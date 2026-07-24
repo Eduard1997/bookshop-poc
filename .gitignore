@@ -1,0 +1,28 @@
+# Environment / secrets — never commit real values
+.env
+.env.local
+.env.*.local
+
+# Node
+node_modules/
+npm-debug.log*
+pnpm-debug.log*
+yarn-error.log*
+
+# Next.js / Payload build output
+.next/
+out/
+build/
+dist/
+
+# Payload
+media/
+
+# Editor / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Docker
+pgdata/
