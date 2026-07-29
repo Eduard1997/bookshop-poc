@@ -1,0 +1,17 @@
+# .github/workflows/pr-title-check.yml
+name: PR title has task number
+
+on:
+  pull_request:
+    types: [opened, edited, synchronize]
+
+jobs:
+  check-title:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check PR title contains a BSP task number
+        run: |
+          if [[ ! "${{ github.event.pull_request.title }}" =~ BSP-[0-9]+ ]]; then
+            echo "PR title must contain a task number, e.g. BSP-9"
+            exit 1
+          fi
