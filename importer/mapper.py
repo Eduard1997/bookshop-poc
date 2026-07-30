@@ -1,4 +1,4 @@
-
+#BSP-9
 def map_fields(book):
     return {
         "title": map_title(book),

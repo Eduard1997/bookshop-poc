@@ -16,7 +16,6 @@ def main_loop(file_path):
         object_id = api.POST_object(book_object)
         api.POST_price(book_object, object_id)
 
-
     return
 
 
