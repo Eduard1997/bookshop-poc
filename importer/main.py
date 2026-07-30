@@ -22,6 +22,3 @@ def main_loop(file_path):
         # api.POST_price(book_object, object_id)
 
     return
-
-
-main()
