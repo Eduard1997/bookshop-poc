@@ -13,7 +13,7 @@ def POST_object(book_object):
     #     "productType": "BASIC",
     #     "mixins": {
     #         "bookDetails": {
-    #
+
     #         }
     #     }
     # }
