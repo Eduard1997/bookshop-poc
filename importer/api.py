@@ -7,13 +7,14 @@ def convert_to_emporix_data(book_object):
             book_object["language"]: book_object["title"]
         },
         "code": book_object["isbn"],
-        "description":{
-            book_object["language"]: book_object["description"]},
+        "description": {
+            book_object["language"]: book_object["description"]
+        },
         "published": False,
         "productType": "BASIC",
-        
+
         "mixins": {
-            "bookDetails":{
+            "6a6b3582e7cadf3c8a834e15": {
                 "1e916fe6-b678-4ecc-bbae-bc26e2323305": [
                     {
                         "0752e4e2-0c78-4f77-b051-397962ae0a55": person.get("role"),
@@ -21,13 +22,20 @@ def convert_to_emporix_data(book_object):
                     } for person in book_object.get("authors", [])
                 ],
                 "0e70195d-3327-4e1e-8ba3-19291d0851ca": book_object["publisher"],
-                "5424cd7c-bb1c-47d4-be6c-916c1cb1f0d0": book_object["publicationDate"],
+                "5424cd7c-bb1c-47d4-be6c-916c1cb1f0d0": book_object["publicationDate"] + "T00:00:00.000Z",#need check if it works without this time part, NOT TESTED
                 "5b10f342-26b7-4573-9c3d-ea1d70c11053": book_object["subtitle"],
                 "7b55e0d4-abd8-41e0-afb2-841010a3e2a2": book_object["category"],
-                "88c144fe-37ca-4dd8-9075-5d9b51600813": book_object["language"],
+                "225d2927-f0aa-412c-a7da-a4aee78a2351": book_object["language"],
                 "ce763c33-8352-46e6-ba05-04ac6bb64c0c": book_object["pageCount"],
-                "ee7a09b7-1769-47bf-83c3-4caadc60bb78": book_object["productForm"],
+                "ee7a09b7-1769-47bf-83c3-4caadc60bb78": book_object["productForm"]
             }
+        },
+
+        "metadata": {
+            "mixins": {
+                "6a6b3582e7cadf3c8a834e15": "https://res.cloudinary.com/saas-ag/raw/upload/schemata2/ant2/6a6b3582e7cadf3c8a834e15_v5.json"
+            },
+            "schema": "https://res.cloudinary.com/saas-ag/raw/upload/v1544786405/schemata/CAAS/product.v2"
         }
     }
 
@@ -69,9 +77,27 @@ def get_auth_data():
 
 
 def POST_object(book_object, auth_token):
-
     emporix_object = convert_to_emporix_data(book_object)
     print(emporix_object)
+    post_url = f"https://api.emporix.io/product/{auth_token['tenant']}/products"
+
+    headers = {
+        "Content-type": "application/json",
+        "Authorization": f"Bearer {auth_token['token']}"
+    }
+
+    response = requests.post(post_url, headers=headers, json=emporix_object)
+
+    if response.status_code in [200, 201]:
+        id = response.json().get('id')
+        print(f"Created book: {id}")
+
+        return id
+    else:
+        print(f"Post failed! Status Code: {response.status_code}")
+        print(response.text)
+        return None
+
 
 def POST_price(book_object, book_id):
     #TODO: BSP-12 here
