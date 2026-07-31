@@ -1,3 +1,5 @@
+import json, requests
+
 
 def convert_to_emporix_data(book_object):
     return {
@@ -29,37 +31,47 @@ def convert_to_emporix_data(book_object):
         }
     }
 
-#emporix structure for the book object
-#     '{
-#     "name": "Smartphone X2",
-#     "code": "BASIC001",
-#     "description": "The world best camera and camcorder in a waterproof smartphone.",
-#     "published": false,
-#     "productType": "BASIC"
-#
-# }'
+def get_auth_data():
+    try:
+        with open('credentials.json', 'r') as file:
+            creds = json.load(file)
+            tenant = creds.get('TENANT')
+            client_id = creds.get('CLIENT_ID')
+            client_secret = creds.get('CLIENT_SECRET')
+    except FileNotFoundError:
+        print("Credentials file not found! Please create it.")
+        return None
 
-def POST_object(book_object):
+    auth_url="https://api.emporix.io/oauth/token"
+
+    headers = {
+        "Content-Type": "application/x-www-form-urlencoded"
+    }
+
+    payload = {
+        "grant_type": "client_credentials",
+        "client_id": client_id,
+        "client_secret": client_secret
+    }
+
+    response = requests.post(auth_url, headers=headers, data=payload)
+
+    if response.status_code == 200:
+        return {
+            "token": response.json().get("access_token"),
+            "tenant": tenant
+        }
+    else:
+        print(response.status_code)
+        print(response.text)
+        return None
+
+
+
+def POST_object(book_object, auth_token):
 
     emporix_object = convert_to_emporix_data(book_object)
-
-    #emporix structure for the book object
-    # {
-    #     "code": "9783662731864",
-    #     "name": {
-    #         "en": " "
-    #     },
-    #     "description": {
-    #         "en": " "
-    #     },
-    #     "published": false,
-    #     "productType": "BASIC",
-    #     "mixins": {
-    #         "bookDetails": {
-
-    #         }
-    #     }
-    # }
+    print(emporix_object)
 
 def POST_price(book_object, book_id):
     #TODO: BSP-12 here

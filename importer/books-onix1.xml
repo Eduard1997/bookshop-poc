@@ -1,0 +1,977 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><ONIXMessage release="3.1"><Header><Sender><SenderName>Lieferbarer Bücher</SenderName><ContactName>GmbH, 079.1396.557</ContactName><EmailAddress>serviceline@mkook-online.de</EmailAddress></Sender><SentDateTime>20260707</SentDateTime></Header>
+<Product datestamp="20260205">
+
+    <RecordReference>ab2a311d0f784c049a4a56606a45d3f8</RecordReference>
+
+    <NotificationType>03</NotificationType>
+
+    <ProductIdentifier>
+
+        <ProductIDType>01</ProductIDType>
+
+        <IDTypeName>Publishers Order No</IDTypeName>
+
+        <IDValue>978-3-032-21008-1</IDValue>
+
+    </ProductIdentifier>
+
+    <ProductIdentifier>
+
+        <ProductIDType>01</ProductIDType>
+
+        <IDTypeName>Publishers Order No</IDTypeName>
+
+        <IDValue>89574526</IDValue>
+
+    </ProductIdentifier>
+
+    <ProductIdentifier>
+
+        <ProductIDType>02</ProductIDType>
+
+        <IDValue>3032210089</IDValue>
+
+    </ProductIdentifier>
+
+    <ProductIdentifier>
+
+        <ProductIDType>03</ProductIDType>
+
+        <IDValue>9783032210081</IDValue>
+
+    </ProductIdentifier>
+
+    <ProductIdentifier>
+
+        <ProductIDType>15</ProductIDType>
+
+        <IDValue>9783032210081</IDValue>
+
+    </ProductIdentifier>
+
+    <DescriptiveDetail>
+
+        <ProductComposition>00</ProductComposition>
+
+        <ProductForm>BB</ProductForm>
+
+        <ProductFormFeature>
+
+            <ProductFormFeatureType>54</ProductFormFeatureType>
+
+            <ProductFormFeatureDescription>EUDR exemption – product or manufacturing materials placed on the market prior to 31.12.2025.</ProductFormFeatureDescription>
+
+        </ProductFormFeature>
+
+        <Measure>
+
+            <MeasureType>01</MeasureType>
+
+            <Measurement>23.5</Measurement>
+
+            <MeasureUnitCode>cm</MeasureUnitCode>
+
+        </Measure>
+
+        <Measure>
+
+            <MeasureType>02</MeasureType>
+
+            <Measurement>15.5</Measurement>
+
+            <MeasureUnitCode>cm</MeasureUnitCode>
+
+        </Measure>
+
+        <CountryOfManufacture>NL</CountryOfManufacture>
+
+        <ProductClassification>
+
+            <ProductClassificationType>04</ProductClassificationType>
+
+            <ProductClassificationCode>49019900</ProductClassificationCode>
+
+        </ProductClassification>
+
+        <Collection>
+
+            <CollectionType>10</CollectionType>
+
+            <CollectionIdentifier>
+
+                <CollectionIDType>04</CollectionIDType>
+
+                <IDValue>AC355</IDValue>
+
+            </CollectionIdentifier>
+
+            <TitleDetail>
+
+                <TitleType>01</TitleType>
+
+                <TitleElement>
+
+                    <TitleElementLevel>02</TitleElementLevel>
+
+                    <TitleText>Studies in Big Data</TitleText>
+
+                </TitleElement>
+
+            </TitleDetail>
+
+        </Collection>
+
+        <TitleDetail>
+
+            <TitleType>01</TitleType>
+
+            <TitleElement>
+
+                <TitleElementLevel>01</TitleElementLevel>
+
+                <TitleText>Deep Learning Applications in Healthcare and Medical Imaging Practice</TitleText>
+
+            </TitleElement>
+
+        </TitleDetail>
+
+        <Contributor>
+
+            <SequenceNumber>1</SequenceNumber>
+
+            <ContributorRole>B01</ContributorRole>
+
+            <NameIdentifier sourcename="Publisher">
+
+                <NameIDType>21</NameIDType>
+
+                <IDValue>0000000293380932</IDValue>
+
+            </NameIdentifier>
+
+            <PersonName>Prabhishek Singh</PersonName>
+
+            <PersonNameInverted>Singh, Prabhishek</PersonNameInverted>
+
+            <NamesBeforeKey>Prabhishek</NamesBeforeKey>
+
+            <KeyNames>Singh</KeyNames>
+
+        </Contributor>
+
+        <Contributor>
+
+            <SequenceNumber>2</SequenceNumber>
+
+            <ContributorRole>B01</ContributorRole>
+
+            <PersonName>Vinayakumar Ravi</PersonName>
+
+            <PersonNameInverted>Ravi, Vinayakumar</PersonNameInverted>
+
+            <NamesBeforeKey>Vinayakumar</NamesBeforeKey>
+
+            <KeyNames>Ravi</KeyNames>
+
+        </Contributor>
+
+        <Contributor>
+
+            <SequenceNumber>3</SequenceNumber>
+
+            <ContributorRole>B01</ContributorRole>
+
+            <NameIdentifier sourcename="Publisher">
+
+                <NameIDType>16</NameIDType>
+
+                <IDValue>0000000529067329</IDValue>
+
+            </NameIdentifier>
+
+            <PersonName>Manoj Diwakar</PersonName>
+
+            <PersonNameInverted>Diwakar, Manoj</PersonNameInverted>
+
+            <NamesBeforeKey>Manoj</NamesBeforeKey>
+
+            <KeyNames>Diwakar</KeyNames>
+
+        </Contributor>
+
+        <Contributor>
+
+            <SequenceNumber>4</SequenceNumber>
+
+            <ContributorRole>B01</ContributorRole>
+
+            <PersonName>Manak Gupta</PersonName>
+
+            <PersonNameInverted>Gupta, Manak</PersonNameInverted>
+
+            <NamesBeforeKey>Manak</NamesBeforeKey>
+
+            <KeyNames>Gupta</KeyNames>
+
+        </Contributor>
+
+        <Language>
+
+            <LanguageRole>01</LanguageRole>
+
+            <LanguageCode>eng</LanguageCode>
+
+        </Language>
+
+        <IllustrationsNote>Approx. 700 p.</IllustrationsNote>
+
+        <Subject>
+
+            <MainSubject/>
+
+            <SubjectSchemeIdentifier>10</SubjectSchemeIdentifier>
+
+            <SubjectSchemeVersion>2009</SubjectSchemeVersion>
+
+            <SubjectCode>COM043000</SubjectCode>
+
+        </Subject>
+
+        <Subject>
+
+            <MainSubject/>
+
+            <SubjectSchemeIdentifier>26</SubjectSchemeIdentifier>
+
+            <SubjectSchemeVersion>2.1</SubjectSchemeVersion>
+
+            <SubjectCode>1630</SubjectCode>
+
+            <SubjectHeadingText>Hardcover, Softcover / Informatik, EDV</SubjectHeadingText>
+
+        </Subject>
+
+        <Subject sourcename="Publisher">
+
+            <MainSubject/>
+
+            <SubjectSchemeIdentifier>93</SubjectSchemeIdentifier>
+
+            <SubjectSchemeVersion>1.6</SubjectSchemeVersion>
+
+            <SubjectCode>UT</SubjectCode>
+
+            <SubjectHeadingText>Computernetzwerke und maschinelle Kommunikation</SubjectHeadingText>
+
+        </Subject>
+
+        <Subject>
+
+            <SubjectSchemeIdentifier>10</SubjectSchemeIdentifier>
+
+            <SubjectSchemeVersion>2009</SubjectSchemeVersion>
+
+            <SubjectCode>TEC059000</SubjectCode>
+
+        </Subject>
+
+        <Subject>
+
+            <SubjectSchemeIdentifier>10</SubjectSchemeIdentifier>
+
+            <SubjectSchemeVersion>2009</SubjectSchemeVersion>
+
+            <SubjectCode>TEC004000</SubjectCode>
+
+        </Subject>
+
+        <Subject>
+
+            <SubjectSchemeIdentifier>20</SubjectSchemeIdentifier>
+
+            <SubjectHeadingText>Medical Imaging</SubjectHeadingText>
+
+        </Subject>
+
+        <Subject>
+
+            <SubjectSchemeIdentifier>20</SubjectSchemeIdentifier>
+
+            <SubjectHeadingText>Computer vision</SubjectHeadingText>
+
+        </Subject>
+
+        <Subject>
+
+            <SubjectSchemeIdentifier>20</SubjectSchemeIdentifier>
+
+            <SubjectHeadingText>Artificial Intelligence</SubjectHeadingText>
+
+        </Subject>
+
+        <Subject>
+
+            <SubjectSchemeIdentifier>20</SubjectSchemeIdentifier>
+
+            <SubjectHeadingText>Artifect Correction</SubjectHeadingText>
+
+        </Subject>
+
+        <Subject>
+
+            <SubjectSchemeIdentifier>20</SubjectSchemeIdentifier>
+
+            <SubjectHeadingText>Multimodel Imaging</SubjectHeadingText>
+
+        </Subject>
+
+        <Subject>
+
+            <SubjectSchemeIdentifier>20</SubjectSchemeIdentifier>
+
+            <SubjectHeadingText>3D reconstruction</SubjectHeadingText>
+
+        </Subject>
+
+        <Subject>
+
+            <SubjectSchemeIdentifier>24</SubjectSchemeIdentifier>
+
+            <SubjectSchemeName>Springer Nature Taxonomy</SubjectSchemeName>
+
+            <SubjectCode>4403</SubjectCode>
+
+            <SubjectHeadingText>Internet of Things</SubjectHeadingText>
+
+        </Subject>
+
+        <Subject>
+
+            <SubjectSchemeIdentifier>24</SubjectSchemeIdentifier>
+
+            <SubjectSchemeName>Springer Nature Taxonomy</SubjectSchemeName>
+
+            <SubjectCode>3344</SubjectCode>
+
+            <SubjectHeadingText>Biomedical Engineering and Bioengineering</SubjectHeadingText>
+
+        </Subject>
+
+        <Subject>
+
+            <SubjectSchemeIdentifier>24</SubjectSchemeIdentifier>
+
+            <SubjectSchemeName>Springer Nature Taxonomy</SubjectSchemeName>
+
+            <SubjectCode>6858</SubjectCode>
+
+            <SubjectHeadingText>Automation</SubjectHeadingText>
+
+        </Subject>
+
+        <Subject sourcename="Publisher">
+
+            <SubjectSchemeIdentifier>93</SubjectSchemeIdentifier>
+
+            <SubjectSchemeVersion>1.6</SubjectSchemeVersion>
+
+            <SubjectCode>MQW</SubjectCode>
+
+            <SubjectHeadingText>Biomedizinische Technik</SubjectHeadingText>
+
+        </Subject>
+
+        <Subject sourcename="Publisher">
+
+            <SubjectSchemeIdentifier>93</SubjectSchemeIdentifier>
+
+            <SubjectSchemeVersion>1.6</SubjectSchemeVersion>
+
+            <SubjectCode>TJFM</SubjectCode>
+
+            <SubjectHeadingText>Regelungstechnik</SubjectHeadingText>
+
+        </Subject>
+
+        <Audience>
+
+            <AudienceCodeType>02</AudienceCodeType>
+
+            <AudienceCodeTypeName>Springer Nature Content Level</AudienceCodeTypeName>
+
+            <AudienceCodeValue>Research</AudienceCodeValue>
+
+        </Audience>
+
+        <Audience>
+
+            <AudienceCodeType>01</AudienceCodeType>
+
+            <AudienceCodeValue>06</AudienceCodeValue>
+
+        </Audience>
+
+    </DescriptiveDetail>
+
+    <CollateralDetail>
+
+        <TextContent>
+
+            <TextType>03</TextType>
+
+            <ContentAudience>00</ContentAudience>
+
+            <Text textformat="05">
+
+                <p>This book offers a comprehensive study of medical image processing, with an emphasis on methods to enhance the accuracy and readability of medical images for diagnosis and therapy. Its main goals are to improve the visual clarity of images by sharpening details, lowering noise, and altering contrast to better visualize subtle elements. Also, it guarantees that anatomical features are accurately represented by correcting distortions, artefacts, and defects resulting from capture or transmission. Reconstruction is the main topic, including how to mix data from different modalities (such as CT and MRI) to build a more complete perspective or recreate missing or incomplete data from fragmented images. This book covers a wide range of topics, including deep learning methodologies, image processing methods, clinical applications, evaluation, and validation. The goal of the book is to provide readers a thorough understanding of medical image processing methods for enhancing, restoring, and reconstructing medical images. It describes the different algorithms’ theoretical foundations and real-world applications. It highlights the practical uses and promise of these methods for enhancing medical diagnosis and care.</p>
+
+
+                <p> </p>
+
+            </Text>
+
+        </TextContent>
+
+        <TextContent>
+
+            <TextType>04</TextType>
+
+            <ContentAudience>03</ContentAudience>
+
+            <Text textformat="05">
+
+                <p>Introduction to Medical Image Denoising, Enhancement, and Reconstruction.- CT, MRI, PET Image Enhancement using Image Fusion Strategy.- Principles, Practices, and Emerging Trends in Modern Image Reconstruction.- Transforming Healthcare with AI An Introduction to Machine Learning and Deep Learning Techniques.- Ai And Deep Learning In Medical Imaging: Reforming Diagnosis And Treatment.- A Summary of Recent Progress in Multimodal Medical Image Fusion Methods for Improved Diagnosis.- In depth Analysis of CT Image, Noise, Non traditional Denoising Techniques, and its Evaluation Metrics.- Comparative Analysis of Transform Based Denoising Techniques for CT Imaging.-Pneumonia Classification from Chest X-Ray Images Using K Fold CNN Approach.- AY Net Attention Y Net based Dehazing in Laparoscopic Surgery.- Ml Driven Approach For Classification Analysis Of Diabetic Retinopathy Using Medical Imaging Application.- Computational Detection Of Diabetic Retinal Dot Blot Hemorrhage Using Medical Imaging Approach With Deep Neural Networks.-Multiple Sclerosis Diagnosis using Deep Learning Techniques Study of Brain MRI Images.- Advanced Diagnostic Technologies and Analytical Models for Enhanced COVID 19 Management A Multi Scale Approach to Early Detection, Severity Classification, and Long Term Risk Assessment.- Ai Aided Detection And Classification Of Auricular Deformities In New Borns.- YOLOv10 for Enhanced Trypanosome Detection.-Revolutionizing Breast Cancer Management Education, Motivational Support and Detection Using Deep Learning Algorithms.- Semi Supervised Image Segmentation Techniques for Medical Image Analysis.- Advancing Fetal Health Prediction A Review of CTG Based Classification, MRI Segmentation, and Abnormality Detection.- Fracture Detection in X ray Images using Deep Supervised Learning.- Challenges Issues on low quality images in Cancer Detection within Medical Imaging System and Image Enhancement using Multi focus Image Fusion Techniques.- Advantages, Drawbacks, Emerging Research Challenges and Future Scope in Medical Image Enhancement, Restoration, Reconstruction.</p>
+
+            </Text>
+
+        </TextContent>
+
+        <TextContent>
+
+            <TextType>05</TextType>
+
+            <ContentAudience>03</ContentAudience>
+
+            <Text textformat="05">
+
+                <p>This book offers a comprehensive study of medical image processing, with an emphasis on methods to enhance the accuracy and readability of medical images for diagnosis and therapy. Its main goals are to improve the visual clarity of images by sharpening details, lowering noise, and altering contrast to better visualize subtle elements. Also, it guarantees that anatomical features are accurately represented by correcting distortions, artefacts, and defects resulting from capture or transmission. Reconstruction is the main topic, including how to mix data from different modalities (such as CT and MRI) to build a more complete perspective or recreate missing or incomplete data from fragmented images. This book covers a wide range of topics, including deep learning methodologies, image processing methods, clinical applications, evaluation, and validation. The goal of the book is to provide readers a thorough understanding of medical image processing methods for enhancing, restoring, and reconstructing medical images. It describes the different algorithms’ theoretical foundations and real-world applications. It highlights the practical uses and promise of these methods for enhancing medical diagnosis and care.</p>
+
+            </Text>
+
+        </TextContent>
+
+        <TextContent>
+
+            <TextType>11</TextType>
+
+            <ContentAudience>03</ContentAudience>
+
+            <Text textformat="06">Offers a comprehensive study of medical image processing Emphasizes on methods to enhance the accuracy and readability of medical images for diagnosis and therapy Covers topics, including deep learning, image processing methods, clinical applications, evaluation, and validation</Text>
+
+        </TextContent>
+
+        <SupportingResource>
+
+            <ResourceContentType>15</ResourceContentType>
+
+            <ContentAudience>00</ContentAudience>
+
+            <ResourceMode>04</ResourceMode>
+
+            <ResourceVersion>
+
+                <ResourceForm>01</ResourceForm>
+
+                <ResourceVersionFeature>
+
+                    <ResourceVersionFeatureType>01</ResourceVersionFeatureType>
+
+                    <FeatureValue>E105</FeatureValue>
+
+                </ResourceVersionFeature>
+
+                <ResourceLink>https://link.springer.com/978-3-032-21008-1</ResourceLink>
+
+            </ResourceVersion>
+
+        </SupportingResource>
+
+    </CollateralDetail>
+
+    <PublishingDetail>
+
+        <Imprint>
+
+            <ImprintIdentifier>
+
+                <ImprintIDType>01</ImprintIDType>
+
+                <IDValue>SPR</IDValue>
+
+            </ImprintIdentifier>
+
+            <ImprintName>Springer</ImprintName>
+
+        </Imprint>
+
+        <Publisher>
+
+            <PublishingRole>01</PublishingRole>
+
+            <PublisherIdentifier>
+
+                <PublisherIDType>05</PublisherIDType>
+
+                <IDValue>5251753</IDValue>
+
+            </PublisherIdentifier>
+
+            <PublisherName>Springer International Publishing</PublisherName>
+
+            <Website>
+
+                <WebsiteRole>18</WebsiteRole>
+
+                <WebsiteLink>http://www.Springer.com</WebsiteLink>
+
+            </Website>
+
+        </Publisher>
+
+        <CityOfPublication>Cham</CityOfPublication>
+
+        <CountryOfPublication>CH</CountryOfPublication>
+
+        <ProductContact>
+
+            <ProductContactRole>10</ProductContactRole>
+
+            <ProductContactName>Springer Nature Customer Service Center GmbH</ProductContactName>
+
+            <EmailAddress>ProductSafety@springernature.com</EmailAddress>
+
+            <StreetAddress>Europaplatz 3</StreetAddress>
+
+            <LocationName>Heidelberg</LocationName>
+
+            <PostalCode>69115</PostalCode>
+
+            <CountryCode>DE</CountryCode>
+
+        </ProductContact>
+
+        <PublishingStatus>02</PublishingStatus>
+
+        <PublishingDate>
+
+            <PublishingDateRole>01</PublishingDateRole>
+
+            <Date dateformat="00">20260730</Date>
+
+        </PublishingDate>
+
+        <PublishingDate>
+
+            <PublishingDateRole>02</PublishingDateRole>
+
+            <Date dateformat="00">20260730</Date>
+
+        </PublishingDate>
+
+        <CopyrightStatement>
+
+            <CopyrightYear>2026</CopyrightYear>
+
+        </CopyrightStatement>
+
+        <SalesRights>
+
+            <SalesRightsType>01</SalesRightsType>
+
+            <Territory>
+
+                <RegionsIncluded>WORLD</RegionsIncluded>
+
+            </Territory>
+
+        </SalesRights>
+
+    </PublishingDetail>
+
+    <RelatedMaterial>
+
+        <RelatedProduct>
+
+            <ProductRelationCode>06</ProductRelationCode>
+
+            <ProductIdentifier>
+
+                <ProductIDType>15</ProductIDType>
+
+                <IDValue>9783032210098</IDValue>
+
+            </ProductIdentifier>
+
+            <ProductForm>EA</ProductForm>
+
+        </RelatedProduct>
+
+        <RelatedProduct>
+
+            <ProductRelationCode>06</ProductRelationCode>
+
+            <ProductIdentifier>
+
+                <ProductIDType>15</ProductIDType>
+
+                <IDValue>9783032210111</IDValue>
+
+            </ProductIdentifier>
+
+            <ProductForm>BC</ProductForm>
+
+        </RelatedProduct>
+
+    </RelatedMaterial>
+
+    <ProductSupply>
+
+        <MarketPublishingDetail>
+
+            <MarketPublishingStatus>02</MarketPublishingStatus>
+
+        </MarketPublishingDetail>
+
+        <SupplyDetail>
+
+            <Supplier>
+
+                <SupplierRole>01</SupplierRole>
+
+                <SupplierIdentifier>
+
+                    <SupplierIDType>05</SupplierIDType>
+
+                    <IDValue>5251753</IDValue>
+
+                </SupplierIdentifier>
+
+                <SupplierName>Springer International Publishing</SupplierName>
+
+            </Supplier>
+
+            <ProductAvailability>10</ProductAvailability>
+
+            <SupplyDate>
+
+                <SupplyDateRole>08</SupplyDateRole>
+
+                <Date dateformat="00">20260730</Date>
+
+            </SupplyDate>
+
+            <Price>
+
+                <PriceType>01</PriceType>
+
+                <PriceStatus>01</PriceStatus>
+
+                <PriceAmount>219.99</PriceAmount>
+
+                <CurrencyCode>EUR</CurrencyCode>
+
+                <Territory>
+
+                    <RegionsIncluded>WORLD</RegionsIncluded>
+
+                    <CountriesExcluded>DE</CountriesExcluded>
+
+                </Territory>
+
+                <PriceDate>
+
+                    <PriceDateRole>14</PriceDateRole>
+
+                    <Date>20250619</Date>
+
+                </PriceDate>
+
+            </Price>
+
+            <Price>
+
+                <PriceType>02</PriceType>
+
+                <PriceStatus>01</PriceStatus>
+
+                <PriceAmount>241.99</PriceAmount>
+
+                <Tax>
+
+                    <TaxType>01</TaxType>
+
+                    <TaxRateCode>R</TaxRateCode>
+
+                    <TaxRatePercent>10</TaxRatePercent>
+
+                </Tax>
+
+                <CurrencyCode>EUR</CurrencyCode>
+
+                <Territory>
+
+                    <CountriesIncluded>AT</CountriesIncluded>
+
+                </Territory>
+
+            </Price>
+
+            <Price>
+
+                <PriceType>01</PriceType>
+
+                <PriceStatus>01</PriceStatus>
+
+                <PriceAmount>326.36</PriceAmount>
+
+                <CurrencyCode>AUD</CurrencyCode>
+
+                <Territory>
+
+                    <CountriesIncluded>AU</CountriesIncluded>
+
+                </Territory>
+
+                <PriceDate>
+
+                    <PriceDateRole>14</PriceDateRole>
+
+                    <Date>20250619</Date>
+
+                </PriceDate>
+
+            </Price>
+
+            <Price>
+
+                <PriceType>02</PriceType>
+
+                <PriceStatus>01</PriceStatus>
+
+                <PriceAmount>359.00</PriceAmount>
+
+                <CurrencyCode>AUD</CurrencyCode>
+
+                <Territory>
+
+                    <CountriesIncluded>AU</CountriesIncluded>
+
+                </Territory>
+
+            </Price>
+
+            <Price>
+
+                <PriceType>02</PriceType>
+
+                <PriceStatus>01</PriceStatus>
+
+                <PriceAmount>260.00</PriceAmount>
+
+                <Tax>
+
+                    <TaxType>01</TaxType>
+
+                    <TaxRateCode>R</TaxRateCode>
+
+                    <TaxRatePercent>2.6</TaxRatePercent>
+
+                </Tax>
+
+                <CurrencyCode>CHF</CurrencyCode>
+
+                <Territory>
+
+                    <CountriesIncluded>CH</CountriesIncluded>
+
+                </Territory>
+
+            </Price>
+
+            <Price>
+
+                <PriceType>02</PriceType>
+
+                <PriceStatus>01</PriceStatus>
+
+                <PriceAmount>235.39</PriceAmount>
+
+                <Tax>
+
+                    <TaxType>01</TaxType>
+
+                    <TaxRateCode>R</TaxRateCode>
+
+                    <TaxRatePercent>7</TaxRatePercent>
+
+                </Tax>
+
+                <CurrencyCode>EUR</CurrencyCode>
+
+                <Territory>
+
+                    <CountriesIncluded>DE</CountriesIncluded>
+
+                </Territory>
+
+            </Price>
+
+            <Price>
+
+                <PriceType>02</PriceType>
+
+                <PriceStatus>01</PriceStatus>
+
+                <PriceAmount>232.09</PriceAmount>
+
+                <CurrencyCode>EUR</CurrencyCode>
+
+                <Territory>
+
+                    <CountriesIncluded>FR</CountriesIncluded>
+
+                </Territory>
+
+            </Price>
+
+            <Price>
+
+                <PriceType>01</PriceType>
+
+                <PriceStatus>01</PriceStatus>
+
+                <PriceAmount>199.99</PriceAmount>
+
+                <CurrencyCode>GBP</CurrencyCode>
+
+                <Territory>
+
+                    <CountriesIncluded>GB</CountriesIncluded>
+
+                </Territory>
+
+                <PriceDate>
+
+                    <PriceDateRole>14</PriceDateRole>
+
+                    <Date>20250619</Date>
+
+                </PriceDate>
+
+            </Price>
+
+            <Price>
+
+                <PriceType>01</PriceType>
+
+                <PriceStatus>01</PriceStatus>
+
+                <PriceAmount>15700.00</PriceAmount>
+
+                <CurrencyCode>INR</CurrencyCode>
+
+                <Territory>
+
+                    <CountriesIncluded>IN</CountriesIncluded>
+
+                </Territory>
+
+                <PriceDate>
+
+                    <PriceDateRole>14</PriceDateRole>
+
+                    <Date>20250619</Date>
+
+                </PriceDate>
+
+            </Price>
+
+            <Price>
+
+                <PriceType>02</PriceType>
+
+                <PriceStatus>01</PriceStatus>
+
+                <PriceAmount>228.79</PriceAmount>
+
+                <CurrencyCode>EUR</CurrencyCode>
+
+                <Territory>
+
+                    <CountriesIncluded>IT</CountriesIncluded>
+
+                </Territory>
+
+            </Price>
+
+            <Price>
+
+                <PriceType>02</PriceType>
+
+                <PriceStatus>01</PriceStatus>
+
+                <PriceAmount>31459.00</PriceAmount>
+
+                <CurrencyCode>JPY</CurrencyCode>
+
+                <Territory>
+
+                    <CountriesIncluded>JP</CountriesIncluded>
+
+                </Territory>
+
+            </Price>
+
+            <Price>
+
+                <PriceType>02</PriceType>
+
+                <PriceStatus>01</PriceStatus>
+
+                <PriceAmount>239.79</PriceAmount>
+
+                <CurrencyCode>EUR</CurrencyCode>
+
+                <Territory>
+
+                    <CountriesIncluded>NL</CountriesIncluded>
+
+                </Territory>
+
+            </Price>
+
+            <Price>
+
+                <PriceType>01</PriceType>
+
+                <PriceStatus>01</PriceStatus>
+
+                <PriceAmount>249.99</PriceAmount>
+
+                <CurrencyCode>USD</CurrencyCode>
+
+                <Territory>
+
+                    <CountriesIncluded>US</CountriesIncluded>
+
+                </Territory>
+
+            </Price>
+
+        </SupplyDetail>
+
+    </ProductSupply>
+
+</Product>
+
+</ONIXMessage>

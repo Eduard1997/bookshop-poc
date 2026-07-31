@@ -12,8 +12,8 @@ def map_fields(book):
         "cover_image_url": map_cover_image_url(book),
         "category": map_category(book),
         "availability": map_availability(book),
-        "product form": map_product_form(book),
-        "page count": map_page_count(book),
+        "productForm": map_product_form(book),
+        "pageCount": map_page_count(book),
         "prices": map_prices(book)
     }
 
