@@ -1,13 +1,5 @@
 import reader,mapper,api
 
-
-if __name__ == '__main__':
-    def main():
-        main_loop('books-onix.xml')
-        return
-
-
-
 def main_loop(file_path):
     raw_books = reader.reader_read(file_path)
     raw_books_list = raw_books.get('ONIXMessage', {}).get('Product', [])
@@ -23,3 +15,6 @@ def main_loop(file_path):
         # api.POST_price(book_object, object_id)
 
     return
+
+if __name__ == '__main__':
+    main_loop('books-onix.xml')
