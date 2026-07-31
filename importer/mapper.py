@@ -1,4 +1,16 @@
 #BSP-9
+lang_converter = {
+        'eng': 'en',
+        'ger': 'de',
+        'fre': 'fr',
+        'fin': 'fi',
+        'tur': 'tr',
+        'pol': 'pl',
+        'rus': 'ru',
+        'ita': 'it'
+    }
+
+
 def map_fields(book):
     return {
         "isbn": map_isbn(book),
@@ -109,8 +121,9 @@ def map_language(book):
 
     for lang in language:
         if lang.get('LanguageRole') == '01':
-            return lang.get('LanguageCode', 'Unknown Language')
-    return 'Unknown Language'
+            onix_lang = lang.get('LanguageCode', '')
+            return lang_converter.get(onix_lang, 'en') #we default to english such that emporix is not blocked from creating the book if the language is not found in the mapping
+    return 'en'
 
 
 def map_publisher(book):
