@@ -13,12 +13,20 @@ def main_loop(file_path, auth_token):
         book_object = mapper.map_fields(book)
 
         input("> Press Enter to continue to the next book...")
-        object_id = api.POST_object(book_object, auth_token)
+        emporix_object = api.convert_to_emporix_data(book_object)
 
-        # api.POST_price(book_object, object_id)
+        book_id = api.isProduct(emporix_object, auth_token)
+        if not book_id:
+            object_id = api.POST_product(emporix_object, auth_token)
+        else :
+            object_id = api.PUT_product(emporix_object, book_id, auth_token)
+
+
+
+        #api.POST_price(book_object, object_id)
 
     return
 
 if __name__ == '__main__':
-    main_loop('books-onix1.xml', api.get_auth_data())
+    main_loop('books-onix.xml', api.get_auth_data())
 

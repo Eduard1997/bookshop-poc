@@ -75,9 +75,36 @@ def get_auth_data():
         return None
 
 
+def isProduct(emporix_object, auth_token):
+    search_url=f"https://api.emporix.io/product/{auth_token['tenant']}/products/search"
 
-def POST_object(book_object, auth_token):
-    emporix_object = convert_to_emporix_data(book_object)
+    headers = {
+        "Content-type": "application/json",
+        "Authorization": f"Bearer {auth_token['token']}"
+    }
+
+    payload = {
+            "q": f"code:{emporix_object["code"]}"
+    }
+
+    response = requests.post(search_url, headers=headers, json=payload)
+
+
+    if response.status_code == 200:
+
+        if response.json():
+            print(f"Product exists: {emporix_object}")
+            return response.json()[0].get('id')
+        else:
+            print(f"Product does not exist: {emporix_object}")
+            return None
+    else:
+        print(f"Search failed! Status Code: {response.status_code}")
+        print(response.text)
+        return None
+
+
+def POST_product(emporix_object, auth_token):
     print(emporix_object)
     post_url = f"https://api.emporix.io/product/{auth_token['tenant']}/products"
 
@@ -97,6 +124,11 @@ def POST_object(book_object, auth_token):
         print(f"Post failed! Status Code: {response.status_code}")
         print(response.text)
         return None
+
+
+def PUT_product(emporix_object, book_id, auth_token):
+    return None
+
 
 
 def POST_price(book_object, book_id):
