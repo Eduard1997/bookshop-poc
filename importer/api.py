@@ -22,7 +22,7 @@ def convert_to_emporix_data(book_object):
                     } for person in book_object.get("authors", [])
                 ],
                 "0e70195d-3327-4e1e-8ba3-19291d0851ca": book_object["publisher"],
-                "5424cd7c-bb1c-47d4-be6c-916c1cb1f0d0": book_object["publicationDate"] + "T00:00:00.000Z",#need check if it works without this time part, NOT TESTED
+                "5424cd7c-bb1c-47d4-be6c-916c1cb1f0d0": book_object["publicationDate"],
                 "5b10f342-26b7-4573-9c3d-ea1d70c11053": book_object["subtitle"],
                 "7b55e0d4-abd8-41e0-afb2-841010a3e2a2": book_object["category"],
                 "225d2927-f0aa-412c-a7da-a4aee78a2351": book_object["language"],
@@ -127,7 +127,23 @@ def POST_product(emporix_object, auth_token):
 
 
 def PUT_product(emporix_object, book_id, auth_token):
-    return None
+    print(emporix_object)
+    put_url= f"https://api.emporix.io/product/{auth_token['tenant']}/products/{book_id}"
+
+    headers = {
+        "Content-type": "application/json",
+        "Authorization": f"Bearer {auth_token['token']}"
+    }
+
+    response = requests.put(put_url, headers=headers, json=emporix_object)
+
+    if response.status_code in [200, 201, 204]:
+        print(f"Updated book: {book_id}")
+        return book_id
+    else:
+        print(f"Put failed! Status Code: {response.status_code}")
+        print(response.text)
+        return None
 
 
 
