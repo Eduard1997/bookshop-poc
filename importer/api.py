@@ -2,6 +2,14 @@ import json, requests
 
 
 def convert_to_emporix_data(book_object):
+    cover_image = book_object["cover_image_url"]
+    print(cover_image)
+    media_array = []
+    if cover_image and cover_image != "Unknown Cover Image URL":
+        media_array.append({
+            "url": cover_image
+        })
+
     return {
         "name": {
             book_object["language"]: book_object["title"]
@@ -30,6 +38,8 @@ def convert_to_emporix_data(book_object):
                 "ee7a09b7-1769-47bf-83c3-4caadc60bb78": book_object["productForm"]
             }
         },
+
+        "media":media_array,
 
         "metadata": {
             "mixins": {

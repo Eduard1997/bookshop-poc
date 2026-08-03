@@ -21,12 +21,10 @@ def main_loop(file_path, auth_token):
         else :
             object_id = api.PUT_product(emporix_object, book_id, auth_token)
 
-
-
         #api.POST_price(book_object, object_id)
 
     return
 
 if __name__ == '__main__':
-    main_loop('books-onix.xml', api.get_auth_data())
+    main_loop('test.xml', api.get_auth_data())
 

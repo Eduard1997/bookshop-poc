@@ -189,7 +189,6 @@ PRICE_TYPE_MAP = {
 PAGE_COUNT_CODES = {"00", "11"}
 
 def map_description(book):
-    #TODO description often contains html tags, which results in the value of the description to be Unknown
     collateral = book.get('CollateralDetail', {})
     if not collateral:
         return "Unknown Description"
