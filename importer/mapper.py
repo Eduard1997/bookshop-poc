@@ -70,12 +70,12 @@ def map_subtitle(book):
 
         for element in title_element:
             if element.get('TitleElementLevel') == '01':
-                subtitile = element.get('Subtitle')
+                subtitle = element.get('Subtitle')
 
-                if isinstance(subtitile, str):
-                    return subtitile
-                elif isinstance(subtitile, dict):
-                    return subtitile.get('#text', 'Unknown Subtitle')
+                if isinstance(subtitle, str):
+                    return subtitle
+                elif isinstance(subtitle, dict):
+                    return subtitle.get('#text', 'Unknown Subtitle')
     return 'Unknown Subtitle'
 
 

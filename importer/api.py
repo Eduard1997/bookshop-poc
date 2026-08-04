@@ -2,14 +2,6 @@ import json, requests
 
 
 def convert_to_emporix_data(book_object):
-    cover_image = book_object["cover_image_url"]
-    print(cover_image)
-    media_array = []
-    if cover_image and cover_image != "Unknown Cover Image URL":
-        media_array.append({
-            "url": cover_image
-        })
-
     return {
         "name": {
             book_object["language"]: book_object["title"]
@@ -38,9 +30,6 @@ def convert_to_emporix_data(book_object):
                 "ee7a09b7-1769-47bf-83c3-4caadc60bb78": book_object["productForm"]
             }
         },
-
-        "media":media_array,
-
         "metadata": {
             "mixins": {
                 "6a6b3582e7cadf3c8a834e15": "https://res.cloudinary.com/saas-ag/raw/upload/schemata2/ant2/6a6b3582e7cadf3c8a834e15_v5.json"
@@ -94,24 +83,79 @@ def isProduct(emporix_object, auth_token):
     }
 
     payload = {
-            "q": f"code:{emporix_object["code"]}"
+            "q": f"code:{emporix_object['code']}"
     }
 
     response = requests.post(search_url, headers=headers, json=payload)
 
 
     if response.status_code == 200:
-
-        if response.json():
+        data = response.json()
+        if data:
             print(f"Product exists: {emporix_object}")
-            return response.json()[0].get('id')
+            return data[0].get('id'), data[0].get('media',[])
         else:
             print(f"Product does not exist: {emporix_object}")
-            return None
+            return None, []
     else:
         print(f"Search failed! Status Code: {response.status_code}")
         print(response.text)
+        return None, []
+
+def POST_media(cover_image ,book_id, auth_token):
+    post_url = f"https://api.emporix.io/media/{auth_token['tenant']}/assets"
+
+    headers = {
+        "Content-type": "application/json",
+        "Authorization": f"Bearer {auth_token['token']}"
+    }
+
+    payload = {
+        "type": "LINK",
+        "access": "PUBLIC",
+        "url": cover_image,
+        "refIds" : [{
+            "id": book_id,
+            "type": "PRODUCT"
+        }]
+    }
+
+    response = requests.post(post_url, headers=headers, json=payload)
+
+    if response.status_code in [200, 201]:
+        media_id = response.json().get('id')
+        print(f"Created media: {media_id}")
+        return media_id
+    else:
+        print(f"Post media failed! Status Code: {response.status_code}")
+        print(response.text)
         return None
+
+def POST_product_to_category(book_id, auth_token):
+    post_url = f"https://api.emporix.io/category/{auth_token['tenant']}/categories/dde8517c-f75e-4261-bde4-bff75f010236/assignments"
+
+    headers = {
+        "Content-type": "application/json",
+        "Authorization": f"Bearer {auth_token['token']}"
+    }
+
+    payload = {
+        "ref": {
+            "id": book_id,
+            "type": "PRODUCT"
+        }
+    }
+
+    response = requests.post(post_url, headers=headers, json=payload)
+
+    if response.status_code in [200, 201, 207]:
+        print(f"Assigned product {book_id} to category")
+        return
+    else:
+        print(f"Post product to category failed! Status Code: {response.status_code}")
+        print(response.text)
+        return
+
 
 
 def POST_product(emporix_object, auth_token):
