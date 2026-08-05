@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?><ONIXMessage release="3.1"><Header><Sender><SenderName>Lieferbarer Bücher</SenderName><ContactName>GmbH, 079.1396.557</ContactName><EmailAddress>serviceline@mkook-online.de</EmailAddress></Sender><SentDateTime>20260707</SentDateTime></Header>
 <Product datestamp="20260205">
 
-    <RecordReference>ab2a311d0f784c049a4a56606a45d3f8</RecordReference>
+    <RecordReference>00d7f1d092394f9ca59a3bae2dec0e71</RecordReference>
 
     <NotificationType>03</NotificationType>
 
@@ -11,7 +11,7 @@
 
         <IDTypeName>Publishers Order No</IDTypeName>
 
-        <IDValue>978-3-032-21008-1</IDValue>
+        <IDValue>978-3-032-20928-3</IDValue>
 
     </ProductIdentifier>
 
@@ -21,7 +21,7 @@
 
         <IDTypeName>Publishers Order No</IDTypeName>
 
-        <IDValue>89574526</IDValue>
+        <IDValue>89579774</IDValue>
 
     </ProductIdentifier>
 
@@ -29,7 +29,7 @@
 
         <ProductIDType>02</ProductIDType>
 
-        <IDValue>3032210089</IDValue>
+        <IDValue>3032209285</IDValue>
 
     </ProductIdentifier>
 
@@ -37,7 +37,7 @@
 
         <ProductIDType>03</ProductIDType>
 
-        <IDValue>9783032210081</IDValue>
+        <IDValue>9783032209283</IDValue>
 
     </ProductIdentifier>
 
@@ -45,7 +45,1848 @@
 
         <ProductIDType>15</ProductIDType>
 
-        <IDValue>9783032210081</IDValue>
+        <IDValue>9783032209283</IDValue>
+
+    </ProductIdentifier>
+
+    <DescriptiveDetail>
+
+        <ProductComposition>00</ProductComposition>
+
+        <ProductForm>BB</ProductForm>
+
+        <ProductFormFeature>
+
+            <ProductFormFeatureType>54</ProductFormFeatureType>
+
+            <ProductFormFeatureDescription>EUDR exemption – product or manufacturing materials placed on the market prior to 31.12.2025.</ProductFormFeatureDescription>
+
+        </ProductFormFeature>
+
+        <Measure>
+
+            <MeasureType>01</MeasureType>
+
+            <Measurement>21</Measurement>
+
+            <MeasureUnitCode>cm</MeasureUnitCode>
+
+        </Measure>
+
+        <Measure>
+
+            <MeasureType>02</MeasureType>
+
+            <Measurement>14.8</Measurement>
+
+            <MeasureUnitCode>cm</MeasureUnitCode>
+
+        </Measure>
+
+        <CountryOfManufacture>NL</CountryOfManufacture>
+
+        <ProductClassification>
+
+            <ProductClassificationType>04</ProductClassificationType>
+
+            <ProductClassificationCode>49019900</ProductClassificationCode>
+
+        </ProductClassification>
+
+        <TitleDetail>
+
+            <TitleType>01</TitleType>
+
+            <TitleElement>
+
+                <TitleElementLevel>01</TitleElementLevel>
+
+                <TitleText>Asset-Based Educational Innovations in Low-Resource Contexts of Southern Africa</TitleText>
+
+            </TitleElement>
+
+        </TitleDetail>
+
+        <Contributor>
+
+            <SequenceNumber>1</SequenceNumber>
+
+            <ContributorRole>B01</ContributorRole>
+
+            <PersonName>Tshimangadzo Selina Mudau</PersonName>
+
+            <PersonNameInverted>Mudau, Tshimangadzo Selina</PersonNameInverted>
+
+            <NamesBeforeKey>Tshimangadzo Selina</NamesBeforeKey>
+
+            <KeyNames>Mudau</KeyNames>
+
+        </Contributor>
+
+        <Contributor>
+
+            <SequenceNumber>2</SequenceNumber>
+
+            <ContributorRole>B01</ContributorRole>
+
+            <PersonName>Thekiso Molokwane</PersonName>
+
+            <PersonNameInverted>Molokwane, Thekiso</PersonNameInverted>
+
+            <NamesBeforeKey>Thekiso</NamesBeforeKey>
+
+            <KeyNames>Molokwane</KeyNames>
+
+        </Contributor>
+
+        <Language>
+
+            <LanguageRole>01</LanguageRole>
+
+            <LanguageCode>eng</LanguageCode>
+
+        </Language>
+
+        <IllustrationsNote>Approx. 225 p. 15 illus.</IllustrationsNote>
+
+        <AncillaryContent>
+
+            <AncillaryContentType>01</AncillaryContentType>
+
+            <Number>15</Number>
+
+        </AncillaryContent>
+
+        <Subject>
+
+            <MainSubject/>
+
+            <SubjectSchemeIdentifier>10</SubjectSchemeIdentifier>
+
+            <SubjectSchemeVersion>2009</SubjectSchemeVersion>
+
+            <SubjectCode>EDU043000</SubjectCode>
+
+        </Subject>
+
+        <Subject>
+
+            <MainSubject/>
+
+            <SubjectSchemeIdentifier>26</SubjectSchemeIdentifier>
+
+            <SubjectSchemeVersion>2.1</SubjectSchemeVersion>
+
+            <SubjectCode>1572</SubjectCode>
+
+            <SubjectHeadingText>Hardcover, Softcover / Pädagogik/Bildungswesen</SubjectHeadingText>
+
+        </Subject>
+
+        <Subject sourcename="Publisher">
+
+            <MainSubject/>
+
+            <SubjectSchemeIdentifier>93</SubjectSchemeIdentifier>
+
+            <SubjectSchemeVersion>1.6</SubjectSchemeVersion>
+
+            <SubjectCode>JND</SubjectCode>
+
+            <SubjectHeadingText>Bildungssysteme und -strukturen</SubjectHeadingText>
+
+        </Subject>
+
+        <Subject>
+
+            <SubjectSchemeIdentifier>10</SubjectSchemeIdentifier>
+
+            <SubjectSchemeVersion>2009</SubjectSchemeVersion>
+
+            <SubjectCode>EDU000000</SubjectCode>
+
+        </Subject>
+
+        <Subject>
+
+            <SubjectSchemeIdentifier>10</SubjectSchemeIdentifier>
+
+            <SubjectSchemeVersion>2009</SubjectSchemeVersion>
+
+            <SubjectCode>EDU000000</SubjectCode>
+
+        </Subject>
+
+        <Subject>
+
+            <SubjectSchemeIdentifier>10</SubjectSchemeIdentifier>
+
+            <SubjectSchemeVersion>2009</SubjectSchemeVersion>
+
+            <SubjectCode>NAT011000</SubjectCode>
+
+        </Subject>
+
+        <Subject>
+
+            <SubjectSchemeIdentifier>10</SubjectSchemeIdentifier>
+
+            <SubjectSchemeVersion>2009</SubjectSchemeVersion>
+
+            <SubjectCode>EDU000000</SubjectCode>
+
+        </Subject>
+
+        <Subject>
+
+            <SubjectSchemeIdentifier>10</SubjectSchemeIdentifier>
+
+            <SubjectSchemeVersion>2009</SubjectSchemeVersion>
+
+            <SubjectCode>EDU000000</SubjectCode>
+
+        </Subject>
+
+        <Subject>
+
+            <SubjectSchemeIdentifier>20</SubjectSchemeIdentifier>
+
+            <SubjectHeadingText>young mothers</SubjectHeadingText>
+
+        </Subject>
+
+        <Subject>
+
+            <SubjectSchemeIdentifier>20</SubjectSchemeIdentifier>
+
+            <SubjectHeadingText>TVET</SubjectHeadingText>
+
+        </Subject>
+
+        <Subject>
+
+            <SubjectSchemeIdentifier>20</SubjectSchemeIdentifier>
+
+            <SubjectHeadingText>Simulation-Based Education</SubjectHeadingText>
+
+        </Subject>
+
+        <Subject>
+
+            <SubjectSchemeIdentifier>20</SubjectSchemeIdentifier>
+
+            <SubjectHeadingText>South African Rural Schools</SubjectHeadingText>
+
+        </Subject>
+
+        <Subject>
+
+            <SubjectSchemeIdentifier>20</SubjectSchemeIdentifier>
+
+            <SubjectHeadingText>disability education</SubjectHeadingText>
+
+        </Subject>
+
+        <Subject>
+
+            <SubjectSchemeIdentifier>24</SubjectSchemeIdentifier>
+
+            <SubjectSchemeName>Springer Nature Taxonomy</SubjectSchemeName>
+
+            <SubjectCode>5364</SubjectCode>
+
+            <SubjectHeadingText>International and Comparative Education</SubjectHeadingText>
+
+        </Subject>
+
+        <Subject>
+
+            <SubjectSchemeIdentifier>24</SubjectSchemeIdentifier>
+
+            <SubjectSchemeName>Springer Nature Taxonomy</SubjectSchemeName>
+
+            <SubjectCode>8186</SubjectCode>
+
+            <SubjectHeadingText>Digital Education and Educational Technology</SubjectHeadingText>
+
+        </Subject>
+
+        <Subject>
+
+            <SubjectSchemeIdentifier>24</SubjectSchemeIdentifier>
+
+            <SubjectSchemeName>Springer Nature Taxonomy</SubjectSchemeName>
+
+            <SubjectCode>5014</SubjectCode>
+
+            <SubjectHeadingText>Environmental and Sustainability Education</SubjectHeadingText>
+
+        </Subject>
+
+        <Subject>
+
+            <SubjectSchemeIdentifier>24</SubjectSchemeIdentifier>
+
+            <SubjectSchemeName>Springer Nature Taxonomy</SubjectSchemeName>
+
+            <SubjectCode>8158</SubjectCode>
+
+            <SubjectHeadingText>Pedagogy</SubjectHeadingText>
+
+        </Subject>
+
+        <Subject>
+
+            <SubjectSchemeIdentifier>24</SubjectSchemeIdentifier>
+
+            <SubjectSchemeName>Springer Nature Taxonomy</SubjectSchemeName>
+
+            <SubjectCode>3397</SubjectCode>
+
+            <SubjectHeadingText>School and Schooling</SubjectHeadingText>
+
+        </Subject>
+
+        <Subject sourcename="Publisher">
+
+            <SubjectSchemeIdentifier>93</SubjectSchemeIdentifier>
+
+            <SubjectSchemeVersion>1.6</SubjectSchemeVersion>
+
+            <SubjectCode>JNV</SubjectCode>
+
+            <SubjectHeadingText>Lehrmittel, Lerntechnologien, E-Learning</SubjectHeadingText>
+
+        </Subject>
+
+        <Subject sourcename="Publisher">
+
+            <SubjectSchemeIdentifier>93</SubjectSchemeIdentifier>
+
+            <SubjectSchemeVersion>1.6</SubjectSchemeVersion>
+
+            <SubjectCode>JN</SubjectCode>
+
+            <SubjectHeadingText>Pädagogik</SubjectHeadingText>
+
+        </Subject>
+
+        <Subject sourcename="Publisher">
+
+            <SubjectSchemeIdentifier>93</SubjectSchemeIdentifier>
+
+            <SubjectSchemeVersion>1.6</SubjectSchemeVersion>
+
+            <SubjectCode>RN</SubjectCode>
+
+            <SubjectHeadingText>Umwelt</SubjectHeadingText>
+
+        </Subject>
+
+        <Subject sourcename="Publisher">
+
+            <SubjectSchemeIdentifier>93</SubjectSchemeIdentifier>
+
+            <SubjectSchemeVersion>1.6</SubjectSchemeVersion>
+
+            <SubjectCode>JNT</SubjectCode>
+
+            <SubjectHeadingText>Didaktische Kompetenz und Lehrmethoden</SubjectHeadingText>
+
+        </Subject>
+
+        <Subject sourcename="Publisher">
+
+            <SubjectSchemeIdentifier>93</SubjectSchemeIdentifier>
+
+            <SubjectSchemeVersion>1.6</SubjectSchemeVersion>
+
+            <SubjectCode>JNL</SubjectCode>
+
+            <SubjectHeadingText>Schulen und Vorschulen</SubjectHeadingText>
+
+        </Subject>
+
+        <Audience>
+
+            <AudienceCodeType>02</AudienceCodeType>
+
+            <AudienceCodeTypeName>Springer Nature Content Level</AudienceCodeTypeName>
+
+            <AudienceCodeValue>Research</AudienceCodeValue>
+
+        </Audience>
+
+        <Audience>
+
+            <AudienceCodeType>01</AudienceCodeType>
+
+            <AudienceCodeValue>06</AudienceCodeValue>
+
+        </Audience>
+
+    </DescriptiveDetail>
+
+    <CollateralDetail>
+
+        <TextContent>
+
+            <TextType>03</TextType>
+
+            <ContentAudience>00</ContentAudience>
+
+            <Text textformat="05">
+
+                <p>This book addresses the critical challenge of educational equity and innovation in Southern Africa's low-resource contexts, where traditional educational models often fail to meet local needs and circumstances. The work examines how communities, educators, and institutions in countries such as South Africa, Zimbabwe, Botswana, Tanzania, and Lesotho are developing transformative educational solutions by leveraging indigenous knowledge systems, local resources, and culturally responsive pedagogies. Rather than viewing resource constraints as insurmountable barriers, this book positions community assets as catalysts for educational innovation that can inform global practices. The subject encompasses multiple interconnected domains: technology-enhanced learning adapted for low-infrastructure environments, community-based educational initiatives, indigenous knowledge integration, policy frameworks for educational equity, and sustainable educational development models. By focusing specifically on Southern Africa, the book provides deep contextual analysis while contributing to broader conversations about decolonizing education and creating more inclusive learning environments globally.</p>
+
+
+                <p> </p>
+
+            </Text>
+
+        </TextContent>
+
+        <TextContent>
+
+            <TextType>04</TextType>
+
+            <ContentAudience>03</ContentAudience>
+
+            <Text textformat="05">
+
+                <p>Part I: Decoding Environmental Contexts (Understanding the landscape).- Part II: Implementation Strategies.- Part III: Innovation: Technology, Community, Literacy, Virtual Learning, Teacher Development, Pedagogy.- Part IV: Future Direction.</p>
+
+            </Text>
+
+        </TextContent>
+
+        <TextContent>
+
+            <TextType>12</TextType>
+
+            <ContentAudience>03</ContentAudience>
+
+            <Text textformat="05">
+
+                <strong>Tshimangadzo Selina Mudau</strong>
+                                 is Senior Lecturer at the University of KwaZulu-Natal, South Africa and a Research Fellow in Development Studies at the University of South Africa (UNISA). She holds a PhD in Higher Education, a Master’s in Health Studies, a Bachelor of Nursing, and a Diploma in Primary Health Care. Her research focuses on higher education, bricolage, community engagement, teenage motherhood, and youth.
+ 
+
+
+                <strong>Thekiso Molokwane</strong>
+                                 is Associate Professor of Public Governance at the University of KwaZulu Natal, South Africa. His areas of research interest include public sector reforms, with a particular interest in Public-Private Partnerships, Comparative Public Administration, and Local Government and Public Policy.
+
+            </Text>
+
+        </TextContent>
+
+        <TextContent>
+
+            <TextType>05</TextType>
+
+            <ContentAudience>03</ContentAudience>
+
+            <Text textformat="05">
+
+                <p>This book addresses the critical challenge of educational equity and innovation in Southern Africa's low-resource contexts, where traditional educational models often fail to meet local needs and circumstances. The work examines how communities, educators, and institutions in countries such as South Africa, Zimbabwe, Botswana, Tanzania, and Lesotho are developing transformative educational solutions by leveraging indigenous knowledge systems, local resources, and culturally responsive pedagogies. Rather than viewing resource constraints as insurmountable barriers, this book positions community assets as catalysts for educational innovation that can inform global practices. The subject encompasses multiple interconnected domains: technology-enhanced learning adapted for low-infrastructure environments, community-based educational initiatives, indigenous knowledge integration, policy frameworks for educational equity, and sustainable educational development models. By focusing specifically on Southern Africa, the book provides deep contextual analysis while contributing to broader conversations about decolonizing education and creating more inclusive learning environments globally.</p>
+
+
+                <strong>Tshimangadzo Selina Mudau</strong>
+                                 is Senior Lecturer at the University of KwaZulu-Natal, South Africa and a Research Fellow in Development Studies at the University of South Africa (UNISA). She holds a PhD in Higher Education, a Master’s in Health Studies, a Bachelor of Nursing, and a Diploma in Primary Health Care. Her research focuses on higher education, bricolage, community engagement, teenage motherhood, and youth.
+ 
+
+
+                <strong>Thekiso Molokwane</strong>
+                                 is Associate Professor of Public Governance at the University of KwaZulu Natal, South Africa. His areas of research interest include public sector reforms, with a particular interest in Public-Private Partnerships, Comparative Public Administration, and Local Government and Public Policy.
+
+            </Text>
+
+        </TextContent>
+
+        <TextContent>
+
+            <TextType>11</TextType>
+
+            <ContentAudience>03</ContentAudience>
+
+            <Text textformat="06">Presents an asset-based framework challenging traditional deficit approaches to education in low-resource contexts Features collaborative chapters written by community educators alongside academic researchers from the Global South Combines indigenous approaches such as Ubuntu and indigenous knowledge with contemporary educational methodologies</Text>
+
+        </TextContent>
+
+        <SupportingResource>
+
+            <ResourceContentType>15</ResourceContentType>
+
+            <ContentAudience>00</ContentAudience>
+
+            <ResourceMode>04</ResourceMode>
+
+            <ResourceVersion>
+
+                <ResourceForm>01</ResourceForm>
+
+                <ResourceVersionFeature>
+
+                    <ResourceVersionFeatureType>01</ResourceVersionFeatureType>
+
+                    <FeatureValue>E105</FeatureValue>
+
+                </ResourceVersionFeature>
+
+                <ResourceLink>https://link.springer.com/978-3-032-20928-3</ResourceLink>
+
+            </ResourceVersion>
+
+        </SupportingResource>
+
+    </CollateralDetail>
+
+    <PublishingDetail>
+
+        <Imprint>
+
+            <ImprintIdentifier>
+
+                <ImprintIDType>01</ImprintIDType>
+
+                <IDValue>PM</IDValue>
+
+            </ImprintIdentifier>
+
+            <ImprintName>Palgrave Macmillan</ImprintName>
+
+        </Imprint>
+
+        <Publisher>
+
+            <PublishingRole>01</PublishingRole>
+
+            <PublisherIdentifier>
+
+                <PublisherIDType>05</PublisherIDType>
+
+                <IDValue>5251753</IDValue>
+
+            </PublisherIdentifier>
+
+            <PublisherName>Springer International Publishing</PublisherName>
+
+            <Website>
+
+                <WebsiteRole>18</WebsiteRole>
+
+                <WebsiteLink>http://www.Springer.com</WebsiteLink>
+
+            </Website>
+
+        </Publisher>
+
+        <CityOfPublication>Cham</CityOfPublication>
+
+        <CountryOfPublication>CH</CountryOfPublication>
+
+        <ProductContact>
+
+            <ProductContactRole>10</ProductContactRole>
+
+            <ProductContactName>Springer Nature Customer Service Center GmbH</ProductContactName>
+
+            <EmailAddress>ProductSafety@springernature.com</EmailAddress>
+
+            <StreetAddress>Europaplatz 3</StreetAddress>
+
+            <LocationName>Heidelberg</LocationName>
+
+            <PostalCode>69115</PostalCode>
+
+            <CountryCode>DE</CountryCode>
+
+        </ProductContact>
+
+        <PublishingStatus>02</PublishingStatus>
+
+        <PublishingDate>
+
+            <PublishingDateRole>01</PublishingDateRole>
+
+            <Date dateformat="00">20260810</Date>
+
+        </PublishingDate>
+
+        <PublishingDate>
+
+            <PublishingDateRole>02</PublishingDateRole>
+
+            <Date dateformat="00">20260810</Date>
+
+        </PublishingDate>
+
+        <CopyrightStatement>
+
+            <CopyrightYear>2026</CopyrightYear>
+
+        </CopyrightStatement>
+
+        <SalesRights>
+
+            <SalesRightsType>01</SalesRightsType>
+
+            <Territory>
+
+                <RegionsIncluded>WORLD</RegionsIncluded>
+
+            </Territory>
+
+        </SalesRights>
+
+    </PublishingDetail>
+
+    <RelatedMaterial>
+
+        <RelatedProduct>
+
+            <ProductRelationCode>06</ProductRelationCode>
+
+            <ProductIdentifier>
+
+                <ProductIDType>15</ProductIDType>
+
+                <IDValue>9783032209290</IDValue>
+
+            </ProductIdentifier>
+
+            <ProductForm>EA</ProductForm>
+
+        </RelatedProduct>
+
+        <RelatedProduct>
+
+            <ProductRelationCode>06</ProductRelationCode>
+
+            <ProductIdentifier>
+
+                <ProductIDType>15</ProductIDType>
+
+                <IDValue>9783032209313</IDValue>
+
+            </ProductIdentifier>
+
+            <ProductForm>BC</ProductForm>
+
+        </RelatedProduct>
+
+    </RelatedMaterial>
+
+    <ProductSupply>
+
+        <MarketPublishingDetail>
+
+            <MarketPublishingStatus>02</MarketPublishingStatus>
+
+        </MarketPublishingDetail>
+
+        <SupplyDetail>
+
+            <Supplier>
+
+                <SupplierRole>01</SupplierRole>
+
+                <SupplierIdentifier>
+
+                    <SupplierIDType>05</SupplierIDType>
+
+                    <IDValue>5251753</IDValue>
+
+                </SupplierIdentifier>
+
+                <SupplierName>Springer International Publishing</SupplierName>
+
+            </Supplier>
+
+            <ProductAvailability>10</ProductAvailability>
+
+            <SupplyDate>
+
+                <SupplyDateRole>08</SupplyDateRole>
+
+                <Date dateformat="00">20260810</Date>
+
+            </SupplyDate>
+
+            <Price>
+
+                <PriceType>01</PriceType>
+
+                <PriceStatus>01</PriceStatus>
+
+                <PriceAmount>169.99</PriceAmount>
+
+                <CurrencyCode>EUR</CurrencyCode>
+
+                <Territory>
+
+                    <RegionsIncluded>WORLD</RegionsIncluded>
+
+                    <CountriesExcluded>DE</CountriesExcluded>
+
+                </Territory>
+
+                <PriceDate>
+
+                    <PriceDateRole>14</PriceDateRole>
+
+                    <Date>20250716</Date>
+
+                </PriceDate>
+
+            </Price>
+
+            <Price>
+
+                <PriceType>02</PriceType>
+
+                <PriceStatus>01</PriceStatus>
+
+                <PriceAmount>186.99</PriceAmount>
+
+                <Tax>
+
+                    <TaxType>01</TaxType>
+
+                    <TaxRateCode>R</TaxRateCode>
+
+                    <TaxRatePercent>10</TaxRatePercent>
+
+                </Tax>
+
+                <CurrencyCode>EUR</CurrencyCode>
+
+                <Territory>
+
+                    <CountriesIncluded>AT</CountriesIncluded>
+
+                </Territory>
+
+            </Price>
+
+            <Price>
+
+                <PriceType>01</PriceType>
+
+                <PriceStatus>01</PriceStatus>
+
+                <PriceAmount>253.64</PriceAmount>
+
+                <CurrencyCode>AUD</CurrencyCode>
+
+                <Territory>
+
+                    <CountriesIncluded>AU</CountriesIncluded>
+
+                </Territory>
+
+                <PriceDate>
+
+                    <PriceDateRole>14</PriceDateRole>
+
+                    <Date>20250716</Date>
+
+                </PriceDate>
+
+            </Price>
+
+            <Price>
+
+                <PriceType>02</PriceType>
+
+                <PriceStatus>01</PriceStatus>
+
+                <PriceAmount>279.00</PriceAmount>
+
+                <CurrencyCode>AUD</CurrencyCode>
+
+                <Territory>
+
+                    <CountriesIncluded>AU</CountriesIncluded>
+
+                </Territory>
+
+            </Price>
+
+            <Price>
+
+                <PriceType>02</PriceType>
+
+                <PriceStatus>01</PriceStatus>
+
+                <PriceAmount>201.00</PriceAmount>
+
+                <Tax>
+
+                    <TaxType>01</TaxType>
+
+                    <TaxRateCode>R</TaxRateCode>
+
+                    <TaxRatePercent>2.6</TaxRatePercent>
+
+                </Tax>
+
+                <CurrencyCode>CHF</CurrencyCode>
+
+                <Territory>
+
+                    <CountriesIncluded>CH</CountriesIncluded>
+
+                </Territory>
+
+            </Price>
+
+            <Price>
+
+                <PriceType>02</PriceType>
+
+                <PriceStatus>01</PriceStatus>
+
+                <PriceAmount>181.89</PriceAmount>
+
+                <Tax>
+
+                    <TaxType>01</TaxType>
+
+                    <TaxRateCode>R</TaxRateCode>
+
+                    <TaxRatePercent>7</TaxRatePercent>
+
+                </Tax>
+
+                <CurrencyCode>EUR</CurrencyCode>
+
+                <Territory>
+
+                    <CountriesIncluded>DE</CountriesIncluded>
+
+                </Territory>
+
+            </Price>
+
+            <Price>
+
+                <PriceType>02</PriceType>
+
+                <PriceStatus>01</PriceStatus>
+
+                <PriceAmount>179.34</PriceAmount>
+
+                <CurrencyCode>EUR</CurrencyCode>
+
+                <Territory>
+
+                    <CountriesIncluded>FR</CountriesIncluded>
+
+                </Territory>
+
+            </Price>
+
+            <Price>
+
+                <PriceType>01</PriceType>
+
+                <PriceStatus>01</PriceStatus>
+
+                <PriceAmount>149.99</PriceAmount>
+
+                <CurrencyCode>GBP</CurrencyCode>
+
+                <Territory>
+
+                    <CountriesIncluded>GB</CountriesIncluded>
+
+                </Territory>
+
+                <PriceDate>
+
+                    <PriceDateRole>14</PriceDateRole>
+
+                    <Date>20250716</Date>
+
+                </PriceDate>
+
+            </Price>
+
+            <Price>
+
+                <PriceType>01</PriceType>
+
+                <PriceStatus>01</PriceStatus>
+
+                <PriceAmount>12100.00</PriceAmount>
+
+                <CurrencyCode>INR</CurrencyCode>
+
+                <Territory>
+
+                    <CountriesIncluded>IN</CountriesIncluded>
+
+                </Territory>
+
+                <PriceDate>
+
+                    <PriceDateRole>14</PriceDateRole>
+
+                    <Date>20250716</Date>
+
+                </PriceDate>
+
+            </Price>
+
+            <Price>
+
+                <PriceType>02</PriceType>
+
+                <PriceStatus>01</PriceStatus>
+
+                <PriceAmount>176.79</PriceAmount>
+
+                <CurrencyCode>EUR</CurrencyCode>
+
+                <Territory>
+
+                    <CountriesIncluded>IT</CountriesIncluded>
+
+                </Territory>
+
+            </Price>
+
+            <Price>
+
+                <PriceType>02</PriceType>
+
+                <PriceStatus>01</PriceStatus>
+
+                <PriceAmount>24309.00</PriceAmount>
+
+                <CurrencyCode>JPY</CurrencyCode>
+
+                <Territory>
+
+                    <CountriesIncluded>JP</CountriesIncluded>
+
+                </Territory>
+
+            </Price>
+
+            <Price>
+
+                <PriceType>02</PriceType>
+
+                <PriceStatus>01</PriceStatus>
+
+                <PriceAmount>185.29</PriceAmount>
+
+                <CurrencyCode>EUR</CurrencyCode>
+
+                <Territory>
+
+                    <CountriesIncluded>NL</CountriesIncluded>
+
+                </Territory>
+
+            </Price>
+
+            <Price>
+
+                <PriceType>01</PriceType>
+
+                <PriceStatus>01</PriceStatus>
+
+                <PriceAmount>199.99</PriceAmount>
+
+                <CurrencyCode>USD</CurrencyCode>
+
+                <Territory>
+
+                    <CountriesIncluded>US</CountriesIncluded>
+
+                </Territory>
+
+            </Price>
+
+        </SupplyDetail>
+
+    </ProductSupply>
+
+</Product>
+<Product datestamp="20260205">
+
+    <RecordReference>016804bd8277481faa150633ab36ee43</RecordReference>
+
+    <NotificationType>03</NotificationType>
+
+    <ProductIdentifier>
+
+        <ProductIDType>01</ProductIDType>
+
+        <IDTypeName>Publishers Order No</IDTypeName>
+
+        <IDValue>978-981-95-8391-1</IDValue>
+
+    </ProductIdentifier>
+
+    <ProductIdentifier>
+
+        <ProductIDType>01</ProductIDType>
+
+        <IDTypeName>Publishers Order No</IDTypeName>
+
+        <IDValue>89610674</IDValue>
+
+    </ProductIdentifier>
+
+    <ProductIdentifier>
+
+        <ProductIDType>02</ProductIDType>
+
+        <IDValue>9819583918</IDValue>
+
+    </ProductIdentifier>
+
+    <ProductIdentifier>
+
+        <ProductIDType>03</ProductIDType>
+
+        <IDValue>9789819583911</IDValue>
+
+    </ProductIdentifier>
+
+    <ProductIdentifier>
+
+        <ProductIDType>15</ProductIDType>
+
+        <IDValue>9789819583911</IDValue>
+
+    </ProductIdentifier>
+
+    <DescriptiveDetail>
+
+        <ProductComposition>00</ProductComposition>
+
+        <ProductForm>EA</ProductForm>
+
+        <ProductFormFeature>
+
+            <ProductFormFeatureType>09</ProductFormFeatureType>
+
+            <ProductFormFeatureValue>00</ProductFormFeatureValue>
+
+            <ProductFormFeatureDescription>This PDF has been created in accordance with the PDF/UA-1 standard to enhance accessibility, including screen reader support, described non-text content (images, graphs), bookmarks for easy navigation, keyboard-friendly links and forms and searchable, selectable text. We recognize the importance of accessibility, and we welcome queries about accessibility for any of our products. If you have a question or an access need, please get in touch with us at accessibilitysupport@springernature.com. Please note tha</ProductFormFeatureDescription>
+
+        </ProductFormFeature>
+
+        <ProductFormFeature>
+
+            <ProductFormFeatureType>09</ProductFormFeatureType>
+
+            <ProductFormFeatureValue>05</ProductFormFeatureValue>
+
+        </ProductFormFeature>
+
+        <ProductFormFeature>
+
+            <ProductFormFeatureType>09</ProductFormFeatureType>
+
+            <ProductFormFeatureValue>10</ProductFormFeatureValue>
+
+        </ProductFormFeature>
+
+        <ProductFormFeature>
+
+            <ProductFormFeatureType>09</ProductFormFeatureType>
+
+            <ProductFormFeatureValue>11</ProductFormFeatureValue>
+
+        </ProductFormFeature>
+
+        <ProductFormFeature>
+
+            <ProductFormFeatureType>09</ProductFormFeatureType>
+
+            <ProductFormFeatureValue>13</ProductFormFeatureValue>
+
+        </ProductFormFeature>
+
+        <ProductFormFeature>
+
+            <ProductFormFeatureType>09</ProductFormFeatureType>
+
+            <ProductFormFeatureValue>14</ProductFormFeatureValue>
+
+        </ProductFormFeature>
+
+        <ProductFormFeature>
+
+            <ProductFormFeatureType>09</ProductFormFeatureType>
+
+            <ProductFormFeatureValue>25</ProductFormFeatureValue>
+
+        </ProductFormFeature>
+
+        <ProductFormFeature>
+
+            <ProductFormFeatureType>09</ProductFormFeatureType>
+
+            <ProductFormFeatureValue>26</ProductFormFeatureValue>
+
+        </ProductFormFeature>
+
+        <ProductFormFeature>
+
+            <ProductFormFeatureType>09</ProductFormFeatureType>
+
+            <ProductFormFeatureValue>29</ProductFormFeatureValue>
+
+        </ProductFormFeature>
+
+        <ProductFormFeature>
+
+            <ProductFormFeatureType>09</ProductFormFeatureType>
+
+            <ProductFormFeatureValue>52</ProductFormFeatureValue>
+
+        </ProductFormFeature>
+
+        <ProductFormFeature>
+
+            <ProductFormFeatureType>09</ProductFormFeatureType>
+
+            <ProductFormFeatureValue>99</ProductFormFeatureValue>
+
+            <ProductFormFeatureDescription>accessibilitysupport@springernature.com</ProductFormFeatureDescription>
+
+        </ProductFormFeature>
+
+        <EpubLicense>
+
+            <EpubLicenseName>CC BY-NC-ND 4.0</EpubLicenseName>
+
+        </EpubLicense>
+
+        <Collection>
+
+            <CollectionType>10</CollectionType>
+
+            <CollectionIdentifier>
+
+                <CollectionIDType>04</CollectionIDType>
+
+                <IDValue>ABBLZ75</IDValue>
+
+            </CollectionIdentifier>
+
+            <TitleDetail>
+
+                <TitleType>01</TitleType>
+
+                <TitleElement>
+
+                    <TitleElementLevel>02</TitleElementLevel>
+
+                    <TitleText>Computer Science (R0)</TitleText>
+
+                </TitleElement>
+
+            </TitleDetail>
+
+        </Collection>
+
+        <Collection>
+
+            <CollectionType>10</CollectionType>
+
+            <CollectionIdentifier>
+
+                <CollectionIDType>04</CollectionIDType>
+
+                <IDValue>ABBLZ74</IDValue>
+
+            </CollectionIdentifier>
+
+            <TitleDetail>
+
+                <TitleType>01</TitleType>
+
+                <TitleElement>
+
+                    <TitleElementLevel>02</TitleElementLevel>
+
+                    <TitleText>Computer Science</TitleText>
+
+                </TitleElement>
+
+            </TitleDetail>
+
+        </Collection>
+
+        <TitleDetail>
+
+            <TitleType>01</TitleType>
+
+            <TitleElement>
+
+                <TitleElementLevel>01</TitleElementLevel>
+
+                <TitleText>H4SD3: A Four-Honey Framework Based on Software-Defined Cyber Deception Defense</TitleText>
+
+                <Subtitle>A Safeguard Defense Mode (SDM) for Proactive Cybersecurity Principles and Models</Subtitle>
+
+            </TitleElement>
+
+        </TitleDetail>
+
+        <Contributor>
+
+            <SequenceNumber>1</SequenceNumber>
+
+            <ContributorRole>A01</ContributorRole>
+
+            <NameIdentifier sourcename="Publisher">
+
+                <NameIDType>21</NameIDType>
+
+                <IDValue>0000000175105112</IDValue>
+
+            </NameIdentifier>
+
+            <PersonName>Zhihong Tian</PersonName>
+
+            <PersonNameInverted>Tian, Zhihong</PersonNameInverted>
+
+            <NamesBeforeKey>Zhihong</NamesBeforeKey>
+
+            <KeyNames>Tian</KeyNames>
+
+        </Contributor>
+
+        <Contributor>
+
+            <SequenceNumber>2</SequenceNumber>
+
+            <ContributorRole>A01</ContributorRole>
+
+            <PersonName>Yuan Liu</PersonName>
+
+            <PersonNameInverted>Liu, Yuan</PersonNameInverted>
+
+            <NamesBeforeKey>Yuan</NamesBeforeKey>
+
+            <KeyNames>Liu</KeyNames>
+
+        </Contributor>
+
+        <Contributor>
+
+            <SequenceNumber>3</SequenceNumber>
+
+            <ContributorRole>A01</ContributorRole>
+
+            <NameIdentifier sourcename="Publisher">
+
+                <NameIDType>21</NameIDType>
+
+                <IDValue>0000000303052132</IDValue>
+
+            </NameIdentifier>
+
+            <PersonName>Binxing Fang</PersonName>
+
+            <PersonNameInverted>Fang, Binxing</PersonNameInverted>
+
+            <NamesBeforeKey>Binxing</NamesBeforeKey>
+
+            <KeyNames>Fang</KeyNames>
+
+        </Contributor>
+
+        <Language>
+
+            <LanguageRole>01</LanguageRole>
+
+            <LanguageCode>eng</LanguageCode>
+
+        </Language>
+
+        <IllustrationsNote>Approx. 300 p. 300 illus., 50 illus. in color.</IllustrationsNote>
+
+        <AncillaryContent>
+
+            <AncillaryContentType>02</AncillaryContentType>
+
+            <Number>50</Number>
+
+        </AncillaryContent>
+
+        <AncillaryContent>
+
+            <AncillaryContentType>01</AncillaryContentType>
+
+            <Number>250</Number>
+
+        </AncillaryContent>
+
+        <Subject>
+
+            <MainSubject/>
+
+            <SubjectSchemeIdentifier>10</SubjectSchemeIdentifier>
+
+            <SubjectSchemeVersion>2009</SubjectSchemeVersion>
+
+            <SubjectCode>COM053000</SubjectCode>
+
+        </Subject>
+
+        <Subject>
+
+            <MainSubject/>
+
+            <SubjectSchemeIdentifier>26</SubjectSchemeIdentifier>
+
+            <SubjectSchemeVersion>2.1</SubjectSchemeVersion>
+
+            <SubjectCode>9632</SubjectCode>
+
+            <SubjectHeadingText>Nonbooks, PBS / Informatik, EDV/Informatik</SubjectHeadingText>
+
+        </Subject>
+
+        <Subject sourcename="Publisher">
+
+            <MainSubject/>
+
+            <SubjectSchemeIdentifier>93</SubjectSchemeIdentifier>
+
+            <SubjectSchemeVersion>1.6</SubjectSchemeVersion>
+
+            <SubjectCode>UR</SubjectCode>
+
+            <SubjectHeadingText>Computersicherheit</SubjectHeadingText>
+
+        </Subject>
+
+        <Subject>
+
+            <SubjectSchemeIdentifier>10</SubjectSchemeIdentifier>
+
+            <SubjectSchemeVersion>2009</SubjectSchemeVersion>
+
+            <SubjectCode>COM053000</SubjectCode>
+
+        </Subject>
+
+        <Subject>
+
+            <SubjectSchemeIdentifier>10</SubjectSchemeIdentifier>
+
+            <SubjectSchemeVersion>2009</SubjectSchemeVersion>
+
+            <SubjectCode>COM053000</SubjectCode>
+
+        </Subject>
+
+        <Subject>
+
+            <SubjectSchemeIdentifier>20</SubjectSchemeIdentifier>
+
+            <SubjectHeadingText>Open Access</SubjectHeadingText>
+
+        </Subject>
+
+        <Subject>
+
+            <SubjectSchemeIdentifier>20</SubjectSchemeIdentifier>
+
+            <SubjectHeadingText>Open Access</SubjectHeadingText>
+
+        </Subject>
+
+        <Subject>
+
+            <SubjectSchemeIdentifier>20</SubjectSchemeIdentifier>
+
+            <SubjectHeadingText>Deceptive Defense</SubjectHeadingText>
+
+        </Subject>
+
+        <Subject>
+
+            <SubjectSchemeIdentifier>20</SubjectSchemeIdentifier>
+
+            <SubjectHeadingText>Four-Honey (H4)</SubjectHeadingText>
+
+        </Subject>
+
+        <Subject>
+
+            <SubjectSchemeIdentifier>20</SubjectSchemeIdentifier>
+
+            <SubjectHeadingText>Software Defined Deceptive Defense (SD3)</SubjectHeadingText>
+
+        </Subject>
+
+        <Subject>
+
+            <SubjectSchemeIdentifier>20</SubjectSchemeIdentifier>
+
+            <SubjectHeadingText>Safeguard Mode</SubjectHeadingText>
+
+        </Subject>
+
+        <Subject>
+
+            <SubjectSchemeIdentifier>20</SubjectSchemeIdentifier>
+
+            <SubjectHeadingText>Proactive Defense</SubjectHeadingText>
+
+        </Subject>
+
+        <Subject>
+
+            <SubjectSchemeIdentifier>24</SubjectSchemeIdentifier>
+
+            <SubjectSchemeName>Springer Nature Taxonomy</SubjectSchemeName>
+
+            <SubjectCode>4516</SubjectCode>
+
+            <SubjectHeadingText>Data and Information Security</SubjectHeadingText>
+
+        </Subject>
+
+        <Subject>
+
+            <SubjectSchemeIdentifier>24</SubjectSchemeIdentifier>
+
+            <SubjectSchemeName>Springer Nature Taxonomy</SubjectSchemeName>
+
+            <SubjectCode>6589</SubjectCode>
+
+            <SubjectHeadingText>Principles and Models of Security</SubjectHeadingText>
+
+        </Subject>
+
+        <Subject>
+
+            <SubjectSchemeIdentifier>24</SubjectSchemeIdentifier>
+
+            <SubjectSchemeName>Springer Nature Taxonomy</SubjectSchemeName>
+
+            <SubjectCode>5367</SubjectCode>
+
+            <SubjectHeadingText>Security Services</SubjectHeadingText>
+
+        </Subject>
+
+        <Subject sourcename="Publisher">
+
+            <SubjectSchemeIdentifier>93</SubjectSchemeIdentifier>
+
+            <SubjectSchemeVersion>1.6</SubjectSchemeVersion>
+
+            <SubjectCode>UTN</SubjectCode>
+
+            <SubjectHeadingText>Netzwerksicherheit</SubjectHeadingText>
+
+        </Subject>
+
+        <Audience>
+
+            <AudienceCodeType>01</AudienceCodeType>
+
+            <AudienceCodeValue>06</AudienceCodeValue>
+
+        </Audience>
+
+        <Audience>
+
+            <AudienceCodeType>02</AudienceCodeType>
+
+            <AudienceCodeTypeName>Springer Nature Content Level</AudienceCodeTypeName>
+
+            <AudienceCodeValue>Research</AudienceCodeValue>
+
+        </Audience>
+
+    </DescriptiveDetail>
+
+    <CollateralDetail>
+
+        <TextContent>
+
+            <TextType>03</TextType>
+
+            <ContentAudience>00</ContentAudience>
+
+            <Text textformat="05">
+
+                <p>Cyberattacks—especially those involving Advanced Persistent Threats (APTs)—are increasingly stealthy, sophisticated, and persistent, posing serious risks to global cybersecurity and national safety. Traditional defense mechanisms, often designed to block system breaches, struggle to keep pace with such adaptive threats.</p>
+
+
+                <p>This open access book responds to these challenges by introducing a novel defensive paradigm: Safeguard Defense Mode (SDM). Developed through years of operational experience and cybersecurity drills, SDM is implemented via the Four-Honey System based on Software-Defined Deception Defense (H4SD3). This framework emphasizes early-stage APT detection, particularly during the reconnaissance phase, and shifts cybersecurity strategy from passive response to proactive guardianship.</p>
+
+
+                <p>Key components of this book include:</p>
+
+
+                <p>• Honeypoint: Lightweight threat detection using network and system tripwires</p>
+
+
+                <p>• Honeyproxy: Traffic monitoring and anomaly detection gateway</p>
+
+
+                <p>• Honeytrace: Attacker tracking and deterrence device</p>
+
+
+                <p>• Honeycenter: Centralized decision and control hub</p>
+
+
+                <p>• Software-Defined Deceptive Defense: A new concept for countering advanced threats</p>
+
+
+                <p>• Deployment Cases: Insights from major events such as the Winter Olympics 2022, Asian Games 2023, Asian Winter Games 2025, and the Canton Fair (2016–2025)</p>
+
+
+                <p>Designed for engineers, managers, researchers, and students in cybersecurity, this book presents technical solutions in an accessible format, using examples and metaphors to clarify complex ideas. While no prior expertise is required, a basic understanding of cybersecurity will enhance the reading experience.</p>
+
+
+                <p> </p>
+
+            </Text>
+
+        </TextContent>
+
+        <TextContent>
+
+            <TextType>04</TextType>
+
+            <ContentAudience>03</ContentAudience>
+
+            <Text textformat="05">
+
+                <p>Chapter 1: Emerging Cybersecurity Challenges.- Chapter 2: Defensive Framework and Threat Modeling.- Chapter 3: Software-Defined Deceptive Defense (SD3).- Chapter 4: Honeypoint Technology.- Chapter 5: Honeyproxy Technology.- Chapter 6: Honeytrace Technology.- Chapter 7: Honeycenter Technology.- Chapter 8: Security for H4SD3.- Chapter 9: Real-World Case Studies.</p>
+
+            </Text>
+
+        </TextContent>
+
+        <TextContent>
+
+            <TextType>12</TextType>
+
+            <ContentAudience>03</ContentAudience>
+
+            <Text textformat="05">
+
+                <p>Tian Zhihong, Vice President of Guangzhou University, Professor, and Doctoral Supervisor. He is a Distinguished Professor under the National Talent Program and a Guangdong Province Universities and Colleges Pearl River Scholar, as well as the chief scientist of national key research and Development plan of China. He is also a part-time Professor with Carleton University, Ottawa, ON, Canada. Previously, he was in different academic and administrative positions at Harbin Institute of Technology. He has authored over 200 journal and conference papers in these areas. His research interests include computer networks and cyberspace security. His research has been supported by the National Natural Science Foundation of China, the National Key Research and Development Plan of China, the National High-Tech Research and Development Program of China (863 Program), and the National Basic Research Program of China (973 Program). He also served as a member, the chair, and the general chair for a number of international conferences. He is a IEEE Senior Member and CCF Distinguished Member.</p>
+
+                <p>Yuan Liu, Professor of Guangzhou University, and Doctoral Supervisor. She received the B.Sc. degree from the Honor School, Harbin Institute of Technology, Harbin, China, in 2010, and the Ph.D. degree from the School of Computer Engineering, Nanyang Technological University (NTU), Singapore, in 2014. She is currently a Full Professor with the Cyberspace Institute of Advanced Technology, Guangzhou University, Guangzhou, Guangdong, China. She was an Associate Professor with Northeastern University, Shenyang, China, from 2015 to 2022. From 2014 to 2015, she worked as a Research Fellow with the Joint NTU-UBC Research Center of Excellence in Active Living for the Elderly (LILY), NTU. Her research interests include incentive mechanism design, federated learning, trust management, blockchain consensus protocols, blockchain-powered artificial intelligence, and threat intelligence system. She serves as Associate Editor of IEEE Transactions on Services Computing and IEEE Transactions on Service Management, IEEE Senior Member and CCF Distinguished Member.</p>
+
+                <p>Binxing Fan, Academician of Chinese Academy of Engineering. He received the MS degree in computer science and technology from Tsinghua University, Beijing, in 1984, and the PhD degree in computer science and technology from the Harbin Institute of Technology, Harbin, in 1989. His current research interests include computer networks, information and network security, and artificial intelligence security.</p>
+
+                <p/>
+
+            </Text>
+
+        </TextContent>
+
+        <TextContent>
+
+            <TextType>05</TextType>
+
+            <ContentAudience>03</ContentAudience>
+
+            <Text textformat="05">
+
+                <p>Cyberattacks—especially those involving Advanced Persistent Threats (APTs)—are increasingly stealthy, sophisticated, and persistent, posing serious risks to global cybersecurity and national safety. Traditional defense mechanisms, often designed to block system breaches, struggle to keep pace with such adaptive threats.</p>
+
+
+                <p>This open access book responds to these challenges by introducing a novel defensive paradigm: Safeguard Defense Mode (SDM). Developed through years of operational experience and cybersecurity drills, SDM is implemented via the Four-Honey System based on Software-Defined Deception Defense (H4SD3). This framework emphasizes early-stage APT detection, particularly during the reconnaissance phase, and shifts cybersecurity strategy from passive response to proactive guardianship.</p>
+
+
+                <p>Key components of this book include:</p>
+
+
+                <p>• Honeypoint: Lightweight threat detection using network and system tripwires</p>
+
+
+                <p>• Honeyproxy: Traffic monitoring and anomaly detection gateway</p>
+
+
+                <p>• Honeytrace: Attacker tracking and deterrence device</p>
+
+
+                <p>• Honeycenter: Centralized decision and control hub</p>
+
+
+                <p>• Software-Defined Deceptive Defense: A new concept for countering advanced threats</p>
+
+
+                <p>• Deployment Cases: Insights from major events such as the Winter Olympics 2022, Asian Games 2023, Asian Winter Games 2025, and the Canton Fair (2016–2025)</p>
+
+
+                <p>Designed for engineers, managers, researchers, and students in cybersecurity, this book presents technical solutions in an accessible format, using examples and metaphors to clarify complex ideas. While no prior expertise is required, a basic understanding of cybersecurity will enhance the reading experience.</p>
+
+            </Text>
+
+        </TextContent>
+
+        <TextContent>
+
+            <TextType>11</TextType>
+
+            <ContentAudience>03</ContentAudience>
+
+            <Text textformat="06">This book is open access, which means that you have free and unlimited access Introduces the novel Safeguard Defense Mode (SDM) for proactive cybersecurity Explains the H4SD3 system with real-world deployment case studies Offers an accessible approach to complex cybersecurity concepts</Text>
+
+        </TextContent>
+
+        <TextContent>
+
+            <TextType>20</TextType>
+
+            <ContentAudience>00</ContentAudience>
+
+            <Text textformat="06">Open Access This book is licensed under the terms of the Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License (http://creativecommons.org/licenses/by-nc-nd/4.0/), which permits any noncommercial use, sharing, distribution and reproduction in any medium or format, as long as you give appropriate credit to the original author(s) and the source, provide a link to the Creative Commons license and indicate if you modified the licensed material. You do not have permission under this license to share adapted material derived from this book or parts of it. The images or other third party material in this book are included in the book's Creative Commons license, unless indicated otherwise in a credit line to the material. If material is not included in the book's Creative Commons license and your intended use is not permitted by statutory regulation or exceeds the permitted use, you will need to obtain permission directly from the copyright holder.</Text>
+
+        </TextContent>
+
+        <SupportingResource>
+
+            <ResourceContentType>15</ResourceContentType>
+
+            <ContentAudience>00</ContentAudience>
+
+            <ResourceMode>04</ResourceMode>
+
+            <ResourceVersion>
+
+                <ResourceForm>01</ResourceForm>
+
+                <ResourceVersionFeature>
+
+                    <ResourceVersionFeatureType>01</ResourceVersionFeatureType>
+
+                    <FeatureValue>E105</FeatureValue>
+
+                </ResourceVersionFeature>
+
+                <ResourceLink>https://link.springer.com/978-981-95-8391-1</ResourceLink>
+
+            </ResourceVersion>
+
+        </SupportingResource>
+
+    </CollateralDetail>
+
+    <PublishingDetail>
+
+        <Imprint>
+
+            <ImprintIdentifier>
+
+                <ImprintIDType>01</ImprintIDType>
+
+                <IDValue>SPR</IDValue>
+
+            </ImprintIdentifier>
+
+            <ImprintName>Springer</ImprintName>
+
+        </Imprint>
+
+        <Publisher>
+
+            <PublishingRole>01</PublishingRole>
+
+            <PublisherIdentifier>
+
+                <PublisherIDType>05</PublisherIDType>
+
+                <IDValue>78997</IDValue>
+
+            </PublisherIdentifier>
+
+            <PublisherName>Springer Singapore</PublisherName>
+
+            <Website>
+
+                <WebsiteRole>18</WebsiteRole>
+
+                <WebsiteLink>http://www.Springer.com</WebsiteLink>
+
+            </Website>
+
+        </Publisher>
+
+        <CityOfPublication>Singapore</CityOfPublication>
+
+        <CountryOfPublication>SG</CountryOfPublication>
+
+        <ProductContact>
+
+            <ProductContactRole>10</ProductContactRole>
+
+            <ProductContactName>Springer Nature Customer Service Center GmbH</ProductContactName>
+
+            <EmailAddress>ProductSafety@springernature.com</EmailAddress>
+
+        </ProductContact>
+
+        <PublishingStatus>02</PublishingStatus>
+
+        <PublishingDate>
+
+            <PublishingDateRole>01</PublishingDateRole>
+
+            <Date dateformat="00">20260626</Date>
+
+        </PublishingDate>
+
+        <PublishingDate>
+
+            <PublishingDateRole>02</PublishingDateRole>
+
+            <Date dateformat="00">20260626</Date>
+
+        </PublishingDate>
+
+        <CopyrightStatement>
+
+            <CopyrightYear>2026</CopyrightYear>
+
+        </CopyrightStatement>
+
+        <SalesRights>
+
+            <SalesRightsType>01</SalesRightsType>
+
+            <Territory>
+
+                <RegionsIncluded>WORLD</RegionsIncluded>
+
+            </Territory>
+
+        </SalesRights>
+
+    </PublishingDetail>
+
+    <RelatedMaterial>
+
+        <RelatedProduct>
+
+            <ProductRelationCode>13</ProductRelationCode>
+
+            <ProductIdentifier>
+
+                <ProductIDType>15</ProductIDType>
+
+                <IDValue>9789819583904</IDValue>
+
+            </ProductIdentifier>
+
+            <ProductForm>BB</ProductForm>
+
+        </RelatedProduct>
+
+    </RelatedMaterial>
+
+    <ProductSupply>
+
+        <MarketPublishingDetail>
+
+            <MarketPublishingStatus>02</MarketPublishingStatus>
+
+        </MarketPublishingDetail>
+
+        <SupplyDetail>
+
+            <Supplier>
+
+                <SupplierRole>01</SupplierRole>
+
+                <SupplierIdentifier>
+
+                    <SupplierIDType>05</SupplierIDType>
+
+                    <IDValue>78997</IDValue>
+
+                </SupplierIdentifier>
+
+                <SupplierName>Springer Singapore</SupplierName>
+
+            </Supplier>
+
+            <ProductAvailability>10</ProductAvailability>
+
+            <SupplyDate>
+
+                <SupplyDateRole>08</SupplyDateRole>
+
+                <Date dateformat="00">20260626</Date>
+
+            </SupplyDate>
+
+            <UnpricedItemType>01</UnpricedItemType>
+
+        </SupplyDetail>
+
+    </ProductSupply>
+
+</Product>
+<Product datestamp="20260205">
+
+    <RecordReference>0179c5d619b0411280c55753db5a3764</RecordReference>
+
+    <NotificationType>03</NotificationType>
+
+    <ProductIdentifier>
+
+        <ProductIDType>01</ProductIDType>
+
+        <IDTypeName>Publishers Order No</IDTypeName>
+
+        <IDValue>978-3-032-20872-9</IDValue>
+
+    </ProductIdentifier>
+
+    <ProductIdentifier>
+
+        <ProductIDType>01</ProductIDType>
+
+        <IDTypeName>Publishers Order No</IDTypeName>
+
+        <IDValue>89186754</IDValue>
+
+    </ProductIdentifier>
+
+    <ProductIdentifier>
+
+        <ProductIDType>02</ProductIDType>
+
+        <IDValue>3032208726</IDValue>
+
+    </ProductIdentifier>
+
+    <ProductIdentifier>
+
+        <ProductIDType>03</ProductIDType>
+
+        <IDValue>9783032208729</IDValue>
+
+    </ProductIdentifier>
+
+    <ProductIdentifier>
+
+        <ProductIDType>15</ProductIDType>
+
+        <IDValue>9783032208729</IDValue>
 
     </ProductIdentifier>
 
@@ -101,7 +1942,7 @@
 
                 <CollectionIDType>04</CollectionIDType>
 
-                <IDValue>AC355</IDValue>
+                <IDValue>AAYOO48</IDValue>
 
             </CollectionIdentifier>
 
@@ -113,7 +1954,7 @@
 
                     <TitleElementLevel>02</TitleElementLevel>
 
-                    <TitleText>Studies in Big Data</TitleText>
+                    <TitleText>Contributions to Phenomenology</TitleText>
 
                 </TitleElement>
 
@@ -129,7 +1970,9 @@
 
                 <TitleElementLevel>01</TitleElementLevel>
 
-                <TitleText>Deep Learning Applications in Healthcare and Medical Imaging Practice</TitleText>
+                <TitleText>Phenomenology in India</TitleText>
+
+                <Subtitle>Themes for the 21st Century</Subtitle>
 
             </TitleElement>
 
@@ -145,17 +1988,17 @@
 
                 <NameIDType>21</NameIDType>
 
-                <IDValue>0000000293380932</IDValue>
+                <IDValue>0000000212745814</IDValue>
 
             </NameIdentifier>
 
-            <PersonName>Prabhishek Singh</PersonName>
+            <PersonName>Sonali A. Chunodkar</PersonName>
 
-            <PersonNameInverted>Singh, Prabhishek</PersonNameInverted>
+            <PersonNameInverted>Chunodkar, Sonali A.</PersonNameInverted>
 
-            <NamesBeforeKey>Prabhishek</NamesBeforeKey>
+            <NamesBeforeKey>Sonali A.</NamesBeforeKey>
 
-            <KeyNames>Singh</KeyNames>
+            <KeyNames>Chunodkar</KeyNames>
 
         </Contributor>
 
@@ -165,53 +2008,21 @@
 
             <ContributorRole>B01</ContributorRole>
 
-            <PersonName>Vinayakumar Ravi</PersonName>
-
-            <PersonNameInverted>Ravi, Vinayakumar</PersonNameInverted>
-
-            <NamesBeforeKey>Vinayakumar</NamesBeforeKey>
-
-            <KeyNames>Ravi</KeyNames>
-
-        </Contributor>
-
-        <Contributor>
-
-            <SequenceNumber>3</SequenceNumber>
-
-            <ContributorRole>B01</ContributorRole>
-
             <NameIdentifier sourcename="Publisher">
 
-                <NameIDType>16</NameIDType>
+                <NameIDType>21</NameIDType>
 
-                <IDValue>0000000529067329</IDValue>
+                <IDValue>0000000257660320</IDValue>
 
             </NameIdentifier>
 
-            <PersonName>Manoj Diwakar</PersonName>
+            <PersonName>Nicolas de Warren</PersonName>
 
-            <PersonNameInverted>Diwakar, Manoj</PersonNameInverted>
+            <PersonNameInverted>de Warren, Nicolas</PersonNameInverted>
 
-            <NamesBeforeKey>Manoj</NamesBeforeKey>
+            <NamesBeforeKey>Nicolas</NamesBeforeKey>
 
-            <KeyNames>Diwakar</KeyNames>
-
-        </Contributor>
-
-        <Contributor>
-
-            <SequenceNumber>4</SequenceNumber>
-
-            <ContributorRole>B01</ContributorRole>
-
-            <PersonName>Manak Gupta</PersonName>
-
-            <PersonNameInverted>Gupta, Manak</PersonNameInverted>
-
-            <NamesBeforeKey>Manak</NamesBeforeKey>
-
-            <KeyNames>Gupta</KeyNames>
+            <KeyNames>de Warren</KeyNames>
 
         </Contributor>
 
@@ -223,7 +2034,29 @@
 
         </Language>
 
-        <IllustrationsNote>Approx. 700 p.</IllustrationsNote>
+        <Extent>
+
+            <ExtentType>00</ExtentType>
+
+            <ExtentValue>240</ExtentValue>
+
+            <ExtentUnit>03</ExtentUnit>
+
+        </Extent>
+
+        <Extent>
+
+            <ExtentType>03</ExtentType>
+
+            <ExtentValue>10</ExtentValue>
+
+            <ExtentValueRoman>X</ExtentValueRoman>
+
+            <ExtentUnit>03</ExtentUnit>
+
+        </Extent>
+
+        <IllustrationsNote>X, 240 p.</IllustrationsNote>
 
         <Subject>
 
@@ -233,7 +2066,7 @@
 
             <SubjectSchemeVersion>2009</SubjectSchemeVersion>
 
-            <SubjectCode>COM043000</SubjectCode>
+            <SubjectCode>PHI018000</SubjectCode>
 
         </Subject>
 
@@ -245,9 +2078,9 @@
 
             <SubjectSchemeVersion>2.1</SubjectSchemeVersion>
 
-            <SubjectCode>1630</SubjectCode>
+            <SubjectCode>1526</SubjectCode>
 
-            <SubjectHeadingText>Hardcover, Softcover / Informatik, EDV</SubjectHeadingText>
+            <SubjectHeadingText>Hardcover, Softcover / Philosophie/20., 21. Jahrhundert</SubjectHeadingText>
 
         </Subject>
 
@@ -259,29 +2092,9 @@
 
             <SubjectSchemeVersion>1.6</SubjectSchemeVersion>
 
-            <SubjectCode>UT</SubjectCode>
+            <SubjectCode>QDHR5</SubjectCode>
 
-            <SubjectHeadingText>Computernetzwerke und maschinelle Kommunikation</SubjectHeadingText>
-
-        </Subject>
-
-        <Subject>
-
-            <SubjectSchemeIdentifier>10</SubjectSchemeIdentifier>
-
-            <SubjectSchemeVersion>2009</SubjectSchemeVersion>
-
-            <SubjectCode>TEC059000</SubjectCode>
-
-        </Subject>
-
-        <Subject>
-
-            <SubjectSchemeIdentifier>10</SubjectSchemeIdentifier>
-
-            <SubjectSchemeVersion>2009</SubjectSchemeVersion>
-
-            <SubjectCode>TEC004000</SubjectCode>
+            <SubjectHeadingText>Phänomenologie und Existenzphilosophie</SubjectHeadingText>
 
         </Subject>
 
@@ -289,7 +2102,7 @@
 
             <SubjectSchemeIdentifier>20</SubjectSchemeIdentifier>
 
-            <SubjectHeadingText>Medical Imaging</SubjectHeadingText>
+            <SubjectHeadingText>phenomenology and hermeneutics</SubjectHeadingText>
 
         </Subject>
 
@@ -297,7 +2110,7 @@
 
             <SubjectSchemeIdentifier>20</SubjectSchemeIdentifier>
 
-            <SubjectHeadingText>Computer vision</SubjectHeadingText>
+            <SubjectHeadingText>philosophy in India</SubjectHeadingText>
 
         </Subject>
 
@@ -305,7 +2118,7 @@
 
             <SubjectSchemeIdentifier>20</SubjectSchemeIdentifier>
 
-            <SubjectHeadingText>Artificial Intelligence</SubjectHeadingText>
+            <SubjectHeadingText>Indian philosophy</SubjectHeadingText>
 
         </Subject>
 
@@ -313,7 +2126,7 @@
 
             <SubjectSchemeIdentifier>20</SubjectSchemeIdentifier>
 
-            <SubjectHeadingText>Artifect Correction</SubjectHeadingText>
+            <SubjectHeadingText>intercultural philosophy</SubjectHeadingText>
 
         </Subject>
 
@@ -321,7 +2134,7 @@
 
             <SubjectSchemeIdentifier>20</SubjectSchemeIdentifier>
 
-            <SubjectHeadingText>Multimodel Imaging</SubjectHeadingText>
+            <SubjectHeadingText>phenomenological psychopathology</SubjectHeadingText>
 
         </Subject>
 
@@ -329,7 +2142,63 @@
 
             <SubjectSchemeIdentifier>20</SubjectSchemeIdentifier>
 
-            <SubjectHeadingText>3D reconstruction</SubjectHeadingText>
+            <SubjectHeadingText>feminist phenomenology</SubjectHeadingText>
+
+        </Subject>
+
+        <Subject>
+
+            <SubjectSchemeIdentifier>20</SubjectSchemeIdentifier>
+
+            <SubjectHeadingText>yoga philosophy</SubjectHeadingText>
+
+        </Subject>
+
+        <Subject>
+
+            <SubjectSchemeIdentifier>20</SubjectSchemeIdentifier>
+
+            <SubjectHeadingText>environmental phenomenology</SubjectHeadingText>
+
+        </Subject>
+
+        <Subject>
+
+            <SubjectSchemeIdentifier>20</SubjectSchemeIdentifier>
+
+            <SubjectHeadingText>mohanty and philosophy</SubjectHeadingText>
+
+        </Subject>
+
+        <Subject>
+
+            <SubjectSchemeIdentifier>20</SubjectSchemeIdentifier>
+
+            <SubjectHeadingText>mohanty and phenomenology</SubjectHeadingText>
+
+        </Subject>
+
+        <Subject>
+
+            <SubjectSchemeIdentifier>20</SubjectSchemeIdentifier>
+
+            <SubjectHeadingText>cross cultural phenomenology</SubjectHeadingText>
+
+        </Subject>
+
+        <Subject>
+
+            <SubjectSchemeIdentifier>20</SubjectSchemeIdentifier>
+
+            <SubjectHeadingText>aesthetic experience and phenomenology</SubjectHeadingText>
+
+        </Subject>
+
+        <Subject>
+
+            <SubjectSchemeIdentifier>20</SubjectSchemeIdentifier>
+
+            <SubjectHeadingText>curatorial practices and phenomenology</SubjectHeadingText>
 
         </Subject>
 
@@ -339,57 +2208,9 @@
 
             <SubjectSchemeName>Springer Nature Taxonomy</SubjectSchemeName>
 
-            <SubjectCode>4403</SubjectCode>
+            <SubjectCode>5492</SubjectCode>
 
-            <SubjectHeadingText>Internet of Things</SubjectHeadingText>
-
-        </Subject>
-
-        <Subject>
-
-            <SubjectSchemeIdentifier>24</SubjectSchemeIdentifier>
-
-            <SubjectSchemeName>Springer Nature Taxonomy</SubjectSchemeName>
-
-            <SubjectCode>3344</SubjectCode>
-
-            <SubjectHeadingText>Biomedical Engineering and Bioengineering</SubjectHeadingText>
-
-        </Subject>
-
-        <Subject>
-
-            <SubjectSchemeIdentifier>24</SubjectSchemeIdentifier>
-
-            <SubjectSchemeName>Springer Nature Taxonomy</SubjectSchemeName>
-
-            <SubjectCode>6858</SubjectCode>
-
-            <SubjectHeadingText>Automation</SubjectHeadingText>
-
-        </Subject>
-
-        <Subject sourcename="Publisher">
-
-            <SubjectSchemeIdentifier>93</SubjectSchemeIdentifier>
-
-            <SubjectSchemeVersion>1.6</SubjectSchemeVersion>
-
-            <SubjectCode>MQW</SubjectCode>
-
-            <SubjectHeadingText>Biomedizinische Technik</SubjectHeadingText>
-
-        </Subject>
-
-        <Subject sourcename="Publisher">
-
-            <SubjectSchemeIdentifier>93</SubjectSchemeIdentifier>
-
-            <SubjectSchemeVersion>1.6</SubjectSchemeVersion>
-
-            <SubjectCode>TJFM</SubjectCode>
-
-            <SubjectHeadingText>Regelungstechnik</SubjectHeadingText>
+            <SubjectHeadingText>Phenomenology</SubjectHeadingText>
 
         </Subject>
 
@@ -423,10 +2244,7 @@
 
             <Text textformat="05">
 
-                <p>This book offers a comprehensive study of medical image processing, with an emphasis on methods to enhance the accuracy and readability of medical images for diagnosis and therapy. Its main goals are to improve the visual clarity of images by sharpening details, lowering noise, and altering contrast to better visualize subtle elements. Also, it guarantees that anatomical features are accurately represented by correcting distortions, artefacts, and defects resulting from capture or transmission. Reconstruction is the main topic, including how to mix data from different modalities (such as CT and MRI) to build a more complete perspective or recreate missing or incomplete data from fragmented images. This book covers a wide range of topics, including deep learning methodologies, image processing methods, clinical applications, evaluation, and validation. The goal of the book is to provide readers a thorough understanding of medical image processing methods for enhancing, restoring, and reconstructing medical images. It describes the different algorithms’ theoretical foundations and real-world applications. It highlights the practical uses and promise of these methods for enhancing medical diagnosis and care.</p>
-
-
-                <p> </p>
+                <p>This volume showcases the vibrant and diverse landscape of phenomenological thinking in India. Critically engaging with the works of phenomenological thinkers like Edmund Husserl, Emmanuel Levinas, Franz Brentano, Hannah Arendt, Jitendra Nath Mohanty, Martin Heidegger, Maurice Merleau-Ponty, and R. Sundara Rajan, the contributors of this volume offer exciting insights and interdisciplinary examinations that help expand our understanding of phenomenology within a global context. Among this volume’s rich contributions are new accounts that delve into the hitherto ‘lost’ reception history of phenomenology in India, the as-yet inadequately acknowledged extent of Edmund Husserl’s engagement with Buddhist philosophy, R. Sundara Rajan’s decolonizing thinking on geophilia, a cross-cultural dialogical exploration between phenomenology and yoga philosophy, a phenomenology of tribal identity formation in Northeast India, a critical phenomenology of caste, a feminist and anti-caste phenomenology of labor, and aesthetic phenomenology in the context of curatorial technologies as well as theatrical experiences. The volume also offers a novel phenomenological methodology for environmental ethics research in addition to timely interventions to the problem of referentiality in Husserl and decision in Heidegger. The varied contributions of this volume would serve as thought-provoking resources for graduate students and researchers in related fields.</p>
 
             </Text>
 
@@ -440,7 +2258,29 @@
 
             <Text textformat="05">
 
-                <p>Introduction to Medical Image Denoising, Enhancement, and Reconstruction.- CT, MRI, PET Image Enhancement using Image Fusion Strategy.- Principles, Practices, and Emerging Trends in Modern Image Reconstruction.- Transforming Healthcare with AI An Introduction to Machine Learning and Deep Learning Techniques.- Ai And Deep Learning In Medical Imaging: Reforming Diagnosis And Treatment.- A Summary of Recent Progress in Multimodal Medical Image Fusion Methods for Improved Diagnosis.- In depth Analysis of CT Image, Noise, Non traditional Denoising Techniques, and its Evaluation Metrics.- Comparative Analysis of Transform Based Denoising Techniques for CT Imaging.-Pneumonia Classification from Chest X-Ray Images Using K Fold CNN Approach.- AY Net Attention Y Net based Dehazing in Laparoscopic Surgery.- Ml Driven Approach For Classification Analysis Of Diabetic Retinopathy Using Medical Imaging Application.- Computational Detection Of Diabetic Retinal Dot Blot Hemorrhage Using Medical Imaging Approach With Deep Neural Networks.-Multiple Sclerosis Diagnosis using Deep Learning Techniques Study of Brain MRI Images.- Advanced Diagnostic Technologies and Analytical Models for Enhanced COVID 19 Management A Multi Scale Approach to Early Detection, Severity Classification, and Long Term Risk Assessment.- Ai Aided Detection And Classification Of Auricular Deformities In New Borns.- YOLOv10 for Enhanced Trypanosome Detection.-Revolutionizing Breast Cancer Management Education, Motivational Support and Detection Using Deep Learning Algorithms.- Semi Supervised Image Segmentation Techniques for Medical Image Analysis.- Advancing Fetal Health Prediction A Review of CTG Based Classification, MRI Segmentation, and Abnormality Detection.- Fracture Detection in X ray Images using Deep Supervised Learning.- Challenges Issues on low quality images in Cancer Detection within Medical Imaging System and Image Enhancement using Multi focus Image Fusion Techniques.- Advantages, Drawbacks, Emerging Research Challenges and Future Scope in Medical Image Enhancement, Restoration, Reconstruction.</p>
+                <p>Chapter 1 Phenomenology in India (Sonali Arvind Chunodkar and Nicolas de Warren).- Chapter 2 Sundara Rajan on Finite Transcendence: Phenomenology as Geophilia (Sanil V).- Chapter 3 Kaivalya as Only-ness: An Intercultural Curation of Phenomenological and Yogic Conceptualizations (Meera Baindur).- Chapter 4 Phenomenology of Tribal Identity of Northeast India (Karilemla).- Chapter 5 Introducing the Phenomenological Research Methodology to Environmental Philosophy: An Exploration of Value-Action Gap (Soumyajit Bhar and Kalpita Bhar Paul).- Chapter 6 Hetero-Aversion: A Phenomenological Account of the Subject of Caste (Siby K George).- Chapter 7 Finding a World in Labor: Hannah Arendt, Women’s Writings from the Self-Respect Movement in India, and the Emergence of an Interactionist Multi-World Thesis for Feminist Phenomenology (Amrita Banerjee).- Chapter 8 Aesthetics and the Curatorial: Towards a New Phenomenology of Art (Srajana Kaikini).- Chapter 9 Being in the Theater: On the Possibility of Belief among Theater Audiences (Sonali Arvind Chunodkar).- Chapter 10 Intentionality and Referentiality: The Problem of Referentiality in Husserl’s Zeitdenken (Babu Thaliath).- Chapter 11 A Revolutionary Sense of Entscheidung: Clearing Up Some Misunderstandings about Heidegger’s Notion of Decision (Arun Iyer).</p>
+
+            </Text>
+
+        </TextContent>
+
+        <TextContent>
+
+            <TextType>12</TextType>
+
+            <ContentAudience>03</ContentAudience>
+
+            <Text textformat="05">
+
+                <p>Sonali A. Chunodkar is an independent researcher based in Mumbai, India.</p>
+
+
+                <p>
+
+                    <br/>
+                                        Nicolas de Warren is Professor of Philosophy and Jewish Studies at Pennsylvania State University, USA.
+
+                </p>
 
             </Text>
 
@@ -454,7 +2294,7 @@
 
             <Text textformat="05">
 
-                <p>This book offers a comprehensive study of medical image processing, with an emphasis on methods to enhance the accuracy and readability of medical images for diagnosis and therapy. Its main goals are to improve the visual clarity of images by sharpening details, lowering noise, and altering contrast to better visualize subtle elements. Also, it guarantees that anatomical features are accurately represented by correcting distortions, artefacts, and defects resulting from capture or transmission. Reconstruction is the main topic, including how to mix data from different modalities (such as CT and MRI) to build a more complete perspective or recreate missing or incomplete data from fragmented images. This book covers a wide range of topics, including deep learning methodologies, image processing methods, clinical applications, evaluation, and validation. The goal of the book is to provide readers a thorough understanding of medical image processing methods for enhancing, restoring, and reconstructing medical images. It describes the different algorithms’ theoretical foundations and real-world applications. It highlights the practical uses and promise of these methods for enhancing medical diagnosis and care.</p>
+                <p>This volume showcases the vibrant and diverse landscape of phenomenological thinking in India. Critically engaging with the works of phenomenological thinkers like Edmund Husserl, Emmanuel Levinas, Franz Brentano, Hannah Arendt, Jitendra Nath Mohanty, Martin Heidegger, Maurice Merleau-Ponty, and R. Sundara Rajan, the contributors of this volume offer exciting insights and interdisciplinary examinations that help expand our understanding of phenomenology within a global context. Among this volume’s rich contributions are new accounts that delve into the hitherto ‘lost’ reception history of phenomenology in India, the as-yet inadequately acknowledged extent of Edmund Husserl’s engagement with Buddhist philosophy, R. Sundara Rajan’s decolonizing thinking on geophilia, a cross-cultural dialogical exploration between phenomenology and yoga philosophy, a phenomenology of tribal identity formation in Northeast India, a critical phenomenology of caste, a feminist and anti-caste phenomenology of labor, and aesthetic phenomenology in the context of curatorial technologies as well as theatrical experiences. The volume also offers a novel phenomenological methodology for environmental ethics research in addition to timely interventions to the problem of referentiality in Husserl and decision in Heidegger. The varied contributions of this volume would serve as thought-provoking resources for graduate students and researchers in related fields.</p>
 
             </Text>
 
@@ -466,7 +2306,7 @@
 
             <ContentAudience>03</ContentAudience>
 
-            <Text textformat="06">Offers a comprehensive study of medical image processing Emphasizes on methods to enhance the accuracy and readability of medical images for diagnosis and therapy Covers topics, including deep learning, image processing methods, clinical applications, evaluation, and validation</Text>
+            <Text textformat="06">Informs an international readership on contemporary phenomenological advancements in India across disciplines Contributes unique non-Western perspectives on classical phenomenological topics Brings together established and younger phenomenology scholars in India for a single volume</Text>
 
         </TextContent>
 
@@ -490,7 +2330,7 @@
 
                 </ResourceVersionFeature>
 
-                <ResourceLink>https://link.springer.com/978-3-032-21008-1</ResourceLink>
+                <ResourceLink>https://link.springer.com/978-3-032-20872-9</ResourceLink>
 
             </ResourceVersion>
 
@@ -566,7 +2406,7 @@
 
             <PublishingDateRole>01</PublishingDateRole>
 
-            <Date dateformat="00">20260730</Date>
+            <Date dateformat="00">20260803</Date>
 
         </PublishingDate>
 
@@ -574,7 +2414,7 @@
 
             <PublishingDateRole>02</PublishingDateRole>
 
-            <Date dateformat="00">20260730</Date>
+            <Date dateformat="00">20260803</Date>
 
         </PublishingDate>
 
@@ -608,7 +2448,7 @@
 
                 <ProductIDType>15</ProductIDType>
 
-                <IDValue>9783032210098</IDValue>
+                <IDValue>9783032208736</IDValue>
 
             </ProductIdentifier>
 
@@ -624,7 +2464,7 @@
 
                 <ProductIDType>15</ProductIDType>
 
-                <IDValue>9783032210111</IDValue>
+                <IDValue>9783032208750</IDValue>
 
             </ProductIdentifier>
 
@@ -666,7 +2506,7 @@
 
                 <SupplyDateRole>08</SupplyDateRole>
 
-                <Date dateformat="00">20260730</Date>
+                <Date dateformat="00">20260803</Date>
 
             </SupplyDate>
 
@@ -676,7 +2516,7 @@
 
                 <PriceStatus>01</PriceStatus>
 
-                <PriceAmount>219.99</PriceAmount>
+                <PriceAmount>109.99</PriceAmount>
 
                 <CurrencyCode>EUR</CurrencyCode>
 
@@ -692,7 +2532,7 @@
 
                     <PriceDateRole>14</PriceDateRole>
 
-                    <Date>20250619</Date>
+                    <Date>20220204</Date>
 
                 </PriceDate>
 
@@ -704,7 +2544,7 @@
 
                 <PriceStatus>01</PriceStatus>
 
-                <PriceAmount>241.99</PriceAmount>
+                <PriceAmount>120.99</PriceAmount>
 
                 <Tax>
 
@@ -732,7 +2572,7 @@
 
                 <PriceStatus>01</PriceStatus>
 
-                <PriceAmount>326.36</PriceAmount>
+                <PriceAmount>162.73</PriceAmount>
 
                 <CurrencyCode>AUD</CurrencyCode>
 
@@ -746,7 +2586,7 @@
 
                     <PriceDateRole>14</PriceDateRole>
 
-                    <Date>20250619</Date>
+                    <Date>20220204</Date>
 
                 </PriceDate>
 
@@ -758,7 +2598,7 @@
 
                 <PriceStatus>01</PriceStatus>
 
-                <PriceAmount>359.00</PriceAmount>
+                <PriceAmount>179.00</PriceAmount>
 
                 <CurrencyCode>AUD</CurrencyCode>
 
@@ -776,7 +2616,7 @@
 
                 <PriceStatus>01</PriceStatus>
 
-                <PriceAmount>260.00</PriceAmount>
+                <PriceAmount>130.00</PriceAmount>
 
                 <Tax>
 
@@ -804,7 +2644,7 @@
 
                 <PriceStatus>01</PriceStatus>
 
-                <PriceAmount>235.39</PriceAmount>
+                <PriceAmount>117.69</PriceAmount>
 
                 <Tax>
 
@@ -832,7 +2672,7 @@
 
                 <PriceStatus>01</PriceStatus>
 
-                <PriceAmount>232.09</PriceAmount>
+                <PriceAmount>116.04</PriceAmount>
 
                 <CurrencyCode>EUR</CurrencyCode>
 
@@ -850,7 +2690,7 @@
 
                 <PriceStatus>01</PriceStatus>
 
-                <PriceAmount>199.99</PriceAmount>
+                <PriceAmount>99.99</PriceAmount>
 
                 <CurrencyCode>GBP</CurrencyCode>
 
@@ -864,7 +2704,7 @@
 
                     <PriceDateRole>14</PriceDateRole>
 
-                    <Date>20250619</Date>
+                    <Date>20220204</Date>
 
                 </PriceDate>
 
@@ -876,7 +2716,7 @@
 
                 <PriceStatus>01</PriceStatus>
 
-                <PriceAmount>15700.00</PriceAmount>
+                <PriceAmount>7830.00</PriceAmount>
 
                 <CurrencyCode>INR</CurrencyCode>
 
@@ -890,7 +2730,7 @@
 
                     <PriceDateRole>14</PriceDateRole>
 
-                    <Date>20250619</Date>
+                    <Date>20220204</Date>
 
                 </PriceDate>
 
@@ -902,7 +2742,7 @@
 
                 <PriceStatus>01</PriceStatus>
 
-                <PriceAmount>228.79</PriceAmount>
+                <PriceAmount>114.39</PriceAmount>
 
                 <CurrencyCode>EUR</CurrencyCode>
 
@@ -920,7 +2760,7 @@
 
                 <PriceStatus>01</PriceStatus>
 
-                <PriceAmount>31459.00</PriceAmount>
+                <PriceAmount>15729.00</PriceAmount>
 
                 <CurrencyCode>JPY</CurrencyCode>
 
@@ -938,7 +2778,7 @@
 
                 <PriceStatus>01</PriceStatus>
 
-                <PriceAmount>239.79</PriceAmount>
+                <PriceAmount>119.89</PriceAmount>
 
                 <CurrencyCode>EUR</CurrencyCode>
 
@@ -956,7 +2796,7 @@
 
                 <PriceStatus>01</PriceStatus>
 
-                <PriceAmount>249.99</PriceAmount>
+                <PriceAmount>119.99</PriceAmount>
 
                 <CurrencyCode>USD</CurrencyCode>
 
@@ -973,10 +2813,9 @@
     </ProductSupply>
 
 </Product>
+<Product datestamp="20260205">
 
-<Product datestamp="20260206">
-
-    <RecordReference>0637f86b4b834b14a92550e085994378</RecordReference>
+    <RecordReference>02526d8f3f0747acb8d9a2905292d086</RecordReference>
 
     <NotificationType>03</NotificationType>
 
@@ -984,7 +2823,7 @@
 
         <ProductIDType>02</ProductIDType>
 
-        <IDValue>3691571042</IDValue>
+        <IDValue>3987402717</IDValue>
 
     </ProductIdentifier>
 
@@ -992,7 +2831,7 @@
 
         <ProductIDType>03</ProductIDType>
 
-        <IDValue>9783691571042</IDValue>
+        <IDValue>9783987402715</IDValue>
 
     </ProductIdentifier>
 
@@ -1000,7 +2839,7 @@
 
         <ProductIDType>15</ProductIDType>
 
-        <IDValue>9783691571042</IDValue>
+        <IDValue>9783987402715</IDValue>
 
     </ProductIdentifier>
 
@@ -1010,15 +2849,11 @@
 
         <ProductForm>BC</ProductForm>
 
-        <ProductFormDetail>B131</ProductFormDetail>
-
-        <PrimaryContentType>10</PrimaryContentType>
-
         <Measure>
 
             <MeasureType>01</MeasureType>
 
-            <Measurement>21.5</Measurement>
+            <Measurement>24</Measurement>
 
             <MeasureUnitCode>cm</MeasureUnitCode>
 
@@ -1028,7 +2863,7 @@
 
             <MeasureType>02</MeasureType>
 
-            <Measurement>13.5</Measurement>
+            <Measurement>17</Measurement>
 
             <MeasureUnitCode>cm</MeasureUnitCode>
 
@@ -1040,7 +2875,7 @@
 
             <ProductClassificationType>04</ProductClassificationType>
 
-            <ProductClassificationCode>49011000</ProductClassificationCode>
+            <ProductClassificationCode>49019900</ProductClassificationCode>
 
         </ProductClassification>
 
@@ -1052,7 +2887,7 @@
 
                 <CollectionIDType>04</CollectionIDType>
 
-                <IDValue>ABBTO99</IDValue>
+                <IDValue>AAZWE80</IDValue>
 
             </CollectionIdentifier>
 
@@ -1064,7 +2899,7 @@
 
                     <TitleElementLevel>02</TitleElementLevel>
 
-                    <TitleText>Sails Reihe</TitleText>
+                    <TitleText>Gesellschaften und Kulturen des sephardischen Judentums I Sephardic Societies and Cultures</TitleText>
 
                 </TitleElement>
 
@@ -1088,9 +2923,23 @@
 
                 <TitleElementLevel>01</TitleElementLevel>
 
-                <TitleText>Red Sails - Die Macht der Tränen</TitleText>
+                <TitleText>Joseph Nehama: Zuflucht Saloniki – Die Sepharden im osmanischen Exil von 1492 bis 1556</TitleText>
 
-                <Subtitle>Band 3 der spicy Piraten-Romantasy</Subtitle>
+                <Subtitle>Eine Auswahl aus der „Histoire des Israélites de Salonique“</Subtitle>
+
+            </TitleElement>
+
+        </TitleDetail>
+
+        <TitleDetail>
+
+            <TitleType>05</TitleType>
+
+            <TitleElement>
+
+                <TitleElementLevel>01</TitleElementLevel>
+
+                <TitleText>Herschhorn/Hirsch, Joseph Nehama: Zuflucht Saloniki</TitleText>
 
             </TitleElement>
 
@@ -1100,29 +2949,35 @@
 
             <SequenceNumber>1</SequenceNumber>
 
-            <ContributorRole>A01</ContributorRole>
+            <ContributorRole>B01</ContributorRole>
 
-            <NameIdentifier sourcename="Publisher">
+            <PersonName>Lilli Herschhorn</PersonName>
 
-                <NameIDType>16</NameIDType>
+            <PersonNameInverted>Herschhorn, Lilli</PersonNameInverted>
 
-                <IDValue>0000000524229114</IDValue>
+            <NamesBeforeKey>Lilli</NamesBeforeKey>
 
-            </NameIdentifier>
-
-            <PersonName>Annie Eisenhardt</PersonName>
-
-            <PersonNameInverted>Eisenhardt, Annie</PersonNameInverted>
-
-            <NamesBeforeKey>Annie</NamesBeforeKey>
-
-            <KeyNames>Eisenhardt</KeyNames>
+            <KeyNames>Herschhorn</KeyNames>
 
         </Contributor>
 
-        <EditionType>NED</EditionType>
+        <Contributor>
 
-        <EditionNumber>2</EditionNumber>
+            <SequenceNumber>2</SequenceNumber>
+
+            <ContributorRole>B99</ContributorRole>
+
+            <PersonName>Jonathan Hirsch</PersonName>
+
+            <PersonNameInverted>Hirsch, Jonathan</PersonNameInverted>
+
+            <NamesBeforeKey>Jonathan</NamesBeforeKey>
+
+            <KeyNames>Hirsch</KeyNames>
+
+        </Contributor>
+
+        <EditionNumber>1</EditionNumber>
 
         <Language>
 
@@ -1134,9 +2989,29 @@
 
         <Extent>
 
-            <ExtentType>11</ExtentType>
+            <ExtentType>00</ExtentType>
 
-            <ExtentValue>496</ExtentValue>
+            <ExtentValue>195</ExtentValue>
+
+            <ExtentUnit>03</ExtentUnit>
+
+        </Extent>
+
+        <Extent>
+
+            <ExtentType>05</ExtentType>
+
+            <ExtentValue>195</ExtentValue>
+
+            <ExtentUnit>03</ExtentUnit>
+
+        </Extent>
+
+        <Extent>
+
+            <ExtentType>06</ExtentType>
+
+            <ExtentValue>195</ExtentValue>
 
             <ExtentUnit>03</ExtentUnit>
 
@@ -1146,23 +3021,13 @@
 
             <MainSubject/>
 
-            <SubjectSchemeIdentifier>10</SubjectSchemeIdentifier>
-
-            <SubjectCode>FIC027030</SubjectCode>
-
-        </Subject>
-
-        <Subject>
-
-            <MainSubject/>
-
             <SubjectSchemeIdentifier>26</SubjectSchemeIdentifier>
 
             <SubjectSchemeVersion>2.1</SubjectSchemeVersion>
 
-            <SubjectCode>2177</SubjectCode>
+            <SubjectCode>1544</SubjectCode>
 
-            <SubjectHeadingText>Taschenbuch / Belletristik/New Adult/Romantasy &amp; Romantic Fantasy</SubjectHeadingText>
+            <SubjectHeadingText>Hardcover, Softcover / Religion, Theologie/Judentum</SubjectHeadingText>
 
         </Subject>
 
@@ -1174,17 +3039,9 @@
 
             <SubjectSchemeVersion>1.6</SubjectSchemeVersion>
 
-            <SubjectCode>FMR</SubjectCode>
+            <SubjectCode>QRJ</SubjectCode>
 
-            <SubjectHeadingText>Fantasy Romance</SubjectHeadingText>
-
-        </Subject>
-
-        <Subject>
-
-            <SubjectSchemeIdentifier>20</SubjectSchemeIdentifier>
-
-            <SubjectHeadingText>Piraten Liebesromane</SubjectHeadingText>
+            <SubjectHeadingText>Judentum</SubjectHeadingText>
 
         </Subject>
 
@@ -1192,7 +3049,7 @@
 
             <SubjectSchemeIdentifier>20</SubjectSchemeIdentifier>
 
-            <SubjectHeadingText>New Adult Romantasy Bücher</SubjectHeadingText>
+            <SubjectHeadingText>Sephardische Diaspora</SubjectHeadingText>
 
         </Subject>
 
@@ -1200,7 +3057,7 @@
 
             <SubjectSchemeIdentifier>20</SubjectSchemeIdentifier>
 
-            <SubjectHeadingText>Dark Romance deutsch</SubjectHeadingText>
+            <SubjectHeadingText>Sozialgeschichte der Juden</SubjectHeadingText>
 
         </Subject>
 
@@ -1208,7 +3065,7 @@
 
             <SubjectSchemeIdentifier>20</SubjectSchemeIdentifier>
 
-            <SubjectHeadingText>Bad Boy Liebesromane</SubjectHeadingText>
+            <SubjectHeadingText>Wirtschaftsgeschichte der Sepharden</SubjectHeadingText>
 
         </Subject>
 
@@ -1216,7 +3073,7 @@
 
             <SubjectSchemeIdentifier>20</SubjectSchemeIdentifier>
 
-            <SubjectHeadingText>Romantic Suspense</SubjectHeadingText>
+            <SubjectHeadingText>Jüdische Geschichte Salonikis</SubjectHeadingText>
 
         </Subject>
 
@@ -1224,7 +3081,7 @@
 
             <SubjectSchemeIdentifier>20</SubjectSchemeIdentifier>
 
-            <SubjectHeadingText>Abenteuerromane für Frauen</SubjectHeadingText>
+            <SubjectHeadingText>Jüdische Minderheiten</SubjectHeadingText>
 
         </Subject>
 
@@ -1232,7 +3089,7 @@
 
             <SubjectSchemeIdentifier>20</SubjectSchemeIdentifier>
 
-            <SubjectHeadingText>morally grey</SubjectHeadingText>
+            <SubjectHeadingText>Kulturgeschichte der Sepharden</SubjectHeadingText>
 
         </Subject>
 
@@ -1240,7 +3097,7 @@
 
             <SubjectSchemeIdentifier>20</SubjectSchemeIdentifier>
 
-            <SubjectHeadingText>Enemies-to-Lovers Liebesromane</SubjectHeadingText>
+            <SubjectHeadingText>Sephardic Diaspora</SubjectHeadingText>
 
         </Subject>
 
@@ -1248,7 +3105,7 @@
 
             <SubjectSchemeIdentifier>20</SubjectSchemeIdentifier>
 
-            <SubjectHeadingText>Chosen One</SubjectHeadingText>
+            <SubjectHeadingText>Jewish History of Salonica</SubjectHeadingText>
 
         </Subject>
 
@@ -1256,7 +3113,7 @@
 
             <SubjectSchemeIdentifier>20</SubjectSchemeIdentifier>
 
-            <SubjectHeadingText>Forbidden Love Liebesgeschichten</SubjectHeadingText>
+            <SubjectHeadingText>Cultural History of the Sephardim</SubjectHeadingText>
 
         </Subject>
 
@@ -1264,7 +3121,7 @@
 
             <SubjectSchemeIdentifier>20</SubjectSchemeIdentifier>
 
-            <SubjectHeadingText>Seeabenteuer romantisch</SubjectHeadingText>
+            <SubjectHeadingText>Social History of the Jews</SubjectHeadingText>
 
         </Subject>
 
@@ -1272,105 +3129,25 @@
 
             <SubjectSchemeIdentifier>20</SubjectSchemeIdentifier>
 
-            <SubjectHeadingText>spannende Liebesromane</SubjectHeadingText>
+            <SubjectHeadingText>Economic History of the Sephardim</SubjectHeadingText>
 
         </Subject>
 
-        <Subject sourcename="Publisher">
+        <Subject>
 
-            <SubjectSchemeIdentifier>93</SubjectSchemeIdentifier>
+            <SubjectSchemeIdentifier>20</SubjectSchemeIdentifier>
 
-            <SubjectSchemeVersion>1.6</SubjectSchemeVersion>
-
-            <SubjectCode>FRL</SubjectCode>
-
-            <SubjectHeadingText>Romance: unlikely or unexpected lovers</SubjectHeadingText>
+            <SubjectHeadingText>Jewish–Ottoman Relations</SubjectHeadingText>
 
         </Subject>
 
-        <Subject sourcename="Publisher">
+        <Subject>
 
-            <SubjectSchemeIdentifier>93</SubjectSchemeIdentifier>
+            <SubjectSchemeIdentifier>20</SubjectSchemeIdentifier>
 
-            <SubjectSchemeVersion>1.6</SubjectSchemeVersion>
-
-            <SubjectCode>FRM</SubjectCode>
-
-            <SubjectHeadingText>Belletristik: romantische Spannung</SubjectHeadingText>
+            <SubjectHeadingText>Jüdisch-osmanische Beziehungen</SubjectHeadingText>
 
         </Subject>
-
-        <Subject sourcename="Publisher">
-
-            <SubjectSchemeIdentifier>93</SubjectSchemeIdentifier>
-
-            <SubjectSchemeVersion>1.6</SubjectSchemeVersion>
-
-            <SubjectCode>FRT</SubjectCode>
-
-            <SubjectHeadingText>Liebesromane: Fantasy und paranormal</SubjectHeadingText>
-
-        </Subject>
-
-        <Subject sourcename="Publisher">
-
-            <SubjectSchemeIdentifier>93</SubjectSchemeIdentifier>
-
-            <SubjectSchemeVersion>1.6</SubjectSchemeVersion>
-
-            <SubjectCode>FRV</SubjectCode>
-
-            <SubjectHeadingText>Dark Romance</SubjectHeadingText>
-
-        </Subject>
-
-        <Subject sourcename="Publisher">
-
-            <SubjectSchemeIdentifier>93</SubjectSchemeIdentifier>
-
-            <SubjectSchemeVersion>1.6</SubjectSchemeVersion>
-
-            <SubjectCode>FRW</SubjectCode>
-
-            <SubjectHeadingText>Romance: bad boys / bad girls</SubjectHeadingText>
-
-        </Subject>
-
-        <Subject sourcename="Publisher">
-
-            <SubjectSchemeIdentifier>93</SubjectSchemeIdentifier>
-
-            <SubjectSchemeVersion>1.6</SubjectSchemeVersion>
-
-            <SubjectCode>FXD</SubjectCode>
-
-            <SubjectHeadingText>Belletristik: Themen, Stoffe, Motive: Liebe und Beziehungen</SubjectHeadingText>
-
-        </Subject>
-
-        <Subject sourcename="Publisher">
-
-            <SubjectSchemeIdentifier>93</SubjectSchemeIdentifier>
-
-            <SubjectSchemeVersion>1.6</SubjectSchemeVersion>
-
-            <SubjectCode>FXF</SubjectCode>
-
-            <SubjectHeadingText>Narrative theme: war and conflict</SubjectHeadingText>
-
-        </Subject>
-
-        <AudienceRange>
-
-            <AudienceRangeQualifier>18</AudienceRangeQualifier>
-
-            <AudienceRangePrecision>03</AudienceRangePrecision>
-
-            <AudienceRangeValue>16</AudienceRangeValue>
-
-        </AudienceRange>
-
-        <AudienceDescription>Fans von Piratengeschichten, Dark Romance und Enemies-to-Lovers Stories</AudienceDescription>
 
     </DescriptiveDetail>
 
@@ -1380,254 +3157,21 @@
 
             <TextType>03</TextType>
 
-            <ContentAudience>04</ContentAudience>
+            <ContentAudience>00</ContentAudience>
 
-            <Text textformat="05" language="ger">
-
-                <p>
-
-                    <strong>
-
-                        <i>Die See fordert, was ihr gehört!</i>
-
-                    </strong>
-
-                </p>
-
-
-                <p> </p>
-
-
-                <p>
-
-                    <i>Die Farbe des Blutes ist schwarz und Liebe zur Nichtigkeit verkommen.</i>
-
-                </p>
-
-
-                <p>Verrat hat den Schwur zerrissen, der Luziana, Finn und Leander einst verbinden sollte, und nun könnte er sie das Leben kosten. Ausgerechnet jetzt, da der Norden sich gegen die Tränen erhebt und die Korsaren am Rand des Untergangs stehen.</p>
-
-
-                <p>Ihre einzige Hoffnung liegt in der magischen Uhr des Maxims, die endlich gefunden wurde. Doch jene Macht befindet sich in den Händen einer zirkarianischen Prinzessin. Selbst wenn Luziana die Uhr erlangen kann, muss sie den Rat der Acht überzeugen, Seite an Seite mit ihr zu segeln. Gegen eine Armee, die von ihrer großen Liebe angeführt wird.</p>
-
-
-                <p>Wo Blut versiegt und nichts als Tod den Atem webt, leuchten Tränen im Dunkel und flüstern von einer Hoffnung, die nicht sterben will.</p>
-
-
-                <p> </p>
-
-
-                <p>
-
-                    <i>In diesem epischen Finale eskalieren Liebe und Krieg – nur wer sein Herz verteidigt, hat eine Chance.</i>
-
-                </p>
-
-            </Text>
+            <Text textformat="06" language="ger">Der Saloniker Historiker Joseph Nehama (1881–1971) war Direktor der reformorientierten frankophonen Schulen der Alliance Israélite Universelle in Saloniki, Gemeindeaktivist, Bankier, Journalist und Autor. Nehama war seiner Heimatstadt zutiefst verbunden und kehrte als Überlebender des KZ Bergen-Belsen dorthin zurück. Mit seiner siebenbändigen „Histoire des Israélites de Salonique“ schuf er eine umfassende Historiographie seiner Stadt von der Antike bis zum Zweiten Weltkrieg. Die vorliegende Übersetzung und Edition ausgewählter Kapitel aus dem 16. Jahrhundert soll heutige Leser:innen mit der vergessenen Stimme Joseph Nehamas bekannt machen und eine ausführliche Einleitung den Zugang dazu erleichtern.</Text>
 
         </TextContent>
 
         <TextContent>
 
-            <TextType>03</TextType>
-
-            <ContentAudience>02</ContentAudience>
-
-            <Text textformat="05" language="ger">
-
-                <p>
-
-                    <strong>
-
-                        <i>Die See fordert, was ihr gehört!</i>
-
-                    </strong>
-
-                </p>
-
-
-                <p> </p>
-
-
-                <p>
-
-                    <i>Die Farbe des Blutes ist schwarz und Liebe zur Nichtigkeit verkommen.</i>
-
-                </p>
-
-
-                <p>Verrat hat den Schwur zerrissen, der Luziana, Finn und Leander einst verbinden sollte, und nun könnte er sie das Leben kosten. Ausgerechnet jetzt, da der Norden sich gegen die Tränen erhebt und die Korsaren am Rand des Untergangs stehen.</p>
-
-
-                <p>Ihre einzige Hoffnung liegt in der magischen Uhr des Maxims, die endlich gefunden wurde. Doch jene Macht befindet sich in den Händen einer zirkarianischen Prinzessin. Selbst wenn Luziana die Uhr erlangen kann, muss sie den Rat der Acht überzeugen, Seite an Seite mit ihr zu segeln. Gegen eine Armee, die von ihrer großen Liebe angeführt wird.</p>
-
-
-                <p>Wo Blut versiegt und nichts als Tod den Atem webt, leuchten Tränen im Dunkel und flüstern von einer Hoffnung, die nicht sterben will.</p>
-
-
-                <p> </p>
-
-
-                <p>
-
-                    <i>In diesem epischen Finale eskalieren Liebe und Krieg – nur wer sein Herz verteidigt, hat eine Chance.</i>
-
-                </p>
-
-            </Text>
-
-        </TextContent>
-
-        <TextContent>
-
-            <TextType>03</TextType>
-
-            <ContentAudience>03</ContentAudience>
-
-            <Text textformat="05" language="ger">
-
-                <p>
-
-                    <strong>
-
-                        <i>Die See fordert, was ihr gehört!</i>
-
-                    </strong>
-
-                </p>
-
-
-                <p> </p>
-
-
-                <p>
-
-                    <i>Die Farbe des Blutes ist schwarz und Liebe zur Nichtigkeit verkommen.</i>
-
-                </p>
-
-
-                <p>Verrat hat den Schwur zerrissen, der Luziana, Finn und Leander einst verbinden sollte, und nun könnte er sie das Leben kosten. Ausgerechnet jetzt, da der Norden sich gegen die Tränen erhebt und die Korsaren am Rand des Untergangs stehen.</p>
-
-
-                <p>Ihre einzige Hoffnung liegt in der magischen Uhr des Maxims, die endlich gefunden wurde. Doch jene Macht befindet sich in den Händen einer zirkarianischen Prinzessin. Selbst wenn Luziana die Uhr erlangen kann, muss sie den Rat der Acht überzeugen, Seite an Seite mit ihr zu segeln. Gegen eine Armee, die von ihrer großen Liebe angeführt wird.</p>
-
-
-                <p>Wo Blut versiegt und nichts als Tod den Atem webt, leuchten Tränen im Dunkel und flüstern von einer Hoffnung, die nicht sterben will.</p>
-
-
-                <p> </p>
-
-
-                <p>
-
-                    <i>In diesem epischen Finale eskalieren Liebe und Krieg – nur wer sein Herz verteidigt, hat eine Chance.</i>
-
-                </p>
-
-            </Text>
-
-        </TextContent>
-
-        <TextContent>
-
-            <TextType>03</TextType>
+            <TextType>17</TextType>
 
             <ContentAudience>00</ContentAudience>
 
-            <Text textformat="05" language="ger">
+            <Text textformat="06" language="ger">Die Reihe Gesellschaften und Kulturen des sephardischen Judentums ist die einzige wissenschaftliche Buchreihe in Deutschland mit einem explizit sephardischen Schwerpunkt. Mit Beiträgen zum iberisch-sephardischen Judentum und seiner westlichen Diaspora sowie zum ost-sephardischen Judentum Nordafrikas und des Nahen Ostens schließt die Schriftenreihe ein länger bestehendes Forschungsdesiderat. Der betrachtete Zeitraum reicht dabei vom Mittelalter bis in die Gegenwart. Die Reihe wendet sich an Forscher:innen und Studierende der Jüdischen Studien, Judaistik und Jüdischen Theologie, Israel und Middle Eastern Studies, Geschichte, Philosophie, Literaturwissenschaft sowie benachbarter Fächer.
 
-                <p>
-
-                    <strong>
-
-                        <i>Die See fordert, was ihr gehört!</i>
-
-                    </strong>
-
-                </p>
-
-
-                <p> </p>
-
-
-                <p>
-
-                    <i>Die Farbe des Blutes ist schwarz und Liebe zur Nichtigkeit verkommen.</i>
-
-                </p>
-
-
-                <p>Verrat hat den Schwur zerrissen, der Luziana, Finn und Leander einst verbinden sollte, und nun könnte er sie das Leben kosten. Ausgerechnet jetzt, da der Norden sich gegen die Tränen erhebt und die Korsaren am Rand des Untergangs stehen.</p>
-
-
-                <p>Ihre einzige Hoffnung liegt in der magischen Uhr des Maxims, die endlich gefunden wurde. Doch jene Macht befindet sich in den Händen einer zirkarianischen Prinzessin. Selbst wenn Luziana die Uhr erlangen kann, muss sie den Rat der Acht überzeugen, Seite an Seite mit ihr zu segeln. Gegen eine Armee, die von ihrer großen Liebe angeführt wird.</p>
-
-
-                <p>Wo Blut versiegt und nichts als Tod den Atem webt, leuchten Tränen im Dunkel und flüstern von einer Hoffnung, die nicht sterben will.</p>
-
-
-                <p> </p>
-
-
-                <p>
-
-                    <i>In diesem epischen Finale eskalieren Liebe und Krieg – nur wer sein Herz verteidigt, hat eine Chance.</i>
-
-                </p>
-
-            </Text>
-
-        </TextContent>
-
-        <TextContent>
-
-            <TextType>03</TextType>
-
-            <ContentAudience>07</ContentAudience>
-
-            <Text textformat="05" language="ger">
-
-                <p>
-
-                    <strong>
-
-                        <i>Die See fordert, was ihr gehört!</i>
-
-                    </strong>
-
-                </p>
-
-
-                <p> </p>
-
-
-                <p>
-
-                    <i>Die Farbe des Blutes ist schwarz und Liebe zur Nichtigkeit verkommen.</i>
-
-                </p>
-
-
-                <p>Verrat hat den Schwur zerrissen, der Luziana, Finn und Leander einst verbinden sollte, und nun könnte er sie das Leben kosten. Ausgerechnet jetzt, da der Norden sich gegen die Tränen erhebt und die Korsaren am Rand des Untergangs stehen.</p>
-
-
-                <p>Ihre einzige Hoffnung liegt in der magischen Uhr des Maxims, die endlich gefunden wurde. Doch jene Macht befindet sich in den Händen einer zirkarianischen Prinzessin. Selbst wenn Luziana die Uhr erlangen kann, muss sie den Rat der Acht überzeugen, Seite an Seite mit ihr zu segeln. Gegen eine Armee, die von ihrer großen Liebe angeführt wird.</p>
-
-
-                <p>Wo Blut versiegt und nichts als Tod den Atem webt, leuchten Tränen im Dunkel und flüstern von einer Hoffnung, die nicht sterben will.</p>
-
-
-                <p> </p>
-
-
-                <p>
-
-                    <i>In diesem epischen Finale eskalieren Liebe und Krieg – nur wer sein Herz verteidigt, hat eine Chance.</i>
-
-                </p>
-
-            </Text>
+ Sephardic Societies and Cultures  is the only academic book series in Germany with an explicit Sephardic focus. It contributes to research on Iberian Jewish communities, its Western and Eastern Sephardic Diasporas, as well as Jewish and non-Jewish perspectives on and interactions with Sephardic Jews from the Middle Ages to the present. The series is aimed at researchers and students of Judaic Studies and Jewish Studies, Jewish, Christian and Islamic Theologies, Israel and Middle Eastern Studies, History, Philosophy, Literature and related subjects.</Text>
 
         </TextContent>
 
@@ -1655,7 +3199,7 @@
 
                     <ResourceVersionFeatureType>02</ResourceVersionFeatureType>
 
-                    <FeatureValue>2665</FeatureValue>
+                    <FeatureValue>746</FeatureValue>
 
                 </ResourceVersionFeature>
 
@@ -1663,7 +3207,7 @@
 
                     <ResourceVersionFeatureType>03</ResourceVersionFeatureType>
 
-                    <FeatureValue>1700</FeatureValue>
+                    <FeatureValue>529</FeatureValue>
 
                 </ResourceVersionFeature>
 
@@ -1671,7 +3215,7 @@
 
                     <ResourceVersionFeatureType>04</ResourceVersionFeatureType>
 
-                    <FeatureValue>9783691571042.jpg</FeatureValue>
+                    <FeatureValue>9783987402715.jpg</FeatureValue>
 
                 </ResourceVersionFeature>
 
@@ -1679,7 +3223,7 @@
 
                     <ResourceVersionFeatureType>06</ResourceVersionFeatureType>
 
-                    <FeatureValue>f210f8fc51eb38456d81d58a76463851</FeatureValue>
+                    <FeatureValue>bffcafc8d6139234796139b52085a522</FeatureValue>
 
                 </ResourceVersionFeature>
 
@@ -1687,7 +3231,7 @@
 
                     <ResourceVersionFeatureType>07</ResourceVersionFeatureType>
 
-                    <FeatureValue>1384895</FeatureValue>
+                    <FeatureValue>44318</FeatureValue>
 
                 </ResourceVersionFeature>
 
@@ -1699,7 +3243,7 @@
 
                 </ResourceVersionFeature>
 
-                <ResourceLink>https://api.vlb.de/api/v1/cover/9783691571042/m</ResourceLink>
+                <ResourceLink>https://api.vlb.de/api/v1/cover/9783987402715/m</ResourceLink>
 
                 <ContentDate>
 
@@ -1725,11 +3269,11 @@
 
                 <PublisherIDType>05</PublisherIDType>
 
-                <IDValue>6243389</IDValue>
+                <IDValue>5102789</IDValue>
 
             </PublisherIdentifier>
 
-            <PublisherName>Sternfeder Verlag</PublisherName>
+            <PublisherName>Ergon</PublisherName>
 
         </Publisher>
 
@@ -1739,21 +3283,45 @@
 
             <ProductContactRole>10</ProductContactRole>
 
-            <ProductContactName>Sternfeder Verlag</ProductContactName>
+            <ProductContactName>Nomos Verlagsgesellschaft mbH &amp; Co. KG</ProductContactName>
 
-            <EmailAddress>produktsicherheit@sternfederverlag.de</EmailAddress>
+            <TelephoneNumber>+49 7221 2104-0</TelephoneNumber>
+
+            <EmailAddress>nomos@nomos.de</EmailAddress>
+
+            <StreetAddress>Waldseestraße 3-5</StreetAddress>
+
+            <LocationName>Baden-Baden</LocationName>
+
+            <PostalCode>76530</PostalCode>
+
+            <CountryCode>DE</CountryCode>
 
         </ProductContact>
 
-        <PublishingStatus>04</PublishingStatus>
+        <PublishingStatus>02</PublishingStatus>
 
         <PublishingDate>
 
             <PublishingDateRole>01</PublishingDateRole>
 
-            <Date dateformat="00">20260206</Date>
+            <Date dateformat="00">20260531</Date>
 
         </PublishingDate>
+
+        <CopyrightStatement>
+
+            <CopyrightType>C</CopyrightType>
+
+            <CopyrightYear>2026</CopyrightYear>
+
+            <CopyrightOwner>
+
+                <CorporateName>Ergon</CorporateName>
+
+            </CopyrightOwner>
+
+        </CopyrightStatement>
 
     </PublishingDetail>
 
@@ -1769,23 +3337,31 @@
 
                     <SupplierIDType>05</SupplierIDType>
 
-                    <IDValue>5307670</IDValue>
+                    <IDValue>5108531</IDValue>
 
                 </SupplierIdentifier>
 
-                <SupplierName>Sternfeder Verlag</SupplierName>
+                <SupplierName>Nomos</SupplierName>
 
             </Supplier>
 
-            <ProductAvailability>20</ProductAvailability>
+            <ProductAvailability>10</ProductAvailability>
+
+            <SupplyDate>
+
+                <SupplyDateRole>08</SupplyDateRole>
+
+                <Date dateformat="00">20260531</Date>
+
+            </SupplyDate>
 
             <Price>
 
                 <PriceType>04</PriceType>
 
-                <PriceStatus>02</PriceStatus>
+                <PriceStatus>01</PriceStatus>
 
-                <PriceAmount>17.50</PriceAmount>
+                <PriceAmount>55.60</PriceAmount>
 
                 <Tax>
 
@@ -1811,9 +3387,9 @@
 
                 <PriceType>04</PriceType>
 
-                <PriceStatus>02</PriceStatus>
+                <PriceStatus>01</PriceStatus>
 
-                <PriceAmount>17.00</PriceAmount>
+                <PriceAmount>54.00</PriceAmount>
 
                 <Tax>
 
@@ -1840,5 +3416,705 @@
     </ProductSupply>
 
 </Product>
+<Product datestamp="20260205">
 
+    <RecordReference>027d9dc8120a4ad990ba38b3a964a374</RecordReference>
+
+    <NotificationType>03</NotificationType>
+
+    <ProductIdentifier>
+
+        <ProductIDType>02</ProductIDType>
+
+        <IDValue>3949064524</IDValue>
+
+    </ProductIdentifier>
+
+    <ProductIdentifier>
+
+        <ProductIDType>03</ProductIDType>
+
+        <IDValue>9783949064524</IDValue>
+
+    </ProductIdentifier>
+
+    <ProductIdentifier>
+
+        <ProductIDType>15</ProductIDType>
+
+        <IDValue>9783949064524</IDValue>
+
+    </ProductIdentifier>
+
+    <DescriptiveDetail>
+
+        <ProductComposition>00</ProductComposition>
+
+        <ProductForm>BC</ProductForm>
+
+        <PrimaryContentType>10</PrimaryContentType>
+
+        <Measure>
+
+            <MeasureType>01</MeasureType>
+
+            <Measurement>23</Measurement>
+
+            <MeasureUnitCode>cm</MeasureUnitCode>
+
+        </Measure>
+
+        <Measure>
+
+            <MeasureType>02</MeasureType>
+
+            <Measurement>15.5</Measurement>
+
+            <MeasureUnitCode>cm</MeasureUnitCode>
+
+        </Measure>
+
+        <Measure>
+
+            <MeasureType>08</MeasureType>
+
+            <Measurement>400</Measurement>
+
+            <MeasureUnitCode>gr</MeasureUnitCode>
+
+        </Measure>
+
+        <CountryOfManufacture>DE</CountryOfManufacture>
+
+        <ProductClassification>
+
+            <ProductClassificationType>04</ProductClassificationType>
+
+            <ProductClassificationCode>49019900</ProductClassificationCode>
+
+        </ProductClassification>
+
+        <TitleDetail>
+
+            <TitleType>01</TitleType>
+
+            <TitleElement>
+
+                <TitleElementLevel>01</TitleElementLevel>
+
+                <TitleText>Le Yoga Cognitif de Michaël</TitleText>
+
+                <Subtitle>Comment bâtir un Nouveau Corps Éthérique et une Individualité Éthérique</Subtitle>
+
+            </TitleElement>
+
+        </TitleDetail>
+
+        <TitleDetail>
+
+            <TitleType>03</TitleType>
+
+            <TitleElement>
+
+                <TitleElementLevel>01</TitleElementLevel>
+
+                <TitleText>COGNITIVE YOGA</TitleText>
+
+                <Subtitle>Making Yourself a New Etheric Body and Individuality</Subtitle>
+
+            </TitleElement>
+
+        </TitleDetail>
+
+        <Contributor>
+
+            <SequenceNumber>1</SequenceNumber>
+
+            <ContributorRole>A01</ContributorRole>
+
+            <PersonName>Yeshayahu Ben-Aharon</PersonName>
+
+            <PersonNameInverted>Ben-Aharon, Yeshayahu</PersonNameInverted>
+
+            <NamesBeforeKey>Yeshayahu</NamesBeforeKey>
+
+            <KeyNames>Ben-Aharon</KeyNames>
+
+            <BiographicalNote>Le Dr Yeshayahu Ben-Aharon est chercheur en science de l’Esprit,
+philosophe et activiste social. En 1982, il a fondé le kibboutz anthroposophique Harduf en
+Israël. Depuis 2009, il dirige l'école globale de la science de l’Esprit.
+Le développement de la conscience humaine en philosophie, histoire, art,
+sciences naturelles et dans la vie sociale est au centre de ses recherches.</BiographicalNote>
+
+        </Contributor>
+
+        <Contributor>
+
+            <SequenceNumber>2</SequenceNumber>
+
+            <ContributorRole>B06</ContributorRole>
+
+            <FromLanguage>eng</FromLanguage>
+
+            <PersonName>Scott Elliot Hicks</PersonName>
+
+            <PersonNameInverted>Hicks, Scott Elliot</PersonNameInverted>
+
+            <NamesBeforeKey>Scott Elliot</NamesBeforeKey>
+
+            <KeyNames>Hicks</KeyNames>
+
+        </Contributor>
+
+        <Contributor>
+
+            <SequenceNumber>3</SequenceNumber>
+
+            <ContributorRole>B06</ContributorRole>
+
+            <FromLanguage>eng</FromLanguage>
+
+            <PersonName>Jean-Christophe Robert</PersonName>
+
+            <PersonNameInverted>Robert, Jean-Christophe</PersonNameInverted>
+
+            <NamesBeforeKey>Jean-Christophe</NamesBeforeKey>
+
+            <KeyNames>Robert</KeyNames>
+
+        </Contributor>
+
+        <Contributor>
+
+            <SequenceNumber>4</SequenceNumber>
+
+            <ContributorRole>B06</ContributorRole>
+
+            <FromLanguage>eng</FromLanguage>
+
+            <PersonName>Catherine Dreiseitl</PersonName>
+
+            <PersonNameInverted>Dreiseitl, Catherine</PersonNameInverted>
+
+            <NamesBeforeKey>Catherine</NamesBeforeKey>
+
+            <KeyNames>Dreiseitl</KeyNames>
+
+        </Contributor>
+
+        <EditionNumber>1</EditionNumber>
+
+        <Language>
+
+            <LanguageRole>01</LanguageRole>
+
+            <LanguageCode>fre</LanguageCode>
+
+        </Language>
+
+        <Language>
+
+            <LanguageRole>02</LanguageRole>
+
+            <LanguageCode>eng</LanguageCode>
+
+        </Language>
+
+        <Extent>
+
+            <ExtentType>11</ExtentType>
+
+            <ExtentValue>255</ExtentValue>
+
+            <ExtentUnit>03</ExtentUnit>
+
+        </Extent>
+
+        <NumberOfIllustrations>0</NumberOfIllustrations>
+
+        <Subject>
+
+            <MainSubject/>
+
+            <SubjectSchemeIdentifier>26</SubjectSchemeIdentifier>
+
+            <SubjectSchemeVersion>2.1</SubjectSchemeVersion>
+
+            <SubjectCode>1930</SubjectCode>
+
+            <SubjectHeadingText>Hardcover, Softcover / Sachbücher/Psychologie, Esoterik, Spiritualität, Anthroposophie</SubjectHeadingText>
+
+        </Subject>
+
+        <Subject sourcename="Publisher">
+
+            <MainSubject/>
+
+            <SubjectSchemeIdentifier>93</SubjectSchemeIdentifier>
+
+            <SubjectSchemeVersion>1.6</SubjectSchemeVersion>
+
+            <SubjectCode>QRYC5</SubjectCode>
+
+            <SubjectHeadingText>Theosophie und Anthroposophie</SubjectHeadingText>
+
+        </Subject>
+
+        <Subject>
+
+            <SubjectSchemeIdentifier>20</SubjectSchemeIdentifier>
+
+            <SubjectHeadingText>Yoga</SubjectHeadingText>
+
+        </Subject>
+
+        <Subject>
+
+            <SubjectSchemeIdentifier>20</SubjectSchemeIdentifier>
+
+            <SubjectHeadingText>Michaël</SubjectHeadingText>
+
+        </Subject>
+
+        <Subject>
+
+            <SubjectSchemeIdentifier>20</SubjectSchemeIdentifier>
+
+            <SubjectHeadingText>Rudolf Steiner</SubjectHeadingText>
+
+        </Subject>
+
+        <Subject>
+
+            <SubjectSchemeIdentifier>20</SubjectSchemeIdentifier>
+
+            <SubjectHeadingText>yoga moderne</SubjectHeadingText>
+
+        </Subject>
+
+        <Subject>
+
+            <SubjectSchemeIdentifier>20</SubjectSchemeIdentifier>
+
+            <SubjectHeadingText>spiritualisation des sens</SubjectHeadingText>
+
+        </Subject>
+
+        <Subject>
+
+            <SubjectSchemeIdentifier>20</SubjectSchemeIdentifier>
+
+            <SubjectHeadingText>Anthroposophie</SubjectHeadingText>
+
+        </Subject>
+
+        <Subject>
+
+            <SubjectSchemeIdentifier>20</SubjectSchemeIdentifier>
+
+            <SubjectHeadingText>ancienne voie du yoga</SubjectHeadingText>
+
+        </Subject>
+
+        <Subject>
+
+            <SubjectSchemeIdentifier>20</SubjectSchemeIdentifier>
+
+            <SubjectHeadingText>spiritualiser l'inspiration</SubjectHeadingText>
+
+        </Subject>
+
+        <Subject>
+
+            <SubjectSchemeIdentifier>20</SubjectSchemeIdentifier>
+
+            <SubjectHeadingText>spiritualiser l'expiration</SubjectHeadingText>
+
+        </Subject>
+
+        <Subject>
+
+            <SubjectSchemeIdentifier>20</SubjectSchemeIdentifier>
+
+            <SubjectHeadingText>spiritualisation de la pensée</SubjectHeadingText>
+
+        </Subject>
+
+        <Subject>
+
+            <SubjectSchemeIdentifier>20</SubjectSchemeIdentifier>
+
+            <SubjectHeadingText>la transformation des perceptions</SubjectHeadingText>
+
+        </Subject>
+
+        <Subject>
+
+            <SubjectSchemeIdentifier>20</SubjectSchemeIdentifier>
+
+            <SubjectHeadingText>la transformation des sensations</SubjectHeadingText>
+
+        </Subject>
+
+        <Subject>
+
+            <SubjectSchemeIdentifier>20</SubjectSchemeIdentifier>
+
+            <SubjectHeadingText>rencontre individualisée avec le Christ éthérique</SubjectHeadingText>
+
+        </Subject>
+
+    </DescriptiveDetail>
+
+    <CollateralDetail>
+
+        <TextContent>
+
+            <TextType>03</TextType>
+
+            <ContentAudience>00</ContentAudience>
+
+            <Text textformat="06" language="fre">Dans «Le Yoga Cognitif de Michael», le Dr Ben-Aharon développe de manière remarquablement détaillée l'ensemble du processus du yoga moderne.
+Le contenu de ce livre exceptionnel contient des instructions complètes sur la spiritualisation des sens et la manière dont celle-ci conduit à une transformation des processus et fonctions physiques les plus profonds et les plus inconscients.
+L'ancienne voie du yoga consistant à spiritualiser l'inspiration et l'expiration est remplacée par une forme contemporaine, celle de la spiritualisation de la pensée et de la transformation des perceptions et des sensations.
+Le Yoga Cognitif de Michael culmine dans une description pionnière d'une rencontre individualisée avec le Christ éthérique dans le monde éthérique.
+Cette œuvre fondamentale fournit la preuve tangible que la formation spirituelle occidentale n'est pas seulement saine et vivante, mais aussi pleine de potentiel pour les futures évolutions.</Text>
+
+        </TextContent>
+
+        <TextContent>
+
+            <TextType>03</TextType>
+
+            <ContentAudience>03</ContentAudience>
+
+            <Text textformat="06" language="fre">Dans «Le Yoga Cognitif de Michael», le Dr Ben-Aharon développe de manière remarquablement détaillée l'ensemble du processus du yoga moderne.
+Le contenu de ce livre exceptionnel contient des instructions complètes sur la spiritualisation des sens et la manière dont celle-ci conduit à une transformation des processus et fonctions physiques les plus profonds et les plus inconscients.
+L'ancienne voie du yoga consistant à spiritualiser l'inspiration et l'expiration est remplacée par une forme contemporaine, celle de la spiritualisation de la pensée et de la transformation des perceptions et des sensations.
+Le Yoga Cognitif de Michael culmine dans une description pionnière d'une rencontre individualisée avec le Christ éthérique dans le monde éthérique.
+Cette œuvre fondamentale fournit la preuve tangible que la formation spirituelle occidentale n'est pas seulement saine et vivante, mais aussi pleine de potentiel pour les futures évolutions.</Text>
+
+        </TextContent>
+
+        <TextContent>
+
+            <TextType>04</TextType>
+
+            <ContentAudience>00</ContentAudience>
+
+            <Text textformat="06" language="fre">Table des matières
+Préface
+Introduction
+Chapitre 1 : Le cycle de vie de la respiration éthérique
+Chapitre 2 : La composition de la cognition ordinaire
+Chapitre 3 : L’inestimable perle : l'individuation
+Chapitre 4 : Éthérisation de la vue
+Chapitre 5 : Éthérisation du penser
+Chapitre 6 : Éthérisation de l'odorat
+Chapitre 7 : Naissance d'un nouveau corps éthérique
+Chapitre 8 : Naissance d'une individualité éthérique
+Chapitre 9 : Petite enfance d'une individualité éthérique
+Chapitre 10 : Échange d'essence avec la source cosmique</Text>
+
+        </TextContent>
+
+        <TextContent>
+
+            <TextType>11</TextType>
+
+            <ContentAudience>02</ContentAudience>
+
+            <Text textformat="06" language="ger">Weitere Informationen finden Sie auf der Verlagswebseite www.ereignisverlag.de.</Text>
+
+        </TextContent>
+
+        <TextContent>
+
+            <TextType>05</TextType>
+
+            <ContentAudience>00</ContentAudience>
+
+            <Text textformat="06" language="ger">Dans «Le Yoga Cognitif de Michael», le Dr Ben-Aharon développe de manière remarquablement détaillée l'ensemble du processus du yoga moderne.
+Le contenu de ce livre exceptionnel contient des instructions complètes sur la spiritualisation des sens et la manière dont celle-ci conduit à une transformation des processus et fonctions physiques les plus profonds et les plus inconscients.
+L'ancienne voie du yoga consistant à spiritualiser l'inspiration et l'expiration est remplacée par une forme contemporaine, celle de la spiritualisation de la pensée et de la transformation des perceptions et des sensations.
+Le Yoga Cognitif de Michael culmine dans une description pionnière d'une rencontre individualisée avec le Christ éthérique dans le monde éthérique.
+Cette œuvre fondamentale fournit la preuve tangible que la formation spirituelle occidentale n'est pas seulement saine et vivante, mais aussi pleine de potentiel pour les futures évolutions.</Text>
+
+        </TextContent>
+
+        <SupportingResource>
+
+            <ResourceContentType>01</ResourceContentType>
+
+            <ContentAudience>00</ContentAudience>
+
+            <ResourceMode>03</ResourceMode>
+
+            <ResourceVersion>
+
+                <ResourceForm>02</ResourceForm>
+
+                <ResourceVersionFeature>
+
+                    <ResourceVersionFeatureType>01</ResourceVersionFeatureType>
+
+                    <FeatureValue>D502</FeatureValue>
+
+                </ResourceVersionFeature>
+
+                <ResourceVersionFeature>
+
+                    <ResourceVersionFeatureType>02</ResourceVersionFeatureType>
+
+                    <FeatureValue>829</FeatureValue>
+
+                </ResourceVersionFeature>
+
+                <ResourceVersionFeature>
+
+                    <ResourceVersionFeatureType>03</ResourceVersionFeatureType>
+
+                    <FeatureValue>556</FeatureValue>
+
+                </ResourceVersionFeature>
+
+                <ResourceVersionFeature>
+
+                    <ResourceVersionFeatureType>04</ResourceVersionFeatureType>
+
+                    <FeatureValue>9783949064524.jpg</FeatureValue>
+
+                </ResourceVersionFeature>
+
+                <ResourceVersionFeature>
+
+                    <ResourceVersionFeatureType>06</ResourceVersionFeatureType>
+
+                    <FeatureValue>353ec3a17a76f9ca90a526b9bd13f0c5</FeatureValue>
+
+                </ResourceVersionFeature>
+
+                <ResourceVersionFeature>
+
+                    <ResourceVersionFeatureType>07</ResourceVersionFeatureType>
+
+                    <FeatureValue>145818</FeatureValue>
+
+                </ResourceVersionFeature>
+
+                <ResourceVersionFeature>
+
+                    <ResourceVersionFeatureType>08</ResourceVersionFeatureType>
+
+                    <FeatureValue>e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855</FeatureValue>
+
+                </ResourceVersionFeature>
+
+                <ResourceLink>https://api.vlb.de/api/v1/cover/9783949064524/m</ResourceLink>
+
+                <ContentDate>
+
+                    <ContentDateRole>17</ContentDateRole>
+
+                    <Date dateformat="00">20260205</Date>
+
+                </ContentDate>
+
+            </ResourceVersion>
+
+        </SupportingResource>
+
+    </CollateralDetail>
+
+    <PublishingDetail>
+
+        <Publisher>
+
+            <PublishingRole>01</PublishingRole>
+
+            <PublisherIdentifier>
+
+                <PublisherIDType>05</PublisherIDType>
+
+                <IDValue>5292771</IDValue>
+
+            </PublisherIdentifier>
+
+            <PublisherName>Ereignis Verlag</PublisherName>
+
+        </Publisher>
+
+        <Publisher>
+
+            <PublishingRole>04</PublishingRole>
+
+            <PublisherName>Temple Lodge Publishing</PublisherName>
+
+        </Publisher>
+
+        <CityOfPublication>München</CityOfPublication>
+
+        <CountryOfPublication>DE</CountryOfPublication>
+
+        <ProductContact>
+
+            <ProductContactRole>10</ProductContactRole>
+
+            <ProductContactName>Ereignis Verlag</ProductContactName>
+
+            <EmailAddress>service@ereignisverlag.de</EmailAddress>
+
+            <StreetAddress>Fürstenrieder Str 97</StreetAddress>
+
+            <LocationName>München</LocationName>
+
+            <PostalCode>80686</PostalCode>
+
+            <CountryCode>DE</CountryCode>
+
+        </ProductContact>
+
+        <PublishingStatus>04</PublishingStatus>
+
+        <PublishingDate>
+
+            <PublishingDateRole>01</PublishingDateRole>
+
+            <Date dateformat="00">20260204</Date>
+
+        </PublishingDate>
+
+    </PublishingDetail>
+
+    <RelatedMaterial>
+
+        <RelatedProduct>
+
+            <ProductRelationCode>06</ProductRelationCode>
+
+            <ProductIdentifier>
+
+                <ProductIDType>15</ProductIDType>
+
+                <IDValue>9783949064500</IDValue>
+
+            </ProductIdentifier>
+
+            <ProductForm>EA</ProductForm>
+
+        </RelatedProduct>
+
+    </RelatedMaterial>
+
+    <ProductSupply>
+
+        <SupplyDetail>
+
+            <Supplier>
+
+                <SupplierRole>01</SupplierRole>
+
+                <SupplierIdentifier>
+
+                    <SupplierIDType>05</SupplierIDType>
+
+                    <IDValue>5292771</IDValue>
+
+                </SupplierIdentifier>
+
+                <SupplierName>Ereignis Verlag</SupplierName>
+
+            </Supplier>
+
+            <ProductAvailability>20</ProductAvailability>
+
+            <Price>
+
+                <PriceType>04</PriceType>
+
+                <PriceStatus>02</PriceStatus>
+
+                <PriceAmount>20.00</PriceAmount>
+
+                <Tax>
+
+                    <TaxType>01</TaxType>
+
+                    <TaxRateCode>R</TaxRateCode>
+
+                    <TaxRatePercent>10</TaxRatePercent>
+
+                </Tax>
+
+                <CurrencyCode>EUR</CurrencyCode>
+
+                <Territory>
+
+                    <CountriesIncluded>AT</CountriesIncluded>
+
+                </Territory>
+
+            </Price>
+
+            <Price>
+
+                <PriceType>02</PriceType>
+
+                <PriceStatus>02</PriceStatus>
+
+                <PriceAmount>22.00</PriceAmount>
+
+                <Tax>
+
+                    <TaxType>01</TaxType>
+
+                    <TaxRateCode>R</TaxRateCode>
+
+                    <TaxRatePercent>2.6</TaxRatePercent>
+
+                </Tax>
+
+                <CurrencyCode>CHF</CurrencyCode>
+
+                <Territory>
+
+                    <CountriesIncluded>CH</CountriesIncluded>
+
+                </Territory>
+
+            </Price>
+
+            <Price>
+
+                <PriceType>04</PriceType>
+
+                <PriceStatus>02</PriceStatus>
+
+                <PriceAmount>20.00</PriceAmount>
+
+                <Tax>
+
+                    <TaxType>01</TaxType>
+
+                    <TaxRateCode>R</TaxRateCode>
+
+                    <TaxRatePercent>7</TaxRatePercent>
+
+                </Tax>
+
+                <CurrencyCode>EUR</CurrencyCode>
+
+                <Territory>
+
+                    <CountriesIncluded>DE</CountriesIncluded>
+
+                </Territory>
+
+            </Price>
+
+        </SupplyDetail>
+
+    </ProductSupply>
+
+</Product>
 </ONIXMessage>
