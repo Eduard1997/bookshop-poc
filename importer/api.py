@@ -1,10 +1,12 @@
 import json, requests, re
 
 def convert_to_emporix_data(book_object):
+    name_dict = {book_object["language"]: book_object["title"]}
+    if book_object["language"] != "en":
+        name_dict["en"] = book_object["title"]
+
     return {
-        "name": {
-            book_object["language"]: book_object["title"]
-        },
+        "name":name_dict,
         "code": book_object["isbn"],
         "description": {
             book_object["language"]: book_object["description"]
