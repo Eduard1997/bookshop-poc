@@ -408,6 +408,120 @@ def PUT_product(emporix_object, book_id, auth_token):
     else:
         raise Exception(f"Put failed! Status Code: {response.status_code}\n{response.text}")
 
-def POST_price(book_object, book_id):
-    #TODO: BSP-12 here
+
+def POST_price(book_object, book_id, auth_token):
+    orig_price = book_object.get('price') or {}
+    price_val = orig_price.get('price', 0)
+    currency = orig_price.get('currency', 'EUR')
+
+    payload = {
+        "currency": currency,
+        "price": price_val,
+        "productId": book_id
+    }
+
+    url = f"https://api.emporix.io/price/{auth_token['tenant']}/prices/{book_id}"
+
+    HEADERS = {
+    "Authorization": f"Bearer {auth_token['token']}",
+    "Content-Type": "application/json"
+}
+
+    try:
+        response = requests.post(url, json=payload, headers=HEADERS, timeout=10)
+        if response.status_code in [200, 201, 204]:
+            print(f"Price for book {book_id} successfully updated.")
+        else:
+            print(f"Error in POST_price for book {book_id}: {response.status_code} - {response.text}")
+    except requests.exceptions.Timeout:
+        print(f"Timeout while sending price for book {book_id}.")
+    except requests.exceptions.RequestException as e:
+        print(f"Network/SSL error in POST_price: {e}")
+
     return
+
+def PUT_price(book_object, book_id, auth_token):
+    orig_price = book_object.get('price') or {}
+    payload = {
+        "currency": orig_price.get('currency', 'EUR'),
+        "price": orig_price.get('price', 0),
+        "productId": book_id
+    }
+    HEADERS = {
+    "Authorization": f"Bearer {auth_token['token']}",
+    "Content-Type": "application/json"
+}
+    
+    url = f"https://api.emporix.io/price/{auth_token['tenant']}/prices/{book_id}"
+
+    try:
+        response = requests.put(url, json=payload, headers=HEADERS, timeout=10)
+        if response.status_code in [200, 204]:
+            print(f"Price updated for book {book_id} (PUT).")
+        else:
+            print(f"PUT_price error for book {book_id}: {response.status_code} - {response.text}")
+    except requests.exceptions.Timeout:
+        print(f"Timeout in PUT_price for book {book_id}.")
+    except requests.exceptions.RequestException as e:
+        print(f"Network error in PUT_price: {e}")
+
+def POST_availability(book_object, book_id, auth_token):
+    orig_avail = book_object.get('availability') or {}
+
+    stock_level = orig_avail.get('stockLevel', 0)
+    is_available = orig_avail.get('available', False)
+    dist_channel = orig_avail.get('distributionChannel', 'ASSORTMENT')
+    site = "main"
+
+    payload = {
+        "stockLevel": stock_level,
+        "available": is_available,
+        "distributionChannel": dist_channel,
+        "popularity": 0
+    }
+
+    HEADERS = {
+    "Authorization": f"Bearer {auth_token['token']}",
+    "Content-Type": "application/json"
+}
+
+    url = f"https://api.emporix.io/availability/{auth_token['tenant']}/availability/{book_id}/{site}"
+
+    try:
+        response = requests.post(url, json=payload, headers=HEADERS, timeout=10)
+        if response.status_code in [200, 201, 204]:
+            print(f"Availability for book {book_id} successfully updated.")
+        else:
+            print(f"Error in POST_availability for book {book_id}: {response.status_code} - {response.text}")
+
+    except requests.exceptions.Timeout:
+        print(f"Timeout while sending availability for book {book_id}.")
+    except requests.exceptions.RequestException as e:
+        print(f"Network/SSL error in POST_availability: {e}")
+
+def PUT_availability(book_object, book_id, auth_token , site="main",):
+    orig_avail = book_object.get('availability') or {}
+    payload = {
+        "stockLevel": orig_avail.get('stockLevel', 0),
+        "available": orig_avail.get('available', False),
+        "distributionChannel": orig_avail.get('distributionChannel', 'ASSORTMENT'),
+        "popularity": 0
+    }
+
+    HEADERS = {
+    "Authorization": f"Bearer {auth_token['token']}",
+    "Content-Type": "application/json"
+}
+    
+    url = f"https://api.emporix.io/availability/{auth_token['tenant']}/availability/{book_id}/{site}"
+
+    try:
+        response = requests.put(url, json=payload, headers=HEADERS, timeout=10)
+        if response.status_code in [200, 204]:
+            print(f"Availability updated for book {book_id} on site '{site}' (PUT).")
+        else:
+            print(f"PUT_availability error for book {book_id}: {response.status_code} - {response.text}")
+    except requests.exceptions.Timeout:
+        print(f"Timeout in PUT_availability for book {book_id}.")
+    except requests.exceptions.RequestException as e:
+        print(f"Network error in PUT_availability: {e}")

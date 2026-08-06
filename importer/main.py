@@ -27,7 +27,7 @@ def main_loop(file_path, auth_token):
 
     for book in raw_books_list:
         try:
-            #input("> Press Enter to continue to the next book...")
+            input("> Press Enter to continue to the next book...")
 
             book_object = mapper.map_fields(book)
             emporix_object = api.convert_to_emporix_data(book_object)
@@ -68,7 +68,14 @@ def main_loop(file_path, auth_token):
 
 
 
-            #api.POST_price(book_object, object_id)
+            if book_id:
+                api.PUT_price(emporix_object, object_id, auth_token)
+                api.PUT_availability(emporix_object, object_id, auth_token)
+            else:
+
+                api.POST_price(emporix_object, object_id, auth_token)
+                api.POST_availability(emporix_object, object_id, auth_token)
+                
 
         except Exception as e:
             print(f"Error processing book: {e}")
