@@ -100,7 +100,7 @@ def isProduct(emporix_object, auth_token):
             return data[0].get('id'), data[0].get('media',[]), data[0].get('categoryIds',[])
         else:
             print(f"Product does not exist: {emporix_object['code']}")
-            return None, []
+            return None, [], None
     else:
         raise Exception(f"Search failed! Status Code: {response.status_code}\n{response.text}")
 
