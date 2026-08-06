@@ -41,13 +41,20 @@ def main_loop(file_path, auth_token):
             api.PUT_category_in_catalog( catalog_id , category_id , auth_token)
 
             cover_image = book_object["cover_image_url"]
-            book_id, existing_media = api.isProduct(emporix_object, auth_token)
+            book_id, existing_media, old_category_ids = api.isProduct(emporix_object, auth_token)
 
             if not book_id:
                 object_id = api.POST_product(emporix_object, auth_token)
-                api.POST_product_to_category(object_id,category_id, auth_token)
             else :
                 object_id = api.PUT_product(emporix_object, book_id, auth_token)
+
+                if old_category_ids:
+                    for old_cat in old_category_ids:
+                        if old_cat != category_id:
+                            api.DELETE_product_from_category(object_id, old_cat, auth_token)
+
+
+            api.POST_product_to_category(object_id, category_id, auth_token)
 
             if cover_image and not cover_image == "Unknown Cover Image URL":
                 image_already_exists = any(media.get('url') == cover_image for media in existing_media)

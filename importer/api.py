@@ -97,7 +97,7 @@ def isProduct(emporix_object, auth_token):
         data = response.json()
         if data:
             print(f"Product exists: {emporix_object['code']}")
-            return data[0].get('id'), data[0].get('media',[])
+            return data[0].get('id'), data[0].get('media',[]), data[0].get('categoryIds',[])
         else:
             print(f"Product does not exist: {emporix_object['code']}")
             return None, []
@@ -293,11 +293,40 @@ def POST_product_to_category(book_id, category_id, auth_token):
     except requests.exceptions.RequestException as e:
         raise Exception(f"Network error during POST_product_to_category: {e}")
 
-    if response.status_code in [200, 201, 207]:
+    if response.status_code in [200, 201,204, 207]:
         print(f"Assigned product {book_id} to category {category_id}")
+        return
+    elif response.status_code == 409:
+        print(f"Product {book_id} is already in category {category_id}. Skipping.")
         return
     else:
         raise Exception(f"Post product to category failed! Status Code: {response.status_code}\n{response.text}")
+
+def DELETE_product_from_category(book_id, old_category_id, auth_token):
+    delete_url = f"https://api.emporix.io/category/{auth_token['tenant']}/categories/{old_category_id}/assignments"
+
+    headers = {
+        "Content-type": "application/json",
+        "Authorization": f"Bearer {auth_token['token']}"
+    }
+
+    payload = {
+        "ref": {
+            "id": book_id,
+            "type": "PRODUCT"
+        }
+    }
+
+    try:
+        response = requests.delete(delete_url, headers=headers, json=payload)
+    except requests.exceptions.RequestException as e:
+        raise Exception(f"Network error during DELETE_product_from_category: {e}")
+
+    if response.status_code in [200, 204]:
+        print(f"Removed product {book_id} from old category {old_category_id}")
+    else:
+        raise Exception(
+            f"Failed to remove product from old category! Status Code: {response.status_code}\n{response.text}")
 
 def PUT_category_in_catalog(catalog_id, category_id, auth_token):
     catalog_url = f"https://api.emporix.io/catalog/{auth_token['tenant']}/catalogs/{catalog_id}"
