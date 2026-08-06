@@ -134,7 +134,6 @@ def isCatalog(auth_token, catalog_name):
     else:
         raise Exception(f"Failed to fetch catalogs! Status Code: {response.status_code}\n{response.text}")
 
-
 def isCategory(category_name, auth_token):
     slug = category_name.lower().strip()
     slug = re.sub(r'[^a-z0-9\- ]', '', slug)
@@ -171,8 +170,6 @@ def isCategory(category_name, auth_token):
         return None
     else:
         raise Exception(f"Failed to fetch categories! Status Code: {response.status_code}\n{response.text}")
-
-
 
 def POST_media(cover_image ,book_id, auth_token):
     post_url = f"https://api.emporix.io/media/{auth_token['tenant']}/assets"
@@ -276,10 +273,8 @@ def POST_category(category_name,auth_token):
     else:
         raise Exception(f"Post category failed! Status Code: {response.status_code}\n{response.text}")
 
-
-
-def POST_product_to_category(book_id, auth_token):
-    post_url = f"https://api.emporix.io/category/{auth_token['tenant']}/categories/dde8517c-f75e-4261-bde4-bff75f010236/assignments"
+def POST_product_to_category(book_id, category_id, auth_token):
+    post_url = f"https://api.emporix.io/category/{auth_token['tenant']}/categories/{category_id}/assignments"
 
     headers = {
         "Content-type": "application/json",
@@ -299,10 +294,49 @@ def POST_product_to_category(book_id, auth_token):
         raise Exception(f"Network error during POST_product_to_category: {e}")
 
     if response.status_code in [200, 201, 207]:
-        print(f"Assigned product {book_id} to category")
+        print(f"Assigned product {book_id} to category {category_id}")
         return
     else:
         raise Exception(f"Post product to category failed! Status Code: {response.status_code}\n{response.text}")
+
+def PUT_category_in_catalog(catalog_id, category_id, auth_token):
+    catalog_url = f"https://api.emporix.io/catalog/{auth_token['tenant']}/catalogs/{catalog_id}"
+
+    headers = {
+        "Content-type": "application/json",
+        "Authorization": f"Bearer {auth_token['token']}",
+        "Accept-Language": "*"
+    }
+
+    try:
+        response = requests.get(catalog_url, headers=headers)
+    except requests.exceptions.RequestException as e:
+        raise Exception(f"Network error during GET catalog: {e}")
+
+    if response.status_code == 200:
+        catalog = response.json()
+    else:
+        raise Exception(f"Failed to fetch catalog! Status Code: {response.status_code}\n{response.text}")
+
+    catalog_categories = catalog.get("categoryIds", [])
+
+    if category_id in catalog_categories:
+        print(f"Category {category_id} is already in catalog {catalog_id}.")
+        return
+
+    catalog_categories.append(category_id)
+    catalog["categoryIds"] = catalog_categories
+
+    try:
+        response = requests.put(catalog_url, headers=headers, json=catalog)
+    except requests.exceptions.RequestException as e:
+        raise Exception(f"Network error during PUT catalog: {e}")
+
+    if response.status_code in [200, 201, 204]:
+        print(f"Added category {category_id} to catalog {catalog_id}.")
+        return
+    else:
+        raise Exception(f"Failed to link category to catalog! Status Code: {response.status_code}\n{response.text}")
 
 def POST_product(emporix_object, auth_token):
     print(emporix_object)

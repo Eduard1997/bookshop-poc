@@ -1,7 +1,4 @@
-from unicodedata import category
-
 import reader, mapper, api
-from importer.api import POST_category
 
 
 def main_loop(file_path, auth_token):
@@ -30,7 +27,7 @@ def main_loop(file_path, auth_token):
 
     for book in raw_books_list:
         try:
-            input("> Press Enter to continue to the next book...")
+            #input("> Press Enter to continue to the next book...")
 
             book_object = mapper.map_fields(book)
             emporix_object = api.convert_to_emporix_data(book_object)
@@ -41,17 +38,18 @@ def main_loop(file_path, auth_token):
             if not category_id:
                 category_id = api.POST_category(category_name, auth_token)
 
+            api.PUT_category_in_catalog( catalog_id , category_id , auth_token)
+
             cover_image = book_object["cover_image_url"]
             book_id, existing_media = api.isProduct(emporix_object, auth_token)
 
             if not book_id:
                 object_id = api.POST_product(emporix_object, auth_token)
-                # if object_id:
-                #     api.POST_product_to_category(object_id, auth_token)
+                api.POST_product_to_category(object_id,category_id, auth_token)
             else :
                 object_id = api.PUT_product(emporix_object, book_id, auth_token)
 
-            if object_id and cover_image and not cover_image == "Unknown Cover Image URL":
+            if cover_image and not cover_image == "Unknown Cover Image URL":
                 image_already_exists = any(media.get('url') == cover_image for media in existing_media)
                 if not image_already_exists:
                     api.POST_media(cover_image, object_id, auth_token)
