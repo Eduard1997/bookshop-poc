@@ -150,27 +150,29 @@ def isCategory(category_name, auth_token):
         "Authorization": f"Bearer {auth_token['token']}"
     }
 
+    query_params = {
+        "q": f"localizedSlug.en:{slug}"
+    }
+
     try:
-        response = requests.get(get_url, headers=headers)
+        response = requests.get(get_url, headers=headers, params=query_params)
     except requests.exceptions.RequestException as e:
         raise Exception(f"Network error during isCategory check: {e}")
 
     if response.status_code == 200:
         categories = response.json()
 
-        for category in categories:
-            loc_names = category.get("localizedName", {})
-            loc_slugs = category.get("localizedSlug", {})
-
-            if category_name in loc_names.values() or slug in loc_slugs.values():
-                category_id = category.get("id")
-                print(f"Category '{category_name}' already exists with ID: {category_id}")
-                return category_id
+        if categories and len(categories) > 0:
+            category_id = categories[0].get("id")
+            print(f"Category '{category_name}' already exists with ID: {category_id}")
+            return category_id
 
         print(f"Category '{category_name}' does not exist.")
         return None
     else:
         raise Exception(f"Failed to fetch categories! Status Code: {response.status_code}\n{response.text}")
+
+
 
 def POST_media(cover_image ,book_id, auth_token):
     post_url = f"https://api.emporix.io/media/{auth_token['tenant']}/assets"
@@ -269,6 +271,7 @@ def POST_category(category_name,auth_token):
         raise Exception(f"Network error during POST_category: {e}")
 
     if response.status_code in [200, 201]:
+        print(f"Created category: {category_name}")
         return response.json().get('id')
     else:
         raise Exception(f"Post category failed! Status Code: {response.status_code}\n{response.text}")
