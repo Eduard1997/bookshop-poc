@@ -12,8 +12,8 @@ def map_fields(book):
         "cover_image_url": map_cover_image_url(book),
         "category": map_category(book),
         "availability": map_availability(book),
-        "product form": map_product_form(book),
-        "page count": map_page_count(book),
+        "productForm": map_product_form(book),
+        "pageCount": map_page_count(book),
         "prices": map_prices(book)
     }
 
@@ -70,12 +70,12 @@ def map_subtitle(book):
 
         for element in title_element:
             if element.get('TitleElementLevel') == '01':
-                subtitile = element.get('Subtitle')
+                subtitle = element.get('Subtitle')
 
-                if isinstance(subtitile, str):
-                    return subtitile
-                elif isinstance(subtitile, dict):
-                    return subtitile.get('#text', 'Unknown Subtitle')
+                if isinstance(subtitle, str):
+                    return subtitle
+                elif isinstance(subtitle, dict):
+                    return subtitle.get('#text', 'Unknown Subtitle')
     return 'Unknown Subtitle'
 
 
