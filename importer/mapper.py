@@ -324,23 +324,21 @@ def map_page_count(book):
 def map_prices(book, default_currency="EUR"):
     prices_list = []
 
-    publishing = book.get("PublishingDetail", {})
-    country = publishing.get("CountryOfPublication")
-    if isinstance(country, dict):
-        country = country.get("#text")
+    product_supply = book.get("ProductSupply") or {}
+    supply_details = product_supply.get("SupplyDetail") or []
 
-    product_supply = book.get("ProductSupply", {})
-    supply_details = product_supply.get("SupplyDetail", [])
-
-    if not isinstance(supply_details, list):
+    if isinstance(supply_details, dict):
         supply_details = [supply_details]
 
     for detail in supply_details:
-        prices = detail.get("Price", [])
-        if not isinstance(prices, list):
+        prices = detail.get("Price") or []
+        if isinstance(prices, dict):
             prices = [prices]
 
         for price in prices:
+            if not isinstance(price, dict):
+                continue
+
             amount = price.get("PriceAmount")
             currency = price.get("CurrencyCode", default_currency)
 
@@ -353,17 +351,33 @@ def map_prices(book, default_currency="EUR"):
 
             if final_currency == "EUR" and amount:
                 try:
-                    price_obj = {
-                        "amount": float(amount),
-                        "currency": "EUR",
-                    }
-
-                    if country:
-                        price_obj["countries"] = [str(country).strip()]
-
-                    prices_list.append(price_obj)
+                    price_val = float(amount)
                 except (ValueError, TypeError):
                     continue
+
+                territory = price.get("Territory") or {}
+                if isinstance(territory, dict):
+                    countries_included = territory.get("CountriesIncluded") or []
+                else:
+                    countries_included = []
+
+                if isinstance(countries_included, str):
+                    countries_included = [countries_included]
+                elif isinstance(countries_included, dict):
+                    c_text = countries_included.get("#text")
+                    countries_included = [c_text] if c_text else []
+
+                clean_countries = [str(c).strip() for c in countries_included if c]
+
+                price_obj = {
+                    "amount": price_val,
+                    "currency": "EUR"
+                }
+
+                if clean_countries:
+                    price_obj["countries"] = clean_countries
+
+                prices_list.append(price_obj)
 
     return prices_list if prices_list else None
 
