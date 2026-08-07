@@ -1,4 +1,4 @@
-import reader, mapper, api
+import reader, mapper, api, json
 
 
 def main_loop(file_path, auth_token):
@@ -26,19 +26,24 @@ def main_loop(file_path, auth_token):
         return
 
     for book in raw_books_list:
-        try:
-            input("> Press Enter to continue to the next book...")
+        # input("> Press Enter to continue to the next book...")
 
+        book_object = {}
+        emporix_object = {}
+
+        try:
             book_object = mapper.map_fields(book)
             emporix_object = api.convert_to_emporix_data(book_object)
-
+            print(emporix_object)
+            if emporix_object["code"] == "Unknown ISBN":
+                raise Exception("Book has an unknown ISBN. Skipping this book.")
 
             category_name = book_object["category"]
             category_id = api.isCategory(category_name, auth_token)
+
             if not category_id:
                 category_id = api.POST_category(category_name, auth_token)
-
-            api.PUT_category_in_catalog( catalog_id , category_id , auth_token)
+                api.PUT_category_in_catalog(catalog_id, category_id, auth_token)
 
             cover_image = book_object["cover_image_url"]
             book_id, existing_media, old_category_ids = api.isProduct(emporix_object, auth_token)
@@ -64,22 +69,24 @@ def main_loop(file_path, auth_token):
                     print(f"Cover image already exists for product {object_id}. Skipping upload.")
 
 
-
-
-
-
             if book_id:
                 api.PUT_price(emporix_object, object_id, auth_token)
                 api.PUT_availability(emporix_object, object_id, auth_token)
             else:
-
                 api.POST_price(emporix_object, object_id, auth_token)
                 api.POST_availability(emporix_object, object_id, auth_token)
-                
+
+
 
         except Exception as e:
             print(f"Error processing book: {e}")
-            #TODO LOGGING
+            error_entry = {
+                "error": str(e),
+                "book_data": book_object
+            }
+            with open("error_log.jsonl", "a", encoding="utf-8") as log_file:
+                log_file.write(json.dumps(error_entry) + "\n")
+
             continue
 
     return

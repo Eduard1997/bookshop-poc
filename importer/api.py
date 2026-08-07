@@ -100,7 +100,7 @@ def isProduct(emporix_object, auth_token):
             return data[0].get('id'), data[0].get('media',[]), data[0].get('categoryIds',[])
         else:
             print(f"Product does not exist: {emporix_object['code']}")
-            return None, []
+            return None, [], None
     else:
         raise Exception(f"Search failed! Status Code: {response.status_code}\n{response.text}")
 
@@ -368,7 +368,6 @@ def PUT_category_in_catalog(catalog_id, category_id, auth_token):
         raise Exception(f"Failed to link category to catalog! Status Code: {response.status_code}\n{response.text}")
 
 def POST_product(emporix_object, auth_token):
-    print(emporix_object)
     post_url = f"https://api.emporix.io/product/{auth_token['tenant']}/products"
 
     headers = {
@@ -389,7 +388,6 @@ def POST_product(emporix_object, auth_token):
         raise Exception(f"Post failed! Status Code: {response.status_code}\n{response.text}")
 
 def PUT_product(emporix_object, book_id, auth_token):
-    print(emporix_object)
     put_url= f"https://api.emporix.io/product/{auth_token['tenant']}/products/{book_id}"
 
     headers = {
