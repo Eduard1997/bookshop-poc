@@ -69,12 +69,12 @@ def main_loop(file_path, auth_token):
 
 
             if book_id:
-                api.PUT_price(emporix_object, object_id, auth_token)
-                api.PUT_availability(emporix_object, object_id, auth_token)
+                api.PUT_price(book_object, object_id, auth_token)
+                api.PUT_availability(book_object, object_id, auth_token)
             else:
 
-                api.POST_price(emporix_object, object_id, auth_token)
-                api.POST_availability(emporix_object, object_id, auth_token)
+                api.POST_price(book_object, object_id, auth_token)
+                api.POST_availability(book_object, object_id, auth_token)
                 
 
         except Exception as e:
