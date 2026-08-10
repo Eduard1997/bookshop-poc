@@ -69,6 +69,7 @@ export interface Config {
   collections: {
     users: User;
     media: Media;
+    'book-overlays': BookOverlay;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -78,6 +79,7 @@ export interface Config {
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
+    'book-overlays': BookOverlaysSelect<false> | BookOverlaysSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -163,6 +165,28 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "book-overlays".
+ */
+export interface BookOverlay {
+  id: number;
+  /**
+   * Must match the ISBN (product code) in Emporix exactly.
+   */
+  isbn: string;
+  staffPick?: boolean | null;
+  /**
+   * A short, hand-written note — not the Emporix product description.
+   */
+  blurb?: string | null;
+  /**
+   * Optional — overrides the cover from Emporix if set.
+   */
+  alternativeCover?: (number | null) | Media;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -192,6 +216,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'media';
         value: number | Media;
+      } | null)
+    | ({
+        relationTo: 'book-overlays';
+        value: number | BookOverlay;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -274,6 +302,18 @@ export interface MediaSelect<T extends boolean = true> {
   height?: T;
   focalX?: T;
   focalY?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "book-overlays_select".
+ */
+export interface BookOverlaysSelect<T extends boolean = true> {
+  isbn?: T;
+  staffPick?: T;
+  blurb?: T;
+  alternativeCover?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

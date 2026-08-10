@@ -1,13 +1,20 @@
+import { getPayload } from 'payload'
+import config from '@payload-config'
 import { getBookById, getBookPrices, getBookAvailability } from '../../../../lib/emporix'
 
 /**
  * Test page: /books/<emporix-product-id>
  *
- * Three separate fetches, kept visibly separate — this mirrors how the
- * data actually lives in Emporix: product+mixin, price, and availability
- * are three different services, not one combined object. The importer
- * writes to all three separately (see api.py: POST_product, POST_price,
- * POST_availability) — the storefront reads them the same way.
+ * Two DIFFERENT kinds of data access, on purpose, side by side:
+ *
+ *  1. Emporix — HTTP fetch, crosses the network, needs a Bearer token.
+ *     (title, authors, price, availability — commerce data)
+ *
+ *  2. Payload — Local API, in-process, no network hop, fully typed.
+ *     (staff pick, editor's blurb — editorial overlay, keyed by ISBN)
+ *
+ * If you ever find yourself writing fetch('/api/...') to reach Payload
+ * from a page inside this same app, stop — that's what Local API replaces.
  */
 
 export default async function BookTestPage({
@@ -28,25 +35,56 @@ export default async function BookTestPage({
     )
   }
 
-  // Fetched in parallel — independent calls, no reason to wait on each other.
+  // Emporix: two more HTTP calls, independent of each other.
   const [prices, availability] = await Promise.all([
     getBookPrices(id),
     getBookAvailability(id),
   ])
 
+  // Payload: Local API, no HTTP, same process. Looked up by ISBN, not by
+  // the Emporix product id — the two systems don't share identifiers,
+  // ISBN is the only thing that connects them.
+  const payload = await getPayload({ config })
+  const overlayResult = await payload.find({
+    collection: 'book-overlays',
+    where: { isbn: { equals: book.isbn } },
+    limit: 1,
+  })
+  const overlay = overlayResult.docs[0] ?? null
+  const coverUrl =
+        (overlay?.alternativeCover && typeof overlay.alternativeCover === 'object'
+            ? overlay.alternativeCover.url
+            : null) ?? book.coverImageUrl
+
   return (
     <div style={{ padding: '2rem', fontFamily: 'sans-serif', maxWidth: 600 }}>
-      {book.coverImageUrl && (
-        <img
-          src={book.coverImageUrl}
-          alt={book.title}
-          style={{ maxWidth: 150, marginBottom: '1rem' }}
-        />
+      {overlay?.staffPick && (
+        <div
+          style={{
+            display: 'inline-block',
+            background: '#fef3c7',
+            color: '#92400e',
+            padding: '2px 10px',
+            borderRadius: 999,
+            fontSize: '0.8rem',
+            fontWeight: 600,
+            marginBottom: '0.75rem',
+          }}
+        >
+          ★ Staff pick
+        </div>
       )}
+
+        {coverUrl && (
+            <img
+                src={coverUrl}
+                alt={book.title}
+                style={{ maxWidth: 150, marginBottom: '1rem', display: 'block' }}
+            />
+        )}
 
       <h1 style={{ marginBottom: 0 }}>{book.title}</h1>
       {book.subtitle && <p style={{ color: '#888', marginTop: 4 }}>{book.subtitle}</p>}
-
       <p style={{ color: '#fff' }}>ISBN: {book.isbn}</p>
 
       {book.authors.length > 0 && (
@@ -57,7 +95,7 @@ export default async function BookTestPage({
         </p>
       )}
 
-      <ul style={{ color: '#fff', fontSize: '0.9rem', paddingLeft: '1.2rem' }}>
+      <ul style={{ fontSize: '0.9rem', paddingLeft: '1.2rem', color: '#fff' }}>
         {book.publisher && <li>Publisher: {book.publisher}</li>}
         {book.publicationDate && <li>Published: {book.publicationDate}</li>}
         {book.language && <li>Language: {book.language}</li>}
@@ -79,9 +117,7 @@ export default async function BookTestPage({
 
         {availability ? (
           <p style={{ margin: '4px 0 0', color: availability.available ? 'green' : 'crimson' }}>
-            {availability.available
-              ? `In stock (${availability.stockLevel})`
-              : 'Out of stock'}
+            {availability.available ? `In stock (${availability.stockLevel})` : 'Out of stock'}
           </p>
         ) : (
           <p style={{ margin: '4px 0 0', color: '#999' }}>No availability data</p>
@@ -90,6 +126,28 @@ export default async function BookTestPage({
 
       {book.description && (
         <div style={{ marginTop: '1rem' }} dangerouslySetInnerHTML={{ __html: book.description }} />
+      )}
+
+      {overlay?.blurb && (
+        <div
+          style={{
+            marginTop: '1.5rem',
+            padding: '1rem',
+            borderLeft: '3px solid #92400e',
+            background: '#fffbeb',
+            fontStyle: 'italic',
+            color: '#000'
+          }}
+        >
+          {overlay.blurb}
+        </div>
+      )}
+
+      {!overlay && (
+        <p style={{ marginTop: '1.5rem', color: '#999', fontSize: '0.85rem' }}>
+          No Payload editorial overlay for this ISBN yet — the page still works
+          without one. Add one in /admin under &quot;Book Overlays&quot; to see it appear here.
+        </p>
       )}
     </div>
   )
