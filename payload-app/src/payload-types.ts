@@ -70,6 +70,8 @@ export interface Config {
     users: User;
     media: Media;
     'book-overlays': BookOverlay;
+    pages: Page;
+    'curated-lists': CuratedList;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -80,6 +82,8 @@ export interface Config {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     'book-overlays': BookOverlaysSelect<false> | BookOverlaysSelect<true>;
+    pages: PagesSelect<false> | PagesSelect<true>;
+    'curated-lists': CuratedListsSelect<false> | CuratedListsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -187,6 +191,40 @@ export interface BookOverlay {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pages".
+ */
+export interface Page {
+  id: number;
+  title?: string | null;
+  content?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "curated-lists".
+ */
+export interface CuratedList {
+  id: number;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -220,6 +258,14 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'book-overlays';
         value: number | BookOverlay;
+      } | null)
+    | ({
+        relationTo: 'pages';
+        value: number | Page;
+      } | null)
+    | ({
+        relationTo: 'curated-lists';
+        value: number | CuratedList;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -312,6 +358,24 @@ export interface BookOverlaysSelect<T extends boolean = true> {
   staffPick?: T;
   blurb?: T;
   alternativeCoverImage?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pages_select".
+ */
+export interface PagesSelect<T extends boolean = true> {
+  title?: T;
+  content?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "curated-lists_select".
+ */
+export interface CuratedListsSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
 }
