@@ -13,6 +13,7 @@ export const CuratedLists: CollectionConfig = {
             type: 'text',
             name: 'title',
             required: true,
+            unique: true,
         },
         {
             name: 'description',

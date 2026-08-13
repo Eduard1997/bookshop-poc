@@ -195,7 +195,8 @@ export interface BookOverlay {
  */
 export interface Page {
   id: number;
-  title?: string | null;
+  title: string;
+  slug: string;
   content?: {
     root: {
       type: string;
@@ -220,6 +221,17 @@ export interface Page {
  */
 export interface CuratedList {
   id: number;
+  title: string;
+  /**
+   * A optional description for what the list is about.
+   */
+  description?: string | null;
+  books?:
+    | {
+        bookOverlay?: (number | null) | BookOverlay;
+        id?: string | null;
+      }[]
+    | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -367,6 +379,7 @@ export interface BookOverlaysSelect<T extends boolean = true> {
  */
 export interface PagesSelect<T extends boolean = true> {
   title?: T;
+  slug?: T;
   content?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -376,6 +389,14 @@ export interface PagesSelect<T extends boolean = true> {
  * via the `definition` "curated-lists_select".
  */
 export interface CuratedListsSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  books?:
+    | T
+    | {
+        bookOverlay?: T;
+        id?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
 }
