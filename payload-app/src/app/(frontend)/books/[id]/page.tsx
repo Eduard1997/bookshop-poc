@@ -1,14 +1,31 @@
 import { getBookById, getBookPrices } from '../../../../lib/emporix'
+import { getPayload } from 'payload'
+import config from '@/payload.config'
 
 export default async function BookPreviewCardPage({ params, }: { params: Promise<{ id: string }> }) {
     const { id } = await params
     const book = await getBookById(id)
+    const payloadConfig = await config
+    const payload = await getPayload({ config: payloadConfig })
+    
+    
 
     if (!book) {
         return (<div><p>Book not found.</p></div>)
     }
 
+    const bookOverlayData = await payload.find({collection: 'book-overlays', where: { isbn: { equals: book.isbn } }})
+    const bookOverlay = bookOverlayData.docs[0]
+
     const prices = await getBookPrices(id)
+
+    let finalImageUrl = book.coverImageUrl;
+
+    const altCover = bookOverlay?.alternativeCoverImage;
+
+    if (altCover && typeof altCover === 'object' && typeof altCover.url === 'string') {
+        finalImageUrl = altCover.url;
+    }
 
     return (
         <div>
@@ -17,11 +34,23 @@ export default async function BookPreviewCardPage({ params, }: { params: Promise
             {
                 book.authors && book.authors.length > 0 && (
                     <p>By: {book.authors.map(a => a.name).join(', ')}</p>)}
+            <div>
+            {bookOverlay?.staffPick &&  <p>Book is a staff pick</p>}
 
-            {book.coverImageUrl && (
-                <div><img
-                    src={book.coverImageUrl}
-                    alt={book.title} />
+            {bookOverlay?.blurb && (
+                <div>
+                    <h3>Staff note:</h3>
+                    <p>{bookOverlay.blurb}</p>
+                </div>
+            )}
+            </div>
+
+            {finalImageUrl && (
+                <div>
+                    <img
+                        src={finalImageUrl}
+                        alt={book.title} 
+                    />
                 </div>
             )}
             <p>ISBN: {book.isbn}</p>
