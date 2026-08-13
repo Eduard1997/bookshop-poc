@@ -23,11 +23,7 @@ export default async function BookPreviewCardPage({ params, }: { params: Promise
 
     const altCover = bookOverlay?.alternativeCoverImage;
 
-    // 2. If Payload has an image object, and it has a url, overwrite the default
     if (altCover && typeof altCover === 'object' && typeof altCover.url === 'string') {
-        // Sometimes Payload stores URLs as relative paths (e.g., "/media/kitten.jpg")
-        // If your images look broken, you might need to add your Payload URL here like:
-        // finalImageUrl = `http://localhost:3000${altCover.url}`
         finalImageUrl = altCover.url;
     }
 
@@ -39,7 +35,7 @@ export default async function BookPreviewCardPage({ params, }: { params: Promise
                 book.authors && book.authors.length > 0 && (
                     <p>By: {book.authors.map(a => a.name).join(', ')}</p>)}
             <div>
-            {bookOverlay?.staffPick &&  <p>Book is a staff pick</p>}
+            {bookOverlay?.staffPick &&  <p>This book is a staff pick</p>}
 
             {bookOverlay?.blurb && (
                 <div>

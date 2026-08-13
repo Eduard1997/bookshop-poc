@@ -16,7 +16,7 @@ export const BookOverlays: CollectionConfig = {
             required: true,
             unique: true,
             admin: {
-                description: 'The ISBN must be the same as in emporix.',
+                description: 'The ISBN must match the book in emporix.',
             },
         },
         {
@@ -24,6 +24,9 @@ export const BookOverlays: CollectionConfig = {
             name: 'staffPick',
             defaultValue: false,
             label: 'Staff Pick',
+            admin: {
+                description: 'Check this box if this book is a staff recommendation.',
+            },
         },
         {
             type: 'textarea',
