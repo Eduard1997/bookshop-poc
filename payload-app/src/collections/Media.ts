@@ -10,6 +10,9 @@ export const Media: CollectionConfig = {
       name: 'alt',
       type: 'text',
       required: true,
+      admin: {
+        description: 'Alternative text for the image.',
+      },
     },
   ],
   upload: true,

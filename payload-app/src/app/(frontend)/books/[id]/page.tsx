@@ -34,6 +34,14 @@ export default async function BookPreviewCardPage({ params }: { params: Promise<
 
     const hasLeftColumn = finalImageUrl || bookOverlay?.staffPick;
 
+    let finalImageUrl = book.coverImageUrl;
+
+    const altCover = bookOverlay?.alternativeCoverImage;
+
+    if (altCover && typeof altCover === 'object' && typeof altCover.url === 'string') {
+        finalImageUrl = altCover.url;
+    }
+
     return (
         <div style={{ maxWidth: '1000px', margin: '0 auto', padding: '2rem', fontFamily: 'system-ui, sans-serif' }}>
             

@@ -154,6 +154,9 @@ export interface User {
  */
 export interface Media {
   id: number;
+  /**
+   * Alternative text for the image.
+   */
   alt: string;
   updatedAt: string;
   createdAt: string;
@@ -174,9 +177,12 @@ export interface Media {
 export interface BookOverlay {
   id: number;
   /**
-   * The ISBN must be the same as in emporix.
+   * The ISBN must match the book in emporix.
    */
   isbn: string;
+  /**
+   * Check this box if this book is a staff recommendation.
+   */
   staffPick?: boolean | null;
   /**
    * A staff written note for the clients to see.
@@ -195,8 +201,17 @@ export interface BookOverlay {
  */
 export interface Page {
   id: number;
+  /**
+   * The title of the page to be displayed.
+   */
   title: string;
+  /**
+   * The exact web address for this page (e.g., "about-us" or "contact"). Please do not include spaces.
+   */
   slug: string;
+  /**
+   * The main content of the page.
+   */
   content?: {
     root: {
       type: string;
@@ -221,11 +236,17 @@ export interface Page {
  */
 export interface CuratedList {
   id: number;
+  /**
+   * The name for this list.
+   */
   title: string;
   /**
-   * A optional description for what the list is about.
+   * An optional description for what the list is about.
    */
   description?: string | null;
+  /**
+   * The books that are part of this list.
+   */
   books?:
     | {
         bookOverlay?: (number | null) | BookOverlay;
