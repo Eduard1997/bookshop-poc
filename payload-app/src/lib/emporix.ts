@@ -148,15 +148,6 @@ export async function getBookById(productId: string): Promise<BookDetails | null
 
 //-----------------GET PRICES----------------
 
-//Note on Emporix Price API:
-//The endpoint `/prices/{priceId}` requires a specific price ID formatted as `price-${productId}-${index}`
-//Querying with a raw `productId` causes 404/400 errors
-//Solution:
-//We construct the `priceId` using the deterministic pattern set by the importer (`price-${productId}-${index}`)
-//Since Emporix's `/prices/{priceId}` endpoint expects a price ID and returns a single JSON object instead of an array,
-//we parse the price object directly rather than using `.map()`.
-//We increment the index in a loop until a 404 is returned to collect all prices for the given product.
-
 export type PriceDetails = {
     amount: number
     currency: string
@@ -167,44 +158,27 @@ export async function getBookPrices(productId: string): Promise<PriceDetails[]> 
     if (!EMPORIX_TENANT_ID) throw new Error('Missing EMPORIX_TENANT_ID')
     const token = await getAccessToken()
 
-    const prices: PriceDetails[] = []
-    let index = 1
+    const response = await fetch(
+        `${EMPORIX_API_BASE_URL}/price/${EMPORIX_TENANT_ID}/prices?q=itemId.id:${productId}`,
+        {
+            method: 'GET',
+            headers: {
+                Authorization: `Bearer ${token}`
+            },
+            cache: 'no-store'
+        },
+    )
 
-    while (true) {
-        const priceId = `price-${productId}-${index}`
+    if (!response.ok) return []
 
-        const response = await fetch(
-            `${EMPORIX_API_BASE_URL}/price/${EMPORIX_TENANT_ID}/prices/${priceId}`,
-            {
-                method: 'GET',
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                    'Content-Type': 'application/json',
-                },
-                cache: 'no-store',
-            }
-        )
+    const priceItem = await response.json()
+    const list = Array.isArray(priceItem) ? priceItem : priceItem.results ?? []
 
-        if (response.status === 404) {
-            break
-        }
-
-        if (!response.ok) {
-            throw new Error(`Emporix price fetch failed (${response.status}): ${await response.text()}`)
-        }
-
-        const priceItem = await response.json()
-
-        prices.push({
-            amount: priceItem.tierValues[0]?.priceValue ?? 0,
-            currency: priceItem.currency,
-            country: priceItem.location.countryCode,
-        })
-
-        index++
-    }
-
-    return prices
+    return list.map((p: any) => ({
+        amount: p.tierValues?.[0]?.priceValue ?? 0,
+        currency: p.currency ?? 'EUR',
+        country: p.location.countryCode,
+    }))
 }
 
 //---------------GET AVAILABILITY-----------------
@@ -246,3 +220,6 @@ export async function getBookAvailability(productId: string, site: string = 'mai
 }
 
 
+//----------------------GET BOOKS---------------------------
+//----------------------GET CATALOG--------------------------
+//------------------GET CATEGORIES--------------------------
