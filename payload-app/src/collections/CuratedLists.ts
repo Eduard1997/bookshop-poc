@@ -4,6 +4,7 @@ export const CuratedLists: CollectionConfig = {
     slug: 'curated-lists',
     admin: {
         useAsTitle: 'title',
+        defaultColumns: ['title', 'updatedAt'],
     },
     access: {
         read: () => true,
@@ -14,12 +15,15 @@ export const CuratedLists: CollectionConfig = {
             name: 'title',
             required: true,
             unique: true,
+            admin: {
+                description: 'The name for this list.',
+            },
         },
         {
             name: 'description',
             type: 'textarea',
             admin: {
-                description: 'A optional description for what the list is about.',
+                description: 'An optional description for what the list is about.',
             },
         },
         {
@@ -31,7 +35,10 @@ export const CuratedLists: CollectionConfig = {
                     name: 'bookOverlay',
                     relationTo: 'book-overlays',
                 }
-            ]
+            ],
+            admin: {
+                description: 'The books that are part of this list.',
+            },
         }
     ]
 
