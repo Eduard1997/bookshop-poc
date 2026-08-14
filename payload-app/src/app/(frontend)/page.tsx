@@ -1,25 +1,29 @@
-import { headers as getHeaders } from 'next/headers.js'
-import Image from 'next/image'
 import { getPayload } from 'payload'
-import React from 'react'
-import { fileURLToPath } from 'url'
-
 import config from '@/payload.config'
+<<<<<<< Updated upstream
 import './styles.css'
 import Link from 'next/link'
+=======
+import React from 'react'
+
+import { getAllProductsFromCatalogViaCategories } from '@/lib/emporix'
+import BookCatalog from './BookCatalog'
+
+export const dynamic = 'force-dynamic';
+>>>>>>> Stashed changes
 
 export default async function HomePage() {
-  const headers = await getHeaders()
   const payloadConfig = await config
   const payload = await getPayload({ config: payloadConfig })
-  const { user } = await payload.auth({ headers })
 
-  const fileURL = `vscode://file/${fileURLToPath(import.meta.url)}`
+  const CATALOG_ID = '6a75cbedd753775031ef0588'
+  const products = await getAllProductsFromCatalogViaCategories(CATALOG_ID)
 
   const myPages = await payload.find({collection: 'pages'})
   const myLists = await payload.find({collection: 'curated-lists'})
 
   return (
+<<<<<<< Updated upstream
     <div className="home">
       <div className="content">
         <picture>
@@ -74,14 +78,17 @@ export default async function HomePage() {
               </div>
             ))}
           </div>
+=======
+    <main style={{ backgroundColor: '#ffffff', minHeight: '100vh', fontFamily: 'system-ui, sans-serif', color: '#111827', paddingBottom: '60px' }}>
+
+      <div style={{ backgroundColor: '#4f46e5', color: '#ffffff', padding: '40px 40px' }}>
+        <div style={{ maxWidth: '1300px', margin: '0 auto' }}>
+          <h1 style={{ fontSize: '32px', fontWeight: '700', margin: '0' }}>Welcome to Bookshop</h1>
+>>>>>>> Stashed changes
         </div>
       </div>
-      <div className="footer">
-        <p>Update this page by editing</p>
-        <a className="codeLink" href={fileURL}>
-          <code>app/(frontend)/page.tsx</code>
-        </a>
-      </div>
-    </div>
+
+      <div style={{ maxWidth: '1300px', margin: '30px auto 0 auto', padding: '0 40px' }}><BookCatalog products={products} /></div>
+    </main>
   )
 }
