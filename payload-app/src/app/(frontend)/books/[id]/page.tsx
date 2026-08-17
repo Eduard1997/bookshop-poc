@@ -3,6 +3,7 @@ import { getPayload } from 'payload'
 import config from '@/payload.config'
 import Link from 'next/link'
 import React from 'react'
+import PriceSelector from '../../PriceSelector'
 
 export default async function BookPreviewCardPage({ params }: { params: Promise<{ id: string }> }) {
     const { id } = await params
@@ -93,35 +94,7 @@ export default async function BookPreviewCardPage({ params }: { params: Promise<
                             )}
                         </div>
 
-                        <div style={{ backgroundColor: '#ffffff', padding: '24px', borderRadius: '12px', border: '1px solid #e5e7eb', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.05)', display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '16px' }}>
-                                <div>
-                                    <div style={{ fontSize: '13px', color: '#6b7280', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '4px' }}>Price</div>
-                                    {prices && prices.length > 0 ? (
-                                        <div style={{ fontSize: '28px', fontWeight: '800', color: '#111827' }}>
-                                            {prices[0].amount} {prices[0].currency}
-                                        </div>
-                                    ) : (
-                                        <div style={{ fontSize: '20px', fontWeight: '600', color: '#9ca3af' }}>Unavailable</div>
-                                    )}
-                                </div>
-
-                                <div style={{ textAlign: 'right' }}>
-                                    <div style={{ fontSize: '13px', color: '#6b7280', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '4px' }}>Availability</div>
-                                    {availability?.available ? (
-                                        <div style={{ color: '#16a34a', fontWeight: '700', fontSize: '16px', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                                            <span style={{ display: 'inline-block', width: '8px', height: '8px', backgroundColor: '#16a34a', borderRadius: '50%' }}></span>
-                                            In Stock ({availability.stockLevel})
-                                        </div>
-                                    ) : (
-                                        <div style={{ color: '#dc2626', fontWeight: '700', fontSize: '16px', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                                            <span style={{ display: 'inline-block', width: '8px', height: '8px', backgroundColor: '#dc2626', borderRadius: '50%' }}></span>
-                                            Out of Stock
-                                        </div>
-                                    )}
-                                </div>
-                            </div>
-                        </div>
+                        <PriceSelector prices={prices} availability={availability} />
 
                         {bookOverlay?.blurb && (
                             <div style={{ backgroundColor: '#f9fafb', borderLeft: '4px solid #4f46e5', padding: '16px 20px', borderRadius: '0 8px 8px 0' }}>
