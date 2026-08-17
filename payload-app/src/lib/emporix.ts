@@ -219,7 +219,93 @@ export async function getBookAvailability(productId: string, site: string = 'mai
     }
 }
 
+//------------------GET CATEGORIES--------------------------
+
+export async function getCategoriesWithNamesForCatalog(catalogId: string) {
+    if (!EMPORIX_TENANT_ID) throw new Error('Missing EMPORIX_TENANT_ID');
+    const token = await getAccessToken();
+
+    const catalogUrl = `${EMPORIX_API_BASE_URL}/catalog/${EMPORIX_TENANT_ID}/catalogs/${catalogId}`;
+    const catalogRes = await fetch(catalogUrl, {
+        method: 'GET',
+        headers: { Authorization: `Bearer ${token}` },
+        cache: 'no-store'
+    });
+
+    if (!catalogRes.ok) return [];
+
+    const catalogData = await catalogRes.json();
+    const categoryIds: string[] = catalogData.categoryIds || [];
+
+    if (categoryIds.length === 0) return [];
+
+    const categoryPromises = categoryIds.map(async (catId) => {
+        const catUrl = `${EMPORIX_API_BASE_URL}/category/${EMPORIX_TENANT_ID}/categories/${catId}`;
+        const catRes = await fetch(catUrl, {
+            method: 'GET',
+            headers: { Authorization: `Bearer ${token}` },
+            cache: 'no-store'
+        });
+
+        if (!catRes.ok) return null;
+        return await catRes.json();
+    });
+
+    const categories = await Promise.all(categoryPromises);
+
+    return categories.filter(Boolean);
+}
 
 //----------------------GET BOOKS---------------------------
-//----------------------GET CATALOG--------------------------
-//------------------GET CATEGORIES--------------------------
+export async function getProductsByCategory(categoryId: string) {
+    if (!EMPORIX_TENANT_ID) throw new Error('Missing EMPORIX_TENANT_ID');
+    const token = await getAccessToken();
+
+    const url = `${EMPORIX_API_BASE_URL}/category/${EMPORIX_TENANT_ID}/categories/${categoryId}/assignments`;
+
+    const res = await fetch(url, {
+        method: 'GET',
+        headers: { Authorization: `Bearer ${token}` },
+        cache: 'no-store'
+    });
+
+    if (!res.ok) return [];
+
+    const data = await res.json();
+    const assignments = data.content || data.assignments || data || [];
+
+    const productPromises = assignments.map(async (assignment: any) => {
+        const prodId = assignment.ref?.id || assignment.productId || assignment.product?.id;
+        if (!prodId) return null;
+
+        return await getBookById(prodId);
+    });
+
+    const products = await Promise.all(productPromises);
+    return products.filter(Boolean);
+}
+//----------------------GET ALL PRODUCTS FROM CATALOG VIA CATEGORIES---------------------------
+export async function getAllProductsFromCatalogViaCategories(catalogId: string): Promise<BookDetails[]> {
+    try {
+        const categories = await getCategoriesWithNamesForCatalog(catalogId);
+        if (!categories || categories.length === 0) return [];
+
+        let allProducts: BookDetails[] = [];
+
+        for (const cat of categories) {
+            const categoryId = cat?.id;
+            if (!categoryId) continue;
+
+            const productsInCat = await getProductsByCategory(categoryId);
+            allProducts.push(...(productsInCat as BookDetails[]));
+        }
+
+        const uniqueProducts = Array.from(
+            new Map(allProducts.filter(p => p && p.id).map(p => [p.id, p])).values()
+        );
+
+        return uniqueProducts;
+    } catch (error) {
+        return [];
+    }
+}
