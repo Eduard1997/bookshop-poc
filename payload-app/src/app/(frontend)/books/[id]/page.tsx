@@ -1,6 +1,8 @@
 import { getBookById, getBookPrices, getBookAvailability } from '../../../../lib/emporix'
 import { getPayload } from 'payload'
 import config from '@/payload.config'
+import Link from 'next/link'
+import React from 'react'
 
 export default async function BookPreviewCardPage({ params }: { params: Promise<{ id: string }> }) {
     const { id } = await params
@@ -14,9 +16,12 @@ export default async function BookPreviewCardPage({ params }: { params: Promise<
 
     if (!book) {
         return (
-            <div style={{ textAlign: 'center', padding: '4rem', fontFamily: 'sans-serif' }}>
-                <h2>Book not found.</h2>
-            </div>
+            <main style={{ backgroundColor: '#ffffff', minHeight: '100vh', fontFamily: 'system-ui, sans-serif', color: '#111827', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <div style={{ textAlign: 'center', padding: '40px' }}>
+                    <h2 style={{ fontSize: '24px', fontWeight: '600', color: '#6b7280' }}>Book not found.</h2>
+                    <Link href="/books" style={{ display: 'inline-block', marginTop: '16px', color: '#4f46e5', textDecoration: 'none', fontWeight: '500' }}>← Back to catalog</Link>
+                </div>
+            </main>
         )
     }
 
@@ -34,97 +39,119 @@ export default async function BookPreviewCardPage({ params }: { params: Promise<
 
     const hasLeftColumn = finalImageUrl || bookOverlay?.staffPick;
 
-
     return (
-        <div style={{ maxWidth: '1000px', margin: '0 auto', padding: '2rem', fontFamily: 'system-ui, sans-serif' }}>
+        <main style={{ backgroundColor: '#ffffff', minHeight: '100vh', fontFamily: 'system-ui, sans-serif', color: '#111827', paddingBottom: '80px' }}>
             
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '3rem', justifyContent: hasLeftColumn ? 'flex-start' : 'center' }}>
-                
-                {hasLeftColumn && (
-                    <div style={{ flex: '1', minWidth: '300px', display: 'flex', flexDirection: 'column', gap: '1rem', maxWidth: '400px' }}>
-                        {finalImageUrl && (
-                            <img
-                                src={finalImageUrl}
-                                alt={book.title}
-                                style={{ width: '100%', borderRadius: '8px', boxShadow: '0 4px 12px rgba(0,0,0,0.5)' }}
-                            />
-                        )}
-                        
-                        {bookOverlay?.staffPick && (
-                            <div style={{ background: '#ffd700', color: '#000', padding: '0.75rem', borderRadius: '6px', textAlign: 'center', fontWeight: 'bold' }}>
-                                ⭐ Staff Pick
-                            </div>
-                        )}
-                    </div>
-                )}
-
-                <div style={{ flex: hasLeftColumn ? '2' : '1', minWidth: '300px', maxWidth: hasLeftColumn ? 'none' : '700px', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-                    
-                    <div style={{ textAlign: hasLeftColumn ? 'left' : 'center' }}>
-                        <h1 style={{ margin: '0 0 0.5rem 0', fontSize: '2.5rem', lineHeight: '1.2' }}>{book.title}</h1>
-                        {book.subtitle && <h2 style={{ margin: '0 0 1rem 0', opacity: 0.7, fontSize: '1.25rem', fontWeight: 'normal' }}>{book.subtitle}</h2>}
-                        
-                        {book.authors && book.authors.length > 0 && (
-                            <p style={{ fontSize: '1.1rem', margin: 0 }}>
-                                By <strong>{book.authors.map(a => a.name).join(', ')}</strong>
-                            </p>
-                        )}
-                    </div>
-
-                    <div style={{ background: 'rgba(128, 128, 128, 0.1)', padding: '1.5rem', borderRadius: '8px', border: '1px solid rgba(128, 128, 128, 0.2)', textAlign: 'left' }}>
-                        
-                        <div style={{ marginBottom: '1rem' }}>
-                            <span style={{ fontSize: '1.2rem', fontWeight: 'bold' }}>Price: </span>
-                            {prices && prices.length > 0 ? (
-                                <span style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>
-                                    {prices[0].amount} {prices[0].currency}
-                                </span>
-                            ) : (
-                                <span style={{ opacity: 0.7 }}>Unavailable</span>
-                            )}
-                        </div>
-
-                        <div>
-                            <span style={{ fontSize: '1.1rem', fontWeight: 'bold' }}>Status: </span>
-                            {availability?.available ? (
-                                <span style={{ color: '#4ade80', fontWeight: '600' }}>
-                                    ✅ In Stock ({availability.stockLevel} available)
-                                </span>
-                            ) : (
-                                <span style={{ color: '#f87171', fontWeight: '600' }}>
-                                    ❌ Out of Stock
-                                </span>
-                            )}
-                        </div>
-                    </div>
-
-                    {bookOverlay?.blurb && (
-                        <div style={{ borderLeft: '4px solid #ffd700', paddingLeft: '1rem', fontStyle: 'italic', opacity: 0.9, textAlign: 'left' }}>
-                            <strong>Staff Note:</strong> "{bookOverlay.blurb}"
-                        </div>
-                    )}
-
-                    {book.description && (
-                        <div style={{ textAlign: 'left' }}>
-                            <h3 style={{ borderBottom: '1px solid rgba(128, 128, 128, 0.2)', paddingBottom: '0.5rem' }}>Description</h3>
-                            <p style={{ lineHeight: '1.6', opacity: 0.8 }}>{book.description}</p>
-                        </div>
-                    )}
-
-                    <div style={{ textAlign: 'left' }}>
-                        <h3 style={{ borderBottom: '1px solid rgba(128, 128, 128, 0.2)', paddingBottom: '0.5rem' }}>Product Details</h3>
-                        <ul style={{ listStyle: 'none', padding: 0, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem', opacity: 0.8 }}>
-                            <li><strong>ISBN:</strong> {book.isbn}</li>
-                            <li><strong>Publication Date:</strong> {book.publicationDate || 'N/A'}</li>
-                            <li><strong>Format:</strong> {book.productForm || 'N/A'}</li>
-                            <li><strong>Pages:</strong> {book.pageCount || 'N/A'}</li>
-                            <li><strong>Language:</strong> {book.language || 'N/A'}</li>
-                            <li><strong>Category:</strong> {book.category || 'N/A'}</li>
-                        </ul>
-                    </div>
-
+            <div style={{ backgroundColor: '#4f46e5', color: '#ffffff', padding: '24px 40px', marginBottom: '40px' }}>
+                <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+                    <Link href="/books" style={{ color: '#e0e7ff', textDecoration: 'none', fontSize: '14px', fontWeight: '600', display: 'inline-flex', alignItems: 'center', transition: 'color 0.2s' }}>
+                        ← Back to Books
+                    </Link>
                 </div>
             </div>
-        </div>
+
+            <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 40px' }}>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '40px', justifyContent: hasLeftColumn ? 'flex-start' : 'center' }}>
+                    
+                    {hasLeftColumn && (
+                        <div style={{ flex: '1', minWidth: '300px', maxWidth: '380px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                            {finalImageUrl ? (
+                                <img
+                                    src={finalImageUrl}
+                                    alt={book.title}
+                                    style={{ width: '100%', borderRadius: '12px', objectFit: 'cover', boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)', backgroundColor: '#f3f4f6' }}
+                                />
+                            ) : (
+                                <div style={{ width: '100%', height: '500px', backgroundColor: '#f3f4f6', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#9ca3af', fontSize: '15px' }}>
+                                    No image available
+                                </div>
+                            )}
+                            
+                            {bookOverlay?.staffPick && (
+                                <div style={{ backgroundColor: '#fef3c7', color: '#b45309', padding: '12px', borderRadius: '8px', textAlign: 'center', fontWeight: '700', fontSize: '14px', letterSpacing: '0.05em', textTransform: 'uppercase', border: '1px solid #fde68a' }}>
+                                    ⭐ Staff Pick
+                                </div>
+                            )}
+                        </div>
+                    )}
+
+                    <div style={{ flex: hasLeftColumn ? '2' : '1', minWidth: '300px', maxWidth: hasLeftColumn ? 'none' : '800px', display: 'flex', flexDirection: 'column', gap: '32px' }}>
+                        
+                        <div style={{ textAlign: hasLeftColumn ? 'left' : 'center' }}>
+                            {book.category && (
+                                <span style={{ fontSize: '12px', fontWeight: '700', textTransform: 'uppercase', color: '#4f46e5', letterSpacing: '0.05em', display: 'block', marginBottom: '8px' }}>
+                                    {book.category}
+                                </span>
+                            )}
+                            <h1 style={{ margin: '0 0 8px 0', fontSize: '36px', fontWeight: '800', lineHeight: '1.2', color: '#111827' }}>{book.title}</h1>
+                            {book.subtitle && <h2 style={{ margin: '0 0 16px 0', color: '#6b7280', fontSize: '20px', fontWeight: '500', lineHeight: '1.4' }}>{book.subtitle}</h2>}
+                            
+                            {book.authors && book.authors.length > 0 && (
+                                <p style={{ fontSize: '16px', margin: 0, color: '#374151' }}>
+                                    By <span style={{ color: '#16a34a', fontWeight: '600' }}>{book.authors.map(a => a.name).join(', ')}</span>
+                                </p>
+                            )}
+                        </div>
+
+                        <div style={{ backgroundColor: '#ffffff', padding: '24px', borderRadius: '12px', border: '1px solid #e5e7eb', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.05)', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '16px' }}>
+                                <div>
+                                    <div style={{ fontSize: '13px', color: '#6b7280', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '4px' }}>Price</div>
+                                    {prices && prices.length > 0 ? (
+                                        <div style={{ fontSize: '28px', fontWeight: '800', color: '#111827' }}>
+                                            {prices[0].amount} {prices[0].currency}
+                                        </div>
+                                    ) : (
+                                        <div style={{ fontSize: '20px', fontWeight: '600', color: '#9ca3af' }}>Unavailable</div>
+                                    )}
+                                </div>
+
+                                <div style={{ textAlign: 'right' }}>
+                                    <div style={{ fontSize: '13px', color: '#6b7280', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '4px' }}>Availability</div>
+                                    {availability?.available ? (
+                                        <div style={{ color: '#16a34a', fontWeight: '700', fontSize: '16px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                                            <span style={{ display: 'inline-block', width: '8px', height: '8px', backgroundColor: '#16a34a', borderRadius: '50%' }}></span>
+                                            In Stock ({availability.stockLevel})
+                                        </div>
+                                    ) : (
+                                        <div style={{ color: '#dc2626', fontWeight: '700', fontSize: '16px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                                            <span style={{ display: 'inline-block', width: '8px', height: '8px', backgroundColor: '#dc2626', borderRadius: '50%' }}></span>
+                                            Out of Stock
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+                        </div>
+
+                        {bookOverlay?.blurb && (
+                            <div style={{ backgroundColor: '#f9fafb', borderLeft: '4px solid #4f46e5', padding: '16px 20px', borderRadius: '0 8px 8px 0' }}>
+                                <div style={{ fontSize: '12px', fontWeight: '700', textTransform: 'uppercase', color: '#4f46e5', letterSpacing: '0.05em', marginBottom: '4px' }}>Staff Note</div>
+                                <p style={{ margin: 0, fontStyle: 'italic', color: '#374151', fontSize: '15px', lineHeight: '1.6' }}>"{bookOverlay.blurb}"</p>
+                            </div>
+                        )}
+
+                        {book.description && (
+                            <div>
+                                <h3 style={{ fontSize: '18px', fontWeight: '700', color: '#111827', borderBottom: '2px solid #f3f4f6', paddingBottom: '12px', margin: '0 0 16px 0' }}>Description</h3>
+                                <p style={{ lineHeight: '1.7', color: '#4b5563', fontSize: '15px', margin: 0 }}>{book.description}</p>
+                            </div>
+                        )}
+
+                        <div>
+                            <h3 style={{ fontSize: '18px', fontWeight: '700', color: '#111827', borderBottom: '2px solid #f3f4f6', paddingBottom: '12px', margin: '0 0 16px 0' }}>Product Details</h3>
+                            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '12px' }}>
+                                <li style={{ fontSize: '14px', color: '#4b5563' }}><strong style={{ color: '#111827', fontWeight: '600' }}>ISBN:</strong> {book.isbn}</li>
+                                <li style={{ fontSize: '14px', color: '#4b5563' }}><strong style={{ color: '#111827', fontWeight: '600' }}>Published:</strong> {book.publicationDate || 'N/A'}</li>
+                                <li style={{ fontSize: '14px', color: '#4b5563' }}><strong style={{ color: '#111827', fontWeight: '600' }}>Format:</strong> {book.productForm || 'N/A'}</li>
+                                <li style={{ fontSize: '14px', color: '#4b5563' }}><strong style={{ color: '#111827', fontWeight: '600' }}>Pages:</strong> {book.pageCount || 'N/A'}</li>
+                                <li style={{ fontSize: '14px', color: '#4b5563' }}><strong style={{ color: '#111827', fontWeight: '600' }}>Language:</strong> {book.language || 'N/A'}</li>
+                                <li style={{ fontSize: '14px', color: '#4b5563' }}><strong style={{ color: '#111827', fontWeight: '600' }}>Publisher:</strong> {book.publisher || 'N/A'}</li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </main>
     )
 }
