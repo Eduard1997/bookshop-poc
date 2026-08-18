@@ -10,6 +10,7 @@ import { Media } from './collections/Media'
 import { BookOverlays } from './collections/BookOverlays'
 import { Pages } from './collections/Pages'
 import { CuratedLists } from './collections/CuratedLists'
+import { LandingPages } from './collections/LandingPages'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -21,7 +22,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, BookOverlays, Pages, CuratedLists
+  collections: [Users, Media, BookOverlays, Pages, CuratedLists, LandingPages
   ],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
