@@ -309,3 +309,50 @@ export async function getAllProductsFromCatalogViaCategories(catalogId: string):
         return [];
     }
 }
+//----------------GET PRODUCTS BY ISBN-----------------------------
+export async function getBookByISBN(isbn: string): Promise<BookDetails | null> {
+    if (!EMPORIX_TENANT_ID) throw new Error('Missing EMPORIX_TENANT_ID')
+    const token = await getAccessToken()
+
+    const response: Response = await fetch(
+        `${EMPORIX_API_BASE_URL}/product/${EMPORIX_TENANT_ID}/products?q=code:${isbn}`,
+        {
+            method: 'GET',
+            headers: { Authorization: `Bearer ${token}` },
+            cache: 'no-store',
+        }
+    )
+
+    if (response.status === 404) return null
+    if (!response.ok) {
+        throw new Error(`Emporix product fetch failed (${response.status}): ${await response.text()}`)
+    }
+
+    const data = await response.json()
+    const list: emporixProductStructure[] = Array.isArray(data) ? data : data.results ?? []
+
+    const product = list.find((p) => p.code === isbn) ?? list[0]
+    if (!product) return null
+    const mixin = product.mixins?.[MIXIN_SCHEMA_ID] ?? {}
+
+    const authors: Author[] = (mixin[FIELD.authors] ?? []).map((a: any) => ({
+        role: a[FIELD.authorRole],
+        name: a[FIELD.authorName],
+    }))
+
+    return {
+        id: product.id,
+        isbn: product.code,
+        title: firstLocalized(product.name) ?? '(no title)',
+        subtitle: mixin[FIELD.subtitle],
+        description: firstLocalized(product.description),
+        coverImageUrl: product.media?.[0]?.url,
+        authors,
+        publisher: mixin[FIELD.publisher],
+        publicationDate: mixin[FIELD.publicationDate],
+        category: mixin[FIELD.category],
+        language: mixin[FIELD.language],
+        pageCount: mixin[FIELD.pageCount],
+        productForm: mixin[FIELD.productForm],
+    }
+}
