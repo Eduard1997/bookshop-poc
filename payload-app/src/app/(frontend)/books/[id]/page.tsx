@@ -7,10 +7,10 @@ import PriceSelector from '../../PriceSelector'
 
 export default async function BookPreviewCardPage({ params }: { params: Promise<{ id: string }> }) {
     const { id } = await params
-    
+
     const book = await getBookById(id)
     const prices = await getBookPrices(id)
-    const availability = await getBookAvailability(id) 
+    const availability = await getBookAvailability(id)
 
     const payloadConfig = await config
     const payload = await getPayload({ config: payloadConfig })
@@ -27,7 +27,7 @@ export default async function BookPreviewCardPage({ params }: { params: Promise<
     }
 
     const bookOverlayData = await payload.find({
-        collection: 'book-overlays', 
+        collection: 'book-overlays',
         where: { isbn: { equals: book.isbn } }
     })
     const bookOverlay = bookOverlayData.docs[0]
@@ -42,7 +42,7 @@ export default async function BookPreviewCardPage({ params }: { params: Promise<
 
     return (
         <main style={{ backgroundColor: '#ffffff', minHeight: '100vh', fontFamily: 'system-ui, sans-serif', color: '#111827', paddingBottom: '80px' }}>
-            
+
             <div style={{ backgroundColor: '#4f46e5', color: '#ffffff', padding: '24px 40px', marginBottom: '40px' }}>
                 <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
                     <Link href="/books" style={{ color: '#e0e7ff', textDecoration: 'none', fontSize: '14px', fontWeight: '600', display: 'inline-flex', alignItems: 'center', transition: 'color 0.2s' }}>
@@ -53,7 +53,7 @@ export default async function BookPreviewCardPage({ params }: { params: Promise<
 
             <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 40px' }}>
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: '40px', justifyContent: hasLeftColumn ? 'flex-start' : 'center' }}>
-                    
+
                     {hasLeftColumn && (
                         <div style={{ flex: '1', minWidth: '300px', maxWidth: '380px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
                             {finalImageUrl ? (
@@ -67,17 +67,36 @@ export default async function BookPreviewCardPage({ params }: { params: Promise<
                                     No image available
                                 </div>
                             )}
-                            
+
                             {bookOverlay?.staffPick && (
-                                <div style={{ backgroundColor: '#fef3c7', color: '#b45309', padding: '12px', borderRadius: '8px', textAlign: 'center', fontWeight: '700', fontSize: '14px', letterSpacing: '0.05em', textTransform: 'uppercase', border: '1px solid #fde68a' }}>
-                                    ⭐ Staff Pick
-                                </div>
+                                <>
+                                    <div style={{ backgroundColor: '#fef3c7', color: '#b45309', padding: '12px', borderRadius: '8px', textAlign: 'center', fontWeight: '700', fontSize: '14px', letterSpacing: '0.05em', textTransform: 'uppercase', border: '1px solid #fde68a' }}>
+                                        ⭐ Staff Pick
+                                    </div>
+                                    <Link
+                                        href="/editorial/staff-picks"
+                                        style={{
+                                            display: 'block',
+                                            marginTop: '10px',
+                                            backgroundColor: '#ffffff',
+                                            color: '#b45309',
+                                            padding: '10px 12px',
+                                            borderRadius: '8px',
+                                            textAlign: 'center',
+                                            fontWeight: '600',
+                                            fontSize: '13px',
+                                            border: '1px solid #fde68a',
+                                            textDecoration: 'none',
+                                            transition: 'all 0.2s ease'
+                                        }}
+                                    >See all Staff Picks →</Link>
+                                </>
                             )}
                         </div>
                     )}
 
                     <div style={{ flex: hasLeftColumn ? '2' : '1', minWidth: '300px', maxWidth: hasLeftColumn ? 'none' : '800px', display: 'flex', flexDirection: 'column', gap: '32px' }}>
-                        
+
                         <div style={{ textAlign: hasLeftColumn ? 'left' : 'center' }}>
                             {book.category && (
                                 <span style={{ fontSize: '12px', fontWeight: '700', textTransform: 'uppercase', color: '#4f46e5', letterSpacing: '0.05em', display: 'block', marginBottom: '8px' }}>
@@ -86,7 +105,7 @@ export default async function BookPreviewCardPage({ params }: { params: Promise<
                             )}
                             <h1 style={{ margin: '0 0 8px 0', fontSize: '36px', fontWeight: '800', lineHeight: '1.2', color: '#111827' }}>{book.title}</h1>
                             {book.subtitle && <h2 style={{ margin: '0 0 16px 0', color: '#6b7280', fontSize: '20px', fontWeight: '500', lineHeight: '1.4' }}>{book.subtitle}</h2>}
-                            
+
                             {book.authors && book.authors.length > 0 && (
                                 <p style={{ fontSize: '16px', margin: 0, color: '#374151' }}>
                                     By <span style={{ color: '#16a34a', fontWeight: '600' }}>{book.authors.map(a => a.name).join(', ')}</span>
