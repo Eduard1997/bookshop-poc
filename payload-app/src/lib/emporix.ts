@@ -75,6 +75,7 @@ type emporixProductStructure = {
             [FIELD.productForm]?: string
         }
     }
+    yrn?: string
 }
 
 export type Author = {
@@ -96,6 +97,7 @@ export type BookDetails = {
     language?: string
     pageCount?: number
     productForm?: string
+    yrn?: string
 }
 
 function firstLocalized(obj?: Record<string, string>): string | undefined {
@@ -143,6 +145,7 @@ export async function getBookById(productId: string): Promise<BookDetails | null
         language: mixin[FIELD.language],
         pageCount: mixin[FIELD.pageCount],
         productForm: mixin[FIELD.productForm],
+        yrn: product.yrn,  
     }
 }
 
@@ -356,3 +359,252 @@ export async function getBookByISBN(isbn: string): Promise<BookDetails | null> {
         productForm: mixin[FIELD.productForm],
     }
 }
+
+//----------------CREATE CART-----------------------------
+export async function createCart(sessionId: string): Promise<string | null> {
+    try {
+        if (!EMPORIX_TENANT_ID) {
+            console.error('Missing EMPORIX_TENANT_ID');
+            return null;
+        }
+        const token = await getAccessToken();
+
+        const url = `${EMPORIX_API_BASE_URL}/cart/${EMPORIX_TENANT_ID}/carts`;
+
+        const res = await fetch(url, {
+            method: 'POST',
+            headers: { 
+                Authorization: `Bearer ${token}`,
+                'session-id': sessionId,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                siteCode: 'main',
+                currency: 'EUR'
+            }),
+            cache: 'no-store'
+        });
+
+        if (!res.ok) {
+            console.error(`Emporix API Error (${res.status}):`, await res.text());
+            return null;
+        }
+
+        const data = await res.json();
+        return data.cartId || data.id;
+
+    } catch (error) {
+        console.error("Internal Server Error:", error);
+        return null;
+    }
+}
+
+//----------------GET CART-----------------------------
+export async function getCart(bookshop_cart_id: string) {
+    try {
+        if (!EMPORIX_TENANT_ID) {
+            console.error('Missing EMPORIX_TENANT_ID');
+            return null;
+        }
+        const token = await getAccessToken();
+
+        const url = `${EMPORIX_API_BASE_URL}/cart/${EMPORIX_TENANT_ID}/carts/${bookshop_cart_id}?expandCalculation=true`;
+
+        const res = await fetch(url, {
+            method: 'GET',
+            headers: { 
+                Authorization: `Bearer ${token}`
+            },
+            cache: 'no-store'
+        });
+
+        if (!res.ok) {
+            console.error(`Emporix API Error (${res.status}):`, await res.text());
+            return null;
+        }
+
+        const data = await res.json();
+
+        return {
+            id: data.id,
+            yrn: data.yrn || '',
+            currency: data.currency || 'EUR',
+            sessionId: data.sessionId || '',
+            items: (data.items || []).map((item: any) => ({
+                id: item.id,
+                itemYrn: item.itemYrn,
+                quantity: item.quantity,
+                effectiveQuantity: item.effectiveQuantity,
+                price: {
+                    priceId: item.price?.priceId || '',
+                    originalAmount: item.price?.originalAmount || 0,
+                    effectiveAmount: item.price?.effectiveAmount || 0,
+                    currency: item.price?.currency || 'EUR'
+                }
+            }))
+        };
+
+    } catch (error) {
+        console.error("Internal Server Error:", error);
+        return null;
+    }
+}
+
+
+//----------------ADD ITEM TO CART-----------------------------
+export async function addToCart(
+    cartId: string, 
+    itemYrn: string, 
+    priceId: string, 
+    priceAmount: number, 
+    quantity: number = 1
+) {
+    try{
+        if (!EMPORIX_TENANT_ID) throw new Error('Missing EMPORIX_TENANT_ID');
+        const token = await getAccessToken();
+
+        const url = `${EMPORIX_API_BASE_URL}/cart/${EMPORIX_TENANT_ID}/carts/${cartId}/items?siteCode=main`;
+
+        const res = await fetch(url, {
+            method: 'POST',
+            headers: { 
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json' 
+            },
+            body: JSON.stringify({
+                itemYrn: itemYrn,
+                price: {
+                    priceId: priceId,
+                    effectiveAmount: priceAmount,
+                    originalAmount: priceAmount,
+                    currency: 'EUR'
+                },
+                quantity: quantity
+            }),
+            cache: 'no-store'
+        });
+
+        if (!res.ok) {
+            console.error(`Emporix API Error (${res.status}):`, await res.text());
+            return { error: 'Failed to add item to cart' };
+        }
+
+        return await res.json();
+    }
+    catch (error){
+        console.error("Internal Server Error:", error);
+        return { error: 'An unexpected error occurred' };
+    }
+}
+
+//----------------UPDATE ITEM-----------------------------
+export async function updateCartItem(
+    itemId: string,
+    cartId: string, 
+    itemYrn: string, 
+    priceId: string, 
+    priceAmount: number, 
+    quantity: number = 1
+) {
+    try{
+        if (!EMPORIX_TENANT_ID) throw new Error('Missing EMPORIX_TENANT_ID');
+        const token = await getAccessToken();
+
+        const url = `${EMPORIX_API_BASE_URL}/cart/${EMPORIX_TENANT_ID}/carts/${cartId}/items/${itemId}`;
+
+        const res = await fetch(url, {
+            method: 'PUT',
+            headers: { 
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json' 
+            },
+            body: JSON.stringify({
+                itemYrn: itemYrn,
+                price: {
+                    priceId: priceId,
+                    effectiveAmount: priceAmount,
+                    originalAmount: priceAmount,
+                    currency: 'EUR'
+                },
+                quantity: quantity
+            }),
+            cache: 'no-store'
+        });
+
+        if (!res.ok) {
+            console.error(`Emporix API Error (${res.status}):`, await res.text());
+            return { error: 'Failed to update item from cart' };
+        }
+
+        return await res.json();
+
+    } catch (error) {
+        console.error("Internal Server Error:", error);
+        return { error: 'An unexpected error occurred' };
+    }
+
+}
+
+
+
+
+
+//----------------DELETE ITEM FROM CART-----------------------------
+export async function removeCartItem(cartId: string, itemId: string) {
+    try{
+        if (!EMPORIX_TENANT_ID) throw new Error('Missing EMPORIX_TENANT_ID');
+        const token = await getAccessToken();
+
+        const url = `${EMPORIX_API_BASE_URL}/cart/${EMPORIX_TENANT_ID}/carts/${cartId}/items/${itemId}`;
+
+        const res = await fetch(url, {
+            method: 'DELETE',
+            headers: { 
+                Authorization: `Bearer ${token}`
+            },
+            cache: 'no-store'
+        });
+
+        if (!res.ok) {
+            console.error(`Emporix API Error (${res.status}):`, await res.text());
+            return { error: 'Failed to delete item from cart' };
+        }
+
+        return res.status
+
+    } catch (error) {
+        console.error("Internal Server Error:", error);
+        return { error: 'An unexpected error occurred' };
+    }
+}
+
+
+//----------------CLEAR CART----------------------------
+export async function clearCart(cartId: string){
+    try{
+        if (!EMPORIX_TENANT_ID) throw new Error('Missing EMPORIX_TENANT_ID');
+            const token = await getAccessToken();
+
+            const url = `${EMPORIX_API_BASE_URL}/cart/${EMPORIX_TENANT_ID}/carts/${cartId}/items`;
+
+            const res = await fetch(url, {
+                method: 'DELETE',
+                headers: { 
+                    Authorization: `Bearer ${token}`,
+                },
+                cache: 'no-store'
+            });
+
+            if (!res.ok) {
+                console.error(`Emporix API Error (${res.status}):`, await res.text());
+                return { error: 'Failed to clear cart' };
+            }
+
+            return res.status
+        
+    }catch (error) {
+        console.error("Internal Server Error:", error);
+        return { error: 'An unexpected error occurred' };
+    }
+}
+
