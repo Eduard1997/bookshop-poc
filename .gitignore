@@ -28,3 +28,4 @@ Thumbs.db
 pgdata/
 
 credentials.json
+importer/error_log.jsonl
