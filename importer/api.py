@@ -14,7 +14,7 @@ def convert_to_emporix_data(book_object):
         "description": {
             book_object["language"]: book_object["description"]
         },
-        "published": False,
+        "published": True,
         "productType": "BASIC",
 
         "taxClasses": {
