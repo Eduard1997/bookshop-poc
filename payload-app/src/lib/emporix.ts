@@ -145,13 +145,14 @@ export async function getBookById(productId: string): Promise<BookDetails | null
         language: mixin[FIELD.language],
         pageCount: mixin[FIELD.pageCount],
         productForm: mixin[FIELD.productForm],
-        yrn: product.yrn,  
+        yrn: product.yrn,
     }
 }
 
 //-----------------GET PRICES----------------
 
 export type PriceDetails = {
+    id: string
     amount: number
     currency: string
     country: string
@@ -178,6 +179,7 @@ export async function getBookPrices(productId: string): Promise<PriceDetails[]> 
     const list = Array.isArray(priceItem) ? priceItem : priceItem.results ?? []
 
     return list.map((p: any) => ({
+        id: p.id,
         amount: p.tierValues?.[0]?.priceValue ?? 0,
         currency: p.currency ?? 'EUR',
         country: p.location.countryCode,
@@ -192,7 +194,7 @@ export type AvailabilityDetails = {
     distributionChannel: string
 }
 
-export async function getBookAvailability(productId: string, site: string = 'main'): Promise<AvailabilityDetails | null> {
+export async function getBookAvailability(productId: string, site: string = 'bookshop-site'): Promise<AvailabilityDetails | null> {
     if (!EMPORIX_TENANT_ID) throw new Error('Missing EMPORIX_TENANT_ID')
     const token = await getAccessToken()
 
@@ -312,6 +314,7 @@ export async function getAllProductsFromCatalogViaCategories(catalogId: string):
         return [];
     }
 }
+
 //----------------GET PRODUCTS BY ISBN-----------------------------
 export async function getBookByISBN(isbn: string): Promise<BookDetails | null> {
     if (!EMPORIX_TENANT_ID) throw new Error('Missing EMPORIX_TENANT_ID')
@@ -373,13 +376,13 @@ export async function createCart(sessionId: string): Promise<string | null> {
 
         const res = await fetch(url, {
             method: 'POST',
-            headers: { 
+            headers: {
                 Authorization: `Bearer ${token}`,
                 'session-id': sessionId,
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                siteCode: 'main',
+                siteCode: 'bookshop-site',
                 currency: 'EUR'
             }),
             cache: 'no-store'
@@ -412,7 +415,7 @@ export async function getCart(bookshop_cart_id: string) {
 
         const res = await fetch(url, {
             method: 'GET',
-            headers: { 
+            headers: {
                 Authorization: `Bearer ${token}`
             },
             cache: 'no-store'
@@ -453,23 +456,23 @@ export async function getCart(bookshop_cart_id: string) {
 
 //----------------ADD ITEM TO CART-----------------------------
 export async function addToCart(
-    cartId: string, 
-    itemYrn: string, 
-    priceId: string, 
-    priceAmount: number, 
+    cartId: string,
+    itemYrn: string,
+    priceId: string,
+    priceAmount: number,
     quantity: number = 1
 ) {
-    try{
+    try {
         if (!EMPORIX_TENANT_ID) throw new Error('Missing EMPORIX_TENANT_ID');
         const token = await getAccessToken();
 
-        const url = `${EMPORIX_API_BASE_URL}/cart/${EMPORIX_TENANT_ID}/carts/${cartId}/items?siteCode=main`;
+        const url = `${EMPORIX_API_BASE_URL}/cart/${EMPORIX_TENANT_ID}/carts/${cartId}/items?siteCode=bookshop-site`;
 
         const res = await fetch(url, {
             method: 'POST',
-            headers: { 
+            headers: {
                 Authorization: `Bearer ${token}`,
-                'Content-Type': 'application/json' 
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify({
                 itemYrn: itemYrn,
@@ -491,7 +494,7 @@ export async function addToCart(
 
         return await res.json();
     }
-    catch (error){
+    catch (error) {
         console.error("Internal Server Error:", error);
         return { error: 'An unexpected error occurred' };
     }
@@ -500,13 +503,13 @@ export async function addToCart(
 //----------------UPDATE ITEM-----------------------------
 export async function updateCartItem(
     itemId: string,
-    cartId: string, 
-    itemYrn: string, 
-    priceId: string, 
-    priceAmount: number, 
+    cartId: string,
+    itemYrn: string,
+    priceId: string,
+    priceAmount: number,
     quantity: number = 1
 ) {
-    try{
+    try {
         if (!EMPORIX_TENANT_ID) throw new Error('Missing EMPORIX_TENANT_ID');
         const token = await getAccessToken();
 
@@ -514,9 +517,9 @@ export async function updateCartItem(
 
         const res = await fetch(url, {
             method: 'PUT',
-            headers: { 
+            headers: {
                 Authorization: `Bearer ${token}`,
-                'Content-Type': 'application/json' 
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify({
                 itemYrn: itemYrn,
@@ -551,7 +554,7 @@ export async function updateCartItem(
 
 //----------------DELETE ITEM FROM CART-----------------------------
 export async function removeCartItem(cartId: string, itemId: string) {
-    try{
+    try {
         if (!EMPORIX_TENANT_ID) throw new Error('Missing EMPORIX_TENANT_ID');
         const token = await getAccessToken();
 
@@ -559,7 +562,7 @@ export async function removeCartItem(cartId: string, itemId: string) {
 
         const res = await fetch(url, {
             method: 'DELETE',
-            headers: { 
+            headers: {
                 Authorization: `Bearer ${token}`
             },
             cache: 'no-store'
@@ -578,31 +581,30 @@ export async function removeCartItem(cartId: string, itemId: string) {
     }
 }
 
-
 //----------------CLEAR CART----------------------------
-export async function clearCart(cartId: string){
-    try{
+export async function clearCart(cartId: string) {
+    try {
         if (!EMPORIX_TENANT_ID) throw new Error('Missing EMPORIX_TENANT_ID');
-            const token = await getAccessToken();
+        const token = await getAccessToken();
 
-            const url = `${EMPORIX_API_BASE_URL}/cart/${EMPORIX_TENANT_ID}/carts/${cartId}/items`;
+        const url = `${EMPORIX_API_BASE_URL}/cart/${EMPORIX_TENANT_ID}/carts/${cartId}/items`;
 
-            const res = await fetch(url, {
-                method: 'DELETE',
-                headers: { 
-                    Authorization: `Bearer ${token}`,
-                },
-                cache: 'no-store'
-            });
+        const res = await fetch(url, {
+            method: 'DELETE',
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+            cache: 'no-store'
+        });
 
-            if (!res.ok) {
-                console.error(`Emporix API Error (${res.status}):`, await res.text());
-                return { error: 'Failed to clear cart' };
-            }
+        if (!res.ok) {
+            console.error(`Emporix API Error (${res.status}):`, await res.text());
+            return { error: 'Failed to clear cart' };
+        }
 
-            return res.status
-        
-    }catch (error) {
+        return res.status
+
+    } catch (error) {
         console.error("Internal Server Error:", error);
         return { error: 'An unexpected error occurred' };
     }

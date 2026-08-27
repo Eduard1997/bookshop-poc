@@ -178,8 +178,7 @@ export default function BookCatalog({ products }: { products: Book[] }) {
 
                         return (
                             <Link
-                                key={bookId}
-                                href={`/books/${book?.id}`}
+                                key={bookId} href={`/books/${book?.id}`}
                                 style={{
                                     backgroundColor: '#ffffff',
                                     borderRadius: '8px',
@@ -244,6 +243,7 @@ export default function BookCatalog({ products }: { products: Book[] }) {
                                     marginBottom: '0',
                                     fontWeight: '500'
                                 }}>{authorNames}</p>
+
                             </Link>
                         )
                     })

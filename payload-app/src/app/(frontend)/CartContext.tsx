@@ -19,8 +19,8 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
         }
 
         fetchInitialCart()
-        
-    },[])
+
+    }, [])
 
     return (
         <CartContext.Provider value={{ cart, setCart }}>
