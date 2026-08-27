@@ -1,3 +1,5 @@
+'use server'
+
 const EMPORIX_API_BASE_URL: string = process.env.EMPORIX_API_BASE_URL ?? 'https://api.emporix.io'
 const EMPORIX_TENANT_ID: string | undefined = process.env.EMPORIX_TENANT_ID
 const EMPORIX_CLIENT_ID: string | undefined = process.env.EMPORIX_CLIENT_ID
@@ -130,7 +132,7 @@ export async function getBookById(productId: string): Promise<BookDetails | null
         role: a[FIELD.authorRole],
         name: a[FIELD.authorName],
     }))
-
+    console.log(product.yrn)
     return {
         id: product.id,
         isbn: product.code,
@@ -176,7 +178,7 @@ export async function getBookPrices(productId: string): Promise<PriceDetails[]> 
 
     const priceItem = await response.json()
     const list = Array.isArray(priceItem) ? priceItem : priceItem.results ?? []
-
+    console.log(list)
     return list.map((p: any) => ({
         amount: p.tierValues?.[0]?.priceValue ?? 0,
         currency: p.currency ?? 'EUR',
@@ -192,7 +194,7 @@ export type AvailabilityDetails = {
     distributionChannel: string
 }
 
-export async function getBookAvailability(productId: string, site: string = 'main'): Promise<AvailabilityDetails | null> {
+export async function getBookAvailability(productId: string, site: string = 'bookshop-site'): Promise<AvailabilityDetails | null> {
     if (!EMPORIX_TENANT_ID) throw new Error('Missing EMPORIX_TENANT_ID')
     const token = await getAccessToken()
 
@@ -379,7 +381,7 @@ export async function createCart(sessionId: string): Promise<string | null> {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                siteCode: 'main',
+                siteCode: 'bookshop-site',
                 currency: 'EUR'
             }),
             cache: 'no-store'
@@ -432,7 +434,7 @@ export async function getCart(bookshop_cart_id: string) {
             yrn: data.yrn || '',
             currency: data.currency || 'EUR',
             sessionId: data.sessionId || '',
-            totalPrice: data.price?.effectiveAmount || 0,
+            totalPrice: data.calculatedPrice?.finalPrice?.grossValue || data.totalPrice?.amount || 0,
             items: (data.items || []).map((item: any) => ({
                 id: item.id,
                 itemYrn: item.itemYrn,
@@ -466,7 +468,7 @@ export async function addToCart(
         if (!EMPORIX_TENANT_ID) throw new Error('Missing EMPORIX_TENANT_ID');
         const token = await getAccessToken();
 
-        const url = `${EMPORIX_API_BASE_URL}/cart/${EMPORIX_TENANT_ID}/carts/${cartId}/items?siteCode=main`;
+        const url = `${EMPORIX_API_BASE_URL}/cart/${EMPORIX_TENANT_ID}/carts/${cartId}/items?siteCode=bookshop-site`;
 
         const res = await fetch(url, {
             method: 'POST',
@@ -611,3 +613,77 @@ export async function clearCart(cartId: string){
     }
 }
 
+
+export async function createOrder(orderPayload: any) {
+    try {
+        if (!EMPORIX_TENANT_ID) throw new Error('Missing EMPORIX_TENANT_ID');
+        const token = await getAccessToken();
+
+        const url = `${EMPORIX_API_BASE_URL}/checkout/${EMPORIX_TENANT_ID}/checkouts/order`;
+
+        const res = await fetch(url, {
+            method: 'POST',
+            headers: { 
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json' 
+            },
+            body: JSON.stringify(orderPayload),
+            cache: 'no-store'
+        });
+
+        if  (!res.ok) {
+            console.error(`Emporix API Error (${res.status}):`, await res.text());
+            return { error: 'Failed to create order' };
+        }
+
+        const data = await res.json();
+        return data.orderId;
+    }
+    catch (error) {
+        console.error("Internal Server Error:", error);
+        return { error: 'An unexpected error occurred' };
+    }
+}
+
+export async function getOrder(orderId: string) {
+    try {
+        if (!EMPORIX_TENANT_ID) throw new Error('Missing EMPORIX_TENANT_ID');
+        const token = await getAccessToken();
+
+        const url = `${EMPORIX_API_BASE_URL}/order-v2/${EMPORIX_TENANT_ID}/salesorders/${orderId}`;
+
+        const res = await fetch(url, {
+            method: 'GET',
+            headers: { 
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            },
+            cache: 'no-store'
+        });
+
+        if (!res.ok) {
+            console.error(`Emporix API Error (${res.status}):`, await res.text());
+            return { error: 'Failed to get order' };
+        }
+
+        const data = await res.json();
+        return data;
+    }
+    catch (error) {
+        console.error("Internal Server Error:", error);
+        return { error: 'An unexpected error occurred' };
+    }
+
+}
+
+// fetch ('api/cart' , {
+//     method : 'POST',
+//     headers : {'Content-Type' : 'application/json'},
+//     body: JSON.stringify({
+//     itemYrn:"urn:yaas:saasag:caasproduct:product:ant2;6a8ee6e9dc781465d94e2692",
+//     priceId: "price-6a8ee6e9dc781465d94e2692-1",
+// priceAmount: 20.00,
+//     quantity: 1
+//     })
+// }).then(res => res.json())
+// .then(data => console.log(data))

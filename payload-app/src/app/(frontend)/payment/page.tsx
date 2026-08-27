@@ -1,8 +1,12 @@
 import { getCart } from '@/lib/emporix'
 import PaymentForm from '../PaymentForm'
 
-export default async function PaymentPage({ searchParams }: { searchParams: Promise<{ cartId: string }> }) {
-    const { cartId } = await searchParams
+type SearchParams = Promise<{ 
+    cartId: string, FirstName?: string, LastName?: string, Email?: string, Phone?: string, Address?: string 
+}>
+
+export default async function PaymentPage({ searchParams }: { searchParams: SearchParams }) {
+    const { cartId, FirstName, LastName, Email, Phone, Address } = await searchParams
     const cart = await getCart(cartId)
 
     return (
@@ -10,10 +14,18 @@ export default async function PaymentPage({ searchParams }: { searchParams: Prom
             <div style={{ maxWidth: '600px', margin: '0 auto' }}>
                 <h1 style={{ margin: '0 0 32px 0', fontSize: '32px', fontWeight: '800', textAlign: 'center' }}>Complete Your Order</h1>
                 
-                <PaymentForm cartId={cartId} />
+                <PaymentForm 
+                    cartId={cartId} 
+                    firstName={FirstName || 'Unknown'} 
+                    lastName={LastName || 'Unknown'} 
+                    email={Email || 'test@test.com'} 
+                    phone={Phone || '0000000000'} 
+                    address={Address || 'Unknown Street'} 
+                    totalAmount={cart?.totalPrice || 0}
+                />
                 
                 <div style={{ marginTop: '32px', textAlign: 'center', color: '#6b7280', fontSize: '14px' }}>
-                    <p>Total to charge: <strong style={{color: '#111827'}}>{cart?.totalPrice} {cart?.currency}</strong></p>
+                    <p>Total to charge: <strong style={{color: '#111827'}}>{cart?.totalPrice} {cart?.currency || 'EUR'}</strong></p>
                 </div>
             </div>
         </main>
