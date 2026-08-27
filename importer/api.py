@@ -523,7 +523,7 @@ def POST_availability(book_object, book_id, auth_token):
     stock_level = orig_avail.get('stockLevel', 0)
     is_available = orig_avail.get('available', False)
     dist_channel = orig_avail.get('distributionChannel', 'ASSORTMENT')
-    site = "main"
+    site = "bookshop-site"
 
     payload = {
         "stockLevel": stock_level,
@@ -550,7 +550,7 @@ def POST_availability(book_object, book_id, auth_token):
     except requests.exceptions.RequestException as e:
         raise Exception(f"Network/SSL error in POST_availability for book {book_id}: {e}")
 
-def PUT_availability(book_object, book_id, auth_token , site="main",):
+def PUT_availability(book_object, book_id, auth_token , site="bookshop-site",):
     orig_avail = book_object.get('availability') or {}
     payload = {
         "stockLevel": orig_avail.get('stockLevel', 0),
