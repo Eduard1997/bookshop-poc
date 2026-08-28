@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import mockPayment from '@/lib/mockPayment'
-import { createOrder } from '@/lib/emporix'
+import { createOrder, updateCartRoot } from '@/lib/emporix'
 
 interface PaymentFormProps {
     cartId: string
@@ -12,7 +12,7 @@ interface PaymentFormProps {
     email: string
     phone: string
     address: string
-    totalAmount: number // <--- Add this
+    totalAmount: number
 }
 
 export default function PaymentForm({ cartId, firstName, lastName, email, phone, address, totalAmount }: PaymentFormProps) {
@@ -25,39 +25,66 @@ export default function PaymentForm({ cartId, firstName, lastName, email, phone,
         setIsProcessing(true)
         setErrorMsg("")
         
+        const finalAmount = Number(totalAmount) > 0 ? Number(totalAmount) : 20.00;
+
         const orderPayload = {
             cartId: cartId,
-            customer: { firstName, lastName, email, phone },
+            currency: "EUR",
+            customer: { 
+                firstName: firstName, 
+                lastName: lastName, 
+                email: email, 
+                contactPhone: phone,
+                guest: true 
+            },
             addresses: [
                 {
                     type: "BILLING",
                     contactName: `${firstName} ${lastName}`,
                     street: address,
-                    city: "Unknown", 
-                    zipCode: "00000",
+                    city: "Stuttgart", 
+                    zipCode: "70173",
                     country: "DE" 
                 },
                 {
                     type: "SHIPPING",
                     contactName: `${firstName} ${lastName}`,
                     street: address,
-                    city: "Unknown",
-                    zipCode: "00000",
+                    city: "Stuttgart",
+                    zipCode: "70173",
                     country: "DE"
                 }
             ],
             shipping: { 
-                shippingMethodId: "standard",
-                zoneId: "DE" 
+                methodId: "standard", 
+                zoneId: "DE",
+                methodName: "Standard", 
+                amount: 0,
+                shippingTaxCode: "STANDARD"
             },
             paymentMethods: [{ 
-                provider: "custom", 
-                method: "credit_card",
-                amount: totalAmount 
+                provider: "none", 
+                method: "invoice"
             }]
         }
 
+        console.log("1. FRONTEND PAYLOAD:", JSON.stringify(orderPayload, null, 2));
+
         await mockPayment(cartId)
+        
+        const prepResponse = await updateCartRoot(cartId, {
+            contactName: `${firstName} ${lastName}`,
+            street: address,
+            city: "Stuttgart",
+            zipCode: "70173"
+        });
+
+        if (prepResponse?.error) {
+            setErrorMsg("Failed to prepare cart shipping details.")
+            setIsProcessing(false)
+            return
+        }
+
         const response = await createOrder(orderPayload)
 
         if (response.error) {
@@ -70,7 +97,6 @@ export default function PaymentForm({ cartId, firstName, lastName, email, phone,
     }
 
     const inputStyle = { width: '100%', padding: '12px 16px', borderRadius: '8px', border: '1px solid #d1d5db', fontSize: '15px', marginBottom: '16px', boxSizing: 'border-box' as const };
-
     return (
         <form onSubmit={handlePay} style={{ backgroundColor: '#f9fafb', padding: '32px', borderRadius: '12px', border: '1px solid #e5e7eb' }}>
             <h2 style={{ fontSize: '20px', fontWeight: '700', marginBottom: '24px' }}>Payment Details</h2>

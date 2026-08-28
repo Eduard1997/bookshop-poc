@@ -41,6 +41,7 @@ async function getAccessToken(): Promise<string> {
             client_id: EMPORIX_CLIENT_ID,
             client_secret: EMPORIX_CLIENT_SECRET,
         }),
+        cache: 'no-store',
     })
 
     if (!response.ok) {
@@ -216,7 +217,6 @@ export async function getBookAvailability(productId: string, site: string = 'boo
     }
 
     const inventoryData = await response.json()
-
     return {
         stockLevel: inventoryData.stockLevel,
         available: inventoryData.available,
@@ -427,8 +427,6 @@ export async function getCart(bookshop_cart_id: string) {
 
         const data = await res.json();
 
-        console.log(data);
-        
         return {
             id: data.id,
             yrn: data.yrn || '',
@@ -616,6 +614,7 @@ export async function clearCart(cartId: string){
 
 export async function createOrder(orderPayload: any) {
     try {
+        console.log("2. SERVER PAYLOAD:", JSON.stringify(orderPayload, null, 2));
         if (!EMPORIX_TENANT_ID) throw new Error('Missing EMPORIX_TENANT_ID');
         const token = await getAccessToken();
 
@@ -676,12 +675,66 @@ export async function getOrder(orderId: string) {
 
 }
 
+//----------------UPDATE CART ROOT (ADDRESS & SHIPPING)-----------------------------
+export async function updateCartRoot(cartId: string, addressData: any) {
+    try {
+        if (!EMPORIX_TENANT_ID) throw new Error('Missing EMPORIX_TENANT_ID');
+        const token = await getAccessToken();
+
+        const url = `${EMPORIX_API_BASE_URL}/cart/${EMPORIX_TENANT_ID}/carts/${cartId}`;
+
+        const res = await fetch(url, {
+            method: 'PUT',
+            headers: { 
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json' 
+            },
+            body: JSON.stringify({
+                currency: 'EUR',
+                countryCode: 'DE',
+                zipCode: addressData.zipCode || '70173',
+                addresses: [
+                    {
+                        type: 'SHIPPING',
+                        contactName: addressData.contactName || 'Test Guest',
+                        street: addressData.street || 'Fritz-Elsaas',
+                        streetNumber: addressData.streetNumber || '20',
+                        city: addressData.city || 'Stuttgart',
+                        zipCode: addressData.zipCode || '70173',
+                        country: 'DE'
+                    },
+                    {
+                        type: 'BILLING',
+                        contactName: addressData.contactName || 'Test Guest',
+                        street: addressData.street || 'Fritz-Elsaas',
+                        streetNumber: addressData.streetNumber || '20',
+                        city: addressData.city || 'Stuttgart',
+                        zipCode: addressData.zipCode || '70173',
+                        country: 'DE'
+                    }
+                ]
+            }),
+            cache: 'no-store'
+        });
+
+        if (!res.ok) {
+            console.error(`Emporix API Error (${res.status}):`, await res.text());
+            return { error: 'Failed to update root cart address' };
+        }
+            const text = await res.text();
+            return text ? JSON.parse(text) : { success: true };
+    } catch (error) {
+        console.error("Internal Server Error:", error);
+        return { error: 'An unexpected error occurred' };
+    }
+}
+
 // fetch ('api/cart' , {
 //     method : 'POST',
 //     headers : {'Content-Type' : 'application/json'},
 //     body: JSON.stringify({
-//     itemYrn:"urn:yaas:saasag:caasproduct:product:ant2;6a8ee6e9dc781465d94e2692",
-//     priceId: "price-6a8ee6e9dc781465d94e2692-1",
+//     itemYrn:"urn:yaas:saasag:caasproduct:product:ant2;6a902b994e1ed05cfb7aa47e",
+//     priceId: "price-6a902b994e1ed05cfb7aa47e-2",
 // priceAmount: 20.00,
 //     quantity: 1
 //     })
