@@ -425,11 +425,14 @@ export async function getCart(bookshop_cart_id: string) {
 
         const data = await res.json();
 
+        console.log(data);
+        
         return {
             id: data.id,
             yrn: data.yrn || '',
             currency: data.currency || 'EUR',
             sessionId: data.sessionId || '',
+            totalPrice: data.price?.effectiveAmount || 0,
             items: (data.items || []).map((item: any) => ({
                 id: item.id,
                 itemYrn: item.itemYrn,
