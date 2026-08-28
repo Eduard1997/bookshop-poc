@@ -1,5 +1,8 @@
 import json, requests, re
 
+from importer.main import country, site, currency
+
+
 def convert_to_emporix_data(book_object):
     name_dict = {book_object["language"]: book_object["title"]}
     if book_object["language"] != "en":
@@ -13,6 +16,10 @@ def convert_to_emporix_data(book_object):
         },
         "published": False,
         "productType": "BASIC",
+
+        "taxClasses": {
+            "DE": "STANDARD"
+        },
 
         "mixins": {
             "6a6b3582e7cadf3c8a834e15": {
@@ -219,7 +226,7 @@ def POST_catalog(auth_token,catalog_name, catalog_description):
             "to": "2030-03-24T12:12:12.616Z"
         },
         "publishedSites": [
-            "main"
+            f"{site}"
         ],
         "categoryIds": []
     }
@@ -435,13 +442,16 @@ def POST_price(book_object, book_id, auth_token):
 
         payload = {
             "id": f"price-{book_id}-{idx + 1}",
-            "currency": "EUR",
+            "currency": f"{currency}",
             "itemId": {
                 "itemType": "PRODUCT",
                 "id": book_id
             },
             "location": {
-                "countryCode": country_code
+                "countryCode": country
+            },
+            "restrictions": {
+                "siteCodes": [site]
             },
             "tierValues": [
                 {
@@ -449,17 +459,19 @@ def POST_price(book_object, book_id, auth_token):
                 }
             ]
         }
+        if country_code == country:
+            break
 
-        try:
-            response = requests.post(url, json=payload, headers=HEADERS, timeout=10)
-            if response.status_code in [200, 201, 204]:
-                print(f"Price {idx + 1} for book {book_id} successfully updated.")
-            else:
-                raise Exception(f"Failed to post price for {book_id}: {response.status_code} - {response.text}")
-        except requests.exceptions.Timeout:
-            raise Exception(f"Timeout while sending price for book {book_id}.")
-        except requests.exceptions.RequestException as e:
-            raise Exception(f"Network error in POST_price for book {book_id}: {e}")
+    try:
+        response = requests.post(url, json=payload, headers=HEADERS, timeout=10)
+        if response.status_code in [200, 201, 204]:
+            print(f"Price {idx + 1} for book {book_id} successfully updated.")
+        else:
+            raise Exception(f"Failed to post price for {book_id}: {response.status_code} - {response.text}")
+    except requests.exceptions.Timeout:
+        raise Exception(f"Timeout while sending price for book {book_id}.")
+    except requests.exceptions.RequestException as e:
+        raise Exception(f"Network error in POST_price for book {book_id}: {e}")
 
 
 def PUT_price(book_object, book_id, auth_token):
@@ -489,14 +501,18 @@ def PUT_price(book_object, book_id, auth_token):
 
         payload = {
             "id": price_id,
-            "currency": "EUR",
+            "currency": f"{currency}",
             "itemId": {
                 "itemType": "PRODUCT",
                 "id": book_id
             },
             "location": {
-                "countryCode": country_code
+                "countryCode": country
             },
+            "restrictions": {
+        "siteCodes": [ site ]
+    },
+
             "tierValues": [
                 {
                     "priceValue": amount
@@ -506,16 +522,18 @@ def PUT_price(book_object, book_id, auth_token):
 
         url = f"https://api.emporix.io/price/{auth_token['tenant']}/prices/{price_id}"
 
-        try:
-            response = requests.put(url, json=payload, headers=HEADERS, timeout=10)
-            if response.status_code in [200, 204]:
-                print(f"Price {price_id} updated for book {book_id} (PUT).")
-            else:
-               raise Exception(f"PUT_price error for book {book_id}: {response.status_code} - {response.text}")
-        except requests.exceptions.Timeout:
-            raise Exception(f"Timeout in PUT_price for book {book_id}.")
-        except requests.exceptions.RequestException as e:
-            raise Exception(f"Network error in PUT_price for book {book_id}: {e}")
+        if country_code == country:
+            break
+    try:
+        response = requests.put(url, json=payload, headers=HEADERS, timeout=10)
+        if response.status_code in [200, 204]:
+            print(f"Price {price_id} updated for book {book_id} (PUT).")
+        else:
+           raise Exception(f"PUT_price error for book {book_id}: {response.status_code} - {response.text}")
+    except requests.exceptions.Timeout:
+        raise Exception(f"Timeout in PUT_price for book {book_id}.")
+    except requests.exceptions.RequestException as e:
+        raise Exception(f"Network error in PUT_price for book {book_id}: {e}")
 
 def POST_availability(book_object, book_id, auth_token):
     orig_avail = book_object.get('availability') or {}
@@ -523,7 +541,6 @@ def POST_availability(book_object, book_id, auth_token):
     stock_level = orig_avail.get('stockLevel', 0)
     is_available = orig_avail.get('available', False)
     dist_channel = orig_avail.get('distributionChannel', 'ASSORTMENT')
-    site = "main"
 
     payload = {
         "stockLevel": stock_level,
@@ -550,7 +567,7 @@ def POST_availability(book_object, book_id, auth_token):
     except requests.exceptions.RequestException as e:
         raise Exception(f"Network/SSL error in POST_availability for book {book_id}: {e}")
 
-def PUT_availability(book_object, book_id, auth_token , site="main",):
+def PUT_availability(book_object, book_id, auth_token ):
     orig_avail = book_object.get('availability') or {}
     payload = {
         "stockLevel": orig_avail.get('stockLevel', 0),
