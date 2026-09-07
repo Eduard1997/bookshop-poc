@@ -1,5 +1,8 @@
 import reader, mapper, api, json
 
+site="bookshop-site"
+currency="EUR"
+country="DE"
 
 def main_loop(file_path, auth_token):
     print(f"token: {auth_token}")
