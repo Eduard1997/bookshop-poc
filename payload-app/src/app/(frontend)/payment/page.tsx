@@ -15,13 +15,12 @@ export default async function PaymentPage({ searchParams }: { searchParams: Sear
                 <h1 style={{ margin: '0 0 32px 0', fontSize: '32px', fontWeight: '800', textAlign: 'center' }}>Complete Your Order</h1>
                 
                 <PaymentForm 
-                    cartId={cartId} 
+                    cart={cart}
                     firstName={FirstName || 'Unknown'} 
                     lastName={LastName || 'Unknown'} 
                     email={Email || 'test@test.com'} 
                     phone={Phone || '0000000000'} 
                     address={Address || 'Unknown Street'} 
-                    totalAmount={cart?.totalPrice || 0}
                 />
                 
                 <div style={{ marginTop: '32px', textAlign: 'center', color: '#6b7280', fontSize: '14px' }}>

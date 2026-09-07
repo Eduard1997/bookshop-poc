@@ -433,11 +433,14 @@ export async function getCart(bookshop_cart_id: string) {
             currency: data.currency || 'EUR',
             sessionId: data.sessionId || '',
             totalPrice: data.calculatedPrice?.finalPrice?.grossValue || data.totalPrice?.amount || 0,
+            calculatedPrice: data.calculatedPrice,
             items: (data.items || []).map((item: any) => ({
                 id: item.id,
                 itemYrn: item.itemYrn,
                 quantity: item.quantity,
                 effectiveQuantity: item.effectiveQuantity,
+                calculatedUnitPrice: item.calculatedUnitPrice,
+                calculatedPrice: item.calculatedPrice,
                 price: {
                     priceId: item.price?.priceId || '',
                     originalAmount: item.price?.originalAmount || 0,
@@ -452,7 +455,6 @@ export async function getCart(bookshop_cart_id: string) {
         return null;
     }
 }
-
 
 //----------------ADD ITEM TO CART-----------------------------
 export async function addToCart(
@@ -618,13 +620,14 @@ export async function createOrder(orderPayload: any) {
         if (!EMPORIX_TENANT_ID) throw new Error('Missing EMPORIX_TENANT_ID');
         const token = await getAccessToken();
 
-        const url = `${EMPORIX_API_BASE_URL}/checkout/${EMPORIX_TENANT_ID}/checkouts/order`;
+        const url = `${EMPORIX_API_BASE_URL}/order-v2/${EMPORIX_TENANT_ID}/salesorders`;
 
         const res = await fetch(url, {
             method: 'POST',
             headers: { 
                 Authorization: `Bearer ${token}`,
-                'Content-Type': 'application/json' 
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
             },
             body: JSON.stringify(orderPayload),
             cache: 'no-store'
@@ -636,7 +639,7 @@ export async function createOrder(orderPayload: any) {
         }
 
         const data = await res.json();
-        return data.orderId;
+        return data.id;
     }
     catch (error) {
         console.error("Internal Server Error:", error);

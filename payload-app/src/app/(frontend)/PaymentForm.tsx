@@ -6,16 +6,15 @@ import mockPayment from '@/lib/mockPayment'
 import { createOrder, updateCartRoot } from '@/lib/emporix'
 
 interface PaymentFormProps {
-    cartId: string
+    cart: any
     firstName: string
     lastName: string
     email: string
     phone: string
     address: string
-    totalAmount: number
 }
 
-export default function PaymentForm({ cartId, firstName, lastName, email, phone, address, totalAmount }: PaymentFormProps) {
+export default function PaymentForm({ cart, firstName, lastName, email, phone, address }: PaymentFormProps) {
     const router = useRouter()
     const [isProcessing, setIsProcessing] = useState(false)
     const [errorMsg, setErrorMsg] = useState("")
@@ -25,54 +24,90 @@ export default function PaymentForm({ cartId, firstName, lastName, email, phone,
         setIsProcessing(true)
         setErrorMsg("")
         
-        const finalAmount = Number(totalAmount) > 0 ? Number(totalAmount) : 20.00;
+        const finalAmount = Number(cart?.totalPrice) > 0 ? Number(cart?.totalPrice) : 20.00;
+
+        const entries = cart?.items?.map((item: any) => ({
+            id: item.itemYrn.includes(';') ? item.itemYrn.split(';').pop() : item.itemYrn,
+            amount: item.quantity,
+            orderedAmount: item.quantity,
+            effectiveQuantity: item.effectiveQuantity || item.quantity,
+            calculatedUnitPrice: item.calculatedUnitPrice || {
+                netValue: item.price.effectiveAmount,
+                grossValue: item.price.effectiveAmount,
+                taxValue: 0,
+                taxCode: "STANDARD",
+                taxRate: 19.0
+            },
+            calculatedPrice: item.calculatedPrice || {
+                price: {
+                    netValue: item.price.effectiveAmount * item.quantity,
+                    grossValue: item.price.effectiveAmount * item.quantity,
+                    taxValue: 0,
+                    taxCode: "STANDARD",
+                    taxRate: 19.0
+                },
+                finalPrice: {
+                    netValue: item.price.effectiveAmount * item.quantity,
+                    grossValue: item.price.effectiveAmount * item.quantity,
+                    taxValue: 0
+                }
+            }
+        })) || [];
 
         const orderPayload = {
-            cartId: cartId,
-            currency: "EUR",
-            customer: { 
-                firstName: firstName, 
-                lastName: lastName, 
-                email: email, 
-                contactPhone: phone,
-                guest: true 
+            entries: entries,
+            discounts: [],
+            customer: {
+                id: cart?.sessionId || "guest-001",
+                name: `${firstName} ${lastName}`,
+                firstName: firstName,
+                lastName: lastName,
+                email: email
             },
-            addresses: [
+            siteCode: "bookshop-site",
+            countryCode: "DE",
+            billingAddress: {
+                contactName: `${firstName} ${lastName}`,
+                street: address,
+                streetNumber: "1",
+                zipCode: "70173",
+                city: "Stuttgart",
+                country: "DE"
+            },
+            shippingAddress: {
+                contactName: `${firstName} ${lastName}`,
+                street: address,
+                streetNumber: "1",
+                zipCode: "70173",
+                city: "Stuttgart",
+                country: "DE"
+            },
+            payments: [
                 {
-                    type: "BILLING",
-                    contactName: `${firstName} ${lastName}`,
-                    street: address,
-                    city: "Stuttgart", 
-                    zipCode: "70173",
-                    country: "DE" 
-                },
-                {
-                    type: "SHIPPING",
-                    contactName: `${firstName} ${lastName}`,
-                    street: address,
-                    city: "Stuttgart",
-                    zipCode: "70173",
-                    country: "DE"
+                    status: "PENDING",
+                    method: "invoice",
+                    paidAmount: 0,
+                    currency: cart?.currency || "EUR"
                 }
             ],
-            shipping: { 
-                methodId: "standard", 
-                zoneId: "DE",
-                methodName: "Standard", 
-                amount: 0,
-                shippingTaxCode: "STANDARD"
+            calculatedPrice: cart?.calculatedPrice || {
+                price: {
+                    netValue: finalAmount,
+                    grossValue: finalAmount,
+                    taxValue: 0
+                },
+                finalPrice: {
+                    netValue: finalAmount,
+                    grossValue: finalAmount,
+                    taxValue: 0
+                }
             },
-            paymentMethods: [{ 
-                provider: "none", 
-                method: "invoice"
-            }]
+            channel: {}
         }
 
-        console.log("1. FRONTEND PAYLOAD:", JSON.stringify(orderPayload, null, 2));
-
-        await mockPayment(cartId)
+        await mockPayment(cart.id)
         
-        const prepResponse = await updateCartRoot(cartId, {
+        const prepResponse = await updateCartRoot(cart.id, {
             contactName: `${firstName} ${lastName}`,
             street: address,
             city: "Stuttgart",
@@ -93,10 +128,21 @@ export default function PaymentForm({ cartId, firstName, lastName, email, phone,
             return
         }
 
+        try {
+            await fetch('/api/cart', {
+                method: 'DELETE',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({}) 
+            })
+        } catch (e) {
+            console.error("Failed to clear cart:", e)
+        }
+
         router.push(`/confirmation?orderId=${response}`)
     }
 
     const inputStyle = { width: '100%', padding: '12px 16px', borderRadius: '8px', border: '1px solid #d1d5db', fontSize: '15px', marginBottom: '16px', boxSizing: 'border-box' as const };
+    
     return (
         <form onSubmit={handlePay} style={{ backgroundColor: '#f9fafb', padding: '32px', borderRadius: '12px', border: '1px solid #e5e7eb' }}>
             <h2 style={{ fontSize: '20px', fontWeight: '700', marginBottom: '24px' }}>Payment Details</h2>
@@ -115,7 +161,7 @@ export default function PaymentForm({ cartId, firstName, lastName, email, phone,
                 disabled={isProcessing}
                 style={{ width: '100%', backgroundColor: '#4f46e5', color: '#ffffff', padding: '16px', borderRadius: '8px', border: 'none', fontSize: '16px', fontWeight: '700', cursor: isProcessing ? 'not-allowed' : 'pointer' }}
             >
-                {isProcessing ? 'Processing...' : `Pay €${totalAmount}`}
+                {isProcessing ? 'Processing...' : `Pay €${cart?.totalPrice || 0}`}
             </button>
         </form>
     )

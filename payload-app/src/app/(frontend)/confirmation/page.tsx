@@ -17,8 +17,9 @@ export default async function ConfirmationPage({ searchParams }: { searchParams:
 
     const orderItemsWithDetails = await Promise.all(
         (order.entries || []).map(async (entry: any) => {
-            const productId = entry.itemYrn.includes(';') ? entry.itemYrn.split(';').pop() : entry.itemYrn;
-            const bookDetails = await getBookById(productId);
+            const rawId = entry.itemYrn || entry.item?.id || entry.id || '';
+            const productId = rawId.includes(';') ? rawId.split(';').pop() : rawId;
+            const bookDetails = productId ? await getBookById(productId) : null;
             return { ...entry, bookDetails };
         })
     );
@@ -52,7 +53,7 @@ export default async function ConfirmationPage({ searchParams }: { searchParams:
                                 </div>
                                 
                                 <div style={{ fontWeight: '600', fontSize: '15px' }}>
-                                    {item.calculatedUnitPrice?.grossValue || item.price?.effectiveAmount} {order.currency || 'EUR'}
+                                    {item.calculatedUnitPrice?.grossValue || item.price?.effectiveAmount || 0} {order.currency || 'EUR'}
                                 </div>
                             </div>
                         ))}
