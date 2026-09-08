@@ -90,6 +90,8 @@ export async function DELETE(request: Request) {
         if (typeof response === 'object' && response?.error) {
             return NextResponse.json({ error: "Failed to clear cart" }, { status: 500 })
         }
+
+        cookieStore.delete('bookshop_cart_id')
     }
 
     const updatedCart = await getCart(bookshop_cart_id)
