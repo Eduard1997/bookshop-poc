@@ -1,15 +1,16 @@
 import Link from 'next/link'
 import { getPayload } from 'payload'
 import config from '@/payload.config'
+import { HeaderCartIcon } from './HeaderCartIcon'
 
 export default async function Header() {
     const payloadConfig = await config
     const payload = await getPayload({ config: payloadConfig })
-    
+
     const pagesData = await payload.find({
         collection: 'pages',
     })
-    
+
     const pages = pagesData.docs
 
     return (
@@ -18,19 +19,22 @@ export default async function Header() {
                 <Link href="/" style={{ fontWeight: 'bold', textDecoration: 'none', color: 'inherit' }}>
                     Home
                 </Link>
-                <Link href="/discover" style={{ fontWeight: 'bold' ,textDecoration: 'none', color: 'inherit' }}>
+                <Link href="/discover" style={{ fontWeight: 'bold', textDecoration: 'none', color: 'inherit' }}>
                     Discover
                 </Link>
-                
+
                 {pages.map((page) => (
-                    <Link 
-                        key={page.id} 
-                        href={`/${page.slug}`} 
+                    <Link
+                        key={page.id}
+                        href={`/${page.slug}`}
                         style={{ textDecoration: 'none', color: 'inherit' }}
                     >
                         {page.title}
                     </Link>
                 ))}
+                <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center' }}>
+                    <HeaderCartIcon />
+                </div>
             </nav>
         </header>
     )
