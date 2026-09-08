@@ -5,7 +5,7 @@ import { useCart } from './CartContext'
 
 export function HeaderCartIcon() {
     const { cart } = useCart() ?? {}
-    const itemCount = cart?.lineItems?.length ?? cart?.items?.length ?? cart?.totalItems ?? 0
+    const itemCount = cart?.totalUnitsCount ?? 0
 
     return (
         <Link

@@ -433,6 +433,8 @@ export async function getCart(bookshop_cart_id: string) {
             yrn: data.yrn || '',
             currency: data.currency || 'EUR',
             sessionId: data.sessionId || '',
+            totalPrice: data.totalPrice || null,
+            totalUnitsCount: data.totalUnitsCount ?? 0,
             items: (data.items || []).map((item: any) => ({
                 id: item.id,
                 itemYrn: item.itemYrn,
@@ -539,7 +541,8 @@ export async function updateCartItem(
             return { error: 'Failed to update item from cart' };
         }
 
-        return await res.json();
+        const text = await res.text();
+        return text ? JSON.parse(text) : { success: true };
 
     } catch (error) {
         console.error("Internal Server Error:", error);
@@ -547,8 +550,6 @@ export async function updateCartItem(
     }
 
 }
-
-
 
 
 

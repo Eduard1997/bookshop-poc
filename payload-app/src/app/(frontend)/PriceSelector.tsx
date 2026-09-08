@@ -5,7 +5,7 @@ import { useCart } from './CartContext'
 
 
 export default function PriceSelector({ prices, availability, itemYrn }: { prices: any[]; availability?: any; itemYrn?: string }) {
-    const { cartId, setCart } = useCart() ?? {}
+    const { setCart } = useCart() ?? {}
     const cartContext = useCart()
     const [loading, setLoading] = useState(false)
 
@@ -39,7 +39,6 @@ export default function PriceSelector({ prices, availability, itemYrn }: { price
         setLoading(true)
 
         try {
-            console.log(currentPrice.amount)
             const response = await fetch('/api/cart', {
                 method: 'POST',
                 headers: {
@@ -60,8 +59,19 @@ export default function PriceSelector({ prices, availability, itemYrn }: { price
                 return
             }
 
+            const cartResponse = await fetch('/api/cart', {
+                method: 'GET',
+                cache: 'no-store',
+            })
+
+            if (!cartResponse.ok) {
+                throw new Error('Failed to refresh cart')
+            }
+
+            const cartData = await cartResponse.json()
+
             if (cartContext?.setCart) {
-                cartContext.setCart(data)
+                cartContext.setCart(cartData)
             }
 
             alert('Produs adăugat cu succes în coș!')

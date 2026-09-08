@@ -63,7 +63,8 @@ export async function PUT(request: Request) {
         return NextResponse.json({ error: response.error }, { status: 400 })
     }
 
-    return NextResponse.json(response, { status: 200 })
+    const updatedCart = await getCart(bookshop_cart_id)
+    return NextResponse.json(updatedCart, { status: 200 })
 }
 
 export async function DELETE(request: Request) {
@@ -91,5 +92,6 @@ export async function DELETE(request: Request) {
         }
     }
 
-    return NextResponse.json({ success: true }, { status: 200 })
+    const updatedCart = await getCart(bookshop_cart_id)
+    return NextResponse.json(updatedCart, { status: 200 })
 }
