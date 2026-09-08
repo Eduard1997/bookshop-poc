@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import mockPayment from '@/lib/mockPayment'
-import { createOrder, updateCartRoot } from '@/lib/emporix'
+import { createOrder, updateCartRoot, getBookById } from '@/lib/emporix'
 
 interface PaymentFormProps {
     cart: any
@@ -51,15 +51,29 @@ export default function PaymentForm({ cart, firstName, lastName, email, phone, a
 
     const finalAmount = Number(updatedCart?.totalPrice) > 0 ? Number(updatedCart?.totalPrice) : 20.00;
 
-    const entries = updatedCart?.items?.map((item: any) => ({
-        id: item.itemYrn.includes(';') ? item.itemYrn.split(';').pop() : item.itemYrn,
+    const entries = await Promise.all((updatedCart?.items || []).map(async (item: any) => {
+        const productId = item.itemYrn.includes(';') ? item.itemYrn.split(';').pop() : item.itemYrn;
+        const bookDetails = await getBookById(productId);
+
+        return {
+        id: productId,
         itemYrn: item.itemYrn,
         amount: item.quantity,
         orderedAmount: item.quantity,
         effectiveQuantity: item.effectiveQuantity || item.quantity,
+        product: {
+            id: productId,
+            sku: bookDetails?.isbn || productId,
+            name: bookDetails?.title || productId,
+            images: bookDetails?.coverImageUrl ? [{ url: bookDetails.coverImageUrl }] : []
+        },
+        ...(bookDetails?.mixinSchemaId && bookDetails?.mixinSchemaUrl ? {
+            metadata: { mixins: { [bookDetails.mixinSchemaId]: bookDetails.mixinSchemaUrl } },
+            mixins: { [bookDetails.mixinSchemaId]: bookDetails.rawMixin || {} }
+        } : {}),
         measurementUnit: item.measurementUnit || {
             value: 1,
-            unit: "H87" 
+            unit: "H87"
         },
         calculatedUnitPrice: item.calculatedUnitPrice || {
             netValue: item.price.effectiveAmount,
@@ -82,7 +96,7 @@ export default function PaymentForm({ cart, firstName, lastName, email, phone, a
                 taxValue: 0
             }
         }
-    })) || [];
+    }}));
 
     const orderPayload = {
         currency: updatedCart?.currency || "EUR",

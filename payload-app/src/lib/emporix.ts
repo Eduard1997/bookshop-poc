@@ -78,6 +78,9 @@ type emporixProductStructure = {
             [FIELD.productForm]?: string
         }
     }
+    metadata?: {
+        mixins?: { [MIXIN_SCHEMA_ID]?: string }
+    }
     yrn?: string
 }
 
@@ -101,6 +104,9 @@ export type BookDetails = {
     pageCount?: number
     productForm?: string
     yrn?: string
+    mixinSchemaId?: string
+    mixinSchemaUrl?: string
+    rawMixin?: Record<string, any>
 }
 
 function firstLocalized(obj?: Record<string, string>): string | undefined {
@@ -148,7 +154,10 @@ export async function getBookById(productId: string): Promise<BookDetails | null
         language: mixin[FIELD.language],
         pageCount: mixin[FIELD.pageCount],
         productForm: mixin[FIELD.productForm],
-        yrn: product.yrn,  
+        yrn: product.yrn,
+        mixinSchemaId: MIXIN_SCHEMA_ID,
+        mixinSchemaUrl: product.metadata?.mixins?.[MIXIN_SCHEMA_ID],
+        rawMixin: mixin,
     }
 }
 
