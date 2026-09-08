@@ -78,6 +78,9 @@ type emporixProductStructure = {
             [FIELD.productForm]?: string
         }
     }
+    metadata?: {
+        mixins?: { [MIXIN_SCHEMA_ID]?: string }
+    }
     yrn?: string
 }
 
@@ -101,6 +104,9 @@ export type BookDetails = {
     pageCount?: number
     productForm?: string
     yrn?: string
+    mixinSchemaId?: string
+    mixinSchemaUrl?: string
+    rawMixin?: Record<string, any>
 }
 
 function firstLocalized(obj?: Record<string, string>): string | undefined {
@@ -149,6 +155,9 @@ export async function getBookById(productId: string): Promise<BookDetails | null
         pageCount: mixin[FIELD.pageCount],
         productForm: mixin[FIELD.productForm],
         yrn: product.yrn,
+        mixinSchemaId: MIXIN_SCHEMA_ID,
+        mixinSchemaUrl: product.metadata?.mixins?.[MIXIN_SCHEMA_ID],
+        rawMixin: mixin,
     }
 }
 
@@ -670,6 +679,8 @@ export async function getOrder(orderId: string) {
         }
 
         const data = await res.json();
+
+        console.log("RAW ORDER DATA FROM API:", JSON.stringify(data, null, 2));
         return data;
     }
     catch (error) {
