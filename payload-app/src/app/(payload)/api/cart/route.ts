@@ -15,7 +15,7 @@ export async function GET() {
     if (!cart) {
         return NextResponse.json({ error: "Failed to fetch cart" }, { status: 500 })
     }
-    
+
     return NextResponse.json(cart, { status: 200 })
 }
 
@@ -25,7 +25,7 @@ export async function POST(request: Request) {
 
     const cookieStore = await cookies()
     let bookshop_cart_id = cookieStore.get('bookshop_cart_id')?.value
-    
+
     if (!bookshop_cart_id) {
         const sessionId = crypto.randomUUID()
         const cartId = await createCart(sessionId)
@@ -37,7 +37,6 @@ export async function POST(request: Request) {
         cookieStore.set('bookshop_cart_id', cartId, { maxAge: 604800 })
         bookshop_cart_id = cartId
     }
-    
     const response = await addToCart(bookshop_cart_id, itemYrn, priceId, priceAmount, quantity)
 
     if (response?.error) {
@@ -59,12 +58,13 @@ export async function PUT(request: Request) {
     }
 
     const response = await updateCartItem(lineItemId, bookshop_cart_id, itemYrn, priceId, priceAmount, quantity)
-    
+
     if (response?.error) {
         return NextResponse.json({ error: response.error }, { status: 400 })
     }
 
-    return NextResponse.json(response, { status: 200 })
+    const updatedCart = await getCart(bookshop_cart_id)
+    return NextResponse.json(updatedCart, { status: 200 })
 }
 
 export async function DELETE(request: Request) {
@@ -80,13 +80,13 @@ export async function DELETE(request: Request) {
 
     if (lineItemId) {
         const response = await removeCartItem(bookshop_cart_id, lineItemId)
-        
+
         if (typeof response === 'object' && response?.error) {
             return NextResponse.json({ error: "Failed to delete item from cart" }, { status: 500 })
         }
     } else {
         const response = await clearCart(bookshop_cart_id)
-        
+
         if (typeof response === 'object' && response?.error) {
             return NextResponse.json({ error: "Failed to clear cart" }, { status: 500 })
         }
@@ -94,5 +94,6 @@ export async function DELETE(request: Request) {
         cookieStore.delete('bookshop_cart_id')
     }
 
-    return NextResponse.json({ success: true }, { status: 200 })
+    const updatedCart = await getCart(bookshop_cart_id)
+    return NextResponse.json(updatedCart, { status: 200 })
 }

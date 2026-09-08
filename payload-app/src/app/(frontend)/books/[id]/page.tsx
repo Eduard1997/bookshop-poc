@@ -12,6 +12,8 @@ export default async function BookPreviewCardPage({ params }: { params: Promise<
     const prices = await getBookPrices(id)
     const availability = await getBookAvailability(id)
 
+    console.log('--- DEBUG EMPORIX AVAILABILITY ---', JSON.stringify(availability, null, 2))
+
     const payloadConfig = await config
     const payload = await getPayload({ config: payloadConfig })
 
@@ -113,7 +115,7 @@ export default async function BookPreviewCardPage({ params }: { params: Promise<
                             )}
                         </div>
 
-                        <PriceSelector prices={prices} availability={availability} />
+                        <PriceSelector prices={prices} availability={availability} itemYrn={book.yrn} />
 
                         {bookOverlay?.blurb && (
                             <div style={{ backgroundColor: '#f9fafb', borderLeft: '4px solid #4f46e5', padding: '16px 20px', borderRadius: '0 8px 8px 0' }}>
