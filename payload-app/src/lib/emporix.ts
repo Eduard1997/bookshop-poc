@@ -435,6 +435,7 @@ export async function getCart(bookshop_cart_id: string) {
             yrn: data.yrn || '',
             currency: data.currency || 'EUR',
             sessionId: data.sessionId || '',
+            totalUnitsCount: data.totalUnitsCount ?? 0,
             totalPrice: data.calculatedPrice?.finalPrice?.grossValue || data.totalPrice?.amount || 0,
             calculatedPrice: data.calculatedPrice,
             items: (data.items || []).map((item: any) => ({
@@ -625,7 +626,7 @@ export async function createOrder(orderPayload: any) {
 
         const res = await fetch(url, {
             method: 'POST',
-            headers: { 
+            headers: {
                 Authorization: `Bearer ${token}`,
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
@@ -634,7 +635,7 @@ export async function createOrder(orderPayload: any) {
             cache: 'no-store'
         });
 
-        if  (!res.ok) {
+        if (!res.ok) {
             console.error(`Emporix API Error (${res.status}):`, await res.text());
             return { error: 'Failed to create order' };
         }
@@ -657,7 +658,7 @@ export async function getOrder(orderId: string) {
 
         const res = await fetch(url, {
             method: 'GET',
-            headers: { 
+            headers: {
                 Authorization: `Bearer ${token}`,
                 'Content-Type': 'application/json'
             },
@@ -689,9 +690,9 @@ export async function updateCartRoot(cartId: string, addressData: any) {
 
         const res = await fetch(url, {
             method: 'PUT',
-            headers: { 
+            headers: {
                 Authorization: `Bearer ${token}`,
-                'Content-Type': 'application/json' 
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify({
                 currency: 'EUR',
@@ -725,8 +726,8 @@ export async function updateCartRoot(cartId: string, addressData: any) {
             console.error(`Emporix API Error (${res.status}):`, await res.text());
             return { error: 'Failed to update root cart address' };
         }
-            const text = await res.text();
-            return text ? JSON.parse(text) : { success: true };
+        const text = await res.text();
+        return text ? JSON.parse(text) : { success: true };
     } catch (error) {
         console.error("Internal Server Error:", error);
         return { error: 'An unexpected error occurred' };

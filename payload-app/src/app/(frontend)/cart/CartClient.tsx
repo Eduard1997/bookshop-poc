@@ -71,7 +71,7 @@ export default function CartClient({ initialItems, cartTotal, currency }: CartCl
         }
     }
 
-    const emporixTotal = cart ? (cart.totalPrice?.amount ?? 0) : cartTotal
+    const emporixTotal = cart ? (cart.totalPrice ?? 0) : cartTotal
     const totalUnitsCount = cart?.totalUnitsCount ?? 0
 
     if (currentItems.length === 0) {
