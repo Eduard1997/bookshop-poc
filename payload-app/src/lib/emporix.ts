@@ -669,6 +669,8 @@ export async function getOrder(orderId: string) {
         }
 
         const data = await res.json();
+
+        console.log("RAW ORDER DATA FROM API:", JSON.stringify(data, null, 2));
         return data;
     }
     catch (error) {

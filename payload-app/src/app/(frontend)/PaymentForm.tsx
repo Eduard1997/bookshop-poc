@@ -20,113 +20,129 @@ export default function PaymentForm({ cart, firstName, lastName, email, phone, a
     const [errorMsg, setErrorMsg] = useState("")
 
     const handlePay = async (e: React.FormEvent) => {
-        e.preventDefault()
-        setIsProcessing(true)
-        setErrorMsg("")
-        
-        const finalAmount = Number(cart?.totalPrice) > 0 ? Number(cart?.totalPrice) : 20.00;
+    e.preventDefault()
+    setIsProcessing(true)
+    setErrorMsg("")
+    
+    await mockPayment(cart.id)
+    
+    const prepResponse = await updateCartRoot(cart.id, {
+        contactName: `${firstName} ${lastName}`,
+        street: address,
+        city: "Stuttgart",
+        zipCode: "70173"
+    });
 
-        const entries = cart?.items?.map((item: any) => ({
-            id: item.itemYrn.includes(';') ? item.itemYrn.split(';').pop() : item.itemYrn,
-            amount: item.quantity,
-            orderedAmount: item.quantity,
-            effectiveQuantity: item.effectiveQuantity || item.quantity,
-            calculatedUnitPrice: item.calculatedUnitPrice || {
-                netValue: item.price.effectiveAmount,
-                grossValue: item.price.effectiveAmount,
+    if (prepResponse?.error) {
+        setErrorMsg("Failed to prepare cart shipping details.")
+        setIsProcessing(false)
+        return
+    }
+
+    let updatedCart = cart;
+    try {
+        const cartRes = await fetch('/api/cart');
+        if (cartRes.ok) {
+            updatedCart = await cartRes.json();
+        }
+    } catch (err) {
+        console.error("Failed to fetch updated cart details:", err);
+    }
+
+    const finalAmount = Number(updatedCart?.totalPrice) > 0 ? Number(updatedCart?.totalPrice) : 20.00;
+
+    const entries = updatedCart?.items?.map((item: any) => ({
+        id: item.itemYrn.includes(';') ? item.itemYrn.split(';').pop() : item.itemYrn,
+        itemYrn: item.itemYrn,
+        amount: item.quantity,
+        orderedAmount: item.quantity,
+        effectiveQuantity: item.effectiveQuantity || item.quantity,
+        measurementUnit: item.measurementUnit || {
+            value: 1,
+            unit: "H87" 
+        },
+        calculatedUnitPrice: item.calculatedUnitPrice || {
+            netValue: item.price.effectiveAmount,
+            grossValue: item.price.effectiveAmount,
+            taxValue: 0,
+            taxCode: "STANDARD",
+            taxRate: 19.0
+        },
+        calculatedPrice: item.calculatedPrice || {
+            price: {
+                netValue: item.price.effectiveAmount * item.quantity,
+                grossValue: item.price.effectiveAmount * item.quantity,
                 taxValue: 0,
                 taxCode: "STANDARD",
                 taxRate: 19.0
             },
-            calculatedPrice: item.calculatedPrice || {
-                price: {
-                    netValue: item.price.effectiveAmount * item.quantity,
-                    grossValue: item.price.effectiveAmount * item.quantity,
-                    taxValue: 0,
-                    taxCode: "STANDARD",
-                    taxRate: 19.0
-                },
-                finalPrice: {
-                    netValue: item.price.effectiveAmount * item.quantity,
-                    grossValue: item.price.effectiveAmount * item.quantity,
-                    taxValue: 0
-                }
+            finalPrice: {
+                netValue: item.price.effectiveAmount * item.quantity,
+                grossValue: item.price.effectiveAmount * item.quantity,
+                taxValue: 0
             }
-        })) || [];
-
-        const orderPayload = {
-            entries: entries,
-            discounts: [],
-            customer: {
-                id: cart?.sessionId || "guest-001",
-                name: `${firstName} ${lastName}`,
-                firstName: firstName,
-                lastName: lastName,
-                email: email
-            },
-            siteCode: "bookshop-site",
-            countryCode: "DE",
-            billingAddress: {
-                contactName: `${firstName} ${lastName}`,
-                street: address,
-                streetNumber: "1",
-                zipCode: "70173",
-                city: "Stuttgart",
-                country: "DE"
-            },
-            shippingAddress: {
-                contactName: `${firstName} ${lastName}`,
-                street: address,
-                streetNumber: "1",
-                zipCode: "70173",
-                city: "Stuttgart",
-                country: "DE"
-            },
-            payments: [
-                {
-                    status: "PENDING",
-                    method: "invoice",
-                    paidAmount: 0,
-                    currency: cart?.currency || "EUR"
-                }
-            ],
-            calculatedPrice: cart?.calculatedPrice || {
-                price: {
-                    netValue: finalAmount,
-                    grossValue: finalAmount,
-                    taxValue: 0
-                },
-                finalPrice: {
-                    netValue: finalAmount,
-                    grossValue: finalAmount,
-                    taxValue: 0
-                }
-            },
-            channel: {}
         }
+    })) || [];
 
-        await mockPayment(cart.id)
-        
-        const prepResponse = await updateCartRoot(cart.id, {
+    const orderPayload = {
+        currency: updatedCart?.currency || "EUR",
+        entries: entries,
+        discounts: [],
+        customer: {
+            id: updatedCart?.sessionId || "guest-001",
+            name: `${firstName} ${lastName}`,
+            firstName: firstName,
+            lastName: lastName,
+            email: email
+        },
+        siteCode: "bookshop-site",
+        countryCode: "DE",
+        billingAddress: {
             contactName: `${firstName} ${lastName}`,
             street: address,
+            streetNumber: "1",
+            zipCode: "70173",
             city: "Stuttgart",
-            zipCode: "70173"
-        });
+            country: "DE"
+        },
+        shippingAddress: {
+            contactName: `${firstName} ${lastName}`,
+            street: address,
+            streetNumber: "1",
+            zipCode: "70173",
+            city: "Stuttgart",
+            country: "DE"
+        },
+        payments: [
+            {
+                status: "PENDING",
+                method: "invoice",
+                paidAmount: 0,
+                currency: updatedCart?.currency || "EUR"
+            }
+        ],
+        calculatedPrice: updatedCart?.calculatedPrice || {
+            price: {
+                netValue: finalAmount,
+                grossValue: finalAmount,
+                taxValue: 0
+            },
+            finalPrice: {
+                netValue: finalAmount,
+                grossValue: finalAmount,
+                taxValue: 0
+            }
+        },
+        channel: {}
+    }
 
-        if (prepResponse?.error) {
-            setErrorMsg("Failed to prepare cart shipping details.")
-            setIsProcessing(false)
-            return
-        }
+    const response = await createOrder(orderPayload)
 
-        const response = await createOrder(orderPayload)
-
-        if (response.error) {
-            setErrorMsg("Order failed: Check the terminal for details.")
-            setIsProcessing(false)
-            return
-        }
+    if (response.error) {
+        setErrorMsg("Order failed: Check the terminal for details.")
+        setIsProcessing(false)
+        return
+    }
 
         try {
             await fetch('/api/cart', {
@@ -138,8 +154,8 @@ export default function PaymentForm({ cart, firstName, lastName, email, phone, a
             console.error("Failed to clear cart:", e)
         }
 
-        router.push(`/confirmation?orderId=${response}`)
-    }
+    router.push(`/confirmation?orderId=${response}`)
+}
 
     const inputStyle = { width: '100%', padding: '12px 16px', borderRadius: '8px', border: '1px solid #d1d5db', fontSize: '15px', marginBottom: '16px', boxSizing: 'border-box' as const };
     
