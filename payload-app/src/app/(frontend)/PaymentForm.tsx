@@ -16,7 +16,7 @@ interface PaymentFormProps {
 }
 
 export default function PaymentForm({ cart, firstName, lastName, email, phone, address }: PaymentFormProps) {
-    const {clearCart} = useCart() ?? {}
+    const {disableCart} = useCart() ?? {}
     const router = useRouter()
     const [isProcessing, setIsProcessing] = useState(false)
     const [errorMsg, setErrorMsg] = useState("")
@@ -162,7 +162,7 @@ export default function PaymentForm({ cart, firstName, lastName, email, phone, a
     }
 
     try {
-        await clearCart()
+        await disableCart()
     } catch (error) {
         console.error('Error clearing cart:', error)
     }
