@@ -100,6 +100,7 @@ export default function PaymentForm({ cart, firstName, lastName, email, phone, a
 
     const orderPayload = {
         currency: updatedCart?.currency || "EUR",
+        cartId: updatedCart?.id,
         entries: entries,
         discounts: [],
         customer: {
@@ -129,7 +130,7 @@ export default function PaymentForm({ cart, firstName, lastName, email, phone, a
         },
         payments: [
             {
-                status: "PENDING",
+                status: "SUCCESS",
                 method: "invoice",
                 paidAmount: 0,
                 currency: updatedCart?.currency || "EUR"
