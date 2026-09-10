@@ -198,6 +198,10 @@ export interface BookOverlay {
    * The title of the book.
    */
   title?: string | null;
+  /**
+   * The description of the book.
+   */
+  description?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -424,6 +428,7 @@ export interface BookOverlaysSelect<T extends boolean = true> {
   blurb?: T;
   alternativeCoverImage?: T;
   title?: T;
+  description?: T;
   updatedAt?: T;
   createdAt?: T;
 }

@@ -1,4 +1,4 @@
-import { getBookByISBN,  putBook, } from '@/lib/emporix'
+import { getBookByISBN,  updateProduct, } from '@/lib/emporix'
 import { FIELD, MIXIN_SCHEMA_ID } from '@/lib/emporix.constants'
 import type { CollectionConfig } from 'payload'
 
@@ -8,14 +8,21 @@ export const BookOverlays: CollectionConfig = {
         afterChange:[
             async ({doc,previousDoc,operation}) => {
                 let titleChanged = false
+                let descriptionChanged = false
                 if(operation === 'create'){
-                    titleChanged = doc.title.length > 0
+                    titleChanged = Boolean(doc.title?.trim())
+                    descriptionChanged = Boolean(doc.description?.trim())
                 }
                 if(operation === 'update'){
-                    titleChanged = doc.title !== previousDoc.title
+                    if(doc.title !== previousDoc.title && Boolean(doc.title?.trim())){
+                        titleChanged = true
+                    }
+                    if(doc.description !== previousDoc.description && Boolean(doc.description?.trim())){
+                        descriptionChanged = true
+                    }
                 }
 
-                if(titleChanged){
+                if(titleChanged || descriptionChanged){
                     const book = await getBookByISBN(doc.isbn)
 
                     if (!book) {
@@ -23,18 +30,21 @@ export const BookOverlays: CollectionConfig = {
                         return doc
                     }
 
+                    const name = titleChanged ? doc.title : book.title
+                    const description = descriptionChanged ? doc.description : book.description
+                   
                     const language = book.language ?? 'en'
 
-                    const name_dict = { [language]: doc.title }
-                    if (book.language != "en") {
-                        name_dict["en"] = doc.title
+                    const name_dict = { [language]: name }
+                    if (language != "en") {
+                        name_dict["en"] = name
                     }
 
                     const newBook = {
                         name: name_dict,
                         code: book.isbn,
                         description: {
-                            [language]: book.description,
+                            [language]: description,
                         },
                         published: true,
                         productType: 'BASIC',
@@ -67,7 +77,7 @@ export const BookOverlays: CollectionConfig = {
                             schema: 'https://res.cloudinary.com/saas-ag/raw/upload/v1544786405/schemata/CAAS/product.v2',
                         },
                     }
-                    await putBook(book?.id, newBook)
+                    await updateProduct(book.id, newBook)
                 }
                 return doc
             }
@@ -121,7 +131,14 @@ export const BookOverlays: CollectionConfig = {
             admin: {
                 description: 'The title of the book.',
             },
-        }
+        },
+         {
+            type: 'text',
+            name: 'description',
+            admin: {
+                description: 'The description of the book.',
+            },
+        },
 
     ]
 

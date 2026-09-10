@@ -363,7 +363,7 @@ export async function getBookByISBN(isbn: string): Promise<BookDetails | null> {
 }
 
 //----------------PUT BOOK--------------------------------
-export async function putBook(bookId: string, bookData: any): Promise<any | null> {
+export async function updateProduct(bookId: string, bookData: any): Promise<any | null> {
     try{
         if (!EMPORIX_TENANT_ID) {
             console.error('Missing EMPORIX_TENANT_ID');
