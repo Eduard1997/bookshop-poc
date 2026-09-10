@@ -194,6 +194,10 @@ export interface BookOverlay {
    * Optional — overrides the cover from Emporix if set.
    */
   alternativeCoverImage?: (number | null) | Media;
+  /**
+   * The title of the book.
+   */
+  title?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -419,6 +423,7 @@ export interface BookOverlaysSelect<T extends boolean = true> {
   staffPick?: T;
   blurb?: T;
   alternativeCoverImage?: T;
+  title?: T;
   updatedAt?: T;
   createdAt?: T;
 }
