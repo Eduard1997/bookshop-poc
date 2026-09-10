@@ -77,7 +77,12 @@ export const BookOverlays: CollectionConfig = {
                             schema: 'https://res.cloudinary.com/saas-ag/raw/upload/v1544786405/schemata/CAAS/product.v2',
                         },
                     }
-                    await updateProduct(book.id, newBook)
+                    try {
+                        await updateProduct(book.id, newBook)
+                    } catch (error) {
+                        console.error("Failed to write back to Emporix:", error)
+                        throw new Error("Failed to sync with Emporix. Your changes were not saved.")
+                    }
                 }
                 return doc
             }
