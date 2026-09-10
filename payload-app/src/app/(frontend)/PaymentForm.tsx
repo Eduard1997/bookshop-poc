@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import mockPayment from '@/lib/mockPayment'
 import { createOrder, updateCartRoot, getBookById } from '@/lib/emporix'
+import { useCart } from './CartContext'
 
 interface PaymentFormProps {
     cart: any
@@ -15,6 +16,7 @@ interface PaymentFormProps {
 }
 
 export default function PaymentForm({ cart, firstName, lastName, email, phone, address }: PaymentFormProps) {
+    const {disableCart} = useCart() ?? {}
     const router = useRouter()
     const [isProcessing, setIsProcessing] = useState(false)
     const [errorMsg, setErrorMsg] = useState("")
@@ -100,6 +102,7 @@ export default function PaymentForm({ cart, firstName, lastName, email, phone, a
 
     const orderPayload = {
         currency: updatedCart?.currency || "EUR",
+        cartId: updatedCart?.id,
         entries: entries,
         discounts: [],
         customer: {
@@ -129,7 +132,7 @@ export default function PaymentForm({ cart, firstName, lastName, email, phone, a
         },
         payments: [
             {
-                status: "PENDING",
+                status: "SUCCESS",
                 method: "invoice",
                 paidAmount: 0,
                 currency: updatedCart?.currency || "EUR"
@@ -158,15 +161,11 @@ export default function PaymentForm({ cart, firstName, lastName, email, phone, a
         return
     }
 
-        try {
-            await fetch('/api/cart', {
-                method: 'DELETE',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({}) 
-            })
-        } catch (e) {
-            console.error("Failed to clear cart:", e)
-        }
+    try {
+        await disableCart()
+    } catch (error) {
+        console.error('Error clearing cart:', error)
+    }
 
     router.push(`/confirmation?orderId=${response}`)
 }

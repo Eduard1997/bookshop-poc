@@ -1,5 +1,7 @@
 'use server'
 
+import { cookies } from "next/headers"
+
 const EMPORIX_API_BASE_URL: string = process.env.EMPORIX_API_BASE_URL ?? 'https://api.emporix.io'
 const EMPORIX_TENANT_ID: string | undefined = process.env.EMPORIX_TENANT_ID
 const EMPORIX_CLIENT_ID: string | undefined = process.env.EMPORIX_CLIENT_ID
@@ -743,6 +745,11 @@ export async function updateCartRoot(cartId: string, addressData: any) {
         console.error("Internal Server Error:", error);
         return { error: 'An unexpected error occurred' };
     }
+}
+
+export async function deleteCartCookie() {
+    const cookieStore = await cookies();
+    cookieStore.delete('bookshop_cart_id');
 }
 
 // fetch ('api/cart' , {
