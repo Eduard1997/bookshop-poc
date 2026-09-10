@@ -12,6 +12,8 @@ import { Pages } from './collections/Pages'
 import { CuratedLists } from './collections/CuratedLists'
 import { LandingPages } from './collections/LandingPages'
 
+import { PageLayout } from './globals/PageLayout'
+
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
@@ -36,4 +38,5 @@ export default buildConfig({
   }),
   sharp,
   plugins: [],
+  globals: [PageLayout],
 })
