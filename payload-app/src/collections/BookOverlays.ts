@@ -5,25 +5,53 @@ import type { CollectionConfig } from 'payload'
 export const BookOverlays: CollectionConfig = {
     slug: 'book-overlays',
     hooks:{
+        beforeChange: [
+            async ({ data, operation }) => {
+                const needsTitle = !Boolean(data.title?.trim());
+                const needsDesc = !Boolean(data.description?.trim());
+
+                if ((operation === 'create' || operation === 'update') && (needsTitle || needsDesc)) {
+                    const book = await getBookByISBN(data.isbn);
+                    
+                    if (book) {
+                        if (needsTitle) data.title = book.title;
+                        if (needsDesc) data.description = book.description;
+                    }
+                }
+                return data;
+            }
+        ],
         afterChange:[
             async ({doc,previousDoc,operation}) => {
                 let titleChanged = false
                 let descriptionChanged = false
+                let book = null
+
+                
+
                 if(operation === 'create'){
-                    titleChanged = Boolean(doc.title?.trim())
-                    descriptionChanged = Boolean(doc.description?.trim())
+                    book = await getBookByISBN(doc.isbn)
+
+                    if (book) {
+                    titleChanged = doc.title !== book.title;
+                    descriptionChanged = doc.description !== book.description;
+                    }
                 }
+
                 if(operation === 'update'){
-                    if(doc.title !== previousDoc.title && Boolean(doc.title?.trim())){
+                    if(doc.title !== previousDoc.title){
                         titleChanged = true
                     }
-                    if(doc.description !== previousDoc.description && Boolean(doc.description?.trim())){
+                    if(doc.description !== previousDoc.description){
                         descriptionChanged = true
                     }
                 }
 
                 if(titleChanged || descriptionChanged){
-                    const book = await getBookByISBN(doc.isbn)
+                    
+                    if (!book) {
+                        book = await getBookByISBN(doc.isbn)
+                    }
 
                     if (!book) {
                         console.error(`No Emporix product found for ISBN ${doc.isbn}`)
