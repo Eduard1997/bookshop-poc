@@ -4,6 +4,7 @@ import React from 'react'
 import Link from 'next/link'
 
 import { getAllProductsFromCatalogViaCategories } from '@/lib/emporix'
+import { getPageLayout } from '@/lib/pageLayout'
 import BookCatalog from './BookCatalog'
 
 export const dynamic = 'force-dynamic'
@@ -13,7 +14,7 @@ export default async function HomePage() {
   const payload = await getPayload({ config: payloadConfig })
   const CATALOG_ID = '6a75cbedd753775031ef0588'
   const products = await getAllProductsFromCatalogViaCategories(CATALOG_ID)
-
+  const layout = await getPageLayout()
 
   return (
     <main
@@ -38,7 +39,7 @@ export default async function HomePage() {
       </div>
 
       <div style={{ maxWidth: '1300px', margin: '30px auto 0 auto', padding: '0 40px' }}>
-        <BookCatalog products={products} />
+        <BookCatalog products={products} layout={layout} />
       </div>
     </main>
   )

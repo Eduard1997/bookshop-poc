@@ -12,14 +12,25 @@ type Book = {
     category?: string
 }
 
-export default function BookCatalog({ products }: { products: Book[] }) {
+type PageLayoutSettings = {
+    cardsPerRow?: string | null
+    defaultSort?: 'title-asc' | 'title-desc' | null
+    visibleFilters?: string[] | null
+    cardStyle?: 'compact' | 'detailed' | null
+}
+
+export default function BookCatalog({ products, layout }: { products: Book[]; layout: PageLayoutSettings }) {
     const router = useRouter()
 
     const [selectedCategory, setSelectedCategory] = useState<string>('all')
-    const [sortBy, setSortBy] = useState<'title-asc' | 'title-desc'>('title-asc')
+    const [sortBy, setSortBy] = useState<'title-asc' | 'title-desc'>(layout?.defaultSort ?? 'title-asc')
 
     const [currentPage, setCurrentPage] = useState<number>(1)
-    const ITEMS_PER_PAGE = 3
+    const ITEMS_PER_PAGE = 10
+
+    const cardsPerRow = layout?.cardsPerRow ?? '3'
+    const showCategoryFilter = layout?.visibleFilters?.includes('category') ?? true
+    const isDetailed = layout?.cardStyle === 'detailed'
 
     const categories = useMemo(() => {
         const cats = products
@@ -78,64 +89,66 @@ export default function BookCatalog({ products }: { products: Book[] }) {
                 paddingBottom: '16px'
             }}>
 
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
-                    <span style={{ fontSize: '13px', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.05em', color: '#6b7280', marginRight: '6px' }}>Filter:</span>
+                {showCategoryFilter && (
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
+                        <span style={{ fontSize: '13px', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.05em', color: '#6b7280', marginRight: '6px' }}>Filter:</span>
 
-                    <button
-                        onClick={() => handleCategoryChange('all')}
-                        style={{
-                            padding: '8px 16px',
-                            borderRadius: '8px',
-                            border: 'none',
-                            backgroundColor: selectedCategory === 'all' ? '#4f46e5' : '#f3f4f6',
-                            color: selectedCategory === 'all' ? '#ffffff' : '#374151',
-                            fontSize: '13px',
-                            fontWeight: '600',
-                            cursor: 'pointer',
-                            transition: 'all 0.15s ease'
-                        }}>All Books ({products.length})</button>
+                        <button
+                            onClick={() => handleCategoryChange('all')}
+                            style={{
+                                padding: '8px 16px',
+                                borderRadius: '8px',
+                                border: 'none',
+                                backgroundColor: selectedCategory === 'all' ? '#4f46e5' : '#f3f4f6',
+                                color: selectedCategory === 'all' ? '#ffffff' : '#374151',
+                                fontSize: '13px',
+                                fontWeight: '600',
+                                cursor: 'pointer',
+                                transition: 'all 0.15s ease'
+                            }}>All Books ({products.length})</button>
 
-                    {quickCategories.map((cat) => {
-                        const isSelected = selectedCategory === cat
-                        return (
-                            <button
-                                key={cat}
-                                onClick={() => handleCategoryChange(cat)}
-                                title={cat}
-                                style={{
-                                    padding: '8px 16px',
-                                    borderRadius: '8px',
-                                    border: 'none',
-                                    backgroundColor: isSelected ? '#4f46e5' : '#f3f4f6',
-                                    color: isSelected ? '#ffffff' : '#374151',
-                                    fontSize: '13px',
-                                    fontWeight: '500',
-                                    cursor: 'pointer',
-                                    transition: 'all 0.15s ease',
-                                    whiteSpace: 'nowrap',
-                                    maxWidth: '200px',
-                                    overflow: 'hidden',
-                                    textOverflow: 'ellipsis'
-                                }}
-                            >{cat}</button>
-                        )
-                    })}
+                        {quickCategories.map((cat) => {
+                            const isSelected = selectedCategory === cat
+                            return (
+                                <button
+                                    key={cat}
+                                    onClick={() => handleCategoryChange(cat)}
+                                    title={cat}
+                                    style={{
+                                        padding: '8px 16px',
+                                        borderRadius: '8px',
+                                        border: 'none',
+                                        backgroundColor: isSelected ? '#4f46e5' : '#f3f4f6',
+                                        color: isSelected ? '#ffffff' : '#374151',
+                                        fontSize: '13px',
+                                        fontWeight: '500',
+                                        cursor: 'pointer',
+                                        transition: 'all 0.15s ease',
+                                        whiteSpace: 'nowrap',
+                                        maxWidth: '200px',
+                                        overflow: 'hidden',
+                                        textOverflow: 'ellipsis'
+                                    }}
+                                >{cat}</button>
+                            )
+                        })}
 
-                    <button
-                        onClick={() => router.push('/books')}
-                        style={{
-                            background: 'none',
-                            border: 'none',
-                            color: '#4f46e5',
-                            fontSize: '13px',
-                            fontWeight: '600',
-                            cursor: 'pointer',
-                            padding: '8px 12px',
-                            marginLeft: '4px',
-                            display: 'inline-flex',
-                            alignItems: 'center'
-                        }}>Browse all categories →</button>
-                </div>
+                        <button
+                            onClick={() => router.push('/books')}
+                            style={{
+                                background: 'none',
+                                border: 'none',
+                                color: '#4f46e5',
+                                fontSize: '13px',
+                                fontWeight: '600',
+                                cursor: 'pointer',
+                                padding: '8px 12px',
+                                marginLeft: '4px',
+                                display: 'inline-flex',
+                                alignItems: 'center'
+                            }}>Browse all categories →</button>
+                    </div>
+                )}
 
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                     <label htmlFor="sort-select" style={{ fontSize: '13px', fontWeight: '600', color: '#6b7280' }}>
@@ -165,7 +178,7 @@ export default function BookCatalog({ products }: { products: Book[] }) {
 
             <div style={{
                 display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))',
+                gridTemplateColumns: `repeat(${cardsPerRow}, 1fr)`,
                 gap: '20px'
             }}>
                 {paginatedProducts.length === 0 ? (
@@ -198,7 +211,7 @@ export default function BookCatalog({ products }: { products: Book[] }) {
                                         alt={book?.title || 'Book cover'}
                                         style={{
                                             width: '100%',
-                                            height: '260px',
+                                            height: isDetailed ? '320px' : '260px',
                                             objectFit: 'cover',
                                             borderRadius: '6px',
                                             marginBottom: '12px',
@@ -208,7 +221,7 @@ export default function BookCatalog({ products }: { products: Book[] }) {
                                 ) : (
                                     <div style={{
                                         width: '100%',
-                                        height: '260px',
+                                        height: isDetailed ? '320px' : '260px',
                                         backgroundColor: '#f3f4f6',
                                         borderRadius: '6px',
                                         marginBottom: '12px',
@@ -243,6 +256,15 @@ export default function BookCatalog({ products }: { products: Book[] }) {
                                     marginBottom: '0',
                                     fontWeight: '500'
                                 }}>{authorNames}</p>
+
+                                {isDetailed && (
+                                    <p style={{
+                                        fontSize: '12px',
+                                        color: '#6b7280',
+                                        marginTop: '8px',
+                                        lineHeight: '1.4'
+                                    }}>ID: {bookId}</p>
+                                )}
 
                             </Link>
                         )
