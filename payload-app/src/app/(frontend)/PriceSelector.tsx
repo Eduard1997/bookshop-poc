@@ -16,23 +16,23 @@ export default function PriceSelector({ prices, availability, itemYrn }: { price
 
     async function handleAddToCart() {
         if (!itemYrn) {
-            alert('Produsul nu are un identificator valid.')
+            alert('The product does not have a valid identifier.')
             return
         }
 
         if (!currentPrice) {
-            alert('Nu există preț disponibil pentru acest produs.')
+            alert('There is no price available for this product.')
             return
         }
 
         if (!currentPrice.id) {
-            console.error('currentPrice fără id:', currentPrice)
-            alert('Preț invalid — lipsește id-ul prețului.')
+            console.error('currentPrice missing ID:', currentPrice)
+            alert('Price ID is missing.')
             return
         }
 
         if (!availability?.available) {
-            alert('Produsul nu este momentan în stoc.')
+            alert('The product is currently out of stock.')
             return
         }
 
@@ -55,7 +55,7 @@ export default function PriceSelector({ prices, availability, itemYrn }: { price
             const data = await response.json().catch(() => null)
 
             if (!response.ok) {
-                alert(`Eroare: ${data?.error || 'Nu s-a putut adăuga în coș'}`)
+                alert(`Error: ${data?.error || 'Could not add to cart.'}`)
                 return
             }
 
@@ -74,10 +74,10 @@ export default function PriceSelector({ prices, availability, itemYrn }: { price
                 cartContext.setCart(cartData)
             }
 
-            alert('Produs adăugat cu succes în coș!')
+            alert('Product successfully added to cart!')
         } catch (error) {
             console.error('Error adding to cart:', error)
-            alert('A apărut o eroare neașteptată.')
+            alert('An unexpected error occurred.')
         } finally {
             setLoading(false)
         }

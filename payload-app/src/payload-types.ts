@@ -95,8 +95,12 @@ export interface Config {
     defaultIDType: number;
   };
   fallbackLocale: null;
-  globals: {};
-  globalsSelect: {};
+  globals: {
+    'page-layout': PageLayout;
+  };
+  globalsSelect: {
+    'page-layout': PageLayoutSelect<false> | PageLayoutSelect<true>;
+  };
   locale: null;
   widgets: {
     collections: CollectionsWidget;
@@ -516,6 +520,32 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "page-layout".
+ */
+export interface PageLayout {
+  id: number;
+  cardsPerRow: '2' | '3' | '4' | '5';
+  defaultSort: 'title-asc' | 'title-desc';
+  visibleFilters?: 'category'[] | null;
+  cardStyle: 'compact' | 'detailed';
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "page-layout_select".
+ */
+export interface PageLayoutSelect<T extends boolean = true> {
+  cardsPerRow?: T;
+  defaultSort?: T;
+  visibleFilters?: T;
+  cardStyle?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
