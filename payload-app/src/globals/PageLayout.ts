@@ -32,13 +32,35 @@ export const PageLayout: GlobalConfig = {
             ],
         },
         {
-            name: 'visibleFilters',
-            type: 'select',
-            label: 'Filters shown to users',
-            hasMany: true,
-            defaultValue: ['category'],
-            options: [
-                { label: 'Category', value: 'category' },
+            name: 'filters',
+            type: 'array',
+            label: 'Filters',
+            admin: {
+                description: 'Drag to reorder how filters appear. Uncheck to hide a filter without removing it.',
+            },
+            defaultValue: [
+                { filterType: 'category', enabled: true },
+                { filterType: 'author', enabled: true },
+                { filterType: 'priceRange', enabled: false },
+            ],
+            fields: [
+                {
+                    name: 'filterType',
+                    type: 'select',
+                    label: 'Filter',
+                    required: true,
+                    options: [
+                        { label: 'Category', value: 'category' },
+                        { label: 'Author', value: 'author' },
+                        { label: 'Price range', value: 'priceRange' },
+                    ],
+                },
+                {
+                    name: 'enabled',
+                    type: 'checkbox',
+                    label: 'Show this filter',
+                    defaultValue: true,
+                },
             ],
         },
         {
