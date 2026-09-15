@@ -22,7 +22,7 @@ export default async function BookPreviewCardPage({ params }: { params: Promise<
             <main style={{ backgroundColor: '#ffffff', minHeight: '100vh', fontFamily: 'system-ui, sans-serif', color: '#111827', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <div style={{ textAlign: 'center', padding: '40px' }}>
                     <h2 style={{ fontSize: '24px', fontWeight: '600', color: '#6b7280' }}>Book not found.</h2>
-                    <Link href="/books" style={{ display: 'inline-block', marginTop: '16px', color: '#4f46e5', textDecoration: 'none', fontWeight: '500' }}>← Back to catalog</Link>
+                    <Link href="/" style={{ display: 'inline-block', marginTop: '16px', color: '#4f46e5', textDecoration: 'none', fontWeight: '500' }}>← Back to catalog</Link>
                 </div>
             </main>
         )
@@ -47,7 +47,7 @@ export default async function BookPreviewCardPage({ params }: { params: Promise<
 
             <div style={{ backgroundColor: '#4f46e5', color: '#ffffff', padding: '24px 40px', marginBottom: '40px' }}>
                 <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-                    <Link href="/books" style={{ color: '#e0e7ff', textDecoration: 'none', fontSize: '14px', fontWeight: '600', display: 'inline-flex', alignItems: 'center', transition: 'color 0.2s' }}>
+                    <Link href="/" style={{ color: '#e0e7ff', textDecoration: 'none', fontSize: '14px', fontWeight: '600', display: 'inline-flex', alignItems: 'center', transition: 'color 0.2s' }}>
                         ← Back to Books
                     </Link>
                 </div>

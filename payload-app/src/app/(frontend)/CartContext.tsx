@@ -1,5 +1,6 @@
 'use client'
 
+import { deleteCartCookie } from '@/lib/emporix'
 import { createContext, useContext, useEffect, useState } from 'react'
 
 const CartContext = createContext<any>(null)
@@ -68,6 +69,20 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
         }
     }
 
+
+    const disableCart = async () => {
+    setIsLoading(true)
+    
+    try {
+        await deleteCartCookie()
+        setCart(null)
+    } catch (error) {
+        console.error('Failed to delete cart cookie:', error)
+    }
+    
+    setIsLoading(false)
+}
+
     const clearCart = async () => {
         setIsLoading(true)
         try {
@@ -89,7 +104,7 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
     }
 
     return (
-        <CartContext.Provider value={{ cart, setCart, isLoading, updateQuantity, removeItem, clearCart }}>
+        <CartContext.Provider value={{ cart, setCart, isLoading, updateQuantity, removeItem, clearCart, disableCart }}>
             {children}
         </CartContext.Provider>
     )
