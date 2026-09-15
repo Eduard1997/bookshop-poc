@@ -178,7 +178,6 @@ export async function getBookPrices(productId: string): Promise<PriceDetails[]> 
 
     const priceItem = await response.json()
     const list = Array.isArray(priceItem) ? priceItem : priceItem.results ?? []
-    console.log(list)
     return list.map((p: any) => ({
         id: p.id,
         amount: p.tierValues?.[0]?.priceValue ?? 0,

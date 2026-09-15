@@ -529,7 +529,16 @@ export interface PageLayout {
   id: number;
   cardsPerRow: '2' | '3' | '4' | '5';
   defaultSort: 'title-asc' | 'title-desc';
-  visibleFilters?: 'category'[] | null;
+  /**
+   * Drag to reorder how filters appear. Uncheck to hide a filter without removing it.
+   */
+  filters?:
+    | {
+        filterType: 'category' | 'author' | 'priceRange';
+        enabled?: boolean | null;
+        id?: string | null;
+      }[]
+    | null;
   cardStyle: 'compact' | 'detailed';
   updatedAt?: string | null;
   createdAt?: string | null;
@@ -541,7 +550,13 @@ export interface PageLayout {
 export interface PageLayoutSelect<T extends boolean = true> {
   cardsPerRow?: T;
   defaultSort?: T;
-  visibleFilters?: T;
+  filters?:
+    | T
+    | {
+        filterType?: T;
+        enabled?: T;
+        id?: T;
+      };
   cardStyle?: T;
   updatedAt?: T;
   createdAt?: T;
