@@ -257,6 +257,29 @@ export default function BookCatalog({ products, layout }: { products: Book[]; la
                                     fontWeight: '500'
                                 }}>{authorNames}</p>
 
+                                <div style={{
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'space-between',
+                                    marginTop: '8px'
+                                }}>
+                                    <span style={{ fontSize: '14px', fontWeight: '700', color: '#111827' }}>
+                                        {book.price ? `${book.price.amount} ${book.price.currency}` : 'Price unavailable'}
+                                    </span>
+
+                                    {book.availability?.available ? (
+                                        <span style={{ color: '#16a34a', fontWeight: '700', fontSize: '11px', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                                            <span style={{ display: 'inline-block', width: '6px', height: '6px', backgroundColor: '#16a34a', borderRadius: '50%' }} />
+                                            In Stock
+                                        </span>
+                                    ) : (
+                                        <span style={{ color: '#dc2626', fontWeight: '700', fontSize: '11px', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                                            <span style={{ display: 'inline-block', width: '6px', height: '6px', backgroundColor: '#dc2626', borderRadius: '50%' }} />
+                                            Out of Stock
+                                        </span>
+                                    )}
+                                </div>
+
                                 {isDetailed && (
                                     <p style={{
                                         fontSize: '12px',

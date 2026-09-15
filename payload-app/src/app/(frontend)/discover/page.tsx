@@ -3,16 +3,17 @@ import Link from 'next/link'
 import { getPayload } from 'payload'
 import config from '@/payload.config'
 import { getAllProductsFromCatalogViaCategories } from '@/lib/emporix'
+import { attachPriceAndAvailability } from '@/lib/bookPriceAvailability'
 
 export const dynamic = 'force-dynamic'
 
 export default async function DiscoverPage() {
     const payloadConfig = await config
     const payload = await getPayload({ config: payloadConfig })
-    
+
     const CATALOG_ID = '6a75cbedd753775031ef0588'
     const allProducts = await getAllProductsFromCatalogViaCategories(CATALOG_ID)
-    
+
     const listsData = await payload.find({
         collection: 'curated-lists',
         depth: 2
@@ -36,22 +37,28 @@ export default async function DiscoverPage() {
                 if (foundBook) {
                     return foundBook
                 }
-                
+
                 const fallbackBook = allProducts.find(book => String(book.id) === isbnToFetch)
                 return fallbackBook || null
             }
             return null
         })
-        
+
         return {
             ...list,
             fetchedBooks: listBooks.filter(Boolean)
         }
     })
+    const enrichedShelves = await Promise.all(
+        shelves.map(async (shelf) => ({
+            ...shelf,
+            fetchedBooks: await attachPriceAndAvailability(shelf.fetchedBooks as any[]),
+        }))
+    )
 
     return (
         <main style={{ backgroundColor: '#ffffff', minHeight: '100vh', fontFamily: 'system-ui, sans-serif', color: '#111827', paddingBottom: '60px' }}>
-            
+
             <div style={{ backgroundColor: '#4f46e5', color: '#ffffff', padding: '40px 40px', marginBottom: '40px' }}>
                 <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
                     <div>
@@ -66,10 +73,10 @@ export default async function DiscoverPage() {
             </div>
 
             <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 40px' }}>
-                {shelves.length === 0 ? (
+                {enrichedShelves.length === 0 ? (
                     <p style={{ textAlign: 'center', color: '#6b7280', padding: '40px 0' }}>No curated lists found.</p>
                 ) : (
-                    shelves.map((shelf) => (
+                    enrichedShelves.map((shelf) => (
                         <div key={shelf.id} style={{ marginBottom: '60px' }}>
                             <div style={{ marginBottom: '24px', borderBottom: '2px solid #f3f4f6', paddingBottom: '12px' }}>
                                 <h2 style={{ fontSize: '24px', fontWeight: '700', margin: '0 0 8px 0', color: '#111827' }}>
@@ -159,6 +166,29 @@ export default async function DiscoverPage() {
                                                     marginBottom: '0',
                                                     fontWeight: '500'
                                                 }}>{authorNames}</p>
+
+                                                <div style={{
+                                                    display: 'flex',
+                                                    alignItems: 'center',
+                                                    justifyContent: 'space-between',
+                                                    marginTop: '8px'
+                                                }}>
+                                                    <span style={{ fontSize: '14px', fontWeight: '700', color: '#111827' }}>
+                                                        {book.price ? `${book.price.amount} ${book.price.currency}` : 'Price unavailable'}
+                                                    </span>
+
+                                                    {book.availability?.available ? (
+                                                        <span style={{ color: '#16a34a', fontWeight: '700', fontSize: '11px', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                                                            <span style={{ display: 'inline-block', width: '6px', height: '6px', backgroundColor: '#16a34a', borderRadius: '50%' }} />
+                                                            In Stock
+                                                        </span>
+                                                    ) : (
+                                                        <span style={{ color: '#dc2626', fontWeight: '700', fontSize: '11px', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                                                            <span style={{ display: 'inline-block', width: '6px', height: '6px', backgroundColor: '#dc2626', borderRadius: '50%' }} />
+                                                            Out of Stock
+                                                        </span>
+                                                    )}
+                                                </div>
                                             </Link>
                                         )
                                     })
