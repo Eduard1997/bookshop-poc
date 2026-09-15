@@ -3,6 +3,7 @@
 import React, { useState, useMemo } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+import type { PriceDetails, AvailabilityDetails } from '@/lib/emporix'
 
 type Book = {
     id: string
@@ -10,52 +11,100 @@ type Book = {
     authors?: { name: string; role?: string }[]
     coverImageUrl?: string
     category?: string
+    price?: PriceDetails | null
+    availability?: AvailabilityDetails | null
+}
+
+type FilterConfig = {
+    filterType: 'category' | 'author' | 'priceRange'
+    enabled?: boolean | null
 }
 
 type PageLayoutSettings = {
     cardsPerRow?: string | null
     defaultSort?: 'title-asc' | 'title-desc' | null
-    visibleFilters?: string[] | null
+    filters?: FilterConfig[] | null
     cardStyle?: 'compact' | 'detailed' | null
+}
+
+const PRICE_BUCKETS = [
+    { label: 'Under 20 EUR', value: 'under-20', min: 0, max: 20 },
+    { label: '20 - 50 EUR', value: '20-50', min: 20, max: 50 },
+    { label: 'Over 50 EUR', value: 'over-50', min: 50, max: Infinity },
+]
+
+function getBookPrice(book: Book): number {
+    return book.price?.amount ?? 0
 }
 
 export default function BookCatalog({ products, layout }: { products: Book[]; layout: PageLayoutSettings }) {
     const router = useRouter()
 
     const [selectedCategory, setSelectedCategory] = useState<string>('all')
+    const [selectedAuthor, setSelectedAuthor] = useState<string>('all')
+    const [selectedPriceRange, setSelectedPriceRange] = useState<string>('all')
     const [sortBy, setSortBy] = useState<'title-asc' | 'title-desc'>(layout?.defaultSort ?? 'title-asc')
 
     const [currentPage, setCurrentPage] = useState<number>(1)
     const ITEMS_PER_PAGE = 10
 
     const cardsPerRow = layout?.cardsPerRow ?? '3'
-    const showCategoryFilter = layout?.visibleFilters?.includes('category') ?? true
     const isDetailed = layout?.cardStyle === 'detailed'
 
+    const orderedFilters = useMemo(() => {
+        return (layout?.filters ?? [])
+            .filter((f) => f.enabled)
+            .map((f) => f.filterType)
+    }, [layout])
+
+    const showCategoryFilter = orderedFilters.includes('category')
+    const showAuthorFilter = orderedFilters.includes('author')
+    const showPriceFilter = orderedFilters.includes('priceRange')
+
     const categories = useMemo(() => {
-        const cats = products
-            .map((p) => p.category)
-            .filter((c): c is string => Boolean(c))
+        const cats = products.map((p) => p.category).filter((c): c is string => Boolean(c))
         return Array.from(new Set(cats))
     }, [products])
 
-    const quickCategories = useMemo(() => {
-        return categories.slice(0, 4)
-    }, [categories])
+    const quickCategories = useMemo(() => categories.slice(0, 4), [categories])
+
+    const authors = useMemo(() => {
+        const names = products.flatMap((p) => p.authors?.map((a) => a.name) ?? []).filter(Boolean) as string[]
+        return Array.from(new Set(names))
+    }, [products])
+
+    const quickAuthors = useMemo(() => authors.slice(0, 4), [authors])
 
     const filteredProducts = useMemo(() => {
-        if (selectedCategory === 'all') return products
-        return products.filter((book) => book.category === selectedCategory)
-    }, [products, selectedCategory])
+        let result = products
+
+        if (selectedCategory !== 'all') {
+            result = result.filter((book) => book.category === selectedCategory)
+        }
+
+        if (selectedAuthor !== 'all') {
+            result = result.filter((book) => book.authors?.some((a) => a.name === selectedAuthor))
+        }
+
+        if (selectedPriceRange !== 'all') {
+            const bucket = PRICE_BUCKETS.find((b) => b.value === selectedPriceRange)
+            if (bucket) {
+                result = result.filter((book) => {
+                    const price = getBookPrice(book)
+                    const inRange = price >= bucket.min && price < bucket.max
+                    const inStock = book.availability?.available === true
+                    return inRange && inStock
+                })
+            }
+        }
+
+        return result
+    }, [products, selectedCategory, selectedAuthor, selectedPriceRange])
 
     const sortedProducts = useMemo(() => {
         return [...filteredProducts].sort((a, b) => {
-            if (sortBy === 'title-asc') {
-                return (a.title || '').localeCompare(b.title || '')
-            }
-            if (sortBy === 'title-desc') {
-                return (b.title || '').localeCompare(a.title || '')
-            }
+            if (sortBy === 'title-asc') return (a.title || '').localeCompare(b.title || '')
+            if (sortBy === 'title-desc') return (b.title || '').localeCompare(a.title || '')
             return 0
         })
     }, [filteredProducts, sortBy])
@@ -71,17 +120,40 @@ export default function BookCatalog({ products, layout }: { products: Book[]; la
         setCurrentPage(1)
     }
 
+    const handleAuthorChange = (author: string) => {
+        setSelectedAuthor(author)
+        setCurrentPage(1)
+    }
+
+    const handlePriceChange = (range: string) => {
+        setSelectedPriceRange(range)
+        setCurrentPage(1)
+    }
+
     const handleSortChange = (sort: 'title-asc' | 'title-desc') => {
         setSortBy(sort)
         setCurrentPage(1)
     }
+
+    const filterPillStyle = (isSelected: boolean) => ({
+        padding: '8px 16px',
+        borderRadius: '8px',
+        border: 'none',
+        backgroundColor: isSelected ? '#4f46e5' : '#f3f4f6',
+        color: isSelected ? '#ffffff' : '#374151',
+        fontSize: '13px',
+        fontWeight: 500,
+        cursor: 'pointer',
+        transition: 'all 0.15s ease',
+        whiteSpace: 'nowrap' as const,
+    })
 
     return (
         <div>
             <div style={{
                 display: 'flex',
                 justifyContent: 'space-between',
-                alignItems: 'center',
+                alignItems: 'flex-start',
                 marginBottom: '32px',
                 flexWrap: 'wrap',
                 gap: '16px',
@@ -89,66 +161,66 @@ export default function BookCatalog({ products, layout }: { products: Book[]; la
                 paddingBottom: '16px'
             }}>
 
-                {showCategoryFilter && (
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
-                        <span style={{ fontSize: '13px', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.05em', color: '#6b7280', marginRight: '6px' }}>Filter:</span>
-
-                        <button
-                            onClick={() => handleCategoryChange('all')}
-                            style={{
-                                padding: '8px 16px',
-                                borderRadius: '8px',
-                                border: 'none',
-                                backgroundColor: selectedCategory === 'all' ? '#4f46e5' : '#f3f4f6',
-                                color: selectedCategory === 'all' ? '#ffffff' : '#374151',
-                                fontSize: '13px',
-                                fontWeight: '600',
-                                cursor: 'pointer',
-                                transition: 'all 0.15s ease'
-                            }}>All Books ({products.length})</button>
-
-                        {quickCategories.map((cat) => {
-                            const isSelected = selectedCategory === cat
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                    {orderedFilters.map((filterType) => {
+                        if (filterType === 'category' && showCategoryFilter) {
                             return (
-                                <button
-                                    key={cat}
-                                    onClick={() => handleCategoryChange(cat)}
-                                    title={cat}
-                                    style={{
-                                        padding: '8px 16px',
-                                        borderRadius: '8px',
-                                        border: 'none',
-                                        backgroundColor: isSelected ? '#4f46e5' : '#f3f4f6',
-                                        color: isSelected ? '#ffffff' : '#374151',
-                                        fontSize: '13px',
-                                        fontWeight: '500',
-                                        cursor: 'pointer',
-                                        transition: 'all 0.15s ease',
-                                        whiteSpace: 'nowrap',
-                                        maxWidth: '200px',
-                                        overflow: 'hidden',
-                                        textOverflow: 'ellipsis'
-                                    }}
-                                >{cat}</button>
+                                <div key="category" style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
+                                    <span style={{ fontSize: '13px', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.05em', color: '#6b7280', marginRight: '6px' }}>Category:</span>
+                                    <button onClick={() => handleCategoryChange('all')} style={filterPillStyle(selectedCategory === 'all')}>
+                                        All ({products.length})
+                                    </button>
+                                    {quickCategories.map((cat) => (
+                                        <button key={cat} onClick={() => handleCategoryChange(cat)} title={cat} style={filterPillStyle(selectedCategory === cat)}>
+                                            {cat}
+                                        </button>
+                                    ))}
+                                    <button
+                                        onClick={() => router.push('/books')}
+                                        style={{ background: 'none', border: 'none', color: '#4f46e5', fontSize: '13px', fontWeight: '600', cursor: 'pointer', padding: '8px 12px' }}
+                                    >Browse all categories →</button>
+                                </div>
                             )
-                        })}
+                        }
 
-                        <button
-                            onClick={() => router.push('/books')}
-                            style={{
-                                background: 'none',
-                                border: 'none',
-                                color: '#4f46e5',
-                                fontSize: '13px',
-                                fontWeight: '600',
-                                cursor: 'pointer',
-                                padding: '8px 12px',
-                                marginLeft: '4px',
-                                display: 'inline-flex',
-                                alignItems: 'center'
-                            }}>Browse all categories →</button>
-                    </div>
-                )}
+                        if (filterType === 'author' && showAuthorFilter) {
+                            return (
+                                <div key="author" style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
+                                    <span style={{ fontSize: '13px', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.05em', color: '#6b7280', marginRight: '6px' }}>Author:</span>
+                                    <button onClick={() => handleAuthorChange('all')} style={filterPillStyle(selectedAuthor === 'all')}>
+                                        All
+                                    </button>
+                                    {quickAuthors.map((author) => (
+                                        <button key={author} onClick={() => handleAuthorChange(author)} title={author} style={filterPillStyle(selectedAuthor === author)}>
+                                            {author}
+                                        </button>
+                                    ))}
+                                </div>
+                            )
+                        }
+
+                        if (filterType === 'priceRange' && showPriceFilter) {
+                            return (
+                                <div key="priceRange" style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
+                                    <span style={{ fontSize: '13px', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.05em', color: '#6b7280', marginRight: '6px' }}>Price:</span>
+                                    <button onClick={() => handlePriceChange('all')} style={filterPillStyle(selectedPriceRange === 'all')}>
+                                        All
+                                    </button>
+                                    {PRICE_BUCKETS.map((bucket) => (
+                                        <button key={bucket.value} onClick={() => handlePriceChange(bucket.value)} style={filterPillStyle(selectedPriceRange === bucket.value)}>
+                                            {bucket.label}
+                                        </button>
+                                    ))}
+                                    {selectedPriceRange !== 'all' && (
+                                        <span style={{ fontSize: '12px', color: '#9ca3af', fontStyle: 'italic' }}>(out-of-stock books hidden)</span>
+                                    )}
+                                </div>
+                            )
+                        }
+
+                        return null
+                    })}
+                </div>
 
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                     <label htmlFor="sort-select" style={{ fontSize: '13px', fontWeight: '600', color: '#6b7280' }}>
@@ -182,7 +254,7 @@ export default function BookCatalog({ products, layout }: { products: Book[]; la
                 gap: '20px'
             }}>
                 {paginatedProducts.length === 0 ? (
-                    <p style={{ textAlign: 'center', gridColumn: '1 / -1', color: '#6b7280', padding: '40px 0' }}>No books found in this category.</p>
+                    <p style={{ textAlign: 'center', gridColumn: '1 / -1', color: '#6b7280', padding: '40px 0' }}>No books found matching these filters.</p>
                 ) : (
                     paginatedProducts.map((book: any, index: number) => {
                         const authorNames = book?.authors?.map((a: any) => a.name).filter(Boolean).join(', ') || 'Unknown Author'
@@ -281,14 +353,8 @@ export default function BookCatalog({ products, layout }: { products: Book[]; la
                                 </div>
 
                                 {isDetailed && (
-                                    <p style={{
-                                        fontSize: '12px',
-                                        color: '#6b7280',
-                                        marginTop: '8px',
-                                        lineHeight: '1.4'
-                                    }}>ID: {bookId}</p>
+                                    <p style={{ fontSize: '12px', color: '#6b7280', marginTop: '8px', lineHeight: '1.4' }}>ID: {bookId}</p>
                                 )}
-
                             </Link>
                         )
                     })
@@ -296,28 +362,16 @@ export default function BookCatalog({ products, layout }: { products: Book[]; la
             </div>
 
             {totalPages > 1 && (
-                <div style={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    gap: '16px',
-                    marginTop: '40px',
-                    paddingTop: '20px',
-                    borderTop: '1px solid #f3f4f6'
-                }}>
+                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '16px', marginTop: '40px', paddingTop: '20px', borderTop: '1px solid #f3f4f6' }}>
                     <button
                         onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
                         disabled={currentPage === 1}
                         style={{
-                            padding: '10px 20px',
-                            borderRadius: '6px',
-                            border: '1px solid #d1d5db',
+                            padding: '10px 20px', borderRadius: '6px', border: '1px solid #d1d5db',
                             backgroundColor: currentPage === 1 ? '#f3f4f6' : '#4f46e5',
                             color: currentPage === 1 ? '#9ca3af' : '#ffffff',
                             cursor: currentPage === 1 ? 'not-allowed' : 'pointer',
-                            fontSize: '14px',
-                            fontWeight: '600',
-                            transition: 'all 0.2s'
+                            fontSize: '14px', fontWeight: '600', transition: 'all 0.2s'
                         }}> ← Previous </button>
 
                     <span style={{ fontSize: '14px', fontWeight: '600', color: '#374151' }}>Page {currentPage} of {totalPages}</span>
@@ -326,15 +380,11 @@ export default function BookCatalog({ products, layout }: { products: Book[]; la
                         onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
                         disabled={currentPage === totalPages}
                         style={{
-                            padding: '10px 20px',
-                            borderRadius: '6px',
-                            border: '1px solid #d1d5db',
+                            padding: '10px 20px', borderRadius: '6px', border: '1px solid #d1d5db',
                             backgroundColor: currentPage === totalPages ? '#f3f4f6' : '#4f46e5',
                             color: currentPage === totalPages ? '#9ca3af' : '#ffffff',
                             cursor: currentPage === totalPages ? 'not-allowed' : 'pointer',
-                            fontSize: '14px',
-                            fontWeight: '600',
-                            transition: 'all 0.2s'
+                            fontSize: '14px', fontWeight: '600', transition: 'all 0.2s'
                         }}
                     > Next → </button>
                 </div>
