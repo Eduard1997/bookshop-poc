@@ -1,6 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 import { getCategoriesWithNamesForCatalog, getProductsByCategory } from '../../../../../lib/emporix'
+import { attachPriceAndAvailability } from '../../../../../lib/bookPriceAvailability'
 
 export const dynamic = 'force-dynamic'
 
@@ -13,6 +14,7 @@ export default async function CategoryPage({ params, }: { params: Promise<{ cate
     const categoryName = currentCat?.localizedName?.en || Object.values(currentCat?.localizedName || {})[0] || 'Category'
 
     const products = await getProductsByCategory(categoryId)
+    const enrichedProducts = await attachPriceAndAvailability(products)
 
     return (
         <main style={{ backgroundColor: '#ffffff', minHeight: '100vh', fontFamily: 'system-ui, sans-serif' }}>
@@ -67,10 +69,10 @@ export default async function CategoryPage({ params, }: { params: Promise<{ cate
                     gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))',
                     gap: '25px'
                 }}>
-                    {products.length === 0 ? (
+                    {enrichedProducts.length === 0 ? (
                         <p style={{ textAlign: 'center', gridColumn: '1 / -1', color: '#6b7280', fontSize: '16px' }}>No books found in this category.</p>
                     ) : (
-                        products.map((book: any, index: number) => {
+                        enrichedProducts.map((book: any, index: number) => {
                             const authorNames = book?.authors?.map((a: any) => a.name).filter(Boolean).join(', ') || 'Unknown Author'
                             const bookId = book?.id || index
 
@@ -128,11 +130,36 @@ export default async function CategoryPage({ params, }: { params: Promise<{ cate
                                     }}>{book?.title || 'Untitled Book'}</h3>
 
                                     <p style={{
-                                        fontSize: '14px',
-                                        color: '#6b7280',
+                                        fontSize: '13px',
+                                        color: '#16a34a',
                                         marginTop: 'auto',
-                                        marginBottom: '0'
+                                        marginBottom: '0',
+                                        fontWeight: '500'
                                     }}>{authorNames}</p>
+
+
+                                    <div style={{
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'space-between',
+                                        marginTop: '8px'
+                                    }}>
+                                        <span style={{ fontSize: '14px', fontWeight: '700', color: '#111827' }}>
+                                            {book.price ? `${book.price.amount} ${book.price.currency}` : 'Price unavailable'}
+                                        </span>
+
+                                        {book.availability?.available ? (
+                                            <span style={{ color: '#16a34a', fontWeight: '700', fontSize: '11px', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                                                <span style={{ display: 'inline-block', width: '6px', height: '6px', backgroundColor: '#16a34a', borderRadius: '50%' }} />
+                                                In Stock
+                                            </span>
+                                        ) : (
+                                            <span style={{ color: '#dc2626', fontWeight: '700', fontSize: '11px', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                                                <span style={{ display: 'inline-block', width: '6px', height: '6px', backgroundColor: '#dc2626', borderRadius: '50%' }} />
+                                                Out of Stock
+                                            </span>
+                                        )}
+                                    </div>
                                 </Link>
                             )
                         })
