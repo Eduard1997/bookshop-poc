@@ -4,6 +4,7 @@ import { getPayload } from 'payload'
 import config from '@/payload.config'
 import { getAllProductsFromCatalogViaCategories } from '@/lib/emporix'
 import { attachPriceAndAvailability } from '@/lib/bookPriceAvailability'
+import { formatPrice } from '@/lib/formatPrice'
 
 export const dynamic = 'force-dynamic'
 
@@ -174,7 +175,7 @@ export default async function DiscoverPage() {
                                                     marginTop: '8px'
                                                 }}>
                                                     <span style={{ fontSize: '14px', fontWeight: '700', color: '#111827' }}>
-                                                        {book.price ? `${book.price.amount} ${book.price.currency}` : 'Price unavailable'}
+                                                        {book.price ? formatPrice(book.price.amount, book.price.currency) : 'Price unavailable'}
                                                     </span>
 
                                                     {book.availability?.available ? (

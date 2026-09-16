@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { useCart } from '../CartContext'
 import EmptyCart from './EmptyCart'
 import Link from 'next/link'
+import { formatPrice } from '@/lib/formatPrice'
 
 interface CartClientProps {
     initialItems: any[]
@@ -186,7 +187,7 @@ export default function CartClient({ initialItems, cartTotal, currency }: CartCl
                                         </h3>
 
                                         <span style={{ fontSize: '13px', color: '#16a34a', fontWeight: '600' }}>
-                                            {emporixUnitPrice} {itemCurrency} / unit
+                                            {formatPrice(emporixUnitPrice, itemCurrency)} / unit
                                         </span>
                                     </div>
                                 </div>
@@ -305,7 +306,7 @@ export default function CartClient({ initialItems, cartTotal, currency }: CartCl
                             Total Amount
                         </span>
                         <div style={{ fontSize: '30px', fontWeight: '800', color: '#5145cd', lineHeight: '1' }}>
-                            {emporixTotal} <span style={{ fontSize: '18px', fontWeight: '600', color: '#5145cd' }}>{currency}</span>
+                            {formatPrice(emporixTotal, currency)}
                         </div>
                     </div>
 

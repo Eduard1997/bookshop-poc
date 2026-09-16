@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { getOrder, getBookById } from '@/lib/emporix'
+import { formatPrice } from '@/lib/formatPrice'
 
 export default async function ConfirmationPage({ searchParams }: { searchParams: Promise<{ orderId: string }> }) {
     const { orderId } = await searchParams
@@ -32,12 +33,12 @@ export default async function ConfirmationPage({ searchParams }: { searchParams:
                 <div style={{ textAlign: 'center', marginBottom: '40px' }}>
                     <h1 style={{ margin: '0 0 16px 0', fontSize: '32px', fontWeight: '800', color: '#10b981' }}>Payment Successful!</h1>
                     <p style={{ fontSize: '16px', color: '#6b7280' }}>Your order has been successfully processed.</p>
-                    <p style={{ fontSize: '18px', margin: '16px 0' }}>Order ID: <strong style={{color: '#111827'}}>{orderId}</strong></p>
+                    <p style={{ fontSize: '18px', margin: '16px 0' }}>Order ID: <strong style={{ color: '#111827' }}>{orderId}</strong></p>
                 </div>
 
                 <div style={{ backgroundColor: '#f9fafb', padding: '32px', borderRadius: '12px', border: '1px solid #e5e7eb', marginBottom: '32px' }}>
                     <h2 style={{ fontSize: '20px', fontWeight: '700', marginBottom: '24px' }}>Order Summary</h2>
-                    
+
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', marginBottom: '32px' }}>
                         {orderItemsWithDetails.map((item: any) => (
                             <div key={item.id} style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
@@ -46,23 +47,23 @@ export default async function ConfirmationPage({ searchParams }: { searchParams:
                                 ) : (
                                     <div style={{ width: '60px', height: '85px', backgroundColor: '#e5e7eb', borderRadius: '6px' }} />
                                 )}
-                                
+
                                 <div style={{ flex: '1' }}>
                                     <h3 style={{ margin: '0 0 4px 0', fontSize: '15px', fontWeight: '600' }}>{item.bookDetails?.title || 'Unknown Book'}</h3>
                                     <p style={{ margin: 0, fontSize: '13px', color: '#6b7280' }}>Qty: {item.amount || item.orderedAmount || 1}</p>
                                 </div>
-                                
+
                                 <div style={{ fontWeight: '600', fontSize: '15px' }}>
-                                    {item.calculatedUnitPrice?.grossValue || item.price?.effectiveAmount || 0} {order.currency || 'EUR'}
+                                    {formatPrice(item.calculatedUnitPrice?.grossValue || item.price?.effectiveAmount || 0, order.currency)}
                                 </div>
                             </div>
                         ))}
                     </div>
-                    
+
                     <div style={{ borderTop: '2px solid #e5e7eb', paddingTop: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                         <span style={{ fontSize: '18px', fontWeight: '700' }}>Total Paid</span>
                         <span style={{ fontSize: '24px', fontWeight: '800', color: '#4f46e5' }}>
-                            {totalPrice} {order.currency || 'EUR'}
+                            {formatPrice(totalPrice, order.currency)}
                         </span>
                     </div>
                 </div>

@@ -4,6 +4,7 @@ import React, { useState, useMemo } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import type { PriceDetails, AvailabilityDetails } from '@/lib/emporix'
+import { formatPrice } from '@/lib/formatPrice'
 
 type Book = {
     id: string
@@ -336,7 +337,7 @@ export default function BookCatalog({ products, layout }: { products: Book[]; la
                                     marginTop: '8px'
                                 }}>
                                     <span style={{ fontSize: '14px', fontWeight: '700', color: '#111827' }}>
-                                        {book.price ? `${book.price.amount} ${book.price.currency}` : 'Price unavailable'}
+                                        {book.price ? formatPrice(book.price.amount, book.price.currency) : 'Price unavailable'}
                                     </span>
 
                                     {book.availability?.available ? (
