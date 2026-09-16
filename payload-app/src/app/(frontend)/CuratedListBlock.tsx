@@ -3,7 +3,7 @@ import { BookCard } from './BookCard'
 
 export const CuratedListBlock = ({ list, books }: { list: any, books: any[] }) => {
     return (
-        <div style={{ marginBottom: '60px' }}>
+        <div style={{ marginBottom: '60px', width: '100%', minWidth: 0 }}>
             {list.showTitle && (
                 <div style={{ marginBottom: '24px', borderBottom: '2px solid #f3f4f6', paddingBottom: '12px' }}>
                     <h2 style={{ fontSize: '24px', fontWeight: '700', margin: '0 0 8px 0', color: '#111827' }}>
@@ -17,7 +17,7 @@ export const CuratedListBlock = ({ list, books }: { list: any, books: any[] }) =
                 </div>
             )}
             
-            <div style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
+            <div style={{ display: 'flex', justifyContent: 'center', width: '100%', minWidth: 0 }}>
                 <div style={{
                     display: 'flex',
                     overflowX: 'auto',

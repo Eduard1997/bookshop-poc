@@ -75,18 +75,69 @@ export default async function Page(props: {params: Promise<{slug: string}>}) {
     const allProducts = await getAllProductsFromCatalogViaCategories(CATALOG_ID)
 
     return (
-        <main style={{ backgroundColor: '#ffffff', minHeight: '100vh', fontFamily: 'system-ui, sans-serif', color: '#111827', paddingBottom: '60px' }}>
+        <main style={{ 
+            backgroundColor: '#f8fafc', 
+            minHeight: '100vh', 
+            fontFamily: '"Inter", system-ui, sans-serif', 
+            color: '#0f172a', 
+            paddingBottom: '100px',
+            overflowX: 'hidden'
+        }}>
             
-            <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '4rem 40px 2rem 40px' }}>
-                <h1 style={{ fontSize: '3rem', margin: '0 0 2rem 0', fontWeight: '800', letterSpacing: '-0.02em', borderBottom: '1px solid rgba(128, 128, 128, 0.2)', paddingBottom: '1rem' }}>
-                    {page.title}
-                </h1>
+            {/* Premium Hero Section */}
+            <div style={{ 
+                position: 'relative',
+                backgroundColor: '#ffffff',
+                borderBottom: '1px solid rgba(226, 232, 240, 0.8)',
+                padding: '100px 40px 60px 40px',
+                marginBottom: '80px',
+                boxShadow: '0 10px 40px -20px rgba(0,0,0,0.05)',
+            }}>
+                {/* Decorative background shapes */}
+                <div style={{
+                    position: 'absolute',
+                    top: '-20%',
+                    right: '-5%',
+                    width: '60vw',
+                    height: '60vw',
+                    maxWidth: '800px',
+                    maxHeight: '800px',
+                    background: 'radial-gradient(circle, rgba(79, 70, 229, 0.05) 0%, rgba(255,255,255,0) 70%)',
+                    borderRadius: '50%',
+                    pointerEvents: 'none',
+                    zIndex: 0
+                }} />
                 
-                {page.content && (
-                    <div style={{ lineHeight: '1.8', fontSize: '1.125rem', opacity: 0.9, marginBottom: '3rem' }}>
-                        <RichText data={page.content as any} />
-                    </div>
-                )}
+                <div style={{ maxWidth: '1200px', margin: '0 auto', position: 'relative', zIndex: 1 }}>
+                    <h1 style={{ 
+                        fontSize: 'clamp(40px, 6vw, 64px)', 
+                        margin: '0', 
+                        fontWeight: '900', 
+                        letterSpacing: '-0.04em', 
+                        lineHeight: '1.1',
+                        background: 'linear-gradient(135deg, #0f172a 0%, #4338ca 100%)',
+                        WebkitBackgroundClip: 'text',
+                        WebkitTextFillColor: 'transparent',
+                        textShadow: '0px 4px 20px rgba(67, 56, 202, 0.15)'
+                    }}>
+                        {page.title}
+                    </h1>
+                    
+                    {page.content && (
+                        <div style={{ 
+                            lineHeight: '1.8', 
+                            fontSize: '1.25rem', 
+                            color: '#475569', 
+                            maxWidth: '800px',
+                            borderLeft: '4px solid #4f46e5',
+                            paddingLeft: '24px',
+                            marginTop: '40px',
+                            opacity: 0.95
+                        }}>
+                            <RichText data={page.content as any} />
+                        </div>
+                    )}
+                </div>
             </div>
 
             <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 40px' }}>
