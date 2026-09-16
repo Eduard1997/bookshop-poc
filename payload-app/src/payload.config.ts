@@ -13,6 +13,7 @@ import { CuratedLists } from './collections/CuratedLists'
 import { LandingPages } from './collections/LandingPages'
 
 import { PageLayout } from './globals/PageLayout'
+import { Banners } from './collections/Banners'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -24,7 +25,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, BookOverlays, Pages, CuratedLists, LandingPages
+  collections: [Users, Media, BookOverlays, Pages, CuratedLists, LandingPages, Banners
   ],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',

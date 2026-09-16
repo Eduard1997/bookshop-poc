@@ -4,7 +4,7 @@ export const CuratedLists: CollectionConfig = {
     slug: 'curated-lists',
     admin: {
         useAsTitle: 'title',
-        defaultColumns: ['title', 'updatedAt'],
+        defaultColumns: ['title', 'showTitle', 'updatedAt'],
     },
     access: {
         read: () => true,
@@ -17,6 +17,15 @@ export const CuratedLists: CollectionConfig = {
             unique: true,
             admin: {
                 description: 'The name for this list.',
+            },
+        },
+        {
+            type: 'checkbox',
+            name: 'showTitle',
+            defaultValue: true,
+            label: 'Display Title on Page',
+            admin: {
+                description: 'Uncheck this to hide the title (useful when placing this list directly under a Banner).',
             },
         },
         {
@@ -41,5 +50,4 @@ export const CuratedLists: CollectionConfig = {
             },
         }
     ]
-
 }
