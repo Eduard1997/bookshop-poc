@@ -5,7 +5,7 @@ export const CuratedListBlock = ({ list, books }: { list: any, books: any[] }) =
     return (
         <div style={{ marginBottom: '60px', width: '100%', minWidth: 0 }}>
             {list.showTitle && (
-                <div style={{ marginBottom: '24px', borderBottom: '2px solid #f3f4f6', paddingBottom: '12px' }}>
+                <div style={{ marginBottom: '24px', borderBottom: '2px solid #f3f4f6', paddingBottom: '12px', textAlign: 'center' }}>
                     <h2 style={{ fontSize: '24px', fontWeight: '700', margin: '0 0 8px 0', color: '#111827' }}>
                         {list.title}
                     </h2>

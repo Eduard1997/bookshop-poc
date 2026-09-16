@@ -19,9 +19,7 @@ export default async function Header() {
                 <Link href="/" style={{ fontWeight: 'bold', textDecoration: 'none', color: 'inherit' }}>
                     Home
                 </Link>
-                <Link href="/discover" style={{ fontWeight: 'bold', textDecoration: 'none', color: 'inherit' }}>
-                    Discover
-                </Link>
+
 
                 {pages.map((page) => (
                     <Link
