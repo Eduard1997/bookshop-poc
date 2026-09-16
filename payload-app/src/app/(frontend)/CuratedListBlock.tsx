@@ -17,20 +17,28 @@ export const CuratedListBlock = ({ list, books }: { list: any, books: any[] }) =
                 </div>
             )}
             
-            <div style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))',
-                gap: '20px'
-            }}>
-                {books.length === 0 ? (
-                    <p style={{ color: '#9ca3af', fontSize: '14px', fontStyle: 'italic' }}>
-                        No books available.
-                    </p>
-                ) : (
-                    books.map((book: any, idx: number) => (
-                        <BookCard key={book.id || idx} book={book} />
-                    ))
-                )}
+            <div style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
+                <div style={{
+                    display: 'flex',
+                    overflowX: 'auto',
+                    gap: '24px',
+                    maxWidth: '100%',
+                    paddingBottom: '24px',
+                    scrollSnapType: 'x mandatory',
+                    WebkitOverflowScrolling: 'touch',
+                }}>
+                    {books.length === 0 ? (
+                        <p style={{ color: '#9ca3af', fontSize: '14px', fontStyle: 'italic', margin: '0 auto' }}>
+                            No books available.
+                        </p>
+                    ) : (
+                        books.map((book: any, idx: number) => (
+                            <div key={book.id || idx} style={{ flex: '0 0 auto', width: '220px', scrollSnapAlign: 'start' }}>
+                                <BookCard book={book} />
+                            </div>
+                        ))
+                    )}
+                </div>
             </div>
         </div>
     )
