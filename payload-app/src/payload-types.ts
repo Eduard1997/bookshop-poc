@@ -73,6 +73,7 @@ export interface Config {
     pages: Page;
     'curated-lists': CuratedList;
     'landing-pages': LandingPage;
+    banners: Banner;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -86,6 +87,7 @@ export interface Config {
     pages: PagesSelect<false> | PagesSelect<true>;
     'curated-lists': CuratedListsSelect<false> | CuratedListsSelect<true>;
     'landing-pages': LandingPagesSelect<false> | LandingPagesSelect<true>;
+    banners: BannersSelect<false> | BannersSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -224,7 +226,7 @@ export interface Page {
    */
   slug: string;
   /**
-   * The main content of the page.
+   * A text-based page content.
    */
   content?: {
     root: {
@@ -241,6 +243,30 @@ export interface Page {
     };
     [k: string]: unknown;
   } | null;
+  /**
+   * Add, reorder, and remove sections to build your page layout.
+   */
+  pageLayout?:
+    | {
+        /**
+         * Select an existing book, list, or banner to feature in this section.
+         */
+        contentBlock:
+          | {
+              relationTo: 'book-overlays';
+              value: number | BookOverlay;
+            }
+          | {
+              relationTo: 'curated-lists';
+              value: number | CuratedList;
+            }
+          | {
+              relationTo: 'banners';
+              value: number | Banner;
+            };
+        id?: string | null;
+      }[]
+    | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -255,6 +281,10 @@ export interface CuratedList {
    */
   title: string;
   /**
+   * Uncheck this to hide the title (useful when placing this list directly under a Banner).
+   */
+  showTitle?: boolean | null;
+  /**
    * An optional description for what the list is about.
    */
   description?: string | null;
@@ -267,6 +297,36 @@ export interface CuratedList {
         id?: string | null;
       }[]
     | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "banners".
+ */
+export interface Banner {
+  id: number;
+  /**
+   * The internal name for this banner.
+   */
+  title: string;
+  isActive?: boolean | null;
+  /**
+   * The main text displayed on the banner.
+   */
+  heading?: string | null;
+  /**
+   * Optional smaller text to display below the main heading.
+   */
+  subheading?: string | null;
+  /**
+   * An optional URL where the banner should take the user when clicked.
+   */
+  link?: string | null;
+  /**
+   * Select the book this banner promotes.
+   */
+  featuredBook?: (number | null) | BookOverlay;
   updatedAt: string;
   createdAt: string;
 }
@@ -339,6 +399,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'landing-pages';
         value: number | LandingPage;
+      } | null)
+    | ({
+        relationTo: 'banners';
+        value: number | Banner;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -444,6 +508,12 @@ export interface PagesSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
   content?: T;
+  pageLayout?:
+    | T
+    | {
+        contentBlock?: T;
+        id?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
 }
@@ -453,6 +523,7 @@ export interface PagesSelect<T extends boolean = true> {
  */
 export interface CuratedListsSelect<T extends boolean = true> {
   title?: T;
+  showTitle?: T;
   description?: T;
   books?:
     | T
@@ -478,6 +549,20 @@ export interface LandingPagesSelect<T extends boolean = true> {
         editorialReview?: T;
         id?: T;
       };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "banners_select".
+ */
+export interface BannersSelect<T extends boolean = true> {
+  title?: T;
+  isActive?: T;
+  heading?: T;
+  subheading?: T;
+  link?: T;
+  featuredBook?: T;
   updatedAt?: T;
   createdAt?: T;
 }
