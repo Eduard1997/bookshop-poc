@@ -118,7 +118,7 @@ export const BookOverlays: CollectionConfig = {
     },
     admin: {
         useAsTitle: 'isbn',
-        defaultColumns: ['isbn', 'staffPick', 'updatedAt'],
+        defaultColumns: ['isbn', 'title', 'staffPick', 'updatedAt'],
     },
     access: {
         read: () => true, 
@@ -175,4 +175,5 @@ export const BookOverlays: CollectionConfig = {
 
     ]
 
+    
 }
