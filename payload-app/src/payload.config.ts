@@ -24,6 +24,26 @@ export default buildConfig({
     importMap: {
       baseDir: path.resolve(dirname),
     },
+    meta: {
+      titleSuffix: '- Store Admin',
+      icons: [
+        {
+          rel: 'icon',
+          url: '/favicon.ico',
+        },
+      ],
+    },
+    components: {
+      graphics: {
+        Logo: '@/components/admin/Branding#Logo',
+        Icon: '@/components/admin/Branding#Icon',
+      },
+      views: {
+        dashboard: {
+          Component: '@/components/admin/Dashboard#CustomDashboard',
+        },
+      },
+    },
   },
   collections: [Users, Media, BookOverlays, Pages, CuratedLists, LandingPages, Banners
   ],
