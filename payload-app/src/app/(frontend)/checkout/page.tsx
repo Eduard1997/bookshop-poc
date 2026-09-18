@@ -1,6 +1,7 @@
 import { cookies } from 'next/headers'
 import { getCart, getBookById } from '@/lib/emporix'
 import Link from 'next/link'
+import { formatPrice } from '@/lib/formatPrice'
 
 export default async function CheckoutPage() {
     const cookieStore = await cookies()
@@ -35,7 +36,7 @@ export default async function CheckoutPage() {
 
     return (
         <main style={{ backgroundColor: '#ffffff', minHeight: '100vh', fontFamily: 'system-ui, sans-serif', color: '#111827', paddingBottom: '80px' }}>
-            
+
             <div style={{ backgroundColor: '#4f46e5', color: '#ffffff', padding: '24px 40px', marginBottom: '40px' }}>
                 <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
                     <Link href="/cart" style={{ color: '#e0e7ff', textDecoration: 'none', fontSize: '14px', fontWeight: '600', display: 'inline-flex', alignItems: 'center' }}>
@@ -48,22 +49,22 @@ export default async function CheckoutPage() {
                 <h1 style={{ margin: '0 0 32px 0', fontSize: '32px', fontWeight: '800' }}>Secure Checkout</h1>
 
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: '48px', alignItems: 'flex-start' }}>
-                    
+
                     <div style={{ flex: '1.5', minWidth: '300px' }}>
                         <h2 style={{ fontSize: '20px', fontWeight: '700', marginBottom: '24px', borderBottom: '2px solid #f3f4f6', paddingBottom: '12px' }}>Customer Details</h2>
-                        
+
                         <form action="/payment" style={{ display: 'flex', flexDirection: 'column' }}>
                             <input type="hidden" name="cartId" value={cartId} />
-                            
+
                             <div style={{ display: 'flex', gap: '16px' }}>
                                 <input type="text" name="FirstName" placeholder="First Name" required style={inputStyle} />
                                 <input type="text" name="LastName" placeholder="Last Name" required style={inputStyle} />
                             </div>
-                            
+
                             <input type="email" name="Email" placeholder="Email Address" required style={inputStyle} />
                             <input type="tel" name="Phone" placeholder="Phone Number" required style={inputStyle} />
                             <input type="text" name="Address" placeholder="Full Shipping Address" required style={inputStyle} />
-                            
+
                             <button type="submit" style={{ marginTop: '16px', backgroundColor: '#4f46e5', color: '#ffffff', padding: '16px', borderRadius: '8px', border: 'none', fontSize: '16px', fontWeight: '700', cursor: 'pointer', transition: 'background-color 0.2s' }}>
                                 Proceed to Payment
                             </button>
@@ -72,33 +73,33 @@ export default async function CheckoutPage() {
 
                     <div style={{ flex: '1', minWidth: '300px', backgroundColor: '#f9fafb', padding: '32px', borderRadius: '12px', border: '1px solid #e5e7eb' }}>
                         <h2 style={{ fontSize: '20px', fontWeight: '700', marginBottom: '24px' }}>Order Summary</h2>
-                        
+
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', marginBottom: '32px' }}>
                             {cartItemsWithDetails.map((item: any) => (
                                 <div key={item.id} style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
-                                    
+
                                     {item.bookDetails?.coverImageUrl ? (
                                         <img src={item.bookDetails.coverImageUrl} alt={item.bookDetails.title} style={{ width: '60px', height: '85px', objectFit: 'cover', borderRadius: '6px', border: '1px solid #e5e7eb' }} />
                                     ) : (
                                         <div style={{ width: '60px', height: '85px', backgroundColor: '#e5e7eb', borderRadius: '6px' }} />
                                     )}
-                                    
+
                                     <div style={{ flex: '1' }}>
                                         <h3 style={{ margin: '0 0 4px 0', fontSize: '15px', fontWeight: '600' }}>{item.bookDetails?.title || 'Unknown Book'}</h3>
                                         <p style={{ margin: 0, fontSize: '13px', color: '#6b7280' }}>Qty: {item.quantity}</p>
                                     </div>
-                                    
+
                                     <div style={{ fontWeight: '600', fontSize: '15px' }}>
-                                        {item.price?.effectiveAmount} {item.price?.currency}
+                                        {formatPrice(item.price?.effectiveAmount, item.price?.currency)}
                                     </div>
                                 </div>
                             ))}
                         </div>
-                        
+
                         <div style={{ borderTop: '2px solid #e5e7eb', paddingTop: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                             <span style={{ fontSize: '18px', fontWeight: '700' }}>Total</span>
                             <span style={{ fontSize: '24px', fontWeight: '800', color: '#4f46e5' }}>
-                                {cart.totalPrice} {cart.currency}
+                                {formatPrice(cart.totalPrice, cart.currency)}
                             </span>
                         </div>
                     </div>

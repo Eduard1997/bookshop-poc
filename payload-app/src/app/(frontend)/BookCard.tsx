@@ -1,5 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
+import { formatPrice } from '@/lib/formatPrice'
 
 export const BookCard = ({ book, isDetailed = false }: { book: any, isDetailed?: boolean }) => {
     const authorNames = book?.authors?.map((a: any) => a.name).filter(Boolean).join(', ') || 'Unknown Author'
@@ -82,7 +83,7 @@ export const BookCard = ({ book, isDetailed = false }: { book: any, isDetailed?:
                 marginTop: '8px'
             }}>
                 <span style={{ fontSize: '14px', fontWeight: '700', color: '#111827' }}>
-                    {book?.price ? `${book.price.amount} ${book.price.currency}` : 'Price unavailable'}
+                    {book?.price ? formatPrice(book.price.amount, book.price.currency) : 'Price unavailable'}
                 </span>
 
                 {book?.availability?.available ? (
