@@ -1,8 +1,9 @@
 import { getCart } from '@/lib/emporix'
 import PaymentForm from '../PaymentForm'
+import { formatPrice } from '@/lib/formatPrice'
 
-type SearchParams = Promise<{ 
-    cartId: string, FirstName?: string, LastName?: string, Email?: string, Phone?: string, Address?: string 
+type SearchParams = Promise<{
+    cartId: string, FirstName?: string, LastName?: string, Email?: string, Phone?: string, Address?: string
 }>
 
 export default async function PaymentPage({ searchParams }: { searchParams: SearchParams }) {
@@ -13,18 +14,18 @@ export default async function PaymentPage({ searchParams }: { searchParams: Sear
         <main style={{ backgroundColor: '#ffffff', minHeight: '100vh', fontFamily: 'system-ui, sans-serif', color: '#111827', padding: '80px 40px' }}>
             <div style={{ maxWidth: '600px', margin: '0 auto' }}>
                 <h1 style={{ margin: '0 0 32px 0', fontSize: '32px', fontWeight: '800', textAlign: 'center' }}>Complete Your Order</h1>
-                
-                <PaymentForm 
+
+                <PaymentForm
                     cart={cart}
-                    firstName={FirstName || 'Unknown'} 
-                    lastName={LastName || 'Unknown'} 
-                    email={Email || 'test@test.com'} 
-                    phone={Phone || '0000000000'} 
-                    address={Address || 'Unknown Street'} 
+                    firstName={FirstName || 'Unknown'}
+                    lastName={LastName || 'Unknown'}
+                    email={Email || 'test@test.com'}
+                    phone={Phone || '0000000000'}
+                    address={Address || 'Unknown Street'}
                 />
-                
+
                 <div style={{ marginTop: '32px', textAlign: 'center', color: '#6b7280', fontSize: '14px' }}>
-                    <p>Total to charge: <strong style={{color: '#111827'}}>{cart?.totalPrice} {cart?.currency || 'EUR'}</strong></p>
+                    <p>Total to charge: <strong style={{ color: '#111827' }}>{formatPrice(cart?.totalPrice, cart?.currency)}</strong></p>
                 </div>
             </div>
         </main>
