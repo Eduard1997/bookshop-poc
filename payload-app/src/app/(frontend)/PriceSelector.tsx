@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react'
 import { useCart } from './CartContext'
+import { formatPrice } from '@/lib/formatPrice'
 
 
 export default function PriceSelector({ prices, availability, itemYrn }: { prices: any[]; availability?: any; itemYrn?: string }) {
@@ -105,7 +106,7 @@ export default function PriceSelector({ prices, availability, itemYrn }: { price
                     </div>
                     {currentPrice ? (
                         <div style={{ fontSize: '28px', fontWeight: '800', color: '#111827' }}>
-                            {currentPrice.amount} {currentPrice.currency}
+                            {formatPrice(currentPrice.amount, currentPrice.currency)}
                         </div>
                     ) : (
                         <div style={{ fontSize: '20px', fontWeight: '600', color: '#9ca3af' }}>Unavailable</div>

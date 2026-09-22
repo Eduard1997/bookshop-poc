@@ -4,6 +4,7 @@ import config from '@/payload.config'
 import Link from 'next/link'
 import React from 'react'
 import PriceSelector from '../../PriceSelector'
+import { formatOnixDate } from '../../../../lib/formatOnixDate'
 
 export default async function BookPreviewCardPage({ params }: { params: Promise<{ id: string }> }) {
     const { id } = await params
@@ -135,7 +136,7 @@ export default async function BookPreviewCardPage({ params }: { params: Promise<
                             <h3 style={{ fontSize: '18px', fontWeight: '700', color: '#111827', borderBottom: '2px solid #f3f4f6', paddingBottom: '12px', margin: '0 0 16px 0' }}>Product Details</h3>
                             <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '12px' }}>
                                 <li style={{ fontSize: '14px', color: '#4b5563' }}><strong style={{ color: '#111827', fontWeight: '600' }}>ISBN:</strong> {book.isbn}</li>
-                                <li style={{ fontSize: '14px', color: '#4b5563' }}><strong style={{ color: '#111827', fontWeight: '600' }}>Published:</strong> {book.publicationDate || 'N/A'}</li>
+                                <li style={{ fontSize: '14px', color: '#4b5563' }}><strong style={{ color: '#111827', fontWeight: '600' }}>Published:</strong> {formatOnixDate(book.publicationDate)}</li>
                                 <li style={{ fontSize: '14px', color: '#4b5563' }}><strong style={{ color: '#111827', fontWeight: '600' }}>Format:</strong> {book.productForm || 'N/A'}</li>
                                 <li style={{ fontSize: '14px', color: '#4b5563' }}><strong style={{ color: '#111827', fontWeight: '600' }}>Pages:</strong> {book.pageCount || 'N/A'}</li>
                                 <li style={{ fontSize: '14px', color: '#4b5563' }}><strong style={{ color: '#111827', fontWeight: '600' }}>Language:</strong> {book.language || 'N/A'}</li>
