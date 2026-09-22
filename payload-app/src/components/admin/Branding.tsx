@@ -7,7 +7,7 @@ const Mark = () => (
     fontSize: '16px',
     color: '#6366f1',
   }}>
-    BS
+    BookShop
   </span>
 )
 
