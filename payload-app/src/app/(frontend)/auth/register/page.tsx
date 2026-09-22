@@ -3,12 +3,12 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
-export default function Login() {
+export default function Register() {
     const router = useRouter();
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
 
-    const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
+    const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setLoading(true);
         setError('');
@@ -18,7 +18,7 @@ export default function Login() {
         const password = formData.get('password');
 
         try {
-            const res = await fetch('http://localhost:3000/api/customers/login', {
+            const registerRes = await fetch('http://localhost:3000/api/customers', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -26,27 +26,23 @@ export default function Login() {
                 body: JSON.stringify({ email, password })
             });
 
-            const data = await res.json();
+            const registerData = await registerRes.json();
 
-            if (!res.ok) {
-                setError(data.message || 'Failed to login');
+            if (!registerRes.ok) {
+                const errorMsg = registerData.errors?.[0]?.message || registerData.message || 'Failed to register';
+                setError(errorMsg);
+                setLoading(false);
                 return;
             }
 
-            router.push('/');
+            router.push('/auth/login');
             router.refresh(); 
 
         } catch (err) {
-            console.error('Login error:', err);
+            console.error('Registration error:', err);
             setError('An unexpected error occurred.');
-        } finally {
             setLoading(false);
         }
-    }
-
-    const handleGuestLogin = () => {
-        router.push('/');
-        router.refresh();
     }
 
     return (
@@ -57,7 +53,7 @@ export default function Login() {
             minHeight: '100vh',
             padding: '20px',
             fontFamily: 'system-ui, -apple-system, sans-serif',
-            backgroundColor: '#f9fafb', 
+            backgroundColor: '#f9fafb',
             boxSizing: 'border-box'
         }}>
             <div style={{
@@ -66,7 +62,7 @@ export default function Login() {
                 backgroundColor: '#ffffff',
                 padding: '40px',
                 borderRadius: '12px',
-                boxShadow: '0 10px 25px rgba(0, 0, 0, 0.05)', 
+                boxShadow: '0 10px 25px rgba(0, 0, 0, 0.05)',
                 display: 'flex',
                 flexDirection: 'column',
                 gap: '24px',
@@ -85,7 +81,7 @@ export default function Login() {
                         BookShop
                     </h1>
                     <p style={{ margin: 0, fontSize: '15px', color: '#6b7280' }}>
-                        Sign in to manage your orders.
+                        Create an account to track your orders.
                     </p>
                 </div>
 
@@ -103,7 +99,7 @@ export default function Login() {
                     </div>
                 )}
 
-                <form onSubmit={handleLogin} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                <form onSubmit={handleRegister} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
                         <label htmlFor="email" style={{ fontSize: '14px', fontWeight: '500', color: '#374151' }}>
                             Email
@@ -162,37 +158,14 @@ export default function Login() {
                             transition: 'background-color 0.2s'
                         }}
                     >
-                        {loading ? 'Logging in...' : 'Login'}
+                        {loading ? 'Creating account...' : 'Register'}
                     </button>
                 </form>
 
-                <div style={{ display: 'flex', alignItems: 'center', margin: '4px 0' }}>
-                    <div style={{ flex: 1, height: '1px', backgroundColor: '#e5e7eb' }}></div>
-                    <span style={{ padding: '0 12px', color: '#9ca3af', fontSize: '14px' }}>or</span>
-                    <div style={{ flex: 1, height: '1px', backgroundColor: '#e5e7eb' }}></div>
-                </div>
-
-                <button 
-                    onClick={handleGuestLogin}
-                    type="button"
-                    style={{
-                        padding: '12px',
-                        backgroundColor: '#ffffff',
-                        color: '#374151',
-                        border: '1px solid #d1d5db',
-                        borderRadius: '8px',
-                        fontSize: '16px',
-                        fontWeight: '600',
-                        cursor: 'pointer',
-                    }}
-                >
-                    Continue as a guest
-                </button>
-
                 <p style={{ textAlign: 'center', fontSize: '14px', color: '#6b7280', margin: 0 }}>
-                    Don't have an account?{' '}
-                    <a href="/auth/register" style={{ color: '#7e22ce', textDecoration: 'none', fontWeight: '600' }}>
-                        Register here
+                    Already have an account?{' '}
+                    <a href="/login" style={{ color: '#7e22ce', textDecoration: 'none', fontWeight: '600' }}>
+                        Sign in
                     </a>
                 </p>
 
