@@ -771,14 +771,40 @@ export async function deleteCartCookie() {
     cookieStore.delete('bookshop_cart_id');
 }
 
-// fetch ('api/cart' , {
-//     method : 'POST',
-//     headers : {'Content-Type' : 'application/json'},
-//     body: JSON.stringify({
-//     itemYrn:"urn:yaas:saasag:caasproduct:product:ant2;6a902b994e1ed05cfb7aa47e",
-//     priceId: "price-6a902b994e1ed05cfb7aa47e-2",
-// priceAmount: 20.00,
-//     quantity: 1
-//     })
-// }).then(res => res.json())
-// .then(data => console.log(data))
+export async function createCustomer(email: string) {
+    try {
+        if (!EMPORIX_TENANT_ID) {
+            console.error('Missing EMPORIX_TENANT_ID');
+            return null;
+        }
+        const token = await getAccessToken();
+
+        const url = `${EMPORIX_API_BASE_URL}/customer/${EMPORIX_TENANT_ID}/customers`;
+
+        const res = await fetch(url, {
+            method: 'POST',
+            headers: {
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                contactEmail: email,
+                preferredCurrency: "EUR" 
+            }),
+            cache: 'no-store'
+        });
+
+        if (!res.ok) {
+            console.error(`Emporix API Error (${res.status}):`, await res.text());
+            return null;
+        }
+
+        const data = await res.json();
+        return data.id;
+
+    } catch (error) {
+        console.error("Internal Server Error:", error);
+        return null;
+    }
+
+}

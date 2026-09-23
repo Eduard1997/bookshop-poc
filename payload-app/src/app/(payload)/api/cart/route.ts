@@ -25,7 +25,9 @@ export async function POST(request: Request) {
 
     const cookieStore = await cookies()
     let bookshop_cart_id = cookieStore.get('bookshop_cart_id')?.value
+    const payloadToken = cookieStore.get('payload-token')?.value
 
+    
     if (!bookshop_cart_id) {
         const sessionId = crypto.randomUUID()
         const cartId = await createCart(sessionId)
