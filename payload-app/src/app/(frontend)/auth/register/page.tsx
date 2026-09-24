@@ -164,7 +164,7 @@ export default function Register() {
 
                 <p style={{ textAlign: 'center', fontSize: '14px', color: '#6b7280', margin: 0 }}>
                     Already have an account?{' '}
-                    <a href="/login" style={{ color: '#7e22ce', textDecoration: 'none', fontWeight: '600' }}>
+                    <a href="/auth/login" style={{ color: '#7e22ce', textDecoration: 'none', fontWeight: '600' }}>
                         Sign in
                     </a>
                 </p>

@@ -502,6 +502,8 @@ export async function getCart(bookshop_cart_id: string) {
             yrn: data.yrn || '',
             currency: data.currency || 'EUR',
             sessionId: data.sessionId || '',
+            customerId: data.customerId || data.customer?.id || '',
+            customer: data.customer || null,
             totalUnitsCount: data.totalUnitsCount ?? 0,
             totalPrice: data.calculatedPrice?.finalPrice?.grossValue || data.totalPrice?.amount || 0,
             calculatedPrice: data.calculatedPrice,

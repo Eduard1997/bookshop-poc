@@ -101,14 +101,14 @@ export default function PaymentForm({ cart, firstName, lastName, email, phone, a
                 }
             }
         }));
-
+        
         const orderPayload = {
             currency: updatedCart?.currency || "EUR",
             cartId: updatedCart?.id,
             entries: entries,
             discounts: [],
             customer: {
-                id: updatedCart?.sessionId || "guest-001",
+                id: updatedCart?.customer?.id || updatedCart?.customerId || updatedCart?.sessionId || "guest", 
                 name: `${firstName} ${lastName}`,
                 firstName: firstName,
                 lastName: lastName,
