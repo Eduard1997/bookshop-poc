@@ -9,20 +9,23 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
     const [cart, setCart] = useState<any>(null)
     const [isLoading, setIsLoading] = useState<boolean>(false)
 
-    useEffect(() => {
-        const fetchInitialCart = async () => {
+    const fetchCart = async () => {
+            setIsLoading(true)
             try {
                 const response = await fetch('/api/cart')
                 const data = await response.json()
                 setCart(data)
             } catch (error) {
                 console.error('Error fetching cart:', error)
+            } finally {
+                setIsLoading(false)
             }
         }
 
-        fetchInitialCart()
-
+    useEffect(() => {
+        fetchCart()
     }, [])
+    
     const updateQuantity = async (item: any, newQuantity: number) => {
         setIsLoading(true)
         try {
@@ -104,7 +107,7 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
     }
 
     return (
-        <CartContext.Provider value={{ cart, setCart, isLoading, updateQuantity, removeItem, clearCart, disableCart }}>
+        <CartContext.Provider value={{ cart, setCart, isLoading,fetchCart, updateQuantity, removeItem, clearCart, disableCart }}>
             {children}
         </CartContext.Provider>
     )

@@ -34,7 +34,7 @@ export default function Register() {
                 setLoading(false);
                 return;
             }
-
+            alert('Registration successful! Please log in.');
             router.push('/auth/login');
             router.refresh(); 
 

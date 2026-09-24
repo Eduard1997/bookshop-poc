@@ -1,16 +1,40 @@
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
-import { getCart, createCart, addToCart, updateCartItem, removeCartItem, clearCart } from "@/lib/emporix";
+import { getCart, createAnonimousCart, createCustomerCart,getCustomerIdFromPayload, addToCart, updateCartItem, removeCartItem, clearCart, getActiveCartForCustomer } from "@/lib/emporix";
 
 export async function GET() {
     const cookieStore = await cookies()
-    const bookshop_cart_id = cookieStore.get('bookshop_cart_id')?.value
+    let bookshop_cart_id = cookieStore.get('bookshop_cart_id')?.value
+    const payloadToken = cookieStore.get('payload-token')?.value
 
-    if (!bookshop_cart_id) {
-        return NextResponse.json({ items: [] }, { status: 200 })
+    if (bookshop_cart_id === 'undefined' || bookshop_cart_id === 'null') {
+        cookieStore.delete('bookshop_cart_id')
+        bookshop_cart_id = undefined 
     }
 
-    const cart = await getCart(bookshop_cart_id)
+    if (!bookshop_cart_id) {
+        if (payloadToken) {
+            const customerId = await getCustomerIdFromPayload(payloadToken)
+            console.log('customerId', customerId)
+            if (customerId) {
+                const existingCartId = await getActiveCartForCustomer(customerId)
+                
+                if (existingCartId) {
+                    cookieStore.set('bookshop_cart_id', existingCartId, { maxAge: 604800 })
+                    bookshop_cart_id = existingCartId
+                } else {
+                    return NextResponse.json({ items: [] }, { status: 200 })
+                }
+            }
+            else {
+                return NextResponse.json({ items: [] }, { status: 200 })
+            }
+        } else {
+            return NextResponse.json({ items: [] }, { status: 200 })
+        }
+    }
+
+    const cart = await getCart(bookshop_cart_id as string)
 
     if (!cart) {
         return NextResponse.json({ error: "Failed to fetch cart" }, { status: 500 })
@@ -27,10 +51,21 @@ export async function POST(request: Request) {
     let bookshop_cart_id = cookieStore.get('bookshop_cart_id')?.value
     const payloadToken = cookieStore.get('payload-token')?.value
 
-    
     if (!bookshop_cart_id) {
-        const sessionId = crypto.randomUUID()
-        const cartId = await createCart(sessionId)
+        let cartId = null
+
+        if (payloadToken) {
+            const customerId = await getCustomerIdFromPayload(payloadToken)
+            
+            if (customerId) {
+                cartId = await createCustomerCart(customerId)
+            }
+        }
+
+        if (!cartId) {
+            const sessionId = crypto.randomUUID()
+            cartId = await createAnonimousCart(sessionId)
+        }
 
         if (!cartId) {
             return NextResponse.json({ error: "Failed to create cart" }, { status: 500 })
@@ -39,6 +74,7 @@ export async function POST(request: Request) {
         cookieStore.set('bookshop_cart_id', cartId, { maxAge: 604800 })
         bookshop_cart_id = cartId
     }
+    
     const response = await addToCart(bookshop_cart_id, itemYrn, priceId, priceAmount, quantity)
 
     if (response?.error) {

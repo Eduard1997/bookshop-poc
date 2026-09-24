@@ -128,7 +128,6 @@ export async function getBookById(productId: string): Promise<BookDetails | null
         role: a[FIELD.authorRole],
         name: a[FIELD.authorName],
     }))
-    console.log(product.yrn)
     return {
         id: product.id,
         isbn: product.code,
@@ -396,7 +395,7 @@ export async function updateProduct(bookId: string, bookData: any): Promise<any 
     }
 }
 //----------------CREATE CART-----------------------------
-export async function createCart(sessionId: string): Promise<string | null> {
+export async function createAnonimousCart(sessionId: string): Promise<string | null> {
     try {
         if (!EMPORIX_TENANT_ID) {
             console.error('Missing EMPORIX_TENANT_ID');
@@ -415,6 +414,44 @@ export async function createCart(sessionId: string): Promise<string | null> {
             },
             body: JSON.stringify({
                 siteCode: 'bookshop-site',
+                currency: 'EUR'
+            }),
+            cache: 'no-store'
+        });
+
+        if (!res.ok) {
+            console.error(`Emporix API Error (${res.status}):`, await res.text());
+            return null;
+        }
+
+        const data = await res.json();
+        return data.cartId || data.id;
+
+    } catch (error) {
+        console.error("Internal Server Error:", error);
+        return null;
+    }
+}
+
+export async function createCustomerCart(customerId: string): Promise<string | null> {
+    try {
+        if (!EMPORIX_TENANT_ID) {
+            console.error('Missing EMPORIX_TENANT_ID');
+            return null;
+        }
+        const token = await getAccessToken();
+
+        const url = `${EMPORIX_API_BASE_URL}/cart/${EMPORIX_TENANT_ID}/carts`;
+
+        const res = await fetch(url, {
+            method: 'POST',
+            headers: {
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                siteCode: 'bookshop-site',
+                customerId : customerId,
                 currency: 'EUR'
             }),
             cache: 'no-store'
@@ -486,6 +523,46 @@ export async function getCart(bookshop_cart_id: string) {
 
     } catch (error) {
         console.error("Internal Server Error:", error);
+        return null;
+    }
+}
+
+
+export async function getActiveCartForCustomer(customerId: string): Promise<string | null> {
+    try {
+        if (!EMPORIX_TENANT_ID) return null;
+        const token = await getAccessToken();
+
+        const url = `${EMPORIX_API_BASE_URL}/cart/${EMPORIX_TENANT_ID}/carts?customerId=${customerId}&siteCode=bookshop-site`;
+
+        const res = await fetch(url, {
+            method: 'GET',
+            headers: {
+                Authorization: `Bearer ${token}`
+            },
+            cache: 'no-store'
+        });
+
+        if (!res.ok) {
+            if (res.status === 404) {
+                return null;
+            }
+            console.error(`Emporix API Error (${res.status}):`, await res.text());
+            return null;
+        }
+
+        const data = await res.json();
+
+        if (Array.isArray(data) && data.length > 0) {
+            return data[0].id || data[0].cartId;
+        } else if (data && (data.id || data.cartId)) {
+            return data.id || data.cartId;
+        }
+
+        return null;
+
+    } catch (error) {
+        console.error(error);
         return null;
     }
 }
@@ -807,4 +884,32 @@ export async function createCustomer(email: string) {
         return null;
     }
 
+}
+
+export async function getCustomerIdFromPayload(payloadToken: string): Promise<string | null> {
+    if (!payloadToken) return null;
+
+    try {
+        const res = await fetch('http://localhost:3000/api/customers/me', {
+            headers: {
+                Cookie: `payload-token=${payloadToken}`
+            },
+            cache: 'no-store'
+        });
+
+        if (!res.ok) {
+            if (res.status === 401) {
+                const cookieStore = await cookies();
+                cookieStore.delete('payload-token');
+            }
+            return null;
+        }
+
+        const data = await res.json();
+        return data.user?.customerId || null;
+
+    } catch (error) {
+        console.error("Failed to fetch customer ID from Payload:", error);
+        return null;
+    }
 }

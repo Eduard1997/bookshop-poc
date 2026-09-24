@@ -2,29 +2,45 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { useCart } from '../../CartContext';
 
 export default function Login() {
     const router = useRouter();
+    const {fetchCart, disableCart} = useCart()
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
 
-    const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        setLoading(true);
-        setError('');
+const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    
+    const formData = new FormData(e.currentTarget);
+    const email = formData.get('email');
+    const password = formData.get('password');
 
-        const formData = new FormData(e.currentTarget);
-        const email = formData.get('email');
-        const password = formData.get('password');
+    setLoading(true);
+    setError('');
 
-        try {
-            const res = await fetch('http://localhost:3000/api/customers/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ email, password })
-            });
+    try {
+        const res = await fetch('http://localhost:3000/api/customers/me');
+        const data = await res.json();
+        
+        if (data?.user) {
+            await fetch('http://localhost:3000/api/customers/logout', { method: 'POST' });
+            await disableCart?.();
+        }
+    } catch (err) {
+        console.error('Auth check failed:', err);
+    }
+
+    try {
+        const res = await fetch('http://localhost:3000/api/customers/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ email, password })
+        });
+
 
             const data = await res.json();
 
@@ -32,6 +48,8 @@ export default function Login() {
                 setError(data.message || 'Failed to login');
                 return;
             }
+
+            await fetchCart(); 
 
             router.push('/');
             router.refresh(); 
@@ -44,13 +62,26 @@ export default function Login() {
         }
     }
 
-    const handleGuestLogin = () => {
+    const handleGuestLogin = async () => {
+    try {
+        const res = await fetch('http://localhost:3000/api/customers/me');
+        const data = await res.json();
+        
+        if (data?.user) {
+            await fetch('http://localhost:3000/api/customers/logout', { method: 'POST' });
+            await disableCart?.();
+        }
+    } catch (err) {
+        console.error('Failed to clear session:', err);
+    } finally {
         router.push('/');
         router.refresh();
     }
+}
 
     return (
         <div style={{
+            position: 'relative',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -60,6 +91,25 @@ export default function Login() {
             backgroundColor: '#f9fafb', 
             boxSizing: 'border-box'
         }}>
+            
+            <a 
+                href="/admin" 
+                style={{
+                    position: 'absolute',
+                    top: '24px',
+                    right: '32px',
+                    fontSize: '14px',
+                    fontWeight: '500',
+                    color: '#6b7280',
+                    textDecoration: 'none',
+                    transition: 'color 0.2s'
+                }}
+                onMouseOver={(e) => e.currentTarget.style.color = '#374151'}
+                onMouseOut={(e) => e.currentTarget.style.color = '#6b7280'}
+            >
+                Admin Portal &rarr;
+            </a>
+
             <div style={{
                 width: '100%',
                 maxWidth: '400px',
