@@ -496,7 +496,6 @@ export async function getCart(bookshop_cart_id: string) {
         }
 
         const data = await res.json();
-
         return {
             id: data.id,
             yrn: data.yrn || '',
@@ -530,7 +529,7 @@ export async function getCart(bookshop_cart_id: string) {
 }
 
 
-export async function getActiveCartForCustomer(customerId: string): Promise<string | null> {
+export async function getActiveCartIdForCustomer(customerId: string): Promise<string | null> {
     try {
         if (!EMPORIX_TENANT_ID) return null;
         const token = await getAccessToken();
@@ -545,13 +544,7 @@ export async function getActiveCartForCustomer(customerId: string): Promise<stri
             cache: 'no-store'
         });
 
-        if (!res.ok) {
-            if (res.status === 404) {
-                return null;
-            }
-            console.error(`Emporix API Error (${res.status}):`, await res.text());
-            return null;
-        }
+        if (!res.ok) return null;
 
         const data = await res.json();
 
@@ -727,7 +720,6 @@ export async function clearCart(cartId: string) {
 
 export async function createOrder(orderPayload: any) {
     try {
-        console.log("2. SERVER PAYLOAD:", JSON.stringify(orderPayload, null, 2));
         if (!EMPORIX_TENANT_ID) throw new Error('Missing EMPORIX_TENANT_ID');
         const token = await getAccessToken();
 
@@ -781,7 +773,6 @@ export async function getOrder(orderId: string) {
 
         const data = await res.json();
 
-        console.log("RAW ORDER DATA FROM API:", JSON.stringify(data, null, 2));
         return data;
     }
     catch (error) {
@@ -913,5 +904,37 @@ export async function getCustomerIdFromPayload(payloadToken: string): Promise<st
     } catch (error) {
         console.error("Failed to fetch customer ID from Payload:", error);
         return null;
+    }
+}
+
+
+export async function markCartAsOrdered(cartId: string, orderId: string) {
+    try {
+        if (!EMPORIX_TENANT_ID) return false;
+        const token = await getAccessToken();
+        
+        const url = `${EMPORIX_API_BASE_URL}/cart/${EMPORIX_TENANT_ID}/carts/${cartId}`;
+
+        const res = await fetch(url, {
+            method: 'PUT',
+            headers: {
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                orderId: orderId,
+                customerId: `ordered-${orderId}`,
+            }),
+            cache: 'no-store'
+        });
+
+        if (!res.ok) {
+            console.error(`Failed to stamp cart (${res.status}):`, await res.text());
+            return false;
+        }
+        return true;
+    } catch (error) {
+        console.error("Error stamping cart:", error);
+        return false;
     }
 }

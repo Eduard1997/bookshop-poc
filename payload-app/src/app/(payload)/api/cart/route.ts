@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
-import { getCart, createAnonimousCart, createCustomerCart,getCustomerIdFromPayload, addToCart, updateCartItem, removeCartItem, clearCart, getActiveCartForCustomer } from "@/lib/emporix";
+import { getCart, createAnonimousCart, createCustomerCart,getCustomerIdFromPayload, addToCart, updateCartItem, removeCartItem, clearCart, getActiveCartIdForCustomer } from "@/lib/emporix";
 
 export async function GET() {
     const cookieStore = await cookies()
@@ -17,7 +17,7 @@ export async function GET() {
             const customerId = await getCustomerIdFromPayload(payloadToken)
             console.log('customerId', customerId)
             if (customerId) {
-                const existingCartId = await getActiveCartForCustomer(customerId)
+                const existingCartId = await getActiveCartIdForCustomer(customerId)
                 
                 if (existingCartId) {
                     cookieStore.set('bookshop_cart_id', existingCartId, { maxAge: 604800 })
