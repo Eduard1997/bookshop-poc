@@ -1,23 +1,21 @@
 import Link from 'next/link'
 import { getPayload } from 'payload'
 import config from '@/payload.config'
+import { headers } from 'next/headers'
 import { HeaderCartIcon } from './HeaderCartIcon'
-import { ProfileIcon } from './ProfileIcon'
-
-// TODO(BSP-57 part 2, after BSP-54)
+import { ProfileDropdown } from './ProfileDropdown'
 
 export default async function Header() {
     const payloadConfig = await config
     const payload = await getPayload({ config: payloadConfig })
+
+    const { user } = await payload.auth({ headers: await headers() })
 
     const pagesData = await payload.find({
         collection: 'pages',
     })
 
     const pages = pagesData.docs
-
-    // TODO: replace with BSP-54 
-    const user = null
 
     return (
         <header style={{ background: 'rgba(128, 128, 128, 0.1)', borderBottom: '1px solid rgba(128, 128, 128, 0.2)', padding: '1rem 2rem' }}>
@@ -26,23 +24,35 @@ export default async function Header() {
                     Home
                 </Link>
 
-                {pages.map((page) => (<Link key={page.id} href={`/${page.slug}`} style={{ textDecoration: 'none', color: 'inherit' }}>{page.title}</Link>))}
+                {pages.map((page) => (
+                    <Link key={page.id} href={`/${page.slug}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+                        {page.title}
+                    </Link>
+                ))}
 
                 <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
                     {user ? (
-                        <Link href="/account" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', color: 'inherit' }}>
-                            <ProfileIcon />
-                        </Link>
+                        <div style={{
+                            paddingRight: '1.5rem',
+                            marginRight: '0.5rem',
+                            borderRight: '1px solid rgba(128, 128, 128, 0.3)',
+                            display: 'flex',
+                            alignItems: 'center'
+                        }}>
+                            <ProfileDropdown />
+                        </div>
                     ) : (
                         <Link
-                            href="/account"
+                            href="/auth/login"
                             style={{
                                 textDecoration: 'none',
                                 color: 'inherit',
                                 fontWeight: '500',
                                 fontSize: '0.9rem'
                             }}
-                        >Authenticate</Link>
+                        >
+                            Authenticate
+                        </Link>
                     )}
                     <HeaderCartIcon />
                 </div>
