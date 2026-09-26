@@ -6,6 +6,7 @@ import { fileURLToPath } from 'url'
 import sharp from 'sharp'
 
 import { Users } from './collections/Users'
+import { Customers } from './collections/Customers'
 import { Media } from './collections/Media'
 import { BookOverlays } from './collections/BookOverlays'
 import { Pages } from './collections/Pages'
@@ -45,7 +46,7 @@ export default buildConfig({
       },
     },
   },
-  collections: [Users, Media, BookOverlays, Pages, CuratedLists, LandingPages, Banners
+  collections: [Users, Customers, Media, BookOverlays, Pages, CuratedLists, LandingPages, Banners
   ],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
