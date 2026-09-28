@@ -163,9 +163,9 @@ export default function PaymentForm({ cart, firstName, lastName, email, phone, a
             return
         }
         
-        await updateCartRoot(cart.id, { 
+        await updateCart(cart.id, { 
             orderId: response, 
-            customerId: `ordered-${response}` 
+            status: "CLOSED" 
         });
 
         try {
