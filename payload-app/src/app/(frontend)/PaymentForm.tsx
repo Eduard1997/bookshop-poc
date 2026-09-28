@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import mockPayment from '@/lib/mockPayment'
-import { createOrder, updateCartRoot, getBookById, markCartAsOrdered } from '@/lib/emporix'
+import { createOrder, updateCartRoot, getBookById, updateCart } from '@/lib/emporix'
 import { useCart } from './CartContext'
 import { formatPrice } from '@/lib/formatPrice'
 
@@ -163,7 +163,10 @@ export default function PaymentForm({ cart, firstName, lastName, email, phone, a
             return
         }
         
-        await markCartAsOrdered(cart.id, response)
+        await updateCartRoot(cart.id, { 
+            orderId: response, 
+            customerId: `ordered-${response}` 
+        });
 
         try {
             await disableCart()

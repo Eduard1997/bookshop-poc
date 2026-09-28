@@ -908,7 +908,7 @@ export async function getCustomerIdFromPayload(payloadToken: string): Promise<st
 }
 
 
-export async function markCartAsOrdered(cartId: string, orderId: string) {
+export async function updateCart(cartId: string, payload: Record<string, any>) {
     try {
         if (!EMPORIX_TENANT_ID) return false;
         const token = await getAccessToken();
@@ -921,20 +921,49 @@ export async function markCartAsOrdered(cartId: string, orderId: string) {
                 Authorization: `Bearer ${token}`,
                 'Content-Type': 'application/json'
             },
+            body: JSON.stringify(payload),
+            cache: 'no-store'
+        });
+
+        if (!res.ok) {
+            console.error(`Failed to update cart (${res.status}):`, await res.text());
+            return false;
+        }
+        return true;
+    } catch (error) {
+        console.error("Error updating cart:", error);
+        return false;
+    }
+}
+
+export async function mergeCarts(customerCartId: string, guestCartId: string) {
+    try {
+        console.log(`Merging guest cart ${guestCartId} into customer cart ${customerCartId}`);
+        if (!EMPORIX_TENANT_ID) return false;
+        const token = await getAccessToken();
+
+        const url = `${EMPORIX_API_BASE_URL}/cart/${EMPORIX_TENANT_ID}/carts/${customerCartId}/merge`;
+
+        const res = await fetch(url, {
+            method: 'POST',
+            headers: {
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            },
             body: JSON.stringify({
-                orderId: orderId,
-                customerId: `ordered-${orderId}`,
+                carts: [guestCartId]
             }),
             cache: 'no-store'
         });
 
         if (!res.ok) {
-            console.error(`Failed to stamp cart (${res.status}):`, await res.text());
+            console.error(`Failed to merge carts (${res.status}):`, await res.text());
             return false;
         }
+
         return true;
     } catch (error) {
-        console.error("Error stamping cart:", error);
+        console.error("Error merging carts:", error);
         return false;
     }
 }

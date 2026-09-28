@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useCart } from '../../CartContext';
+import { getActiveCartIdForCustomer, updateCart, mergeCarts } from '@/lib/emporix';
 
 export default function Login() {
     const router = useRouter();
@@ -20,6 +21,8 @@ const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     setLoading(true);
     setError('');
 
+    let guestCartId: string | null | undefined = null;
+
     try {
         const res = await fetch('http://localhost:3000/api/customers/me');
         const data = await res.json();
@@ -27,6 +30,21 @@ const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
         if (data?.user) {
             await fetch('http://localhost:3000/api/customers/logout', { method: 'POST' });
             await disableCart?.();
+        } else {
+            const getCookie = (name: string) => {
+                const value = `; ${document.cookie}`;
+                const parts = value.split(`; ${name}=`);
+                if (parts.length === 2) return parts.pop()?.split(';').shift();
+                return null;
+            };
+            
+            guestCartId = getCookie('bookshop_cart_id');
+
+            if (guestCartId && guestCartId !== 'undefined' && guestCartId !== 'null') {
+                document.cookie = 'bookshop_cart_id=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+            } else {
+                guestCartId = null;
+            }
         }
     } catch (err) {
         console.error('Auth check failed:', err);
@@ -41,26 +59,40 @@ const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
             body: JSON.stringify({ email, password })
         });
 
+        const data = await res.json();
 
-            const data = await res.json();
-
-            if (!res.ok) {
-                setError(data.message || 'Failed to login');
-                return;
-            }
-
-            await fetchCart(); 
-
-            router.push('/');
-            router.refresh(); 
-
-        } catch (err) {
-            console.error('Login error:', err);
-            setError('An unexpected error occurred.');
-        } finally {
-            setLoading(false);
+        if (!res.ok) {
+            setError(data.message || 'Failed to login');
+            return;
         }
+
+        if (guestCartId && data?.user?.customerId) { 
+            try {
+                await fetch('/api/cart/merge', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ 
+                        guestCartId,
+                        customerId: data.user.customerId 
+                    })
+                });
+            } catch (cartErr) {
+                console.error('Failed to process cart sync:', cartErr);
+            }
+        }
+
+        await fetchCart(); 
+
+        router.push('/');
+        router.refresh(); 
+
+    } catch (err) {
+        console.error('Login error:', err);
+        setError('An unexpected error occurred.');
+    } finally {
+        setLoading(false);
     }
+}
 
     const handleGuestLogin = async () => {
     try {
