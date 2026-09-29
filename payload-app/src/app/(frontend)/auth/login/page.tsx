@@ -2,55 +2,118 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { useCart } from '../../CartContext';
+import { getActiveCartIdForCustomer, updateCart, mergeCarts } from '@/lib/emporix';
 
 export default function Login() {
     const router = useRouter();
+    const {fetchCart, disableCart} = useCart()
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
 
-    const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        setLoading(true);
-        setError('');
+const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    
+    const formData = new FormData(e.currentTarget);
+    const email = formData.get('email');
+    const password = formData.get('password');
 
-        const formData = new FormData(e.currentTarget);
-        const email = formData.get('email');
-        const password = formData.get('password');
+    setLoading(true);
+    setError('');
 
-        try {
-            const res = await fetch('http://localhost:3000/api/customers/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ email, password })
-            });
+    let guestCartId: string | null | undefined = null;
 
-            const data = await res.json();
+    try {
+        const res = await fetch('http://localhost:3000/api/customers/me');
+        const data = await res.json();
+        
+        if (data?.user) {
+            await fetch('http://localhost:3000/api/customers/logout', { method: 'POST' });
+            await disableCart?.();
+        } else {
+            const getCookie = (name: string) => {
+                const value = `; ${document.cookie}`;
+                const parts = value.split(`; ${name}=`);
+                if (parts.length === 2) return parts.pop()?.split(';').shift();
+                return null;
+            };
+            
+            guestCartId = getCookie('bookshop_cart_id');
 
-            if (!res.ok) {
-                setError(data.message || 'Failed to login');
-                return;
+            if (guestCartId && guestCartId !== 'undefined' && guestCartId !== 'null') {
+                document.cookie = 'bookshop_cart_id=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+            } else {
+                guestCartId = null;
             }
-
-            router.push('/');
-            router.refresh(); 
-
-        } catch (err) {
-            console.error('Login error:', err);
-            setError('An unexpected error occurred.');
-        } finally {
-            setLoading(false);
         }
+    } catch (err) {
+        console.error('Auth check failed:', err);
     }
 
-    const handleGuestLogin = () => {
+    try {
+        const res = await fetch('http://localhost:3000/api/customers/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ email, password })
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+            setError(data.message || 'Failed to login');
+            return;
+        }
+
+        if (guestCartId && data?.user?.customerId) { 
+            try {
+                await fetch('/api/cart/merge', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ 
+                        guestCartId,
+                        customerId: data.user.customerId 
+                    })
+                });
+            } catch (cartErr) {
+                console.error('Failed to process cart sync:', cartErr);
+            }
+        }
+
+        await fetchCart(); 
+
+        router.push('/');
+        router.refresh(); 
+
+    } catch (err) {
+        console.error('Login error:', err);
+        setError('An unexpected error occurred.');
+    } finally {
+        setLoading(false);
+    }
+}
+
+    const handleGuestLogin = async () => {
+    try {
+        const res = await fetch('http://localhost:3000/api/customers/me');
+        const data = await res.json();
+        
+        if (data?.user) {
+            await fetch('http://localhost:3000/api/customers/logout', { method: 'POST' });
+            await disableCart?.();
+        }
+    } catch (err) {
+        console.error('Failed to clear session:', err);
+    } finally {
         router.push('/');
         router.refresh();
     }
+}
 
     return (
         <div style={{
+            position: 'relative',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -60,6 +123,25 @@ export default function Login() {
             backgroundColor: '#f9fafb', 
             boxSizing: 'border-box'
         }}>
+            
+            <a 
+                href="/admin" 
+                style={{
+                    position: 'absolute',
+                    top: '24px',
+                    right: '32px',
+                    fontSize: '14px',
+                    fontWeight: '500',
+                    color: '#6b7280',
+                    textDecoration: 'none',
+                    transition: 'color 0.2s'
+                }}
+                onMouseOver={(e) => e.currentTarget.style.color = '#374151'}
+                onMouseOut={(e) => e.currentTarget.style.color = '#6b7280'}
+            >
+                Admin Portal &rarr;
+            </a>
+
             <div style={{
                 width: '100%',
                 maxWidth: '400px',

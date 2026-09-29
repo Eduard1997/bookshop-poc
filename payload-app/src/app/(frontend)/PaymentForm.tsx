@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import mockPayment from '@/lib/mockPayment'
-import { createOrder, updateCartRoot, getBookById } from '@/lib/emporix'
+import { createOrder, updateCartRoot, getBookById, updateCart } from '@/lib/emporix'
 import { useCart } from './CartContext'
 import { formatPrice } from '@/lib/formatPrice'
 
@@ -101,14 +101,14 @@ export default function PaymentForm({ cart, firstName, lastName, email, phone, a
                 }
             }
         }));
-
+        
         const orderPayload = {
             currency: updatedCart?.currency || "EUR",
             cartId: updatedCart?.id,
             entries: entries,
             discounts: [],
             customer: {
-                id: updatedCart?.sessionId || "guest-001",
+                id: updatedCart?.customer?.id || updatedCart?.customerId || updatedCart?.sessionId || "guest", 
                 name: `${firstName} ${lastName}`,
                 firstName: firstName,
                 lastName: lastName,
@@ -162,6 +162,11 @@ export default function PaymentForm({ cart, firstName, lastName, email, phone, a
             setIsProcessing(false)
             return
         }
+        
+        await updateCart(cart.id, { 
+            orderId: response, 
+            status: "CLOSED" 
+        });
 
         try {
             await disableCart()

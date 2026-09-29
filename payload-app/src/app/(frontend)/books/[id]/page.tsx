@@ -13,8 +13,6 @@ export default async function BookPreviewCardPage({ params }: { params: Promise<
     const prices = await getBookPrices(id)
     const availability = await getBookAvailability(id)
 
-    console.log('--- DEBUG EMPORIX AVAILABILITY ---', JSON.stringify(availability, null, 2))
-
     const payloadConfig = await config
     const payload = await getPayload({ config: payloadConfig })
 
