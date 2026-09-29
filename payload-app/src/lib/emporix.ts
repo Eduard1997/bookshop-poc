@@ -363,7 +363,7 @@ export async function getBookByISBN(isbn: string): Promise<BookDetails | null> {
 
 //----------------PUT BOOK--------------------------------
 export async function updateProduct(bookId: string, bookData: any): Promise<any | null> {
-    try{
+    try {
         if (!EMPORIX_TENANT_ID) {
             console.error('Missing EMPORIX_TENANT_ID');
             return null;
@@ -451,7 +451,7 @@ export async function createCustomerCart(customerId: string): Promise<string | n
             },
             body: JSON.stringify({
                 siteCode: 'bookshop-site',
-                customerId : customerId,
+                customerId: customerId,
                 currency: 'EUR'
             }),
             cache: 'no-store'
@@ -782,6 +782,54 @@ export async function getOrder(orderId: string) {
 
 }
 
+export type OrderSummary = {
+    id: string
+    orderNumber: string
+    orderDate: string
+    status: string
+    total: number
+}
+
+
+export async function getOrdersForCustomer(customerId: string): Promise<OrderSummary[]> {
+    try {
+        if (!EMPORIX_TENANT_ID) throw new Error('Missing EMPORIX_TENANT_ID')
+        const token = await getAccessToken()
+
+        const q = encodeURIComponent(`customer.id:"${customerId}"`)
+        const url = `${EMPORIX_API_BASE_URL}/order-v2/${EMPORIX_TENANT_ID}/salesorders?q=${q}&sort=created:desc&pageSize=50`
+
+        const res = await fetch(url, {
+            method: 'GET',
+            headers: {
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            },
+            cache: 'no-store',
+        })
+
+        if (!res.ok) {
+            console.error(`Emporix API Error (${res.status}):`, await res.text())
+            return []
+        }
+
+        const data = await res.json()
+        const list = Array.isArray(data) ? data : data.results ?? []
+
+        return list.map((o: any) => ({
+            id: o.id,
+            orderNumber: o.id,
+            orderDate: o.created,
+            status: o.status,
+            total: o.calculatedPrice?.finalPrice?.grossValue ?? 0,
+        }))
+    } catch (error) {
+        console.error('Internal Server Error:', error)
+        return []
+    }
+}
+
+
 //----------------UPDATE CART ROOT (ADDRESS & SHIPPING)-----------------------------
 export async function updateCartRoot(cartId: string, addressData: any) {
     try {
@@ -859,7 +907,7 @@ export async function createCustomer(email: string) {
             },
             body: JSON.stringify({
                 contactEmail: email,
-                preferredCurrency: "EUR" 
+                preferredCurrency: "EUR"
             }),
             cache: 'no-store'
         });
@@ -912,7 +960,7 @@ export async function updateCart(cartId: string, payload: Record<string, any>) {
     try {
         if (!EMPORIX_TENANT_ID) return false;
         const token = await getAccessToken();
-        
+
         const url = `${EMPORIX_API_BASE_URL}/cart/${EMPORIX_TENANT_ID}/carts/${cartId}`;
 
         const res = await fetch(url, {
