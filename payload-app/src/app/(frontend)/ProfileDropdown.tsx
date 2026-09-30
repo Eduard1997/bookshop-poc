@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { ProfileIcon } from './ProfileIcon'
+import { useCart } from './CartContext'
 
 export function ProfileDropdown() {
     const [isOpen, setIsOpen] = useState(false)
@@ -20,9 +21,12 @@ export function ProfileDropdown() {
         return () => document.removeEventListener('mousedown', handleClickOutside)
     }, [])
 
+    const { disableCart } = useCart()
+
     const handleLogout = async () => {
         try {
             await fetch('/api/customers/logout', { method: 'POST' })
+            await disableCart()
             setIsOpen(false)
             router.refresh()
         } catch (err) {
