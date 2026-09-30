@@ -65,12 +65,29 @@ export function ProfileDropdown() {
                         borderRadius: '8px',
                         border: '1px solid #e5e7eb',
                         padding: '4px 0',
-                        minWidth: '120px',
+                        minWidth: '220px',
                         zIndex: 50,
                         display: 'flex',
                         flexDirection: 'column'
                     }}
                 >
+                    <Link
+                        href="/account/orders"
+                        onClick={() => setIsOpen(false)}
+                        style={{
+                            padding: '8px 16px',
+                            color: '#111827',
+                            fontSize: '14px',
+                            fontWeight: '500',
+                            textAlign: 'left',
+                            textDecoration: 'none',
+                            width: '100%',
+                            boxSizing: 'border-box',
+                            display: 'block'
+                        }}
+                    >Order History</Link>
+
+                    <div style={{ height: '1px', backgroundColor: '#f3f4f6', margin: '4px 0' }} />
                     <button
                         onClick={handleLogout}
                         type="button"
@@ -84,10 +101,7 @@ export function ProfileDropdown() {
                             textAlign: 'left',
                             cursor: 'pointer',
                             width: '100%'
-                        }}
-                    >
-                        Logout
-                    </button>
+                        }}>Logout</button>
                 </div>
             )}
         </div>
